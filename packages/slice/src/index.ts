@@ -2,8 +2,6 @@ import { Action, Dispatch, MiddlewareAPI } from '@pivot/redux-types';
 
 type ANumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
-console.log('hello world');
-
 type DropFirst<T extends unknown[]> = T extends [any, ...infer U]
   ? U['length'] extends ANumber
     ? U
