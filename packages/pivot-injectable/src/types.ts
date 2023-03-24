@@ -14,3 +14,5 @@ export type AsyncFactoryFn<T, Deps extends any[] = any[]> = (
     [K in keyof Deps]: Deps[K] extends Injectable<infer U> ? U : never;
   }
 ) => Promise<T>;
+
+export type ExtractInstance<T> = T extends Injectable<infer U> ? U : never;

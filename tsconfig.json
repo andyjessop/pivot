@@ -17,8 +17,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@pivot/core-cache": ["packages/core-cache/src/index.ts"],
-      "@pivot/core-router": ["packages/core-router/src/index.ts"],
+      "@pivot/client-cache": ["packages/client-cache/src/index.ts"],
+      "@pivot/client-router": ["packages/client-router/src/index.ts"],
       "@pivot/dynamic-slice": ["packages/dynamic-slice/src/index.ts"],
       "@pivot/dynamic-store": ["packages/dynamic-store/src/index.ts"],
       "@pivot/pivot-injectable": ["packages/pivot-injectable/src/index.ts"],

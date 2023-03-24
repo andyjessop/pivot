@@ -1,8 +1,18 @@
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import { useService } from './services';
 
 function App() {
+  const cache = useService('cache');
+
+  if (!cache) {
+    console.log('not ready yet');
+    return null;
+  }
+
+  console.log('cache ready');
+
   return (
     <div className="App">
       <div>

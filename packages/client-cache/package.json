@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/core-cache",
+  "name": "@pivot/client-cache",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../.eslintrc.json",

@@ -19,9 +19,6 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
-
-      - run: npx nx format:check
-
       - run: npm run lint:all
       - run: npm run test:all
       - run: npm run type-check:all

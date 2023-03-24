@@ -1,3 +1,3 @@
 export * as reducers from './reducers';
 export * from './service';
-export * as initialState from './state';
+export * from './state';

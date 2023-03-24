@@ -1,5 +1,5 @@
 import { RouterState } from './types';
 
-export const initial: RouterState = {
+export const initialState: RouterState = {
   route: null,
 };
