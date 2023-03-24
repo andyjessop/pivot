@@ -19,7 +19,6 @@ jobs:
           node-version: 18.3.0
           cache: 'npm'
       - run: npm ci
-      - run: npm ci
 
       - run: npx nx format:check
       - run: npx nx affected --target=lint --parallel=3

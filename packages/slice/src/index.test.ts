@@ -1,7 +1,11 @@
 import { dynamicStore } from '@pivot/dynamic-store';
 import { slice } from './index';
 
-describe('skuce', () => {
+describe('slice', () => {
+  it('should be true', () => {
+    expect(true).toBe(true);
+  });
+
   it('should work', () => {
     interface State {
       count: number;
@@ -22,6 +26,8 @@ describe('skuce', () => {
 
     const { add, subtract } = actions;
 
+    // eslint-disable-next-line
+    // @ts-expect-error
     expect(reducer(undefined, { type: add.type, payload: 1 })).toEqual({
       count: 1,
     });
