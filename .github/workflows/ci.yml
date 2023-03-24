@@ -21,6 +21,7 @@ jobs:
       - run: npm ci
 
       - run: npx nx format:check
-      - run: npm run lint:affected
-      - run: npm run test:affected
-      - run: npm run type-check:affected
+
+      - run: npx nx affected --target=lint --parallel=3
+      - run: npx nx affected --target=test --parallel=3
+      - run: npx nx affected --target=build --parallel=3
