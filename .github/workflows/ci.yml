@@ -23,4 +23,4 @@ jobs:
       - run: npx nx format:check
       - run: npm run lint:affected
       - run: npm run test:affected
-      - run: run type-check:affected
+      - run: npm run type-check:affected
