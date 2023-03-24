@@ -2,14 +2,6 @@ import { dynamicStore } from '@pivot/dynamic-store';
 import { slice } from './index';
 
 describe('slice', () => {
-  it('should be true', () => {
-    expect(true).toBe(true);
-  });
-
-  it('should be 2', () => {
-    expect(2).toBe(2);
-  });
-
   it('should work', () => {
     interface State {
       count: number;

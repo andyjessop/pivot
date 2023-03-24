@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx nx affected --target=test --parallel=3 --watch=false
+npm run test:affected
 npm run lint:affected
 npm run type-check:affected
