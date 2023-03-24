@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/core-router",
+  "name": "@pivot/client-router",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../.eslintrc.json",

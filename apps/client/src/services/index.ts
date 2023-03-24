@@ -1,87 +1,40 @@
-export const config: ServiceCollection = {
-  router: {
-    dependencies: [slices.get('router')],
-    asyncFactoryFn: (state) =>
-      import('@pivot/core-router').then((m) =>
-        m.router(
-          {
-            home: 'home',
-            login: 'login',
-          },
-          state,
-        ),
-      ),
-  },
-  routerSlice: {
-    dependencies: [],
-    asyncFactoryFn: () =>
-      Promise.resolve({
-        navigateSuccess: (route: any) => route,
-      }),
-  },
+import { createContext, useContext, useEffect, useState } from 'react';
+import { cacheService } from '../modules/cache.module';
+import { routerService } from '../modules/router.module';
+import { ExtractInstance } from '@pivot/pivot-injectable';
+
+const config = {
+  cache: cacheService,
+  router: routerService,
 };
 
-/*
-const routerSlice = useSlice('router');
-const service = useService('router', routerConfig, slices.get('router'));
+export const Services = createContext(config);
 
-//
+export function useService<K extends keyof typeof config>(key: K) {
+  const context = useContext(Services);
 
-const otherService = {
-  asyncFactoryFn: (state, router) => import('@pivot/core-test').then((m) => m.test(state, router)),
-  dependencies: [slices.inject('test'), services.inject('router')]
-}
+  // The context contains injectables, so we need to extract the instance.
+  type Service = ExtractInstance<(typeof config)[K]>;
 
+  const [service, setService] = useState<Service | null>(null);
 
-
-
-*/
-
-type ServiceCollection = {
-  [key: string]: {
-    asyncFactoryFn: (...args: any[]) => Promise<any>;
-    dependencies: Injectable[];
-  };
-};
-
-type Injectable = () => Promise<any>;
-
-export function serviceManager(services: ServiceCollection) {
-  const serviceMap = new Map();
-
-  function get(name: string) {
-    if (serviceMap.has(name)) {
-      return serviceMap.get(name);
-    }
-
-    const service = services[name];
-
-    if (!service) {
-      throw new Error(`Service ${name} not found`);
-    }
-
-    const { asyncFactoryFn, dependencies } = service;
-
-    const promise = Promise.all(dependencies.map((dep) => dep())).then(
-      (deps) => {
-        return asyncFactoryFn(...deps);
-      },
-    );
-
-    serviceMap.set(name, promise);
-
-    return promise;
+  if (context === undefined) {
+    throw new Error('useService must be used within a ServicesProvider');
   }
 
-  /**
-   * Return an injectable function that will return the service
-   */
-  function inject(name: string) {
-    return () => get(name);
-  }
+  useEffect(() => {
+    resolveService();
+  }, []);
 
-  return {
-    get,
-    inject,
-  };
+  return service;
+
+  async function resolveService() {
+    try {
+      const response = await context[key].get();
+
+      setService(response as Service);
+    } catch (error) {
+      /* ... */
+    }
+  }
 }

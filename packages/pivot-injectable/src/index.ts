@@ -2,7 +2,7 @@ import { externallyResolvablePromise } from '@pivot/util-promise';
 import { buildDepChain } from './build-dep-chain';
 import { AsyncFactoryFn, Injectable } from './types';
 
-export type { Injectable } from './types';
+export type { ExtractInstance, Injectable } from './types';
 
 export function injectable<T, Deps extends Injectable<any>[]>(
   asyncFactoryFn: AsyncFactoryFn<T, Deps>,
