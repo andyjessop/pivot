@@ -2,6 +2,10 @@ import { injectable } from '.';
 import { vi } from 'vitest';
 
 describe('injectable', () => {
+  it('should be true', () => {
+    expect(true).toBe(true);
+  });
+
   it('should create an injectable object', async () => {
     const asyncFactoryFn = () => Promise.resolve({});
 
