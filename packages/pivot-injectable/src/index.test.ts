@@ -1,15 +1,7 @@
 import { injectable } from '.';
 import { vi } from 'vitest';
 
-function logs() {
-  console.log('logs');
-}
-
 describe('injectable', () => {
-  it('should log', () => {
-    logs();
-  });
-
   it('should create an injectable object', async () => {
     const asyncFactoryFn = () => Promise.resolve({});
 
