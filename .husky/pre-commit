@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run test:affected
-npm run lint:affected
-npm run type-check:affected
+npm run lint:all
+npm run test:all
+npm run type-check:all
