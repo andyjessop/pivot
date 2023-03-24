@@ -13,19 +13,20 @@
   },
   "private": true,
   "dependencies": {
-    "@nrwl/devkit": "^15.8.8",
-    "@nrwl/eslint-plugin-nx": "^15.8.8",
-    "@types/redux": "^3.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@nrwl/devkit": "^15.8.8",
+    "@nrwl/eslint-plugin-nx": "^15.8.8",
     "@nrwl/js": "15.8.7",
+    "@nrwl/nx-cloud": "^15.3.2",
     "@nrwl/workspace": "15.8.7",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/redux": "^3.6.0",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "@vitejs/plugin-react": "^3.1.0",
