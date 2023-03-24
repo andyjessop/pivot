@@ -1,9 +1,13 @@
 import { injectable } from '.';
 import { vi } from 'vitest';
 
+function logs() {
+  console.log('logs');
+}
+
 describe('injectable', () => {
-  it('should be true', () => {
-    expect(true).toBe(true);
+  it('should log', () => {
+    logs();
   });
 
   it('should create an injectable object', async () => {
