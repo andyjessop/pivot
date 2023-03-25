@@ -1,12 +1,13 @@
 export type Injectable<T = any, Deps extends Injectable<any>[] = []> = {
-  asyncFactoryFn: AsyncFactoryFn<T, Deps>;
   depChain: Injectable[];
   dependencies: [...Injectable[]];
   get: (withDeps?: boolean) => Promise<T | null>;
   getInstance: () => T | undefined;
+  importFn: AsyncFactoryFn<T, Deps>;
   instance?: T;
   isResolving(): boolean;
   hasResolved(): boolean;
+  onDestroy: (instance: T) => void;
 };
 
 export type AsyncFactoryFn<T, Deps extends any[] = any[]> = (

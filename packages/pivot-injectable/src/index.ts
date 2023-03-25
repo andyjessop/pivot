@@ -4,10 +4,17 @@ import { AsyncFactoryFn, Injectable } from './types';
 
 export type { ExtractInstance, Injectable } from './types';
 
-export function injectable<T, Deps extends Injectable<any>[]>(
-  asyncFactoryFn: AsyncFactoryFn<T, Deps>,
-  dependencies: [...Deps] = [] as unknown as Deps,
-): Injectable<T> {
+export function injectable<T, Deps extends Injectable<any>[]>({
+  dependencies = [] as unknown as Deps,
+  importFn,
+  onDestroy = () => {
+    /* ... */
+  },
+}: {
+  importFn: AsyncFactoryFn<T, Deps>;
+  dependencies?: [...Deps];
+  onDestroy?: (instance: T) => void;
+}): Injectable<T> {
   const resolvablePromise = externallyResolvablePromise<T>();
 
   let instance: T | undefined;
@@ -17,13 +24,14 @@ export function injectable<T, Deps extends Injectable<any>[]>(
   const depChain = buildDepChain(dependencies);
 
   return {
-    asyncFactoryFn,
+    importFn,
     depChain,
     dependencies,
     get,
     getInstance,
     isResolving,
     hasResolved,
+    onDestroy,
   };
 
   async function get(withDeps = true) {
@@ -43,7 +51,7 @@ export function injectable<T, Deps extends Injectable<any>[]>(
       await Promise.all(depChain.map((dep) => dep.get(false)));
     }
 
-    instance = await asyncFactoryFn(
+    instance = await importFn(
       ...(dependencies.map((dep) => dep.getInstance()) as any),
     );
 
