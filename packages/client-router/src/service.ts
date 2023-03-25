@@ -4,18 +4,25 @@ import { getUrlFromRoute } from './utils/get-url-from-route';
 
 export function router<T extends RouterConfig>(
   config: T,
-  api: { navigateSuccess: (route: Route) => void }
+  api: { navigateSuccess: (route: Route) => void },
 ) {
-  navigate(getRouteFromUrl(config, window.location.href));
+  addEventListener('popstate', onPopstate);
 
-  addEventListener('popstate', () => {
-    onPopstate();
-  });
+  const route = getRouteFromUrl(config, window.location.href);
+
+  if (route) {
+    navigate(route);
+  }
 
   return {
+    destroy,
     link,
     navigate,
   };
+
+  function destroy() {
+    removeEventListener('popstate', onPopstate);
+  }
 
   function link(route: Route<T>) {
     return function withEvent(event: Event) {
@@ -40,6 +47,10 @@ export function router<T extends RouterConfig>(
 
   function onPopstate() {
     const route = getRouteFromUrl(config, window.location.href);
+
+    if (!route) {
+      return;
+    }
 
     api.navigateSuccess(route);
   }

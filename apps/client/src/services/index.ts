@@ -24,6 +24,12 @@ export function useService<K extends keyof typeof config>(key: K) {
 
   useEffect(() => {
     resolveService();
+
+    return () => {
+      if (service) {
+        context[key].onDestroy(service as any);
+      }
+    };
   }, []);
 
   return service;

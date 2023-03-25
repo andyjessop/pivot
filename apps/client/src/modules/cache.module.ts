@@ -1,5 +1,5 @@
 import { injectable } from '@pivot/pivot-injectable';
 
-export const cacheService = injectable(() =>
-  import('@pivot/client-cache').then((m) => m.cache()),
-);
+export const cacheService = injectable({
+  importFn: () => import('@pivot/client-cache').then((m) => m.cache()),
+});
