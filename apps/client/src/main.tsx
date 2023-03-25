@@ -4,7 +4,10 @@ import App from './App';
 import { Services } from './services';
 import { cacheService } from './modules/cache.module';
 import { routerService } from './modules/router.module';
+import { store } from './store';
 import './index.css';
+
+console.log(store);
 
 const services = {
   cache: cacheService,

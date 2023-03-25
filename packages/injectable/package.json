@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/pivot-injectable",
+  "name": "@pivot/injectable",
   "main": "./src/index.ts",
   "scripts": {
     "test": "vitest --config ../../vitest.config.js",

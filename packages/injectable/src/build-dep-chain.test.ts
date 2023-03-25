@@ -1,7 +1,7 @@
 import { buildDepChain } from './build-dep-chain';
 import { Injectable } from './types';
 
-describe('pivot-injectable', () => {
+describe('injectable', () => {
   describe('buildDepChain', () => {
     it('should build dependency chain for injectables without dependencies', () => {
       const injectables = [
