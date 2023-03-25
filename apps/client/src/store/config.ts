@@ -1,8 +1,8 @@
-import { SliceCollection } from '@pivot/dynamic-slice';
+import { routerSlice } from '../modules/router.module';
 
-export const config: SliceCollection = {
+export const config = {
   router: {
     active: () => true,
-    asyncFactoryFn: () => import('@pivot/client-router'),
+    injectable: routerSlice,
   },
 };

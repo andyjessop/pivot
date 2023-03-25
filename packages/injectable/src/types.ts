@@ -1,7 +1,7 @@
 export type Injectable<T = any, Deps extends Injectable<any>[] = []> = {
   depChain: Injectable[];
   dependencies: [...Injectable[]];
-  get: (withDeps?: boolean) => Promise<T | null>;
+  get: (withDeps?: boolean) => Promise<T>;
   getInstance: () => T | undefined;
   importFn: AsyncFactoryFn<T, Deps>;
   instance?: T;

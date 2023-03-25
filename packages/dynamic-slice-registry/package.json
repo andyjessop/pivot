@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/dynamic-slice",
+  "name": "@pivot/dynamic-slice-registry",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../.eslintrc.json",

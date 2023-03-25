@@ -1,4 +1,4 @@
-import { injectable } from '@pivot/pivot-injectable';
+import { injectable } from '@pivot/injectable';
 import { slice } from '@pivot/slice';
 
 export const routerSlice = injectable({

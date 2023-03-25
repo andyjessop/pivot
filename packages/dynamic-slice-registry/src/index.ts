@@ -1,21 +1,17 @@
 import { DynamicStore } from '@pivot/dynamic-store';
-import { slice, Slice } from '@pivot/slice';
+import { Injectable } from '@pivot/injectable';
+import { Slice } from '@pivot/slice';
 import {
   ExternallyResolvablePromise,
   externallyResolvablePromise,
 } from '@pivot/util-promise';
 
-type AsyncFactoryFn<T, S> = () => Promise<{
-  initialState: S;
-  reducers: T;
-}>;
-
-type SliceConfig = {
+type SliceConfig<T extends Slice<any, any, any>> = {
   active: (state: any) => boolean;
-  asyncFactoryFn: AsyncFactoryFn<any, any>;
+  injectable: Injectable<T, any>;
 };
 
-type SliceEntry = SliceConfig & {
+type SliceEntry<T extends Slice<any, any, any>> = SliceConfig<T> & {
   instance?: Slice<any, any, any>;
   externallyResolvablePromise: ExternallyResolvablePromise<
     Slice<any, any, any>
@@ -24,12 +20,17 @@ type SliceEntry = SliceConfig & {
   unregister?: () => void;
 };
 
-export type SliceCollection = Record<string, SliceConfig>;
-type SliceEntryCollection = Record<string, SliceEntry>;
+export type SliceCollection<
+  T extends Slice<any, any, any> = Slice<any, any, any>,
+> = Record<string, SliceConfig<T>>;
+type SliceEntryCollection<T extends Slice<any, any, any>> = Record<
+  string,
+  SliceEntry<T>
+>;
 
-export function registerDynamicSlices(
+export function dynamicSliceRegistry<T extends Slice<any, any, any>>(
   store: DynamicStore,
-  config: SliceCollection = {},
+  config: SliceCollection<T> = {},
 ) {
   const entries = Object.keys(config).reduce((acc, key) => {
     acc[key] = {
@@ -37,7 +38,7 @@ export function registerDynamicSlices(
       externallyResolvablePromise: externallyResolvablePromise(),
     };
     return acc;
-  }, {} as SliceEntryCollection);
+  }, {} as SliceEntryCollection<T>);
 
   store.subscribe(listener);
 
@@ -56,7 +57,7 @@ export function registerDynamicSlices(
     const sliceNames = Object.keys(config);
 
     for (const sliceName of sliceNames) {
-      const { active, asyncFactoryFn, registering, unregister } =
+      const { active, injectable, registering, unregister } =
         entries[sliceName];
 
       const shouldBeActive = active(state);
@@ -72,8 +73,7 @@ export function registerDynamicSlices(
         // should be active and is not
         entries[sliceName].registering = true;
 
-        const { initialState, reducers } = await asyncFactoryFn();
-        const instance = slice(sliceName, initialState, reducers);
+        const instance = await injectable.get();
 
         const removeMiddleware = store.addMiddleware(instance.middleware);
         const removeReducer = store.addReducer(sliceName, instance.reducer);

@@ -19,9 +19,11 @@
     "paths": {
       "@pivot/client-cache": ["packages/client-cache/src/index.ts"],
       "@pivot/client-router": ["packages/client-router/src/index.ts"],
-      "@pivot/dynamic-slice": ["packages/dynamic-slice/src/index.ts"],
+      "@pivot/dynamic-slice-registry": [
+        "packages/dynamic-slice-registry/src/index.ts"
+      ],
       "@pivot/dynamic-store": ["packages/dynamic-store/src/index.ts"],
-      "@pivot/pivot-injectable": ["packages/pivot-injectable/src/index.ts"],
+      "@pivot/injectable": ["packages/injectable/src/index.ts"],
       "@pivot/pivot-resolver": ["packages/pivot-resolver/src/index.ts"],
       "@pivot/redux-registry": ["packages/redux-registry/src/index.ts"],
       "@pivot/redux-types": ["packages/redux-types/src/index.ts"],

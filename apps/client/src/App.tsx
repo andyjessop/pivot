@@ -4,14 +4,11 @@ import './App.css';
 import { useService } from './services';
 
 function App() {
-  const cache = useService('cache');
+  const router = useService('router');
 
-  if (!cache) {
-    console.log('not ready yet');
+  if (!router) {
     return null;
   }
-
-  console.log('cache ready');
 
   return (
     <div className="App">

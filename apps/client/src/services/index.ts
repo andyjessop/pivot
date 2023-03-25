@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { cacheService } from '../modules/cache.module';
 import { routerService } from '../modules/router.module';
-import { ExtractInstance } from '@pivot/pivot-injectable';
+import { ExtractInstance } from '@pivot/injectable';
 
 const config = {
   cache: cacheService,
