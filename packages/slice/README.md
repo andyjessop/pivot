@@ -2,6 +2,11 @@
 
 The `slice` function is a utility to help you create a "slice" of your Redux store, providing you with action creators, an API, middleware, a reducer, and a selector. The slice is generated based on the given name, initialState, and config object, which contains a set of state-modifying functions.
 
+The key differences between this function and the RTK `createSlice`:
+
+- The state-modifying functions do not accept actions. Instead, they accept the current state and any additional arguments. This allows you to keep your business logic separate from your Redux store.
+- Along with the reducer and middleware, the slice function also returns an API object containing functions that dispatch actions and return a boolean indicating if the state has changed. This makes the API a bit more convenient to use, as it allows you to use it anywhere in the app. Pivot uses it to inject into services, so that services can dispatch actions and update the store without having to know anything about Redux.
+
 ## Usage
 
 ```ts

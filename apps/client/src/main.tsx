@@ -15,9 +15,7 @@ const services = {
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Services.Provider value={services}>
-      <App />
-    </Services.Provider>
-  </React.StrictMode>,
+  <Services.Provider value={services}>
+    <App />
+  </Services.Provider>,
 );
