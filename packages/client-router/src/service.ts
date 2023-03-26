@@ -3,16 +3,14 @@ import { getRouteFromUrl } from './utils/get-route-from-url';
 import { getUrlFromRoute } from './utils/get-url-from-route';
 
 export function router<T extends RouterConfig>(
-  config: T,
+  initial: T,
   api: { navigateSuccess: (route: Route) => void },
 ) {
+  const config = { notFound: '/404', ...initial };
+
   addEventListener('popstate', onPopstate);
 
-  const route = getRouteFromUrl(config, window.location.href);
-
-  if (route) {
-    navigate(route);
-  }
+  navigate(getRouteFromUrl(config, window.location.href));
 
   return {
     destroy,
@@ -25,14 +23,20 @@ export function router<T extends RouterConfig>(
   }
 
   function link(route: Route<T>) {
-    return function withEvent(event: Event) {
+    return function withEvent(event: any) {
       event.preventDefault();
 
       navigate(route);
     };
   }
 
-  function navigate({ hash, name, search, params }: Route<T>) {
+  function navigate(route: Route<T> | null): void {
+    if (!route) {
+      return navigate({ name: 'notFound' });
+    }
+
+    const { hash, name, search, params } = route;
+
     const url = getUrlFromRoute(config, name, params, search, hash);
 
     window.history.pushState({}, '', url);

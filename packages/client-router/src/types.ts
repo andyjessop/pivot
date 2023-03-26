@@ -5,7 +5,9 @@ export type Route<T extends RouterConfig = any> = {
   search?: Record<string, string>;
 };
 
-export type RouterConfig = Record<string, string>;
+export type RouterConfig = Record<string, string> & {
+  notFound?: string;
+};
 
 export interface RouterState {
   route: Route | null;

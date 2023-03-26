@@ -23,6 +23,7 @@
         "packages/dynamic-slice-registry/src/index.ts"
       ],
       "@pivot/dynamic-store": ["packages/dynamic-store/src/index.ts"],
+      "@pivot/design-layout": ["packages/design-layout/src/index.ts"],
       "@pivot/injectable": ["packages/injectable/src/index.ts"],
       "@pivot/pivot-resolver": ["packages/pivot-resolver/src/index.ts"],
       "@pivot/redux-registry": ["packages/redux-registry/src/index.ts"],
@@ -31,7 +32,8 @@
       "@pivot/slice": ["packages/slice/src/index.ts"],
       "@pivot/template": ["packages/template/src/index.ts"],
       "@pivot/util-promise": ["packages/util-promise/src/index.ts"]
-    }
+    },
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "references": [{ "path": "./tsconfig.node.json" }]
 }

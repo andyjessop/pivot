@@ -1,17 +1,15 @@
 import { injectable } from '@pivot/injectable';
 import { slice } from '@pivot/slice';
+import { initialState, reducers, router } from '@pivot/client-router';
 
 export const routerSlice = injectable({
-  importFn: () =>
-    import('@pivot/client-router').then((m) =>
-      slice('router', m.initialState, m.reducers),
-    ),
+  importFn: () => Promise.resolve(slice('router', initialState, reducers)),
 });
 
 export const routerService = injectable({
   importFn: (sliceObj) =>
-    import('@pivot/client-router').then((m) =>
-      m.router(
+    Promise.resolve(
+      router(
         {
           project: '/projects/:id',
           projects: '/projects',
