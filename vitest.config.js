@@ -7,6 +7,7 @@ export default defineConfig({
     alias: getAliases(),
   },
   test: {
+    environment: 'jsdom',
     globals: true,
     passWithNoTests: true,
   },
