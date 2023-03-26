@@ -1,0 +1,31 @@
+.container {
+  --pivot-card-background-color: var(--pivot-color-white);
+  --pivot-card-padding-horizontal: var(--pivot-spacing-2);
+  --pivot-card-padding-vertical: var(--pivot-spacing-2);
+  --pivot-card-border-width: var(--pivot-border-width);
+  --pivot-card-border-color: var(--pivot-color-gray-10);
+  --pivot-card-padding: var(--pivot-border-radius);
+
+  background-color: var(--pivot-card-background-color);
+  padding-left: var(--pivot-card-padding-horizontal);
+  padding-right: var(--pivot-card-padding-horizontal);
+  padding-top: var(--pivot-card-padding-vertical);
+  padding-bottom: var(--pivot-card-padding-vertical);
+  border: var(--pivot-card-border-width) solid var(--pivot-card-border-color);
+  border-radius: var(--pivot-card-padding);
+}
+
+.container.small {
+  --pivot-card-padding-horizontal: var(--pivot-spacing-1);
+  --pivot-card-padding-vertical: var(--pivot-spacing-1);
+}
+
+.container.medium {
+  --pivot-card-padding-horizontal: var(--pivot-spacing-2);
+  --pivot-card-padding-vertical: var(--pivot-spacing-2);
+}
+
+.container.large {
+  --pivot-card-padding-horizontal: var(--pivot-spacing-4);
+  --pivot-card-padding-vertical: var(--pivot-spacing-4);
+}

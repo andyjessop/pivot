@@ -5,6 +5,7 @@ import { Services } from './services';
 import { cacheService } from './modules/cache.module';
 import { routerService } from './modules/router.module';
 import { store } from './store';
+import '@pivot/design-variables';
 import './index.css';
 
 console.log(store);

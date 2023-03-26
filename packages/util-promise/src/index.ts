@@ -1,10 +1,10 @@
 /**
  * Create the promise object, externalizing the reject() and resolve()
- * functions so that they can be called from without the Promise.
+ * functions so that they can be called from without the promise.
  *
  * @example
  * ```ts
- * const { promise, resolve } = createExternallyResolvablePromise();
+ * const { promise, resolve } = createExternallyResolvablepromise();
  *
  * promise.then(result => { ... });
  *
@@ -14,23 +14,23 @@
 export function externallyResolvablePromise<
   T,
 >(): ExternallyResolvablePromise<T> {
-  let res: PromiseResolveReject | undefined;
-  let rej: PromiseResolveReject | undefined;
+  let res: promiseResolveReject | undefined;
+  let rej: promiseResolveReject | undefined;
 
   return {
     promise: new Promise((resolve, reject) => {
       res = resolve;
       rej = reject;
     }),
-    reject: rej as PromiseResolveReject,
-    resolve: res as PromiseResolveReject,
+    reject: rej as promiseResolveReject,
+    resolve: res as promiseResolveReject,
   };
 }
 
-export type PromiseResolveReject = (data: any) => void;
+export type promiseResolveReject = (data: any) => void;
 
 export interface ExternallyResolvablePromise<T> {
   promise: Promise<T>;
-  reject: PromiseResolveReject;
-  resolve: PromiseResolveReject;
+  reject: promiseResolveReject;
+  resolve: promiseResolveReject;
 }
