@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/design-layout",
+  "name": "@pivot/util-classname",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../.eslintrc.json",

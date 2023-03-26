@@ -1,0 +1,24 @@
+.container {
+  --pivot-spaced-gap-default: var(--pivot-spacing-2);
+  --pivot-spaced-gap-small: var(--pivot-spacing-1);
+  --pivot-spaced-gap-large: var(--pivot-spacing-4);
+
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--pivot-spaced-gap-default);
+}
+
+.container.small {
+  gap: var(--pivot-spaced-gap-small);
+}
+
+.container.large {
+  gap: var(--pivot-spaced-gap-large);
+}
+
+.container.vertical {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}

@@ -1,0 +1,79 @@
+:root {
+  --top-height: 60px;
+
+  --pivot-color-primary: hsl(171, 100%, 41%);
+  --pivot-color-primary-light: hsl(171, 100%, 51%);
+  --pivot-color-primary-dark: hsl(171, 100%, 31%);
+  --pivot-color-primary-contrast: #ffffff;
+
+  --pivot-color-success: hsl(153, 53%, 53%);
+  --pivot-color-success-light: hsl(153, 53%, 63%);
+  --pivot-color-success-dark: hsl(153, 53%, 40%);
+  --pivot-color-success-contrast: #ffffff;
+
+  --pivot-color-warning: hsl(44, 100%, 77%);
+  --pivot-color-warning-light: hsl(44, 100%, 87%);
+  --pivot-color-warning-dark: hsl(44, 100%, 57%);
+  --pivot-color-warning-contrast: #ffffff;
+
+  --pivot-color-danger: hsl(348, 86%, 61%);
+  --pivot-color-danger-light: hsl(348, 86%, 71%);
+  --pivot-color-danger-dark: hsl(348, 86%, 51%);
+  --pivot-color-danger-contrast: #ffffff;
+
+  --pivot-color-info: hsl(207, 61%, 53%);
+  --pivot-color-info-light: hsl(207, 61%, 63%);
+  --pivot-color-info-dark: hsl(207, 61%, 43%);
+  --pivot-color-info-contrast: #ffffff;
+
+  --pivot-color-dark: hsl(0, 0%, 20%);
+  --pivot-color-dark-light: hsl(0, 0%, 30%);
+  --pivot-color-dark-dark: hsl(0, 0%, 10%);
+  --pivot-color-dark-contrast: #ffffff;
+
+  --pivot-color-white: hsl(0, 0%, 100%);
+  --pivot-color-gray-10: hsl(0, 0%, 90%);
+  --pivot-color-gray-20: hsl(0, 0%, 80%);
+  --pivot-color-gray-30: hsl(0, 0%, 70%);
+  --pivot-color-gray-40: hsl(0, 0%, 60%);
+  --pivot-color-gray-50: hsl(0, 0%, 50%);
+  --pivot-color-gray-60: hsl(0, 0%, 40%);
+  --pivot-color-gray-70: hsl(0, 0%, 30%);
+  --pivot-color-gray-80: hsl(0, 0%, 20%);
+  --pivot-color-gray-90: hsl(0, 0%, 10%);
+  --pivot-color-gray-100: hsl(0, 0%, 0%);
+
+  --pivot-border-width: 1px;
+  --pivot-border-radius: 4px;
+
+  --pivot-spacing-0: 0.25rem;
+  --pivot-spacing-1: 0.5rem;
+  --pivot-spacing-2: 1rem;
+  --pivot-spacing-3: 1.5rem;
+  --pivot-spacing-4: 2rem;
+
+  --pivot-font-size-0: 0.625rem;
+  --pivot-font-size-1: 0.75rem;
+  --pivot-font-size-2: 0.875rem;
+  --pivot-font-size-3: 1rem;
+  --pivot-font-size-4: 1.125rem;
+  --pivot-font-size-5: 1.25rem;
+  --pivot-font-size-6: 1.5rem;
+  --pivot-font-size-7: 2rem;
+
+  --pivot-font-color: var(--pivot-color-gray-80);
+
+  --pivot-font-weight-normal: 400;
+  --pivot-font-weight-semibold: 600;
+  --pivot-font-weight-bold: 700;
+
+  --pivot-animation-duration-0: 0.0875s;
+  --pivot-animation-duration-1: 0.175s;
+  --pivot-animation-duration-2: 0.35s;
+  --pivot-animation-duration-3: 0.7s;
+  --pivot-animation-duration-4: 1.4s;
+
+  --pivot-avatar-size-0: 2rem;
+  --pivot-avatar-size-1: 2.5rem;
+  --pivot-avatar-size-2: 3rem;
+}

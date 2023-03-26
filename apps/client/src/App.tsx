@@ -1,5 +1,6 @@
 import { useService } from './services';
-import { horizontalLeftContent as layout } from '@pivot/design-layout';
+import { horizontalLeftContent as layout, spaced } from '@pivot/design-css';
+import { cx } from '@pivot/util-classname';
 
 function App() {
   const router = useService('router');
@@ -11,9 +12,13 @@ function App() {
   return (
     <div className={layout.container}>
       <div
-        className={layout['top-left']}
+        className={cx(layout['top-left'], spaced.container)}
         onClick={router.link({ name: 'project', params: { id: '1' } })}
-      ></div>
+      >
+        <span>1</span>
+        <span>1</span>
+        <span>1</span>
+      </div>
       <div className={layout['top-right']}></div>
       <div className={layout.subheader}></div>
       <div className={layout['left-content']}></div>
