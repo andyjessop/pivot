@@ -1,12 +1,14 @@
+import '@pivot/design-variables';
+import './main.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { Services } from './services';
+
+import { App } from './App';
 import { cacheService } from './modules/cache.module';
 import { routerService } from './modules/router.module';
+import { Services } from './services';
 import { store } from './store';
-import '@pivot/design-variables';
-import './index.css';
 
 console.log(store);
 

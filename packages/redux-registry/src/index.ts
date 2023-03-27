@@ -1,3 +1,5 @@
+import { combineReducers, compose } from 'redux';
+
 import {
   Action,
   Dispatch,
@@ -5,7 +7,6 @@ import {
   MiddlewareAPI,
   Reducer,
 } from '@pivot/redux-types';
-import { combineReducers, compose } from 'redux';
 
 export function middlewareRegistry() {
   const mdw: Middleware[] = [];

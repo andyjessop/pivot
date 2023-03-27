@@ -1,9 +1,9 @@
-import type { Route } from '../types';
+import type { FullRoute } from '../types';
 
 export function getRouteFromUrl(
   config: Record<string, string>,
   fullUrl: string,
-): Route | null {
+): FullRoute | null {
   const { hash, pathname, searchParams } = new URL(fullUrl);
 
   const pathnameTokens = pathname.split('/');
@@ -32,7 +32,7 @@ export function getRouteFromUrl(
     ? {
         hash,
         name,
-        params: Object.keys(params).length ? params : undefined,
+        params,
         search: Object.fromEntries(searchParams.entries()),
       }
     : null;

@@ -1,10 +1,12 @@
-import type { Route, RouterConfig } from './types';
+import type { FullRoute, Route, RouterConfig } from './types';
 import { getRouteFromUrl } from './utils/get-route-from-url';
 import { getUrlFromRoute } from './utils/get-url-from-route';
 
+export type Router = ReturnType<typeof router>;
+
 export function router<T extends RouterConfig>(
   initial: T,
-  api: { navigateSuccess: (route: Route) => void },
+  api: { navigateSuccess: (route: FullRoute) => void },
 ) {
   const config = { notFound: '/404', ...initial };
 
@@ -42,10 +44,10 @@ export function router<T extends RouterConfig>(
     window.history.pushState({}, '', url);
 
     api.navigateSuccess({
-      hash,
+      hash: hash ?? '',
       name,
-      params,
-      search,
+      params: params ?? {},
+      search: search ?? {},
     });
   }
 

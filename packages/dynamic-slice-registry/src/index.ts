@@ -1,18 +1,18 @@
 import { DynamicStore } from '@pivot/dynamic-store';
-import { Injectable } from '@pivot/injectable';
+import { ExtractInstance, Injectable } from '@pivot/injectable';
 import { Slice } from '@pivot/slice';
 import {
   ExternallyResolvablePromise,
   externallyResolvablePromise,
 } from '@pivot/util-promise';
 
-type SliceConfig<T extends Slice<any, any, any>> = {
+type SliceConfig<T extends Slice<any>> = {
   active: (state: any) => boolean;
   injectable: Injectable<T, any>;
 };
 
-type SliceEntry<T extends Slice<any, any, any>> = SliceConfig<T> & {
-  instance?: Slice<any, any, any>;
+type SliceEntry<T extends Slice<any>> = SliceConfig<T> & {
+  instance?: Slice<any>;
   externallyResolvablePromise: ExternallyResolvablePromise<
     Slice<any, any, any>
   >;
@@ -20,25 +20,20 @@ type SliceEntry<T extends Slice<any, any, any>> = SliceConfig<T> & {
   unregister?: () => void;
 };
 
-export type SliceCollection<
-  T extends Slice<any, any, any> = Slice<any, any, any>,
-> = Record<string, SliceConfig<T>>;
-type SliceEntryCollection<T extends Slice<any, any, any>> = Record<
-  string,
-  SliceEntry<T>
->;
+export function dynamicSliceRegistry<
+  T extends Record<keyof T, SliceConfig<any>>,
+>(store: DynamicStore, config: T) {
+  type SliceEntryCollection = {
+    [K in keyof T]: SliceEntry<ExtractInstance<T[K]['injectable']>>;
+  };
 
-export function dynamicSliceRegistry<T extends Slice<any, any, any>>(
-  store: DynamicStore,
-  config: SliceCollection<T> = {},
-) {
-  const entries = Object.keys(config).reduce((acc, key) => {
+  const entries = (Object.keys(config) as (keyof T)[]).reduce((acc, key) => {
     acc[key] = {
       ...config[key],
       externallyResolvablePromise: externallyResolvablePromise(),
     };
     return acc;
-  }, {} as SliceEntryCollection<T>);
+  }, {} as SliceEntryCollection);
 
   store.subscribe(listener);
 
@@ -46,15 +41,18 @@ export function dynamicSliceRegistry<T extends Slice<any, any, any>>(
 
   return {
     get,
+    select,
   };
 
-  async function get(sliceName: string): Promise<Slice<any>> {
+  async function get<K extends keyof SliceEntryCollection>(
+    sliceName: K,
+  ): Promise<ExtractInstance<Injectable<T[K]['injectable']['instance']>>> {
     return entries[sliceName].externallyResolvablePromise.promise;
   }
 
   async function listener() {
     const state = store.getState();
-    const sliceNames = Object.keys(config);
+    const sliceNames = Object.keys(config) as (keyof T & string)[];
 
     for (const sliceName of sliceNames) {
       const { active, injectable, registering, unregister } =
@@ -80,6 +78,7 @@ export function dynamicSliceRegistry<T extends Slice<any, any, any>>(
 
         entries[sliceName] = {
           ...entries[sliceName],
+          instance,
           registering: false,
           unregister: () => {
             removeMiddleware();
@@ -97,5 +96,11 @@ export function dynamicSliceRegistry<T extends Slice<any, any, any>>(
       entries[sliceName].registering = false;
       unregister?.();
     }
+  }
+
+  function select<K extends keyof SliceEntryCollection>(
+    key: K,
+  ): ReturnType<ExtractInstance<T[K]['injectable']>['select']> {
+    return entries[key].instance?.select();
   }
 }

@@ -1,7 +1,9 @@
-import { LitElement, css, html } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
+
 import { cx } from '@pivot/util-classname';
+
 import { clickOutside } from './mixins/click-outside';
 
 export class PivotPopover extends clickOutside(LitElement) {

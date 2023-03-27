@@ -1,5 +1,7 @@
 import type { Cache } from './types';
 
+export type { Cache };
+
 export function cache(storage: Storage = localStorage): Cache {
   return {
     clear,
