@@ -37,6 +37,7 @@ The function accepts the following parameters:
 The function returns a `Slice` object with the following properties:
 
 - `actions`: An object containing action creators for each state-modifying function provided in the config object.
+- `addListener((state: State) => void)) => void`: A function that adds a listener to the slice. The listener will be called whenever the slice state changes.
 - `api`: An object containing API functions that dispatch actions and return a boolean indicating if the state has changed.
 - `middleware`: A middleware function for use in a Redux store.
 - `reducer`: A reducer function for use in a Redux store.

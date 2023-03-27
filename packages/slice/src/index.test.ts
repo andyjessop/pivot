@@ -1,18 +1,15 @@
 import { dynamicStore } from '@pivot/dynamic-store';
 import { slice } from './index';
+import { vi } from 'vitest';
+
+interface State {
+  count: number;
+}
+
+const initial: State = { count: 0 };
 
 describe('slice', () => {
-  it('true is true', () => {
-    expect(true).toBe(true);
-  });
-
-  it('should work', () => {
-    interface State {
-      count: number;
-    }
-
-    const initial: State = { count: 0 };
-
+  it('should add reducers', () => {
     const { actions, reducer } = slice('counter', initial, {
       add: (state: State, one: number) => ({
         ...state,
@@ -46,12 +43,6 @@ describe('slice', () => {
   });
 
   it('should handle multiple parameters', () => {
-    interface State {
-      count: number;
-    }
-
-    const initial: State = { count: 0 };
-
     const { actions, reducer } = slice('counter', initial, {
       add: (state: State, one: number, two: number) => ({
         ...state,
@@ -68,12 +59,6 @@ describe('slice', () => {
   });
 
   it('should handle multiple parameters (2)', () => {
-    interface State {
-      count: number;
-    }
-
-    const initial: State = { count: 0 };
-
     const { actions, reducer } = slice('counter', initial, {
       add: (state: State, one: number, two: number) => ({
         ...state,
@@ -107,12 +92,6 @@ describe('slice', () => {
   });
 
   it('should handle optional parameters (1)', () => {
-    interface State {
-      count: number;
-    }
-
-    const initial: State = { count: 0 };
-
     const { actions, reducer } = slice('counter', initial, {
       addOptional: (state: State, one?: number) => ({
         ...state,
@@ -137,12 +116,6 @@ describe('slice', () => {
   });
 
   it('should handle optional parameters (2)', () => {
-    interface State {
-      count: number;
-    }
-
-    const initial: State = { count: 0 };
-
     const { actions, reducer } = slice('counter', initial, {
       addOptional: (state: State, one: number, two?: number) => ({
         ...state,
@@ -171,12 +144,6 @@ describe('slice', () => {
   });
 
   it('should work with array type params', () => {
-    interface State {
-      count: number;
-    }
-
-    const initial: State = { count: 0 };
-
     const { actions, reducer } = slice('counter', initial, {
       add: (state: State, one: number[]) => ({
         ...state,
@@ -193,12 +160,6 @@ describe('slice', () => {
   });
 
   it('should produce API from actions', () => {
-    interface State {
-      count: number;
-    }
-
-    const initial: State = { count: 0 };
-
     const { api } = slice('counter', initial, {
       add: (state: State, one: number[]) => ({
         ...state,
@@ -210,12 +171,6 @@ describe('slice', () => {
   });
 
   it('api should dispatch actions', () => {
-    interface State {
-      count: number;
-    }
-
-    const initial: State = { count: 0 };
-
     const { api, middleware, reducer } = slice('counter', initial, {
       add: (state: State, one: number[]) => ({
         ...state,
@@ -231,5 +186,60 @@ describe('slice', () => {
     api.add([1, 2]);
 
     expect(store.getState().counter.count).toEqual(3);
+  });
+
+  it('should add listener', () => {
+    const initial: State = { count: 0 };
+
+    const { addListener, api, middleware, reducer } = slice(
+      'counter',
+      initial,
+      {
+        add: (state: State, one: number[]) => ({
+          ...state,
+          count: state.count + one.reduce((acc, cur) => acc + cur, 0),
+        }),
+      },
+    );
+
+    const store = dynamicStore();
+
+    store.addMiddleware(middleware);
+    store.addReducer('counter', reducer);
+
+    const listener = vi.fn();
+
+    addListener(listener);
+
+    api.add([1, 2]);
+
+    expect(listener).toBeCalledTimes(1);
+  });
+
+  it('should not call listener if action is not owned by slice', () => {
+    const initial: State = { count: 0 };
+
+    const { addListener, middleware, reducer } = slice('counter', initial, {
+      add: (state: State, one: number[]) => ({
+        ...state,
+        count: state.count + one.reduce((acc, cur) => acc + cur, 0),
+      }),
+    });
+
+    const store = dynamicStore();
+
+    store.addMiddleware(middleware);
+    store.addReducer('counter', reducer);
+
+    const listener = vi.fn();
+
+    addListener(listener);
+
+    store.dispatch({
+      type: 'some-other-action',
+      payload: [1, 2],
+    });
+
+    expect(listener).toBeCalledTimes(0);
   });
 });

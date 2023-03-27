@@ -32,6 +32,7 @@
       "@pivot/services-context": ["packages/services-context/src/index.ts"],
       "@pivot/slice": ["packages/slice/src/index.ts"],
       "@pivot/template": ["packages/template/src/index.ts"],
+      "@pivot/use-selector": ["packages/use-selector/src/index.ts"],
       "@pivot/util-classname": ["packages/util-classname/src/index.ts"],
       "@pivot/util-promise": ["packages/util-promise/src/index.ts"]
     },

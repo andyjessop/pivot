@@ -18,8 +18,7 @@ export function injectable<T, Deps extends Injectable<any>[]>({
   const resolvablePromise = externallyResolvablePromise<T>();
 
   let instance: T | undefined;
-  let resolving = false;
-  let resolved = false;
+  let state = 'idle' as 'idle' | 'resolving' | 'resolved';
   const promise = resolvablePromise.promise;
   const depChain = buildDepChain(dependencies);
 
@@ -43,7 +42,7 @@ export function injectable<T, Deps extends Injectable<any>[]>({
       return promise;
     }
 
-    resolving = true;
+    state = 'resolving';
 
     if (withDeps) {
       // Resolve all dependencies in parallel. Here we're passing false
@@ -55,8 +54,7 @@ export function injectable<T, Deps extends Injectable<any>[]>({
       ...(dependencies.map((dep) => dep.getInstance()) as any),
     );
 
-    resolving = false;
-    resolved = true;
+    state = 'resolved';
 
     resolvablePromise.resolve(instance);
 
@@ -68,10 +66,10 @@ export function injectable<T, Deps extends Injectable<any>[]>({
   }
 
   function isResolving() {
-    return resolving;
+    return state === 'resolving';
   }
 
   function hasResolved() {
-    return resolved;
+    return state === 'resolved';
   }
 }

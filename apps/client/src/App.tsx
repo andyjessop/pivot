@@ -1,13 +1,18 @@
 import { useService } from './services';
 import { horizontalLeftContent as layout, spaced } from '@pivot/design-css';
 import { cx } from '@pivot/util-classname';
+import { useSelector } from './store';
+import { selectRouteName } from './selectors/router';
 
 function App() {
   const router = useService('router');
+  const route = useSelector(selectRouteName);
 
   if (!router) {
     return null;
   }
+
+  console.log(route);
 
   return (
     <div className={layout.container}>

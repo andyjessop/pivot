@@ -32,6 +32,7 @@ export type Slice<
           type: `${N}/${K & string}`;
         };
   };
+  addListener: (listener: (state: S) => void) => () => void;
   api: {
     [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
   };
@@ -47,9 +48,11 @@ export function slice<
   N extends string = any,
   S = any,
 >(name: N, initialState: S, config: T): Slice<T, N, S> {
+  type SliceActionType = `${N}/${keyof T & string}`;
+  type Listener = (state: S) => void;
+
   let dispatch: Dispatch;
   let getState: () => any;
-  type SliceActionType = `${N}/${keyof T & string}`;
 
   const keys = Object.keys(config) as unknown as (keyof T & string)[];
 
@@ -60,6 +63,7 @@ export function slice<
   }, {} as Record<keyof T & string, SliceActionType>);
 
   const keysFromActionTypes = inverse(actionTypes);
+  const listeners = new Set<Listener>();
 
   /**
    * Build the slice's action creators.
@@ -140,11 +144,20 @@ export function slice<
 
   return {
     actions,
+    addListener,
     api,
     middleware,
     reducer,
     select,
   };
+
+  function addListener(listener: Listener) {
+    listeners.add(listener);
+
+    return () => {
+      listeners.delete(listener);
+    };
+  }
 
   function select(): S {
     if (!getState) {
@@ -171,7 +184,15 @@ export function slice<
       dispatch = middlewareApi.dispatch;
     }
 
-    return (next: Dispatch) => (action: Action) => next(action);
+    return (next: Dispatch) => (action: Action) => {
+      next(action);
+
+      if (isSliceActionType(action.type)) {
+        const state = select();
+
+        listeners.forEach((listener) => listener(state));
+      }
+    };
   }
 
   function reducer(state: S | undefined, action: Action): S {
