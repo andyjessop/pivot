@@ -1,5 +1,6 @@
 import React from 'react';
 
 export const routes = {
-  projects: React.lazy(() => import('./pages/Projects')),
+  '404': React.lazy(() => import('./pages/NotFound')),
+  project: React.lazy(() => import('./pages/project/Project')),
 };

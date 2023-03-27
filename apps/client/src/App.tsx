@@ -1,35 +1,33 @@
-import { useService } from './services';
-import { horizontalLeftContent as layout, spaced } from '@pivot/design-css';
+import { Suspense } from 'react';
+
+import { horizontalLeftContent as layout } from '@pivot/design-css';
 import { cx } from '@pivot/util-classname';
-import { useSelector } from './store';
-import { selectRouteName } from './selectors/router';
 
-function App() {
-  const router = useService('router');
-  const route = useSelector(selectRouteName);
+import { selectRouteName } from '~selectors/router';
+import { useService } from '~services';
+import { useSelector } from '~store';
 
-  if (!router) {
+import { routes } from './routes';
+
+export function App() {
+  useService('router');
+
+  const name = useSelector(selectRouteName) as keyof typeof routes;
+
+  if (!name) {
     return null;
   }
 
-  console.log(route);
+  const Component = routes[name] ?? routes['404'];
 
   return (
-    <div className={layout.container}>
-      <div
-        className={cx(layout['top-left'], spaced.container)}
-        onClick={router.link({ name: 'project', params: { id: '1' } })}
-      >
-        <span>1</span>
-        <span>1</span>
-        <span>1</span>
+    <Suspense>
+      <div className={layout.container}>
+        <div className={cx(layout['top-left'])}></div>
+        <div className={layout['top-right']}></div>
+
+        <Component />
       </div>
-      <div className={layout['top-right']}></div>
-      <div className={layout.subheader}></div>
-      <div className={layout['left-content']}></div>
-      <div className={layout.content}></div>
-    </div>
+    </Suspense>
   );
 }
-
-export default App;

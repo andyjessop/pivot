@@ -1,18 +1,18 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
-const root = resolve(__dirname, '../../');
-const fileName = 'tsconfig.json';
-
 const format = (s: string) => s.replace('/*', '');
 
-function readTsAliases() {
-  return JSON.parse(readFileSync(resolve(root, fileName), 'utf-8'))
+function readTsAliases(root: string, filename: string) {
+  return JSON.parse(readFileSync(resolve(root, filename), 'utf-8'))
     .compilerOptions.paths;
 }
 
-export function getAliases(): Record<string, string> {
-  const aliases = readTsAliases();
+export function getAliases(
+  root: string,
+  filename: string,
+): Record<string, string> {
+  const aliases = readTsAliases(root, filename);
 
   return Object.keys(aliases).reduce((acc, key) => {
     const k = format(key);

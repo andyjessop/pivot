@@ -1,4 +1,5 @@
 import { externallyResolvablePromise } from '@pivot/util-promise';
+
 import { buildDepChain } from './build-dep-chain';
 import { AsyncFactoryFn, Injectable } from './types';
 

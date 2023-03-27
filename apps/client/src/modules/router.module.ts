@@ -1,6 +1,6 @@
+import { initialState, reducers, router } from '@pivot/client-router';
 import { injectable } from '@pivot/injectable';
 import { slice } from '@pivot/slice';
-import { initialState, reducers, router } from '@pivot/client-router';
 
 export const routerSlice = injectable({
   importFn: () => Promise.resolve(slice('router', initialState, reducers)),

@@ -1,4 +1,5 @@
-import { legacy_createStore, applyMiddleware, compose } from 'redux';
+import { applyMiddleware, compose, legacy_createStore } from 'redux';
+
 import { middlewareRegistry, reducerRegistry } from '@pivot/redux-registry';
 import type { Reducer, Store } from '@pivot/redux-types';
 

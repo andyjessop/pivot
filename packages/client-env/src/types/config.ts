@@ -1,0 +1,6 @@
+export enum Variable {
+  API_URL,
+  SUPABASE_API_KEY,
+  SUPABASE_API_URL,
+  SUPABASE_FUNCTIONS_URL,
+}

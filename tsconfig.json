@@ -17,8 +17,25 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
+      "~selectors/*": ["apps/client/src/selectors/*"],
+      "~services": ["apps/client/src/services/index.ts"],
+      "~store": ["apps/client/src/store/index.ts"],
+      "@pivot/client-auth": ["packages/client-auth/src/index.ts"],
       "@pivot/client-cache": ["packages/client-cache/src/index.ts"],
+      "@pivot/client-env": ["packages/client-env/src/index.ts"],
+      "@pivot/client-feature-flags": [
+        "packages/client-feature-flags/src/index.ts"
+      ],
+      "@pivot/client-nav": ["packages/client-nav/src/index.ts"],
+      "@pivot/client-project": ["packages/client-project/src/index.ts"],
+      "@pivot/client-pending-deployment": [
+        "packages/client-pending-deployment/src/index.ts"
+      ],
       "@pivot/client-router": ["packages/client-router/src/index.ts"],
+      "@pivot/client-shared-interfaces": [
+        "packages/client-shared-interfaces/src/index.ts"
+      ],
+      "@pivot/design-lit": ["packages/design-lit/src/index.ts"],
       "@pivot/dynamic-slice-registry": [
         "packages/dynamic-slice-registry/src/index.ts"
       ],
@@ -26,7 +43,6 @@
       "@pivot/design-css": ["packages/design-css/src/index.ts"],
       "@pivot/design-variables": ["packages/design-variables/src/index.ts"],
       "@pivot/injectable": ["packages/injectable/src/index.ts"],
-      "@pivot/pivot-resolver": ["packages/pivot-resolver/src/index.ts"],
       "@pivot/redux-registry": ["packages/redux-registry/src/index.ts"],
       "@pivot/redux-types": ["packages/redux-types/src/index.ts"],
       "@pivot/services-context": ["packages/services-context/src/index.ts"],
@@ -34,7 +50,9 @@
       "@pivot/template": ["packages/template/src/index.ts"],
       "@pivot/use-selector": ["packages/use-selector/src/index.ts"],
       "@pivot/util-classname": ["packages/util-classname/src/index.ts"],
-      "@pivot/util-promise": ["packages/util-promise/src/index.ts"]
+      "@pivot/util-promise": ["packages/util-promise/src/index.ts"],
+      "@pivot/util-time": ["packages/util-time/src/index.ts"],
+      "@pivot/util-url": ["packages/util-url/src/index.ts"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },

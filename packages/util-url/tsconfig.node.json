@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["./src/**/*.test.ts"],
+  "exclude": ["./src/**/*.ts"],
+  "compilerOptions": {
+    "composite": true,
+    "isolatedModules": false,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node", "jest"]
+  }
+}

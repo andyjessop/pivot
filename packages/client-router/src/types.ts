@@ -5,6 +5,13 @@ export type Route<T extends RouterConfig = any> = {
   search?: Record<string, string>;
 };
 
+export type FullRoute<T extends RouterConfig = any> = {
+  name: keyof T & string;
+  hash: string;
+  params: Record<string, string>;
+  search: Record<string, string>;
+};
+
 export type RouterConfig = Record<string, string> & {
   notFound?: string;
 };

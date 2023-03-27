@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+
 import { DynamicStore } from '@pivot/dynamic-store';
 
 export function createUseSelector(store: DynamicStore) {
-  return function useSelector<T extends (state: S) => U, S = any, U = any>(
+  return function useSelector<T extends (state: any) => any>(
     selector: T,
-  ) {
-    const [selectedState, setSelectedState] = useState<U>(
+  ): ReturnType<T> {
+    const [selectedState, setSelectedState] = useState<ReturnType<T>>(
       selector(store.getState()),
     );
 

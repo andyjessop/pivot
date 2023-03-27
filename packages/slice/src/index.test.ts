@@ -1,6 +1,8 @@
-import { dynamicStore } from '@pivot/dynamic-store';
-import { slice } from './index';
 import { vi } from 'vitest';
+
+import { dynamicStore } from '@pivot/dynamic-store';
+
+import { slice } from './index';
 
 interface State {
   count: number;

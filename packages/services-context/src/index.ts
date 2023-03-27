@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+
 import { ExtractInstance } from '@pivot/injectable';
+
 import { ServicesConfig } from './types';
 
 export function servicesContext<T extends ServicesConfig>(config: T) {
