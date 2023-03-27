@@ -1,9 +1,0 @@
-{
-  "name": "@pivot/client-nav",
-  "main": "./src/index.ts",
-  "scripts": {
-    "lint": "eslint src --config ../../.eslintrc.json",
-    "test": "vitest --config ../../vitest.config.js",
-    "type-check": "tsc --noEmit"
-  }
-}

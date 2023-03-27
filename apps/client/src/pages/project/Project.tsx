@@ -1,4 +1,4 @@
-import { horizontalLeftContent as layout, outlet } from '@pivot/design-css';
+import { horizontalLeftContent as layout, outlet } from '@pivot/design/css';
 
 import { selectRouteParams } from '~selectors/router';
 import { useSelector } from '~store';

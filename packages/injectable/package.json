@@ -1,8 +1,0 @@
-{
-  "name": "@pivot/injectable",
-  "main": "./src/index.ts",
-  "scripts": {
-    "test": "vitest --config ../../vitest.config.js",
-    "type-check": "tsc --noEmit"
-  }
-}

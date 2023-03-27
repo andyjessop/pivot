@@ -1,4 +1,4 @@
-import { servicesContext } from '@pivot/services-context';
+import { servicesContext } from '@pivot/lib/context-services';
 
 import { config } from './config';
 

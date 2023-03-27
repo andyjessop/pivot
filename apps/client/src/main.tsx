@@ -1,4 +1,4 @@
-import '@pivot/design-variables';
+import '@pivot/design/variables';
 import './main.css';
 
 import React from 'react';
