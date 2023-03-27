@@ -1,6 +1,6 @@
-import { dynamicSliceRegistry } from '@pivot/dynamic-slice-registry';
-import { dynamicStore } from '@pivot/dynamic-store';
-import { createUseSelector } from '@pivot/use-selector';
+import { dynamicSliceRegistry } from '@pivot/lib/dynamic-slice-registry';
+import { dynamicStore } from '@pivot/lib/dynamic-store';
+import { createUseSelector } from '@pivot/lib/use-selector';
 
 import { config } from './config';
 

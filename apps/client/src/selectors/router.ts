@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { selectors } from '@pivot/client-router';
+import { selectors } from '@pivot/client/router';
 
 import { select } from '~store';
 
