@@ -1,5 +1,5 @@
-import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
 import { DynamicStore } from '@pivot/lib/dynamic-store';
+import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
 import { Slice } from '@pivot/lib/slice';
 import {
   ExternallyResolvablePromise,

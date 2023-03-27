@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/client/feature/flags",
+  "name": "@pivot/client-feature-flags",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../../.eslintrc.json",

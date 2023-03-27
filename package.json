@@ -48,8 +48,8 @@
   },
   "workspaces": {
     "packages": [
-      "apps/*",
-      "packages/*"
+      "apps/**",
+      "packages/**"
     ]
   }
 }

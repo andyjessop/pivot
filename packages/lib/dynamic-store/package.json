@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/libdynamic-store",
+  "name": "@pivot/lib-dynamic-store",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../../.eslintrc.json",

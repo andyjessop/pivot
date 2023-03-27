@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/design/css",
+  "name": "@pivot/design-css",
   "main": "./src/index.ts",
   "scripts": {}
 }
