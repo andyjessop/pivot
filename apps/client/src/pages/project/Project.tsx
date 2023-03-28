@@ -4,9 +4,8 @@ import { selectRouteParams } from '~modules/router/router.selectors';
 import { useSelector } from '~store';
 
 export default function Project() {
+  // eslint-disable-next-line
   const params = useSelector(selectRouteParams);
-
-  console.log(params);
 
   return (
     <div className={outlet.container}>

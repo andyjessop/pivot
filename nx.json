@@ -7,9 +7,11 @@
       "options": {
         "cacheableOperations": [
           "build",
+          "e2e",
           "lint",
+          "lint:commit",
           "test",
-          "e2e"
+          "type-check"
         ],
         "accessToken": "NTZkZjc2MjYtY2JiMC00Y2RlLTkzOTAtMzhkM2FiNjcwY2VmfHJlYWQtd3JpdGU="
       }
@@ -17,23 +19,13 @@
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "production": [
-      "default"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": ["default"],
     "sharedGlobals": []
   },
   "workspaceLayout": {
