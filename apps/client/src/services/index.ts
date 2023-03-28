@@ -1,7 +1,5 @@
-import { servicesContext } from '@pivot/lib/context-services';
+import { createUseService } from '@pivot/lib/use-service';
 
 import { config } from './config';
 
-const { Services, useService } = servicesContext(config);
-
-export { Services, useService };
+export const useService = createUseService(config);

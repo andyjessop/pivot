@@ -1,15 +1,15 @@
-# `servicesContext`
+# `useService`
 
-The `servicesContext` function creates a React context and a `useService` hook for managing and accessing services within a React application. It takes a `Record<string, Injectable>` object as its argument and returns an object containing the created context and the useService hook.
+The `createUseService` function creates a `useService` hook for managing and accessing services within a React application. It takes a `Record<string, Injectable>` object as its argument.
 
 ## Usage
 
 ```ts
-import { servicesContext } from '@pivot/lib/context-services';
+import { createUseService } from '@pivot/lib/use-service';
 import { Injectable } from '@pivot/lib/injectable';
 
-const config: <Record<string, Injectable> = { ... };
-const { Services, useService } = servicesContext(config);
+const config: <Record<string, Injectable>> = { ... };
+const useService = createUseService(config);
 ```
 
 ## Parameters
@@ -18,14 +18,13 @@ const { Services, useService } = servicesContext(config);
 
 ## Return Value
 
-The function returns an object with the following properties:
+The function returns the following function:
 
-- `Services`: The created React context.
 - `useService`: A hook for accessing services from the context.
 
 ### `useService`
 
-A custom hook to access services from the context created by `servicesContext`. It takes a key representing the service name and returns the service instance, or `null` until the service instance is resolved.
+A custom hook to access services. It takes a key representing the service name and returns the service instance, or `null` until the service instance is resolved.
 
 #### Parameters
 
@@ -40,7 +39,7 @@ A custom hook to access services from the context created by `servicesContext`. 
 ```ts
 import { Injectable } from '@pivot/lib/injectable';
 
-const { Services, useService } = servicesContext({
+const userService = createUseService({
   myService: injectable({
     importFn: () => import('./myService'), // resolves to { sayHello: () => 'Hello World' }
   }),

@@ -37,9 +37,7 @@
       "@pivot/client/shared-interfaces": [
         "packages/client/shared-interfaces/src/index.ts"
       ],
-      "@pivot/lib/context-services": [
-        "packages/lib/context-services/src/index.ts"
-      ],
+      "@pivot/lib/use-service": ["packages/lib/use-service/src/index.ts"],
       "@pivot/design/lit": ["packages/lit/src/index.ts"],
       "@pivot/lib/dynamic-slice-registry": [
         "packages/lib/dynamic-slice-registry/src/index.ts"
