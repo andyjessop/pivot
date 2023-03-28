@@ -55,6 +55,13 @@ export function router<T extends RouterConfig>(
     const route = getRouteFromUrl(config, window.location.href);
 
     if (!route) {
+      api.navigateSuccess({
+        name: 'notFound',
+        params: {},
+        search: {},
+        hash: '',
+      });
+
       return;
     }
 
