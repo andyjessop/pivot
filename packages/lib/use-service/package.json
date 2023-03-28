@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/lib-context-services",
+  "name": "@pivot/lib-use-service",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../../.eslintrc.json",
