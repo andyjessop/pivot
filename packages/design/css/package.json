@@ -1,5 +1,7 @@
 {
   "name": "@pivot/design-css",
   "main": "./src/index.ts",
-  "scripts": {}
+  "scripts": {
+    "stylelint": "stylelint \"src/**/*.css\" --allow-empty-input"
+  }
 }

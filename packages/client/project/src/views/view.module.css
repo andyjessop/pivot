@@ -1,9 +1,7 @@
 .container {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-rows: 1fr;
+  grid-template: 300px 1fr 1fr 'nav content';
   gap: 1rem;
-  grid-template-areas: 'nav content';
   padding-top: 1.5rem;
   height: calc(100vh - 140px);
 }
@@ -63,6 +61,11 @@
   gap: 1rem;
 }
 
+.commit-message {
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
 .deployment-card {
   display: flex;
   align-items: center;
@@ -86,9 +89,4 @@
 .deployment-card .actions {
   text-align: right;
   flex: 1;
-}
-
-.commit-message {
-  font-family: monospace;
-  font-size: 0.9rem;
 }

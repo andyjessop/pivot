@@ -2,8 +2,9 @@
   display: grid;
   grid-template-columns: 200px 100px 1fr 200px;
   grid-template-rows: 70px 50px 1fr;
-  gap: 0px 0px;
+  gap: 0 0;
   grid-auto-flow: row;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
   grid-template-areas:
     'top top top top'
     'subheader subheader subheader subheader'

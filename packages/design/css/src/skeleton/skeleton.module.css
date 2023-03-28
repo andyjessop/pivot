@@ -21,7 +21,7 @@
   padding: 0;
 }
 
-.paragraph:last-child:not(:first-child):not(:nth-child(2)) {
+.paragraph:last-child:not(:first-child:nth-child(2)) {
   width: 61%;
 }
 

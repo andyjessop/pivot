@@ -7,10 +7,8 @@
   --pivot-card-padding: var(--pivot-border-radius);
 
   background-color: var(--pivot-card-background-color);
-  padding-left: var(--pivot-card-padding-horizontal);
-  padding-right: var(--pivot-card-padding-horizontal);
-  padding-top: var(--pivot-card-padding-vertical);
-  padding-bottom: var(--pivot-card-padding-vertical);
+  padding: var(--pivot-card-padding-vertical)
+    var(--pivot-card-padding-horizontal);
   border: var(--pivot-card-border-width) solid var(--pivot-card-border-color);
   border-radius: var(--pivot-card-padding);
 }
