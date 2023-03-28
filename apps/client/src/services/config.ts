@@ -1,5 +1,6 @@
-import { cacheService } from '../modules/cache.module';
-import { routerService } from '../modules/router.module';
+import { authService } from '../modules/auth/auth.module';
+import { cacheService } from '../modules/cache/cache.module';
+import { routerService } from '../modules/router/router.module';
 
 /**
  * This is the configuration for the services of the application. Services defined
@@ -10,6 +11,7 @@ import { routerService } from '../modules/router.module';
  * that can modify (and read from) the state of the application.
  */
 export const config = {
+  auth: authService,
   cache: cacheService,
   router: routerService,
 };

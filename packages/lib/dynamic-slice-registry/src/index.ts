@@ -64,7 +64,7 @@ export function dynamicSliceRegistry<
         (shouldBeActive && (unregister || registering)) || // should be active and is
         (!shouldBeActive && !unregister && !registering) // should not be active and is not
       ) {
-        return;
+        continue;
       }
 
       if (shouldBeActive) {
@@ -89,7 +89,7 @@ export function dynamicSliceRegistry<
 
         entries[sliceName].externallyResolvablePromise.resolve(instance);
 
-        return;
+        continue;
       }
 
       // should not be active and is

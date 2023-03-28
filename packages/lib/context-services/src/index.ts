@@ -38,6 +38,8 @@ export function servicesContext<T extends ServicesConfig>(config: T) {
 
     async function resolveService() {
       try {
+        debugger; // eslint-disable-line
+
         const response = await context[key].get();
 
         setService(response as Service);

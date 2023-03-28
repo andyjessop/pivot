@@ -10,14 +10,8 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["@nrwl/nx", "@typescript-eslint", "simple-import-sort"],
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
   "rules": {
-    "@nrwl/nx/enforce-module-boundaries": [
-      "error",
-      {
-        "allowCircularSelfDependency": true
-      }
-    ],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-unused-vars": [
