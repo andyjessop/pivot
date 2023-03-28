@@ -1,7 +1,6 @@
-import { selectNavItems } from '../modules/nav/main-nav.selectors';
-
-import { Headless, headless } from './utils/headless';
-import { visit } from './utils/visit';
+import { selectNavItems } from '../../modules/nav/main-nav.selectors';
+import { Headless, headless } from '../utils/headless';
+import { visit } from '../utils/visit';
 
 let app: Headless;
 

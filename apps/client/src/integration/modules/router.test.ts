@@ -1,5 +1,5 @@
-import { Headless, headless } from './utils/headless';
-import { visit } from './utils/visit';
+import { Headless, headless } from '../utils/headless';
+import { visit } from '../utils/visit';
 
 let app: Headless;
 
