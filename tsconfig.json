@@ -18,11 +18,12 @@
     "jsx": "react-jsx",
     "paths": {
       "~assets/*": ["apps/client/src/assets/*"],
-      "~selectors/*": ["apps/client/src/selectors/*"],
+      "~modules/*": ["apps/client/src/modules/*"],
       "~services": ["apps/client/src/services/index.ts"],
       "~store": ["apps/client/src/store/index.ts"],
       "@pivot/client/auth": ["packages/client/auth/src/index.ts"],
       "@pivot/client/cache": ["packages/client/cache/src/index.ts"],
+      "@pivot/client/components": ["packages/client/components/src/index.ts"],
       "@pivot/client/env": ["packages/client/env/src/index.ts"],
       "@pivot/client/feature-flags": [
         "packages/client/feature-flags/src/index.ts"

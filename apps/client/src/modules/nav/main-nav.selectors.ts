@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-import { navItems } from '../widgets/main-nav/selectors';
+import { navItems } from '@pivot/client/components';
 
-import { selectRoute } from './router';
+import { selectRoute } from '../router/router.selectors';
 
 export const selectNavItems = createSelector(selectRoute, navItems);

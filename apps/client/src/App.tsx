@@ -1,24 +1,27 @@
 import { Suspense } from 'react';
 
+import { UserNav } from '@pivot/client/auth';
+import { MainNav, Navbar } from '@pivot/client/components';
 import { horizontalLeftContent as layout } from '@pivot/design/css';
 
 import logo from '~assets/react.svg';
-import { selectNavItems } from '~selectors/main-nav';
-import { selectRouteName } from '~selectors/router';
+import { selectAuth } from '~modules/auth/auth.selectors';
+import { selectNavItems } from '~modules/nav/main-nav.selectors';
+import { selectRouteName } from '~modules/router/router.selectors';
 import { useService } from '~services';
 import { useSelector } from '~store';
 
 import { routes } from './routes';
-import { MainNav } from './widgets/main-nav/MainNav';
-import { Navbar } from './widgets/navbar/Navbar';
 
 export function App() {
   const router = useService('router');
+  const auth = useService('auth');
 
   const name = useSelector(selectRouteName) as keyof typeof routes;
   const navItems = useSelector(selectNavItems);
+  const authState = useSelector(selectAuth);
 
-  if (!router || !name) {
+  if (!router || !auth || !name) {
     return null;
   }
 
@@ -35,12 +38,17 @@ export function App() {
   /**
    * Main navigation component.
    */
-  const Nav = <MainNav items={navItems} link={router.link} />;
+  const LeftNav = <MainNav items={navItems} link={router.link} />;
+
+  /**
+   * User login component.
+   */
+  const RightNav = <UserNav actions={auth} data={authState} />;
 
   return (
     <div className={layout.container}>
       <div className={layout.top}>
-        <Navbar Logo={Logo} LeftNav={Nav} RightNav={<></>} />
+        <Navbar Logo={Logo} LeftNav={LeftNav} RightNav={RightNav} />
       </div>
       <Suspense>
         <PageContent />

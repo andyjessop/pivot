@@ -5,6 +5,7 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
+  "files": ["*.ts", "*.tsx"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -15,7 +16,8 @@
     "@nrwl/nx/enforce-module-boundaries": [
       "error",
       {
-        "allowCircularSelfDependency": true
+        "allowCircularSelfDependency": true,
+        "checkDynamicDependenciesExceptions": ["!*"]
       }
     ],
     "@typescript-eslint/no-explicit-any": "off",
