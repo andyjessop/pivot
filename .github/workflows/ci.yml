@@ -22,3 +22,4 @@ jobs:
       - run: npm run lint:affected
       - run: npm run test:affected
       - run: npm run type-check:affected
+      - run: npm run stylelint:affected

@@ -1,3 +1,4 @@
+/* stylelint-disable */
 input[type='range'].slider {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -13,7 +14,9 @@ input[type='range'].slider.is-fullwidth {
 input[type='range'].slider:focus {
   outline: 0;
 }
-input[type='range'].slider:not([orient='vertical'])::-webkit-slider-runnable-track {
+input[type='range'].slider:not(
+    [orient='vertical']
+  )::-webkit-slider-runnable-track {
   width: 100%;
 }
 input[type='range'].slider:not([orient='vertical'])::-moz-range-track {
@@ -23,7 +26,8 @@ input[type='range'].slider:not([orient='vertical'])::-ms-track {
   width: 100%;
 }
 input[type='range'].slider:not([orient='vertical']).has-output + output,
-input[type='range'].slider:not([orient='vertical']).has-output-tooltip + output {
+input[type='range'].slider:not([orient='vertical']).has-output-tooltip
+  + output {
   width: 3rem;
   background: #4a4a4a;
   border-radius: 4px;
@@ -38,8 +42,10 @@ input[type='range'].slider:not([orient='vertical']).has-output-tooltip + output 
   pointer-events: none;
   z-index: 200;
 }
-input[type='range'].slider:not([orient='vertical']).has-output-tooltip:disabled + output,
-input[type='range'].slider:not([orient='vertical']).has-output:disabled + output {
+input[type='range'].slider:not([orient='vertical']).has-output-tooltip:disabled
+  + output,
+input[type='range'].slider:not([orient='vertical']).has-output:disabled
+  + output {
   opacity: 0.5;
 }
 input[type='range'].slider:not([orient='vertical']).has-output {
@@ -55,7 +61,8 @@ input[type='range'].slider:not([orient='vertical']).has-output + output {
 input[type='range'].slider:not([orient='vertical']).has-output-tooltip {
   display: block;
 }
-input[type='range'].slider:not([orient='vertical']).has-output-tooltip + output {
+input[type='range'].slider:not([orient='vertical']).has-output-tooltip
+  + output {
   position: absolute;
   left: 0;
   top: -0.1rem;
@@ -170,7 +177,9 @@ input[type='range'].slider:disabled::-ms-thumb {
 input[type='range'].slider:not([orient='vertical']) {
   min-height: calc((1rem + 2px) * 1.25);
 }
-input[type='range'].slider:not([orient='vertical'])::-webkit-slider-runnable-track {
+input[type='range'].slider:not(
+    [orient='vertical']
+  )::-webkit-slider-runnable-track {
   height: 0.5rem;
 }
 input[type='range'].slider:not([orient='vertical'])::-moz-range-track {
@@ -213,7 +222,9 @@ input[type='range'].slider[orient='vertical']::-webkit-slider-thumb {
 input[type='range'].slider.is-small:not([orient='vertical']) {
   min-height: calc((0.75rem + 2px) * 1.25);
 }
-input[type='range'].slider.is-small:not([orient='vertical'])::-webkit-slider-runnable-track {
+input[type='range'].slider.is-small:not(
+    [orient='vertical']
+  )::-webkit-slider-runnable-track {
   height: 0.375rem;
 }
 input[type='range'].slider.is-small:not([orient='vertical'])::-moz-range-track {
@@ -256,10 +267,14 @@ input[type='range'].slider.is-small[orient='vertical']::-webkit-slider-thumb {
 input[type='range'].slider.is-medium:not([orient='vertical']) {
   min-height: calc((1.25rem + 2px) * 1.25);
 }
-input[type='range'].slider.is-medium:not([orient='vertical'])::-webkit-slider-runnable-track {
+input[type='range'].slider.is-medium:not(
+    [orient='vertical']
+  )::-webkit-slider-runnable-track {
   height: 0.625rem;
 }
-input[type='range'].slider.is-medium:not([orient='vertical'])::-moz-range-track {
+input[type='range'].slider.is-medium:not(
+    [orient='vertical']
+  )::-moz-range-track {
   height: 0.625rem;
 }
 input[type='range'].slider.is-medium:not([orient='vertical'])::-ms-track {
@@ -299,7 +314,9 @@ input[type='range'].slider.is-medium[orient='vertical']::-webkit-slider-thumb {
 input[type='range'].slider.is-large:not([orient='vertical']) {
   min-height: calc((1.5rem + 2px) * 1.25);
 }
-input[type='range'].slider.is-large:not([orient='vertical'])::-webkit-slider-runnable-track {
+input[type='range'].slider.is-large:not(
+    [orient='vertical']
+  )::-webkit-slider-runnable-track {
   height: 0.75rem;
 }
 input[type='range'].slider.is-large:not([orient='vertical'])::-moz-range-track {

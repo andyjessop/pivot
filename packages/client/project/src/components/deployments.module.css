@@ -1,5 +1,6 @@
 .container {
   --cx-card-padding-horizontal: var(--cx-spacing-2);
+
   display: flex;
   align-items: center;
 }
