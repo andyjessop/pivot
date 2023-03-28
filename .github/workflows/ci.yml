@@ -19,6 +19,6 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
-      - run: npm run lint:all
-      - run: npm run test:all
-      - run: npm run type-check:all
+      - run: npm run lint:affected
+      - run: npm run test:affected
+      - run: npm run type-check:affected

@@ -2,6 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm install
-npm run lint:all
-npm run test:all
-npm run type-check:all
+npm run lint:affected
+npm run test:affected
+npm run type-check:affected

@@ -6,6 +6,8 @@ import { useSelector } from '~store';
 export default function Project() {
   const params = useSelector(selectRouteParams);
 
+  console.log(params);
+
   return (
     <div className={outlet.container}>
       <div className={layout.subheader}></div>
