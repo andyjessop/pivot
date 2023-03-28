@@ -3,6 +3,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../.eslintrc.json",
+    "lint:commit": "eslint src --config ../../.eslintrc.commit.json",
     "test": "vitest --config ../../vitest.config.js",
     "type-check": "tsc --noEmit"
   }

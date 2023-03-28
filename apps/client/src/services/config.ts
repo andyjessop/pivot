@@ -1,6 +1,6 @@
-import { authService } from '../modules/auth/auth.module';
-import { cacheService } from '../modules/cache/cache.module';
-import { routerService } from '../modules/router/router.module';
+import { authService } from '../modules/auth/auth.injectables';
+import { cacheService } from '../modules/cache/cache.injectables';
+import { routerService } from '../modules/router/router.injectables';
 
 /**
  * This is the configuration for the services of the application. Services defined
