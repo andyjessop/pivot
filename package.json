@@ -6,10 +6,11 @@
     "prepare": "husky install",
     "type-check:affected": "npx nx affected --target=type-check",
     "type-check:all": "npx nx run-many --target=type-check",
-    "lint:affected": "npx nx affected --target=lint",
-    "lint:all": "npx nx run-many --target=lint",
+    "lint:affected": "npx nx affected --target=lint:commit",
+    "lint:all": "npx nx run-many --target=lint:commit",
     "test:affected": "npx nx affected --target=test --watch=false",
-    "test:all": "npx nx run-many --target=test --watch=false"
+    "test:all": "npx nx run-many --target=test --watch=false",
+    "lint:all:commit": "npx nx run-many --target=lint:commit"
   },
   "private": true,
   "dependencies": {
