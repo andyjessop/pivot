@@ -1,6 +1,7 @@
 import { externallyResolvablePromise } from '@pivot/util/promise';
 
 import { buildDepChain } from './build-dep-chain';
+import { byDependencyOrder } from './by-dependency-order';
 import { AsyncFactoryFn, Injectable } from './types';
 
 export type { AsyncFactoryFn, ExtractInstance, Injectable } from './types';
@@ -21,12 +22,13 @@ export function injectable<T, Deps extends Injectable<any>[]>({
   let instance: T | undefined;
   let state = 'idle' as 'idle' | 'resolving' | 'resolved';
   const promise = resolvablePromise.promise;
-  const depChain = buildDepChain(dependencies);
+  const deps = [...dependencies].sort(byDependencyOrder);
+  const depChain = buildDepChain(deps);
 
   return {
     importFn,
     depChain,
-    dependencies,
+    dependencies: deps,
     get,
     getInstance,
     isResolving,
@@ -34,7 +36,7 @@ export function injectable<T, Deps extends Injectable<any>[]>({
     onDestroy,
   };
 
-  async function get(withDeps = true) {
+  async function get(): Promise<T> {
     if (instance) {
       return instance as T;
     }
@@ -45,15 +47,11 @@ export function injectable<T, Deps extends Injectable<any>[]>({
 
     state = 'resolving';
 
-    if (withDeps) {
-      // Resolve all dependencies in parallel. Here we're passing false
-      // to get() because we've already flattened the dependency chain.
-      await Promise.all(depChain.map((dep) => dep.get(false)));
-    }
+    const depPromises = (await Promise.all(deps.map((dep) => dep.get()))) as {
+      [K in keyof Deps]: Deps[K] extends Injectable<infer U, []> ? U : never;
+    };
 
-    instance = await importFn(
-      ...(dependencies.map((dep) => dep.getInstance()) as any),
-    );
+    instance = await importFn(...depPromises);
 
     state = 'resolved';
 

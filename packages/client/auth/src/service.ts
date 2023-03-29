@@ -66,6 +66,10 @@ export function service(auth: Actions, cache: Cache, http: Http): Service {
     cache.remove(CRUX_ACCESS_TOKEN_CACHE_KEY);
     cache.remove(CRUX_REFRESH_TOKEN_CACHE_KEY);
 
+    if (!token) {
+      return;
+    }
+
     await http.logout(token);
 
     auth.setUser(null);

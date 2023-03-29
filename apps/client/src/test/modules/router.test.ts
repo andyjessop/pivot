@@ -4,7 +4,7 @@ import { visit } from '../utils/visit';
 let app: Headless;
 
 describe('integration', () => {
-  describe('auth', () => {
+  describe('router', () => {
     beforeEach(async () => {
       app = headless();
 
