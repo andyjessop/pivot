@@ -1,4 +1,4 @@
-import { initialState, reducers, router } from '@pivot/client/router';
+import { initialState, reducers, service } from '@pivot/client/router';
 import { injectable } from '@pivot/lib/injectable';
 import { slice } from '@pivot/lib/slice';
 
@@ -12,7 +12,7 @@ export const routerSlice = injectable({
 });
 
 export const routerService = injectable({
-  importFn: (sliceObj) => Promise.resolve(router(config, sliceObj.api)),
+  importFn: (sliceObj) => Promise.resolve(service(config, sliceObj.api)),
   dependencies: [routerSlice],
   onDestroy: (service) => service.destroy(),
 });

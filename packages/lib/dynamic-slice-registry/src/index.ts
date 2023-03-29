@@ -41,7 +41,7 @@ export function dynamicSliceRegistry<
 
   return {
     get,
-    select,
+    selector,
   };
 
   async function get<K extends keyof SliceEntryCollection>(
@@ -98,9 +98,9 @@ export function dynamicSliceRegistry<
     }
   }
 
-  function select<K extends keyof SliceEntryCollection>(
+  function selector<K extends keyof SliceEntryCollection>(
     key: K,
-  ): ReturnType<ExtractInstance<T[K]['injectable']>['select']> {
-    return entries[key].instance?.select();
+  ): (_: any) => ReturnType<ExtractInstance<T[K]['injectable']>['select']> {
+    return (_: any) => entries[key].instance?.select();
   }
 }
