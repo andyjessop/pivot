@@ -2,6 +2,7 @@
 
 # env
 *.local
+*.env*
 
 # compiled output
 dist
@@ -28,6 +29,7 @@ node_modules
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+vitest.vscode-config.ts
 
 # misc
 /.sass-cache

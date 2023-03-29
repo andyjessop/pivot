@@ -7,7 +7,7 @@
     "lint:commit": "eslint src --config ../../.eslintrc.commit.json",
     "preview": "vite preview",
     "stylelint": "stylelint \"src/**/*.css\" --allow-empty-input",
-    "test": "vitest --config ../../vitest.config.js",
+    "test": "vitest --config vitest.config.ts",
     "type-check": "tsc --noEmit"
   }
 }

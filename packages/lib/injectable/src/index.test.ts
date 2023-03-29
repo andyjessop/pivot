@@ -1,5 +1,6 @@
-import { injectable } from '.';
 import { vi } from 'vitest';
+
+import { injectable } from '.';
 
 describe('injectable', () => {
   it('should create an injectable object', async () => {
@@ -148,5 +149,28 @@ describe('injectable', () => {
     const ret = injectableObject.get();
 
     expect(ret.then).not.toBe(undefined);
+  });
+
+  it('should provide chained dependencies to factory function', async () => {
+    const importFn = (dep1: boolean, dep2: boolean) =>
+      Promise.resolve({ dep1, dep2 });
+
+    const dep2 = injectable({ importFn: () => Promise.resolve(true) });
+    const dep1 = injectable({
+      importFn: (d2) => Promise.resolve(Boolean(d2)),
+      dependencies: [dep2],
+    });
+
+    const injectableObject = injectable({
+      importFn,
+      dependencies: [dep1, dep2],
+    });
+
+    const instance = await injectableObject.get();
+
+    expect(instance).toEqual({
+      dep1: true,
+      dep2: true,
+    });
   });
 });
