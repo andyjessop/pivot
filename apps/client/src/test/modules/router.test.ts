@@ -14,25 +14,25 @@ describe('integration', () => {
     it('should visit project page', async () => {
       visit('/projects/1');
 
-      const state = await app.selectSlice('router');
+      const state = app.selectSlice('router');
 
-      expect(state.route.name).toEqual('project');
+      expect(state.route?.name).toEqual('project');
     });
 
     it('should visit projects page', async () => {
       visit('/projects');
 
-      const state = await app.selectSlice('router');
+      const state = app.selectSlice('router');
 
-      expect(state.route.name).toEqual('projects');
+      expect(state.route?.name).toEqual('projects');
     });
 
     it('should visit 404 page', async () => {
       visit('/projects/1/edit');
 
-      const state = await app.selectSlice('router');
+      const state = app.selectSlice('router');
 
-      expect(state.route.name).toEqual('notFound');
+      expect(state.route?.name).toEqual('notFound');
     });
 
     it('should navigate to project page', async () => {
@@ -40,10 +40,10 @@ describe('integration', () => {
 
       router.navigate({ name: 'project', params: { id: '1' } });
 
-      const state = await app.selectSlice('router');
+      const state = app.selectSlice('router');
 
-      expect(state.route.name).toEqual('project');
-      expect(state.route.params.id).toEqual('1');
+      expect(state.route?.name).toEqual('project');
+      expect(state.route?.params?.id).toEqual('1');
     });
   });
 });

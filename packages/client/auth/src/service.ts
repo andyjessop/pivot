@@ -4,9 +4,9 @@ import {
   CRUX_ACCESS_TOKEN_CACHE_KEY,
   CRUX_REFRESH_TOKEN_CACHE_KEY,
 } from './config';
-import { Actions, Http, Service } from './types';
+import { Actions, Http } from './types';
 
-export function service(auth: Actions, cache: Cache, http: Http): Service {
+export function service(auth: Actions, cache: Cache, http: Http) {
   return {
     getUser,
     login,

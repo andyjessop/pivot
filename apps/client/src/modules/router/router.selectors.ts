@@ -2,9 +2,9 @@ import { createSelector } from 'reselect';
 
 import { selectors } from '@pivot/client/router';
 
-import { select } from '~store';
+import { selector } from '~store';
 
-export const selectRouter = () => select('router');
+export const selectRouter = selector('router');
 
 export const selectRoute = createSelector(
   selectRouter,

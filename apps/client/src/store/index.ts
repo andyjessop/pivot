@@ -6,8 +6,8 @@ import { config } from './config';
 
 export const store = dynamicStore();
 
-const { get, select } = dynamicSliceRegistry(store, config);
+const { get, selector } = dynamicSliceRegistry(store, config);
 
-export { get, select };
+export { config, get, selector };
 
 export const useSelector = createUseSelector(store);

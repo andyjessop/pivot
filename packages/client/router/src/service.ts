@@ -2,9 +2,9 @@ import type { FullRoute, Route, RouterConfig } from './types';
 import { getRouteFromUrl } from './utils/get-route-from-url';
 import { getUrlFromRoute } from './utils/get-url-from-route';
 
-export type Router = ReturnType<typeof router>;
+export type Router = ReturnType<typeof service>;
 
-export function router<T extends RouterConfig>(
+export function service<T extends RouterConfig>(
   initial: T,
   api: { navigateSuccess: (route: FullRoute) => void },
 ) {

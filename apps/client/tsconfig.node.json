@@ -3,11 +3,6 @@
   "exclude": ["./src/**/*.ts", "./src/**/*.tsx"],
   "include": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
   "compilerOptions": {
-    "composite": true,
-    "isolatedModules": false,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
     "types": ["node", "jest"]
   }
 }

@@ -1,3 +1,3 @@
-import { select } from '~store';
+import { selector } from '~store';
 
-export const selectAuth = () => select('auth');
+export const selectAuth = selector('auth');
