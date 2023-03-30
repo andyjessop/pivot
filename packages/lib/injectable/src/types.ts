@@ -8,6 +8,7 @@ export type Injectable<T = any, Deps extends Injectable<any>[] = []> = {
   isResolving(): boolean;
   hasResolved(): boolean;
   onDestroy: (instance: T) => void;
+  reset(): void;
 };
 
 export type AsyncFactoryFn<T, Deps extends any[] = any[]> = (

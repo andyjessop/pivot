@@ -17,11 +17,10 @@ export function injectable<T, Deps extends Injectable<any>[]>({
   dependencies?: [...Deps];
   onDestroy?: (instance: T) => void;
 }): Injectable<T> {
-  const resolvablePromise = externallyResolvablePromise<T>();
-
+  let resolvablePromise = externallyResolvablePromise<T>();
   let instance: T | undefined;
   let state = 'idle' as 'idle' | 'resolving' | 'resolved';
-  const promise = resolvablePromise.promise;
+  let promise = resolvablePromise.promise;
   const deps = [...dependencies].sort(byDependencyOrder);
   const depChain = buildDepChain(deps);
 
@@ -34,6 +33,7 @@ export function injectable<T, Deps extends Injectable<any>[]>({
     isResolving,
     hasResolved,
     onDestroy,
+    reset,
   };
 
   async function get(): Promise<T> {
@@ -70,5 +70,12 @@ export function injectable<T, Deps extends Injectable<any>[]>({
 
   function hasResolved() {
     return state === 'resolved';
+  }
+
+  function reset() {
+    state = 'idle';
+    instance = undefined;
+    resolvablePromise = externallyResolvablePromise<T>();
+    promise = resolvablePromise.promise;
   }
 }

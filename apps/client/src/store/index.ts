@@ -4,10 +4,18 @@ import { createUseSelector } from '@pivot/lib/use-selector';
 
 import { config } from './config';
 
-export const store = dynamicStore();
+export function createStore() {
+  const store = dynamicStore();
 
-const { get, selector } = dynamicSliceRegistry(store, config);
+  const { get, selector } = dynamicSliceRegistry(store, config);
 
-export { config, get, selector };
+  return {
+    config,
+    get,
+    selector,
+    store,
+    useSelector: createUseSelector(store),
+  };
+}
 
-export const useSelector = createUseSelector(store);
+export const { selector, useSelector } = createStore();

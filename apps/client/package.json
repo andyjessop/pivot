@@ -4,7 +4,7 @@
     "build": "tsc && vite build",
     "dev": "vite",
     "lint": "eslint src --config ../../.eslintrc.json",
-    "lint:commit": "eslint src --config ../../.eslintrc.commit.json",
+    "lint:strict": "eslint src --config ../../.eslintrc.strict.json",
     "preview": "vite preview",
     "stylelint": "stylelint \"src/**/*.css\" --allow-empty-input",
     "test": "vitest --config vitest.config.ts",

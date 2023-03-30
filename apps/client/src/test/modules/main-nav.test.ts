@@ -1,19 +1,17 @@
 import { selectNavItems } from '../../modules/nav/main-nav.selectors';
-import { Headless, headless } from '../utils/headless';
+import { headless } from '../utils/headless';
 import { visit } from '../utils/visit';
 
-let app: Headless;
+const app = headless();
 
 describe('integration', () => {
   describe('main-nav', () => {
     beforeEach(async () => {
-      app = headless();
-
       await app.init();
     });
 
     it('projects should not be active', async () => {
-      const items = await app.selector(selectNavItems);
+      const items = await app.select(selectNavItems);
 
       expect(items).toEqual([
         {
@@ -27,7 +25,7 @@ describe('integration', () => {
     it('projects should be active', async () => {
       visit('/projects');
 
-      const items = await app.selector(selectNavItems);
+      const items = await app.select(selectNavItems);
 
       expect(items).toEqual([
         {

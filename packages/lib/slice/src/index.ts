@@ -8,6 +8,8 @@ type DropFirst<T extends unknown[]> = T extends [any, ...infer U]
     : [U]
   : never;
 
+export type ExtractState<T> = T extends Slice<any, any, infer U> ? U : never;
+
 export type Slice<
   T extends Record<keyof T, (state: S, ...params: any[]) => S>,
   N extends string = any,
