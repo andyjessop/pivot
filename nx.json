@@ -9,7 +9,7 @@
           "build",
           "e2e",
           "lint",
-          "lint:commit",
+          "lint:strict",
           "stylelint",
           "test",
           "type-check"

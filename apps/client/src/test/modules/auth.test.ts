@@ -1,12 +1,10 @@
-import { Headless, headless } from '../utils/headless';
+import { headless } from '../utils/headless';
 
-let app: Headless;
+const app = headless();
 
 describe('integration', () => {
   describe('auth', () => {
     beforeEach(async () => {
-      app = headless();
-
       await app.init();
     });
 

@@ -1,25 +1,28 @@
 import { ExtractInstance } from '@pivot/lib/injectable';
 
 import { config as services } from '~services/config';
-import {
-  config as slices,
-  get as getSlice,
-  selector as selectSlice,
-  store,
-} from '~store';
+import { createStore } from '~store';
 
 export type Headless = ReturnType<typeof headless>;
 
 export function headless() {
+  let store = createStore();
+
   return {
     getService,
-    getSlice,
+    getSlice: store.get,
     init,
-    selector,
-    selectSlice: headlessSelectSlice,
+    select,
+    selectSlice,
   };
 
   async function init() {
+    for (const serviceConfig of Object.values(services)) {
+      serviceConfig.reset();
+    }
+
+    store = createStore();
+
     await getService('router'); // Initialize router
   }
 
@@ -29,13 +32,13 @@ export function headless() {
     return response as ExtractInstance<(typeof services)[T]>;
   }
 
-  function headlessSelectSlice<K extends keyof typeof slices>(sliceName: K) {
-    return selectSlice(sliceName)({}) as ReturnType<
-      ExtractInstance<(typeof slices)[K]['injectable']>['select']
+  function selectSlice<K extends keyof typeof store.config>(sliceName: K) {
+    return store.selector(sliceName)({}) as ReturnType<
+      ExtractInstance<(typeof store.config)[K]['injectable']>['select']
     >;
   }
 
-  function selector(fn: (state: (typeof store)['getState']) => any) {
-    return fn(store.getState());
+  function select(fn: (state: (typeof store.store)['getState']) => any) {
+    return fn(store.store.getState());
   }
 }
