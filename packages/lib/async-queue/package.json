@@ -1,0 +1,11 @@
+{
+  "name": "@pivot/lib-async-queue",
+  "main": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint src --config ../../../.eslintrc.json",
+    "lint:strict": "eslint src --config ../../../.eslintrc.strict.json",
+    "stylelint": "stylelint \"src/**/*.css\" --allow-empty-input",
+    "test": "vitest --config ../../../vitest.config.js",
+    "type-check": "tsc --noEmit"
+  }
+}
