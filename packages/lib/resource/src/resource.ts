@@ -63,8 +63,6 @@ export function resource<
   ) {
     const res = queue.add(doMutation);
 
-    queue.flush();
-
     return res;
 
     async function doMutation() {

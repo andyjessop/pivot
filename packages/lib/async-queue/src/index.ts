@@ -1,20 +1,6 @@
-type AnyFunction = (...args: any[]) => void;
+import { AnyFunction, AsyncQueue, AsyncQueueEntry } from './types';
 
-export interface AsyncQueue {
-  add(fn: AnyFunction, ...params: unknown[]): Promise<unknown>;
-  clear(): void;
-  entries: AsyncQueueEntry[];
-  flush(): Promise<unknown>;
-}
-
-export interface AsyncQueueEntry {
-  fn: AnyFunction;
-  params: unknown[];
-  reject: AnyFunction;
-  resolve: AnyFunction;
-}
-
-export function asyncQueue(): AsyncQueue {
+export function asyncQueue(autoFlush = true): AsyncQueue {
   const entries: AsyncQueueEntry[] = [];
   let flushing = false;
 
@@ -40,6 +26,10 @@ export function asyncQueue(): AsyncQueue {
       reject: rej,
       resolve: res,
     });
+
+    if (autoFlush) {
+      Promise.resolve(flush());
+    }
 
     return promise;
   }

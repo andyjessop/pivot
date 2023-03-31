@@ -21,6 +21,9 @@
         "caughtErrorsIgnorePattern": "^_"
       }
     ],
+    "no-debugger": "off",
+    "no-console": "off",
+    "no-unused-vars": "off",
     "simple-import-sort/imports": [
       "error",
       {
@@ -35,9 +38,6 @@
           ["^\\./"]
         ]
       }
-    ],
-
-    "no-debugger": "off",
-    "no-unused-vars": "off"
+    ]
   }
 }
