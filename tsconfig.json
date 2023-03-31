@@ -1,21 +1,16 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "baseUrl": ".",
+    "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
     "paths": {
       "~assets/*": ["apps/client/src/assets/*"],
       "~modules/*": ["apps/client/src/modules/*"],
@@ -60,7 +55,17 @@
       "@pivot/util/time": ["packages/util/time/src/index.ts"],
       "@pivot/util/url": ["packages/util/url/src/index.ts"]
     },
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true
   },
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.src.json" },
+    { "path": "./tsconfig.test.json" }
+  ]
 }
