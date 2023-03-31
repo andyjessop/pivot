@@ -1,7 +1,6 @@
 import { asyncQueue } from '@pivot/lib/async-queue';
-import { slice } from '@pivot/lib/slice';
 
-import { Config, State } from './types';
+import { Config } from './types';
 
 export function resource<
   Data,
@@ -9,30 +8,24 @@ export function resource<
   CreateParams extends any[],
   DeleteParams extends any[],
   UpdateParams extends any[],
->(config: Config<Data, ReadParams, CreateParams, DeleteParams, UpdateParams>) {
+>(
+  config: Config<Data, ReadParams, CreateParams, DeleteParams, UpdateParams>,
+  {
+    getData,
+    setData,
+  }: {
+    getData: () => Data;
+    setData: (data: Data) => void;
+  },
+) {
   const queue = asyncQueue();
-
-  const initialState: State<Data, Error> = {
-    data: null,
-    error: null,
-    loading: false,
-    updating: false,
-  };
-
-  const { api, reducer, middleware, select } = slice('resource', initialState, {
-    set: (state: State<Data, Error>, data: Data) => ({ ...state, data }),
-  });
-
   let readParams: ReadParams;
 
   return {
-    service: {
-      create,
-      delete: del,
-      read,
-      update,
-    },
-    slice: { api, reducer, middleware, select },
+    create,
+    delete: del,
+    read,
+    update,
   };
 
   async function read(...params: ReadParams) {
@@ -42,7 +35,7 @@ export function resource<
 
     const res = await config.read.query(...params);
 
-    api.set(res);
+    setData(res);
   }
 
   async function update(...params: UpdateParams) {
@@ -72,10 +65,10 @@ export function resource<
 
       const { optimistic, query, transform } = conf;
 
-      const oldData = select().data;
+      const oldData = getData();
 
       if (optimistic) {
-        api.set(optimistic(...params)(oldData));
+        setData(optimistic(...params)(oldData));
       }
 
       const res = await query(...params);
@@ -83,7 +76,7 @@ export function resource<
       if (transform) {
         const data = transform(res)(oldData);
 
-        api.set(data);
+        setData(data);
 
         return data;
       }
