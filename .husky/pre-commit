@@ -4,5 +4,5 @@
 npm install
 npm run lint:affected
 npm run test:affected
-npm run type-check:affected
 npm run stylelint:affected
+npm run type-check

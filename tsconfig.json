@@ -4,6 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "esModuleInterop": false,
+    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
@@ -35,7 +36,7 @@
       ],
       "@pivot/lib/async-queue": ["packages/lib/async-queue/src/index.ts"],
       "@pivot/lib/use-service": ["packages/lib/use-service/src/index.ts"],
-      "@pivot/design/lit": ["packages/lit/src/index.ts"],
+      "@pivot/design/lit": ["packages/design/lit/src/index.ts"],
       "@pivot/lib/dynamic-slice-registry": [
         "packages/lib/dynamic-slice-registry/src/index.ts"
       ],
