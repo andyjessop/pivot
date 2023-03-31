@@ -1,4 +1,6 @@
-import { AsyncQueue, asyncQueue } from '.';
+import { asyncQueue } from '.';
+
+import { AsyncQueue } from './types';
 
 describe('AsyncQueue', () => {
   let queue: AsyncQueue;
