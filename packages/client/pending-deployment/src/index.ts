@@ -4,3 +4,4 @@ export * from './selectors';
 export * from './service';
 export * from './state';
 export * from './views/modal';
+export * from './types';
