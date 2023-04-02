@@ -16,16 +16,19 @@
   grid-area: top;
   display: flex;
   align-items: center;
+  padding: 0 var(--page-horizontal-padding);
 }
 
 .subheader {
   grid-area: subheader;
   display: flex;
   align-items: center;
+  padding: 0 var(--page-horizontal-padding);
 }
 
 .left-content {
   grid-area: left-content;
+  padding: 0 var(--page-horizontal-padding);
 }
 
 .content {

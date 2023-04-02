@@ -3,6 +3,11 @@
   color: var(--header-color);
 }
 
+.subheader {
+  background-color: var(--subheader-background);
+  color: var(--subheader-color);
+}
+
 .content {
   background-color: var(--content-background);
   color: var(--content-color);
