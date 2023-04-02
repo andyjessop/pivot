@@ -1,5 +1,3 @@
-export interface Service {
-  getUser: () => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-}
+import { service } from '../service';
+
+export type Service = ReturnType<typeof service>;

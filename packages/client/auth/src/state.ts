@@ -1,7 +1,8 @@
 import { State } from './types';
 
 export const initialState: State = {
-  isLoading: true,
+  isChecking: false,
   isLoggingIn: false,
+  isLoggingOut: false,
   user: null,
 };

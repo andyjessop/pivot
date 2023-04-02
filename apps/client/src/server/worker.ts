@@ -7,7 +7,7 @@ import { createHandlers } from './handlers';
 const env = service();
 
 export function createServer(apiUrl: string) {
-  return setupWorker(...createHandlers(apiUrl));
+  return setupWorker(...createHandlers(apiUrl, { isBrowser: true }));
 }
 
 export const server = createServer(env.get(Variable.SUPABASE_API_URL));

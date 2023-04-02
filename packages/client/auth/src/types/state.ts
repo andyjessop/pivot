@@ -1,7 +1,8 @@
 import { User } from './model';
 
 export interface State {
-  isLoading: boolean;
+  isChecking: boolean;
   isLoggingIn: boolean;
+  isLoggingOut: boolean;
   user: User | null;
 }
