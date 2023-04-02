@@ -2,10 +2,10 @@
 // @ts-nocheck
 import { vi } from 'vitest';
 
-import { resource } from '.';
+import { service } from '.';
 
-describe('resource', () => {
-  let testResource;
+describe('service', () => {
+  let testService;
   let mockConfig;
   let mockState;
   let getData;
@@ -51,66 +51,66 @@ describe('resource', () => {
       mockState.data = newData;
     });
 
-    testResource = resource(mockConfig, { getData, setData });
+    testService = service(mockConfig, { getData, setData });
   });
 
   it('should read data', async () => {
-    await testResource.read('param1', 'param2');
+    await testService.read('param1', 'param2');
     expect(mockConfig.read.query).toHaveBeenCalledWith('param1', 'param2');
     expect(getData()).toEqual({ data: 'testData' });
   });
 
   it('should update data', async () => {
-    await testResource.read();
-    await testResource.update('param1', 'param2');
+    await testService.read();
+    await testService.update('param1', 'param2');
     expect(setData).toHaveBeenCalledWith({ data: 'testData', updated: true });
     expect(setData).toHaveBeenCalledWith({ data: 'testData' });
   });
 
   it('should create data', async () => {
-    await testResource.read();
-    await testResource.create('param1', 'param2');
+    await testService.read();
+    await testService.create('param1', 'param2');
     expect(setData).toHaveBeenCalledWith({ data: 'testData', created: true });
     expect(setData).toHaveBeenCalledWith({ data: 'testData' });
   });
 
   it('should delete data', async () => {
-    await testResource.read();
+    await testService.read();
 
-    await testResource.delete('param1', 'param2');
+    await testService.delete('param1', 'param2');
     expect(setData).toHaveBeenCalledWith({ data: 'testData', deleted: true });
     expect(setData).toHaveBeenCalledWith({ data: 'testData' });
   });
 
   it('should throw an error if mutate is called before reading', () => {
-    expect(testResource.create('param1', 'param2')).rejects.toThrow(
+    expect(testService.create('param1', 'param2')).rejects.toThrow(
       'Cannot mutate before reading',
     );
-    expect(testResource.update('param1', 'param2')).rejects.toThrow(
+    expect(testService.update('param1', 'param2')).rejects.toThrow(
       'Cannot mutate before reading',
     );
-    expect(testResource.delete('param1', 'param2')).rejects.toThrow(
+    expect(testService.delete('param1', 'param2')).rejects.toThrow(
       'Cannot mutate before reading',
     );
   });
 
   it('should handle query errors', () => {
     mockConfig.read.query.mockRejectedValueOnce(new Error('Read error'));
-    expect(testResource.read('param1', 'param2')).rejects.toThrow('Read error');
+    expect(testService.read('param1', 'param2')).rejects.toThrow('Read error');
 
     mockConfig.update.query.mockRejectedValueOnce(new Error('Update error'));
-    testResource.read();
-    expect(testResource.update('param1', 'param2')).rejects.toThrow(
+    testService.read();
+    expect(testService.update('param1', 'param2')).rejects.toThrow(
       'Update error',
     );
 
     mockConfig.create.query.mockRejectedValueOnce(new Error('Create error'));
-    expect(testResource.create('param1', 'param2')).rejects.toThrow(
+    expect(testService.create('param1', 'param2')).rejects.toThrow(
       'Create error',
     );
 
     mockConfig.delete.query.mockRejectedValueOnce(new Error('Delete error'));
-    expect(testResource.delete('param1', 'param2')).rejects.toThrow(
+    expect(testService.delete('param1', 'param2')).rejects.toThrow(
       'Delete error',
     );
   });
@@ -120,14 +120,14 @@ describe('resource', () => {
     delete mockConfig.update.optimistic;
     delete mockConfig.delete.optimistic;
 
-    await testResource.read();
-    await testResource.create('param1', 'param2');
+    await testService.read();
+    await testService.create('param1', 'param2');
     expect(getData()).toEqual({ data: 'testData' });
 
-    await testResource.update('param1', 'param2');
+    await testService.update('param1', 'param2');
     expect(getData()).toEqual({ data: 'testData' });
 
-    await testResource.delete('param1', 'param2');
+    await testService.delete('param1', 'param2');
     expect(getData()).toEqual({ data: 'testData' });
   });
 });
