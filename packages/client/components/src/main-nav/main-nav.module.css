@@ -12,28 +12,28 @@
   & a {
     display: flex;
     align-items: center;
-    color: #9b9b9b;
+    color: var(--main-nav-item-color);
     font-weight: 600;
 
     & i {
       margin-right: 0.5rem;
-      color: #9b9b9b;
+      color: var(--main-nav-item-color);
     }
 
     &:hover {
-      color: white;
+      color: var(--main-nav-item-hover-color);
 
       & i {
-        color: white;
+        color: var(--main-nav-item-hover-color);
       }
     }
   }
 
   &.active a {
-    color: white;
+    color: var(--main-nav-item-active-color);
 
     & i {
-      color: white;
+      color: var(--main-nav-item-active-color);
     }
   }
 }

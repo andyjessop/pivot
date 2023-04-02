@@ -9,6 +9,10 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    env:
+      VITE_CI: true
+      VITE_SUPABASE_API_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6b3JjeXhsc2h5anN5a2xvaWZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTUwOTg4NDksImV4cCI6MTk3MDY3NDg0OX0.qQka-Nfs-ZDxlRtiUofwA8iv05GNXQmPkeBk8cqag6s
+      VITE_SUPABASE_API_URL: https://bzorcyxlshyjsykloifx.supabase.co
     steps:
       - uses: actions/checkout@v2
         with:

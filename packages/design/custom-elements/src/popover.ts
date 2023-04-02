@@ -30,7 +30,7 @@ export class PivotPopover extends clickOutside(LitElement) {
       position: relative;
       height: fit-content;
       width: fit-content;
-      padding: var(--pivot-popover-gap, 1rem);
+      padding: var(--popover-gap, 1rem);
     }
 
     .content {

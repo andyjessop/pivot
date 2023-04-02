@@ -1,8 +1,8 @@
 .subtitle {
-  --pivot-typography-subtitle-font-weight: var(--pivot-font-weight-semibold);
-  --pivot-typography-subtitle-color: var(--pivot-color-gray-30);
+  --typography-subtitle-font-weight: var(--font-weight-semibold);
+  --typography-subtitle-color: var(--color-gray-30);
 
-  font-weight: var(--pivot-typography-subtitle-font-weight);
+  font-weight: var(--typography-subtitle-font-weight);
   font-size: 80%;
-  color: var(--pivot-typography-subtitle-color);
+  color: var(--typography-subtitle-color);
 }

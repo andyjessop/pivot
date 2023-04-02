@@ -1,0 +1,9 @@
+.header {
+  background-color: var(--header-background);
+  color: var(--header-color);
+}
+
+.content {
+  background-color: var(--content-background);
+  color: var(--content-color);
+}

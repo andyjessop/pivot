@@ -1,29 +1,28 @@
 .container {
-  --pivot-card-background-color: var(--pivot-color-white);
-  --pivot-card-padding-horizontal: var(--pivot-spacing-2);
-  --pivot-card-padding-vertical: var(--pivot-spacing-2);
-  --pivot-card-border-width: var(--pivot-border-width);
-  --pivot-card-border-color: var(--pivot-color-gray-10);
-  --pivot-card-padding: var(--pivot-border-radius);
+  --card-background-color: var(--color-white);
+  --card-padding-horizontal: var(--spacing-2);
+  --card-padding-vertical: var(--spacing-2);
+  --card-border-width: var(--border-width);
+  --card-border-color: var(--color-gray-10);
+  --card-padding: var(--border-radius);
 
-  background-color: var(--pivot-card-background-color);
-  padding: var(--pivot-card-padding-vertical)
-    var(--pivot-card-padding-horizontal);
-  border: var(--pivot-card-border-width) solid var(--pivot-card-border-color);
-  border-radius: var(--pivot-card-padding);
+  background-color: var(--card-background-color);
+  padding: var(--card-padding-vertical) var(--card-padding-horizontal);
+  border: var(--card-border-width) solid var(--card-border-color);
+  border-radius: var(--card-padding);
 }
 
 .container.small {
-  --pivot-card-padding-horizontal: var(--pivot-spacing-1);
-  --pivot-card-padding-vertical: var(--pivot-spacing-1);
+  --card-padding-horizontal: var(--spacing-1);
+  --card-padding-vertical: var(--spacing-1);
 }
 
 .container.medium {
-  --pivot-card-padding-horizontal: var(--pivot-spacing-2);
-  --pivot-card-padding-vertical: var(--pivot-spacing-2);
+  --card-padding-horizontal: var(--spacing-2);
+  --card-padding-vertical: var(--spacing-2);
 }
 
 .container.large {
-  --pivot-card-padding-horizontal: var(--pivot-spacing-4);
-  --pivot-card-padding-vertical: var(--pivot-spacing-4);
+  --card-padding-horizontal: var(--spacing-4);
+  --card-padding-vertical: var(--spacing-4);
 }

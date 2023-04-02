@@ -1,8 +1,9 @@
 import { FormEvent } from 'react';
 
+import { Service, State } from '@pivot/client/auth';
 import { spaced } from '@pivot/design/css';
 
-import { Service, State } from '../domain/types';
+import styles from './user-nav.module.css';
 
 interface UserNavProps {
   data: State;
@@ -23,8 +24,10 @@ export function UserNav({ actions, data }: UserNavProps) {
   if (data.user) {
     return (
       <div className={spaced.container}>
-        <span>{data.isLoggingOut ? 'Logging out...' : data.user.email}</span>
-        <button className="button" onClick={logout}>
+        <span className={styles.text}>
+          {data.isLoggingOut ? 'Logging out...' : data.user.email}
+        </span>
+        <button className="button is-dark" onClick={logout}>
           Logout
         </button>
       </div>
