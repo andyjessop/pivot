@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VITE_CI: true
+      VITE_SUPABASE_API_URL: https://bzorcyxlshyjsykloifx.supabase.co
     steps:
       - uses: actions/checkout@v2
         with:
