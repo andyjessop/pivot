@@ -1,8 +1,9 @@
 import { asyncQueue } from '@pivot/lib/async-queue';
 
+import { ResourceSlice } from './slice';
 import { Config } from './types';
 
-export function resource<
+export function service<
   Data,
   ReadParams extends any[],
   CreateParams extends any[],
@@ -10,14 +11,9 @@ export function resource<
   UpdateParams extends any[],
 >(
   config: Config<Data, ReadParams, CreateParams, DeleteParams, UpdateParams>,
-  {
-    getData,
-    setData,
-  }: {
-    getData: () => Data;
-    setData: (data: Data) => void;
-  },
+  slice: ResourceSlice<Data>,
 ) {
+  const { api, select } = slice;
   const queue = asyncQueue();
   let readParams: ReadParams;
 
@@ -29,13 +25,41 @@ export function resource<
   };
 
   async function read(...params: ReadParams) {
+    const { pollingInterval, query } = config.read;
+
     if (!readParams) {
       readParams = params;
     }
 
-    const res = await config.read.query(...params);
+    const current = select();
 
-    setData(res);
+    api.set({
+      loading: !current.loaded,
+      updating: current.loaded,
+    });
+
+    try {
+      const res = await query(...params);
+
+      api.set({
+        data: res,
+        loading: false,
+        updating: false,
+        error: null,
+      });
+    } catch (error) {
+      api.set({
+        loading: false,
+        updating: false,
+        error,
+      });
+
+      return;
+    }
+
+    if (pollingInterval !== undefined) {
+      setTimeout(() => read(...params), pollingInterval);
+    }
   }
 
   async function update(...params: UpdateParams) {
@@ -65,20 +89,30 @@ export function resource<
 
       const { optimistic, query, transform } = conf;
 
-      const oldData = getData();
+      const oldData = select();
 
       if (optimistic) {
-        setData(optimistic(...params)(oldData));
+        api.set({
+          data: optimistic(...params)(oldData.data),
+        });
       }
 
-      const res = await query(...params);
+      try {
+        const res = await query(...params);
 
-      if (transform) {
-        const data = transform(res)(oldData);
+        if (transform) {
+          const data = transform(res)(oldData.data);
 
-        setData(data);
+          api.set({ data });
 
-        return data;
+          return data;
+        }
+      } catch (error) {
+        api.set({
+          loading: false,
+          updating: false,
+          error,
+        });
       }
 
       read(...readParams);

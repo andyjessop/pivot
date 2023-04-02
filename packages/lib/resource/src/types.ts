@@ -16,6 +16,7 @@ export type Config<
   UpdateReturn = any,
 > = {
   read: {
+    pollingInterval?: number;
     query: (...params: ReadParams) => Promise<Data>;
   };
   create: {
