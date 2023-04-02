@@ -1,8 +1,12 @@
-import { selectNavItems } from '../../modules/nav/main-nav.selectors';
-import { headless } from '../utils/headless';
+import { selectNavItems } from '@pivot/client/nav';
+import { headless } from '@pivot/lib/headless';
+
+import { config as services } from '~services/config';
+import { config as slices } from '~store/config';
+
 import { visit } from '../utils/visit';
 
-const app = headless();
+const app = headless(services, slices);
 
 describe('integration', () => {
   describe('main-nav', () => {

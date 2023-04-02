@@ -1,6 +1,6 @@
 import { ResponseComposition, rest, RestContext, RestRequest } from 'msw';
 
-import { cache as cacheService } from '@pivot/client/cache';
+import { service as cacheService } from '@pivot/client/cache';
 import { service as envService, Variable } from '@pivot/client/env';
 import { sleep } from '@pivot/util/time';
 

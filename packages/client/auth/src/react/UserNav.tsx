@@ -2,7 +2,7 @@ import { FormEvent } from 'react';
 
 import { spaced } from '@pivot/design/css';
 
-import { Service, State } from './types';
+import { Service, State } from '../domain/types';
 
 interface UserNavProps {
   data: State;

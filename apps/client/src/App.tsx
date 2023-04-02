@@ -1,13 +1,13 @@
 import { Suspense } from 'react';
 
 import { UserNav } from '@pivot/client/auth';
+import { selectAuth } from '@pivot/client/auth';
 import { MainNav, Navbar } from '@pivot/client/components';
+import { selectNavItems } from '@pivot/client/nav';
+import { selectRouteName } from '@pivot/client/router';
 import { horizontalLeftContent as layout } from '@pivot/design/css';
 
 import logo from '~assets/react.svg';
-import { selectAuth } from '~modules/auth/auth.selectors';
-import { selectNavItems } from '~modules/nav/main-nav.selectors';
-import { selectRouteName } from '~modules/router/router.selectors';
 import { useService } from '~services';
 import { useSelector } from '~store';
 

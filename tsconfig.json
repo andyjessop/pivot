@@ -18,6 +18,7 @@
       "~services": ["apps/client/src/services/index.ts"],
       "~services/*": ["apps/client/src/services/*"],
       "~store": ["apps/client/src/store/index.ts"],
+      "~store/*": ["apps/client/src/store/*"],
       "@pivot/client/auth": ["packages/client/auth/src/index.ts"],
       "@pivot/client/cache": ["packages/client/cache/src/index.ts"],
       "@pivot/client/components": ["packages/client/components/src/index.ts"],
@@ -34,24 +35,26 @@
       "@pivot/client/shared-interfaces": [
         "packages/client/shared-interfaces/src/index.ts"
       ],
-      "@pivot/lib/async-queue": ["packages/lib/async-queue/src/index.ts"],
-      "@pivot/lib/use-service": ["packages/lib/use-service/src/index.ts"],
       "@pivot/design/lit": ["packages/design/lit/src/index.ts"],
-      "@pivot/lib/dynamic-slice-registry": [
-        "packages/lib/dynamic-slice-registry/src/index.ts"
-      ],
-      "@pivot/lib/dynamic-store": ["packages/lib/dynamic-store/src/index.ts"],
       "@pivot/design/css": ["packages/design/css/src/index.ts"],
       "@pivot/design/custom-elements": [
         "packages/design/custom-elements/src/index.ts"
       ],
       "@pivot/design/variables": ["packages/design/variables/src/index.ts"],
+      "@pivot/lib/async-queue": ["packages/lib/async-queue/src/index.ts"],
+      "@pivot/lib/create-store": ["packages/lib/create-store/src/index.ts"],
+      "@pivot/lib/dynamic-slice-registry": [
+        "packages/lib/dynamic-slice-registry/src/index.ts"
+      ],
+      "@pivot/lib/dynamic-store": ["packages/lib/dynamic-store/src/index.ts"],
+      "@pivot/lib/headless": ["packages/lib/headless/src/index.ts"],
       "@pivot/lib/injectable": ["packages/lib/injectable/src/index.ts"],
       "@pivot/lib/redux-registry": ["packages/lib/redux-registry/src/index.ts"],
       "@pivot/lib/redux-types": ["packages/lib/redux-types/src/index.ts"],
       "@pivot/lib/slice": ["packages/lib/slice/src/index.ts"],
-      "@pivot/template": ["packages/template/src/index.ts"],
       "@pivot/lib/use-selector": ["packages/lib/use-selector/src/index.ts"],
+      "@pivot/lib/use-service": ["packages/lib/use-service/src/index.ts"],
+      "@pivot/template": ["packages/template/src/index.ts"],
       "@pivot/util/classname": ["packages/util/classname/src/index.ts"],
       "@pivot/util/promise": ["packages/util/promise/src/index.ts"],
       "@pivot/util/time": ["packages/util/time/src/index.ts"],

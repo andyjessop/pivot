@@ -1,8 +1,8 @@
 import { Service as Env, Variable } from '@pivot/client/env';
 
-import { Http, User, UserResponse } from './types';
+import { User, UserResponse } from './types';
 
-export function http(env: Env): Http {
+export function http(env: Env) {
   return {
     /**
      * Login.

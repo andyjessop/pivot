@@ -1,6 +1,6 @@
+import { selectRouteParams } from '@pivot/client/router';
 import { horizontalLeftContent as layout, outlet } from '@pivot/design/css';
 
-import { selectRouteParams } from '~modules/router/router.selectors';
 import { useSelector } from '~store';
 
 export default function Project() {

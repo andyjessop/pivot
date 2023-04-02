@@ -1,12 +1,13 @@
-import { ExtractInstance } from '@pivot/lib/injectable';
-
-import { config as services } from '~services/config';
-import { createStore } from '~store';
+import { createStore, SliceConfigs } from '@pivot/lib/create-store';
+import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
 
 export type Headless = ReturnType<typeof headless>;
 
-export function headless() {
-  let store = createStore();
+export function headless<Services extends Record<string, Injectable<any>>>(
+  services: Services,
+  slices: SliceConfigs,
+) {
+  const store = createStore(slices);
 
   return {
     getService,
@@ -20,9 +21,6 @@ export function headless() {
     for (const serviceConfig of Object.values(services)) {
       serviceConfig.reset();
     }
-
-    store = createStore();
-
     await getService('router'); // Initialize router
   }
 
@@ -38,7 +36,7 @@ export function headless() {
     >;
   }
 
-  function select(fn: (state: (typeof store.store)['getState']) => any) {
+  function select(fn: (state: any) => any) {
     return fn(store.store.getState());
   }
 }
