@@ -15,15 +15,12 @@ describe('integration', () => {
     });
 
     it('should not be logged in', async () => {
-      const auth = await app.getService('auth');
+      await app.getService('auth');
 
-      await auth.getUser();
-
-      const state = app.selectSlice('auth');
-
-      expect(state).toEqual({
-        isLoading: true,
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
         isLoggingIn: false,
+        isLoggingOut: false,
         user: null,
       });
     });
@@ -31,15 +28,23 @@ describe('integration', () => {
     it('should login', async () => {
       const auth = await app.getService('auth');
 
-      await auth.login('user', 'password');
+      const login = auth.login('user@user.com', 'password');
 
-      const state = app.selectSlice('auth');
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
+        isLoggingIn: true,
+        isLoggingOut: false,
+        user: null,
+      });
 
-      expect(state).toEqual({
-        isLoading: true,
+      await login;
+
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
         isLoggingIn: false,
+        isLoggingOut: false,
         user: {
-          email: 'user',
+          email: 'user@user.com',
         },
       });
     });
@@ -47,36 +52,83 @@ describe('integration', () => {
     it('should login, logout, then login again', async () => {
       const auth = await app.getService('auth');
 
-      await auth.login('user', 'password');
-      await auth.logout();
+      const login1 = auth.login('user@user.com', 'password');
 
-      const logoutState = app.selectSlice('auth');
-
-      expect(logoutState).toEqual({
-        isLoading: true,
-        isLoggingIn: false,
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
+        isLoggingIn: true,
+        isLoggingOut: false,
         user: null,
       });
 
-      await auth.login('user', 'password');
+      await login1;
 
-      const loginState = app.selectSlice('auth');
-
-      expect(loginState).toEqual({
-        isLoading: true,
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
         isLoggingIn: false,
+        isLoggingOut: false,
         user: {
-          email: 'user',
+          email: 'user@user.com',
         },
       });
 
-      await auth.logout();
+      const logout1 = auth.logout();
 
-      const logoutState2 = app.selectSlice('auth');
-
-      expect(logoutState2).toEqual({
-        isLoading: true,
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
         isLoggingIn: false,
+        isLoggingOut: true,
+        user: {
+          email: 'user@user.com',
+        },
+      });
+
+      await logout1;
+
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
+        isLoggingIn: false,
+        isLoggingOut: false,
+        user: null,
+      });
+
+      const login2 = auth.login('user@user.com', 'password');
+
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
+        isLoggingIn: true,
+        isLoggingOut: false,
+        user: null,
+      });
+
+      await login2;
+
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
+        isLoggingIn: false,
+        isLoggingOut: false,
+        user: {
+          email: 'user@user.com',
+        },
+      });
+
+      const logout2 = auth.logout();
+
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
+        isLoggingIn: false,
+        isLoggingOut: true,
+        user: {
+          email: 'user@user.com',
+        },
+      });
+
+      await logout2;
+
+      expect(app.selectSlice('auth')).toEqual({
+        isChecking: false,
+        isLoggingIn: false,
+        isLoggingOut: false,
         user: null,
       });
     });

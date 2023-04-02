@@ -1,5 +1,7 @@
 import { FormEvent } from 'react';
 
+import { spaced } from '@pivot/design/css';
+
 import { Service, State } from './types';
 
 interface UserNavProps {
@@ -8,21 +10,30 @@ interface UserNavProps {
 }
 
 export function UserNav({ actions, data }: UserNavProps) {
-  if (data.isLoading) {
-    return <div>Loading...</div>;
+  const { login, logout } = actions;
+
+  if (data.isChecking) {
+    return <div>Checking user...</div>;
   }
 
   if (data.isLoggingIn) {
-    return <div>Logging in.</div>;
+    return <div>Logging in...</div>;
   }
 
   if (data.user) {
-    return <div>Logged in.</div>;
+    return (
+      <div className={spaced.container}>
+        <span>{data.isLoggingOut ? 'Logging out...' : data.user.email}</span>
+        <button className="button" onClick={logout}>
+          Logout
+        </button>
+      </div>
+    );
   }
 
   return (
     <div>
-      <form onSubmit={login}>
+      <form onSubmit={onSubmit}>
         <div className="field is-grouped">
           <div className="control">
             <input className="input" type="email" placeholder="Email" />
@@ -40,13 +51,13 @@ export function UserNav({ actions, data }: UserNavProps) {
     </div>
   );
 
-  function login(event: FormEvent<HTMLFormElement>) {
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const form = event.target as HTMLFormElement;
     const email = form.elements[0] as HTMLInputElement;
     const password = form.elements[1] as HTMLInputElement;
 
-    actions.login(email.value, password.value);
+    login(email.value, password.value);
   }
 }

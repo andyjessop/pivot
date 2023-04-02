@@ -10,6 +10,15 @@ type DropFirst<T extends unknown[]> = T extends [any, ...infer U]
 
 export type ExtractState<T> = T extends Slice<any, any, infer U> ? U : never;
 
+export type ExtractActions<T, S = any> = T extends Record<
+  keyof T,
+  (state: S, ...params: any[]) => S
+>
+  ? {
+      [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
+    }
+  : any;
+
 export type Slice<
   T extends Record<keyof T, (state: S, ...params: any[]) => S>,
   N extends string = any,

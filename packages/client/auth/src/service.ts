@@ -7,6 +7,8 @@ import {
 import { Actions, Http } from './types';
 
 export function service(auth: Actions, cache: Cache, http: Http) {
+  getUser();
+
   return {
     getUser,
     login,
@@ -27,7 +29,11 @@ export function service(auth: Actions, cache: Cache, http: Http) {
       return;
     }
 
+    auth.setIsChecking(true);
+
     const response = await http.user(accessToken);
+
+    auth.setIsChecking(false);
 
     if (response.email) {
       auth.setUser(response);
@@ -47,7 +53,11 @@ export function service(auth: Actions, cache: Cache, http: Http) {
     cache.remove(CRUX_ACCESS_TOKEN_CACHE_KEY);
     cache.remove(CRUX_REFRESH_TOKEN_CACHE_KEY);
 
+    auth.setIsLoggingIn(true);
+
     const response = await http.login(email, password);
+
+    auth.setIsLoggingIn(false);
 
     if (response.access_token && response.refresh_token) {
       cache.set(CRUX_ACCESS_TOKEN_CACHE_KEY, response.access_token);
@@ -70,8 +80,11 @@ export function service(auth: Actions, cache: Cache, http: Http) {
       return;
     }
 
+    auth.setIsLoggingOut(true);
+
     await http.logout(token);
 
+    auth.setIsLoggingOut(false);
     auth.setUser(null);
   }
 }

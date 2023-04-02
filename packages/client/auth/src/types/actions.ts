@@ -1,7 +1,5 @@
-import { User } from './model';
+import { ExtractActions } from '@pivot/lib/slice';
 
-export interface Actions {
-  setIsLoading: (isLoading: boolean) => void;
-  setIsLoggingIn: (isLoggingIn: boolean) => void;
-  setUser: (user: User | null) => void;
-}
+import * as reducers from '../reducers';
+
+export type Actions = ExtractActions<typeof reducers>;
