@@ -1,4 +1,4 @@
-import { Cache } from '@pivot/client/cache';
+import { Cache } from 'packages/client/cache/src/domain/service';
 
 import {
   CRUX_ACCESS_TOKEN_CACHE_KEY,

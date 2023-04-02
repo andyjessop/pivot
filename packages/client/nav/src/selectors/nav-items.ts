@@ -2,12 +2,14 @@ import { Route } from '@pivot/client/router';
 
 import type { NavItem } from '../types';
 
-export function navItems(route: Route): NavItem[] {
+export function navItems(route: Route | null): NavItem[] {
   return [
     {
       route: 'projects',
       text: 'Projects',
-      active: ['project', 'projects'].includes(route?.name),
+      active: route?.name
+        ? ['project', 'projects'].includes(route?.name)
+        : false,
     },
   ];
 }

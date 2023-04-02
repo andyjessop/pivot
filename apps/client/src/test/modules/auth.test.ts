@@ -1,6 +1,9 @@
-import { headless } from '../utils/headless';
+import { headless } from '@pivot/lib/headless';
 
-const app = headless();
+import { config as services } from '~services/config';
+import { config as slices } from '~store/config';
+
+const app = headless(services, slices);
 
 describe('integration', () => {
   describe('auth', () => {

@@ -2,8 +2,6 @@ import type { FullRoute, Route, RouterConfig } from './types';
 import { getRouteFromUrl } from './utils/get-route-from-url';
 import { getUrlFromRoute } from './utils/get-url-from-route';
 
-export type Router = ReturnType<typeof service>;
-
 export function service<T extends RouterConfig>(
   initial: T,
   api: { navigateSuccess: (route: FullRoute) => void },
@@ -52,6 +50,8 @@ export function service<T extends RouterConfig>(
   }
 
   function onPopstate() {
+    debugger; // eslint-disable-line
+
     const route = getRouteFromUrl(config, window.location.href);
 
     if (!route) {

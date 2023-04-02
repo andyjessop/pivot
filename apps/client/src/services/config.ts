@@ -1,6 +1,6 @@
-import { authService } from '../modules/auth/auth.injectables';
-import { cacheService } from '../modules/cache/cache.injectables';
-import { routerService } from '../modules/router/router.injectables';
+import { authService } from '@pivot/client/auth';
+import { cacheService } from '@pivot/client/cache';
+import { routerService } from '@pivot/client/router';
 
 /**
  * This is the configuration for the services of the application. Services defined
