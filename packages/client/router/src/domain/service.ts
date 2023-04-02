@@ -50,8 +50,6 @@ export function service<T extends RouterConfig>(
   }
 
   function onPopstate() {
-    debugger; // eslint-disable-line
-
     const route = getRouteFromUrl(config, window.location.href);
 
     if (!route) {
