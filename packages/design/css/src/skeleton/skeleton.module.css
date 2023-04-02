@@ -1,18 +1,18 @@
 .container {
-  --pivot-skeleton-gap-default: var(--pivot-spacing-2);
-  --pivot-skeleton-row-height: var(--pivot-font-size-1);
-  --pivot-skeleton-background-color: var(--pivot-color-grey-80);
-  --pivot-skeleton-background-color-highlighted: var(--pivot-color-grey-60);
-  --pivot-skeleton-border-radius: var(--pivot-border-radius);
-  --pivot-skeleton-avatar-width: var(cx-avatar-size-1);
-  --pivot-skeleton-avatar-height: var(cx-avatar-size-1);
-  --pivot-skeleton-animation-duration: var(--pivot-animation-duration-4);
-  --pivot-skeleton-title-width: 38%;
+  --skeleton-gap-default: var(--spacing-2);
+  --skeleton-row-height: var(--font-size-1);
+  --skeleton-background-color: var(--color-grey-80);
+  --skeleton-background-color-highlighted: var(--color-grey-60);
+  --skeleton-border-radius: var(--border-radius);
+  --skeleton-avatar-width: var(cx-avatar-size-1);
+  --skeleton-avatar-height: var(cx-avatar-size-1);
+  --skeleton-animation-duration: var(--animation-duration-4);
+  --skeleton-title-width: 38%;
 
   display: inline-flex;
   width: 100%;
   flex-direction: column;
-  gap: var(--pivot-skeleton-gap-default);
+  gap: var(--skeleton-gap-default);
 }
 
 .paragraph {
@@ -27,35 +27,35 @@
 
 .item {
   width: 100%;
-  height: var(--pivot-skeleton-row-height);
+  height: var(--skeleton-row-height);
   list-style: none;
-  background: var(--pivot-skeleton-background-color);
-  border-radius: var(--pivot-skeleton-border-radius);
-  margin-block-end: var(--pivot-skeleton-gap-default);
+  background: var(--skeleton-background-color);
+  border-radius: var(--skeleton-border-radius);
+  margin-block-end: var(--skeleton-gap-default);
 }
 
 .item.avatar {
-  width: var(--pivot-skeleton-avatar-width);
-  height: var(--pivot-skeleton-avatar-height);
+  width: var(--skeleton-avatar-width);
+  height: var(--skeleton-avatar-height);
   border-radius: 50%;
 }
 
 .container.active .item {
   background: linear-gradient(
     90deg,
-    var(--pivot-skeleton-background-color) 25%,
-    var(--pivot-skeleton-background-color-highlighted) 37%,
-    var(--pivot-skeleton-background-color) 63%
+    var(--skeleton-background-color) 25%,
+    var(--skeleton-background-color-highlighted) 37%,
+    var(--skeleton-background-color) 63%
   );
   background-size: 400% 100%;
   animation-name: skeleton-loading;
-  animation-duration: var(--pivot-skeleton-animation-duration);
+  animation-duration: var(--skeleton-animation-duration);
   animation-timing-function: ease;
   animation-iteration-count: infinite;
 }
 
 .row.title {
-  width: var(--pivot-skeleton-title-width);
+  width: var(--skeleton-title-width);
 }
 
 @keyframes skeleton-loading {

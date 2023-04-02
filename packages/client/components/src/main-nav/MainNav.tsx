@@ -15,7 +15,7 @@ export function MainNav({ items, link }: NavbarProps) {
       <ul className={styles.nav}>
         {items.map((item) => (
           <li
-            className={cx({ active: item.active }, styles.item)}
+            className={cx({ [styles.active]: item.active }, styles.item)}
             key={item.text}
           >
             <a href="#" onClick={link({ name: item.route })}>

@@ -1,16 +1,17 @@
 import { Suspense } from 'react';
 
-import { UserNav } from '@pivot/client/auth';
 import { selectAuth } from '@pivot/client/auth';
-import { MainNav, Navbar } from '@pivot/client/components';
+import { MainNav, Navbar, UserNav } from '@pivot/client/components';
 import { selectNavItems } from '@pivot/client/nav';
 import { selectRouteName } from '@pivot/client/router';
 import { horizontalLeftContent as layout } from '@pivot/design/css';
+import { cx } from '@pivot/util/classname';
 
 import logo from '~assets/react.svg';
 import { useService } from '~services';
 import { useSelector } from '~store';
 
+import styles from './app.module.css';
 import { routes } from './routes';
 
 export function App() {
@@ -33,7 +34,7 @@ export function App() {
   /**
    * Logo component.
    */
-  const Logo = <img width="50" height="50" src={logo} alt="Pivot" />;
+  const Logo = <img width="25" height="25" src={logo} alt="Pivot" />;
 
   /**
    * Main navigation component.
@@ -46,8 +47,8 @@ export function App() {
   const RightNav = <UserNav actions={auth} data={authState} />;
 
   return (
-    <div className={layout.container}>
-      <div className={layout.top}>
+    <div className={cx(layout.container, styles.content)}>
+      <div className={cx(layout.top, styles.header)}>
         <Navbar Logo={Logo} LeftNav={LeftNav} RightNav={RightNav} />
       </div>
       <Suspense>
