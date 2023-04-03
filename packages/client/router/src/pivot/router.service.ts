@@ -5,6 +5,7 @@ import { service } from '../domain';
 import { routerSlice } from './router.slice';
 
 const config = {
+  notFound: '/404',
   project: '/projects/:id',
   projects: '/projects',
 };

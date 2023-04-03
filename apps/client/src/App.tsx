@@ -12,9 +12,12 @@ import { useService } from '~services';
 import { useSelector } from '~store';
 
 import styles from './app.module.css';
+import { useUnauthorizedRedirect } from './hooks/use-unauthorized-redirect';
 import { routes } from './routes';
 
 export function App() {
+  useUnauthorizedRedirect();
+
   const router = useService('router');
   const auth = useService('auth');
 
