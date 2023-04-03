@@ -1,5 +1,6 @@
 import { createStore, SliceConfigs } from '@pivot/lib/create-store';
 import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
+import { createUseService } from '@pivot/lib/use-service';
 
 export type Headless = ReturnType<typeof headless>;
 
@@ -8,6 +9,7 @@ export function headless<Services extends Record<string, Injectable<any>>>(
   slices: SliceConfigs,
 ) {
   const store = createStore(slices);
+  const useService = createUseService(services);
 
   return {
     getService,
@@ -15,12 +17,15 @@ export function headless<Services extends Record<string, Injectable<any>>>(
     init,
     select,
     selectSlice,
+    useSelector: store.useSelector,
+    useService,
   };
 
   async function init() {
     for (const serviceConfig of Object.values(services)) {
       serviceConfig.reset();
     }
+
     await getService('router'); // Initialize router
   }
 

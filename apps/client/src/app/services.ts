@@ -10,7 +10,7 @@ import { routerService } from '@pivot/client/router';
  * Injectables can be anything, even Slice APIs, which means that you can defined services
  * that can modify (and read from) the state of the application.
  */
-export const config = {
+export const services = {
   auth: authService,
   cache: cacheService,
   router: routerService,

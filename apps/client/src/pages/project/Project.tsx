@@ -2,7 +2,7 @@ import { selectRouteParams } from '@pivot/client/router';
 import { horizontalLeftContent as layout, outlet } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
-import { useSelector } from '~store';
+import { useSelector } from '~app';
 
 import appStyles from '../../app.module.css';
 

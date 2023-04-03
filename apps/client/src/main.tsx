@@ -1,6 +1,6 @@
 import '@pivot/design/variables';
 import './main.css';
-import './store';
+import './app/index';
 
 import ReactDOM from 'react-dom/client';
 
