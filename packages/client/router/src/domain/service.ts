@@ -1,3 +1,5 @@
+import { State as AuthState } from '@pivot/client/auth';
+
 import type { FullRoute, Route, RouterConfig } from './types';
 import { getRouteFromUrl } from './utils/get-route-from-url';
 import { getUrlFromRoute } from './utils/get-url-from-route';
@@ -5,6 +7,8 @@ import { getUrlFromRoute } from './utils/get-url-from-route';
 export function service<T extends RouterConfig>(
   initial: T,
   api: { navigateSuccess: (route: FullRoute) => void },
+  getAuthState: () => AuthState,
+  authenticatedRoutes: string[],
 ) {
   const config = { notFound: '/404', ...initial };
 
@@ -31,8 +35,13 @@ export function service<T extends RouterConfig>(
   }
 
   function navigate(route: Route<T> | null): void {
-    if (!route) {
-      return navigate({ name: 'notFound' });
+    if (
+      !route ||
+      !(getAuthState().user && authenticatedRoutes.includes(route.name))
+    ) {
+      if (route?.name !== 'notFound') {
+        return navigate({ name: 'notFound' });
+      }
     }
 
     const { hash, name, search, params } = route;
