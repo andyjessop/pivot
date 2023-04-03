@@ -1,7 +1,7 @@
 import { headless } from '@pivot/lib/headless';
 
-import { config as services } from '~services/config';
-import { config as slices } from '~store/config';
+import { services } from '~app/services';
+import { slices } from '~app/slices';
 
 import { visit } from '../utils/visit';
 
@@ -64,5 +64,17 @@ describe('integration', () => {
 
       expect(state.route?.name).toEqual('notFound');
     });
+
+    // it('should navigate to notFound on authorized route then logged out', async () => {
+    //   visit('/projects');
+
+    //   const auth = await app.getService('auth');
+
+    //   await auth.logout();
+
+    //   const state = app.selectSlice('router');
+
+    //   expect(state.route?.name).toEqual('notFound');
+    // });
   });
 });

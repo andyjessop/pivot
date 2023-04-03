@@ -7,9 +7,8 @@ import { selectRouteName } from '@pivot/client/router';
 import { horizontalLeftContent as layout } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
+import { useSelector, useService } from '~app';
 import logo from '~assets/react.svg';
-import { useService } from '~services';
-import { useSelector } from '~store';
 
 import styles from './app.module.css';
 import { routes } from './routes';

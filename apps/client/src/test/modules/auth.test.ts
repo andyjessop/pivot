@@ -1,7 +1,7 @@
 import { headless } from '@pivot/lib/headless';
 
-import { config as services } from '~services/config';
-import { config as slices } from '~store/config';
+import { services } from '~app/services';
+import { slices } from '~app/slices';
 
 const app = headless(services, slices);
 

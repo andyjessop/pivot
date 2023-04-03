@@ -6,7 +6,7 @@ import { routerSlice } from '@pivot/client/router';
  * is an instance of an `Injectable` that returns a Slice instance. The `active` property
  * is a function that returns a boolean indicating whether the slice should be active.
  */
-export const config = {
+export const slices = {
   auth: {
     active: () => true,
     injectable: authSlice,
