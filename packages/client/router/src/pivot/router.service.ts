@@ -1,4 +1,3 @@
-import { authSlice } from '@pivot/client/auth';
 import { injectable } from '@pivot/lib/injectable';
 
 import { service } from '../domain';
@@ -14,10 +13,7 @@ const config = {
 export const authenticatedRoutes = ['project', 'projects'];
 
 export const routerService = injectable({
-  importFn: (sliceObj, auth) =>
-    Promise.resolve(
-      service(config, sliceObj.api, auth.select, authenticatedRoutes),
-    ),
-  dependencies: [routerSlice, authSlice],
+  importFn: (sliceObj) => Promise.resolve(service(config, sliceObj.api)),
+  dependencies: [routerSlice],
   onDestroy: (service) => service.destroy(),
 });

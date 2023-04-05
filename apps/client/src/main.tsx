@@ -4,7 +4,7 @@ import './app/index';
 
 import ReactDOM from 'react-dom/client';
 
-import { App } from './App';
+import { Entry } from './Entry';
 
 main();
 
@@ -21,5 +21,5 @@ async function main() {
     });
   }
 
-  ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+  ReactDOM.createRoot(document.getElementById('root')!).render(<Entry />);
 }

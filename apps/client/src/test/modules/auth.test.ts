@@ -20,7 +20,7 @@ describe('integration', () => {
     it('should not be logged in', async () => {
       await app.getService('auth');
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: false,
         isLoggingOut: false,
@@ -33,7 +33,7 @@ describe('integration', () => {
 
       const login = auth.login('user@user.com', 'password');
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: true,
         isLoggingOut: false,
@@ -42,7 +42,7 @@ describe('integration', () => {
 
       await login;
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: false,
         isLoggingOut: false,
@@ -57,7 +57,7 @@ describe('integration', () => {
 
       const login1 = auth.login('user@user.com', 'password');
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: true,
         isLoggingOut: false,
@@ -66,7 +66,7 @@ describe('integration', () => {
 
       await login1;
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: false,
         isLoggingOut: false,
@@ -77,7 +77,7 @@ describe('integration', () => {
 
       const logout1 = auth.logout();
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: false,
         isLoggingOut: true,
@@ -88,7 +88,7 @@ describe('integration', () => {
 
       await logout1;
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: false,
         isLoggingOut: false,
@@ -97,7 +97,7 @@ describe('integration', () => {
 
       const login2 = auth.login('user@user.com', 'password');
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: true,
         isLoggingOut: false,
@@ -106,7 +106,7 @@ describe('integration', () => {
 
       await login2;
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: false,
         isLoggingOut: false,
@@ -117,7 +117,7 @@ describe('integration', () => {
 
       const logout2 = auth.logout();
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: false,
         isLoggingOut: true,
@@ -128,7 +128,7 @@ describe('integration', () => {
 
       await logout2;
 
-      expect(app.selectSlice('auth')).toEqual({
+      expect(app.getState('auth')).toEqual({
         isChecking: false,
         isLoggingIn: false,
         isLoggingOut: false,

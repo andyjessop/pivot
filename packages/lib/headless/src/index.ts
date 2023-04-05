@@ -1,24 +1,24 @@
-import { createStore, SliceConfigs } from '@pivot/lib/create-store';
+import { SliceConfigs } from '@pivot/lib/create-store';
+import { dynamicSliceRegistry } from '@pivot/lib/dynamic-slice-registry';
+import { dynamicStore } from '@pivot/lib/dynamic-store';
 import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
-import { createUseService } from '@pivot/lib/use-service';
 
 export type Headless = ReturnType<typeof headless>;
 
-export function headless<Services extends Record<string, Injectable<any>>>(
-  services: Services,
-  slices: SliceConfigs,
-) {
-  const store = createStore(slices);
-  const useService = createUseService(services);
+export function headless<
+  Services extends Record<string, Injectable<any>>,
+  Slices extends SliceConfigs,
+>(services: Services, slices: Slices) {
+  const store = dynamicStore();
+
+  const sliceRegistry = dynamicSliceRegistry(store, slices);
 
   return {
     getService,
-    getSlice: store.get,
+    getState,
     init,
     select,
-    selectSlice,
-    useSelector: store.useSelector,
-    useService,
+    store,
   };
 
   async function init() {
@@ -29,19 +29,19 @@ export function headless<Services extends Record<string, Injectable<any>>>(
     await getService('router'); // Initialize router
   }
 
-  async function getService<T extends keyof typeof services>(key: T) {
+  async function getService<T extends keyof Services>(key: T) {
     const response = await services[key].get();
 
-    return response as ExtractInstance<(typeof services)[T]>;
+    return response as ExtractInstance<Services[T]>;
   }
 
-  function selectSlice<K extends keyof typeof store.config>(sliceName: K) {
-    return store.selector(sliceName)({}) as ReturnType<
-      ExtractInstance<(typeof store.config)[K]['injectable']>['select']
+  function getState<K extends keyof Slices>(sliceName: K) {
+    return sliceRegistry.selector(sliceName)({}) as ReturnType<
+      ExtractInstance<Slices[K]['injectable']>['select']
     >;
   }
 
   function select(fn: (state: any) => any) {
-    return fn(store.store.getState());
+    return fn(store.getState());
   }
 }

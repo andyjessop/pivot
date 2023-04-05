@@ -12,20 +12,21 @@ interface UserNavProps {
 
 export function UserNav({ actions, data }: UserNavProps) {
   const { login, logout } = actions;
+  const { isChecking, isLoggingIn, isLoggingOut, user } = data;
 
-  if (data.isChecking) {
+  if (isChecking) {
     return <div>Checking user...</div>;
   }
 
-  if (data.isLoggingIn) {
+  if (isLoggingIn) {
     return <div>Logging in...</div>;
   }
 
-  if (data.user) {
+  if (user) {
     return (
       <div className={spaced.container}>
         <span className={styles.text}>
-          {data.isLoggingOut ? 'Logging out...' : data.user.email}
+          {isLoggingOut ? 'Logging out...' : user.email}
         </span>
         <button className="button is-dark" onClick={logout}>
           Logout

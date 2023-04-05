@@ -13,7 +13,7 @@ import logo from '~assets/react.svg';
 import styles from './app.module.css';
 import { routes } from './routes';
 
-export function App() {
+export function Entry() {
   const router = useService('router');
   const auth = useService('auth');
 
