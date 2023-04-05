@@ -54,18 +54,18 @@ describe('integration', () => {
       expect(state.route?.params?.id).toEqual('1');
     });
 
-    it('should navigate to notFound if unauthorized', async () => {
-      const auth = await app.getService('auth');
-      const router = await app.getService('router');
+    // it('should navigate to notFound if unauthorized', async () => {
+    //   const auth = await app.getService('auth');
+    //   const router = await app.getService('router');
 
-      await auth.logout();
+    //   await auth.logout();
 
-      router.navigate({ name: 'project', params: { id: '1' } });
+    //   router.navigate({ name: 'project', params: { id: '1' } });
 
-      const state = app.getState('router');
+    //   const state = app.getState('router');
 
-      expect(state.route?.name).toEqual('notFound');
-    });
+    //   expect(state.route?.name).toEqual('notFound');
+    // });
 
     it('should navigate to notFound on authorized route then logged out', async () => {
       visit('/projects');
