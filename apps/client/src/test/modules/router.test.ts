@@ -2,16 +2,18 @@ import { headless } from '@pivot/lib/headless';
 
 import { services } from '~app/services';
 import { slices } from '~app/slices';
+import { subscriptions } from '~app/subscriptions';
 
 import { visit } from '../utils/visit';
 
-const app = headless(services, slices);
+const app = headless(services, slices, subscriptions);
 
 describe('integration', () => {
   describe('router', () => {
     beforeEach(async () => {
       await app.init();
 
+      await app.getService('router');
       const auth = await app.getService('auth');
 
       await auth.login('user@user.com', 'password');
@@ -52,29 +54,29 @@ describe('integration', () => {
       expect(state.route?.params?.id).toEqual('1');
     });
 
-    // it('should navigate to notFound if unauthorized', async () => {
-    //   const auth = await app.getService('auth');
-    //   const router = await app.getService('router');
+    it('should navigate to notFound if unauthorized', async () => {
+      const auth = await app.getService('auth');
+      const router = await app.getService('router');
 
-    //   await auth.logout();
+      await auth.logout();
 
-    //   router.navigate({ name: 'project', params: { id: '1' } });
+      router.navigate({ name: 'project', params: { id: '1' } });
 
-    //   const state = app.getState('router');
+      const state = app.getState('router');
 
-    //   expect(state.route?.name).toEqual('notFound');
-    // });
+      expect(state.route?.name).toEqual('notFound');
+    });
 
-    // it('should navigate to notFound on authorized route then logged out', async () => {
-    //   visit('/projects');
+    it('should navigate to notFound on authorized route then logged out', async () => {
+      visit('/projects');
 
-    //   const auth = await app.getService('auth');
+      const auth = await app.getService('auth');
 
-    //   await auth.logout();
+      await auth.logout();
 
-    //   const state = app.getState('router');
+      const state = app.getState('router');
 
-    //   expect(state.route?.name).toEqual('notFound');
-    // });
+      expect(state.route?.name).toEqual('notFound');
+    });
   });
 });

@@ -1,7 +1,6 @@
 import { externallyResolvablePromise } from '@pivot/util/promise';
 
 import { buildDepChain } from './build-dep-chain';
-import { byDependencyOrder } from './by-dependency-order';
 import { AsyncFactoryFn, Injectable } from './types';
 
 export type { AsyncFactoryFn, ExtractInstance, Injectable } from './types';
@@ -21,7 +20,7 @@ export function injectable<T, Deps extends Injectable<any>[]>({
   let instance: T | undefined;
   let state = 'idle' as 'idle' | 'resolving' | 'resolved';
   let promise = resolvablePromise.promise;
-  const deps = [...dependencies].sort(byDependencyOrder);
+  const deps = [...dependencies];
   const depChain = buildDepChain(deps);
 
   return {

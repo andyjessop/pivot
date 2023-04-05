@@ -3,10 +3,11 @@ import { headless } from '@pivot/lib/headless';
 
 import { services } from '~app/services';
 import { slices } from '~app/slices';
+import { subscriptions } from '~app/subscriptions';
 
 import { visit } from '../utils/visit';
 
-const app = headless(services, slices);
+const app = headless(services, slices, subscriptions);
 
 describe('integration', () => {
   describe('main-nav', () => {

@@ -94,6 +94,8 @@ export function dynamicSliceRegistry<
 
       // should not be active and is
       entries[sliceName].registering = false;
+      entries[sliceName].externallyResolvablePromise =
+        externallyResolvablePromise();
       unregister?.();
     }
   }
