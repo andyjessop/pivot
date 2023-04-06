@@ -44,8 +44,8 @@
       "@pivot/lib/dynamic-slice-registry": [
         "packages/lib/dynamic-slice-registry/src/index.ts"
       ],
-      "@pivot/lib/dynamic-subscription-registry": [
-        "packages/lib/dynamic-subscription-registry/src/index.ts"
+      "@pivot/lib/subscription-manager": [
+        "packages/lib/subscription-manager/src/index.ts"
       ],
       "@pivot/lib/dynamic-store": ["packages/lib/dynamic-store/src/index.ts"],
       "@pivot/lib/headless": ["packages/lib/headless/src/index.ts"],

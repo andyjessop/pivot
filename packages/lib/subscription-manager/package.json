@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/lib-dynamic-subscription-registry",
+  "name": "@pivot/lib-subscription-manager",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../../.eslintrc.json",

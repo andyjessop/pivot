@@ -1,21 +1,10 @@
 import { DynamicStore } from '@pivot/lib/dynamic-store';
-import { Injectable } from '@pivot/lib/injectable';
 
-type Subscription = (val: any) => void;
+import { SubscriptionEntry, Subscriptions } from './types';
 
-export type SubscriptionConfig<T extends Subscription> = {
-  handler: T;
-  dependencies?: Injectable<any>[];
-  selector: (state: any) => any;
-};
+export type { Subscriptions } from './types';
 
-type SubscriptionEntry<T extends Subscription> = SubscriptionConfig<T> & {
-  currentValue: any;
-};
-
-export type Subscriptions = Record<string, SubscriptionConfig<any>>;
-
-export function dynamicSubscriptionRegistry<T extends Subscriptions>(
+export function subscriptionManager<T extends Subscriptions>(
   store: DynamicStore,
   config: T,
 ) {

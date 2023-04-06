@@ -1,11 +1,11 @@
 import { SliceConfigs } from '@pivot/lib/create-store';
 import { dynamicSliceRegistry } from '@pivot/lib/dynamic-slice-registry';
 import { dynamicStore } from '@pivot/lib/dynamic-store';
-import {
-  dynamicSubscriptionRegistry,
-  Subscriptions,
-} from '@pivot/lib/dynamic-subscription-registry';
 import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
+import {
+  subscriptionManager,
+  Subscriptions,
+} from '@pivot/lib/subscription-manager';
 
 type Selector<R = any> = (state: any) => R;
 
@@ -19,7 +19,7 @@ export function headless<
   const store = dynamicStore();
 
   const sliceRegistry = dynamicSliceRegistry(store, slices);
-  dynamicSubscriptionRegistry(store, subscriptions);
+  subscriptionManager(store, subscriptions);
 
   return {
     getService,
