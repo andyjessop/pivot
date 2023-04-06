@@ -10,7 +10,6 @@ import {
  */
 export const subscriptions = {
   authRouter: {
-    active: () => true,
     selector: selectShouldRedirectToNotFound,
     injectable: authRouter,
   },

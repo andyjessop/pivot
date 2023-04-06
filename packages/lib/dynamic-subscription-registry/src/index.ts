@@ -4,7 +4,6 @@ import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
 type Subscription = (val: any) => void;
 
 type SubscriptionConfig<T extends Subscription> = {
-  active: (state: any) => boolean;
   injectable: Injectable<T, any>;
   selector: (state: any) => any;
 };
@@ -12,7 +11,6 @@ type SubscriptionConfig<T extends Subscription> = {
 type SubscriptionEntry<T extends Subscription> = SubscriptionConfig<T> & {
   instance?: Subscription;
   currentValue: any;
-  isActive: boolean;
 };
 
 export function dynamicSubscriptionRegistry<
@@ -26,7 +24,6 @@ export function dynamicSubscriptionRegistry<
     acc[key] = {
       ...config[key],
       currentValue: null,
-      isActive: false,
     };
     return acc;
   }, {} as SubscriptionEntryCollection);
@@ -37,25 +34,12 @@ export function dynamicSubscriptionRegistry<
 
   return {};
 
-  async function listener() {
+  function listener() {
     const state = store.getState();
     const subNames = Object.keys(config) as (keyof T & string)[];
 
     for (const subName of subNames) {
-      const { active, injectable, isActive, currentValue, selector } =
-        entries[subName];
-
-      const shouldBeActive = active(state);
-
-      if (shouldBeActive && !isActive) {
-        await injectable.get();
-      }
-
-      if (!shouldBeActive && isActive) {
-        entries[subName].isActive = false;
-        entries[subName].currentValue = null;
-        continue;
-      }
+      const { injectable, currentValue, selector } = entries[subName];
 
       entries[subName].currentValue = selector(state);
 
