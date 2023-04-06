@@ -1,7 +1,10 @@
 import { SliceConfigs } from '@pivot/lib/create-store';
 import { dynamicSliceRegistry } from '@pivot/lib/dynamic-slice-registry';
 import { dynamicStore } from '@pivot/lib/dynamic-store';
-import { dynamicSubscriptionRegistry } from '@pivot/lib/dynamic-subscription-registry';
+import {
+  dynamicSubscriptionRegistry,
+  Subscriptions,
+} from '@pivot/lib/dynamic-subscription-registry';
 import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
 
 type Selector<R = any> = (state: any) => R;
@@ -11,15 +14,8 @@ export type Headless = ReturnType<typeof headless>;
 export function headless<
   Services extends Record<string, Injectable<any>>,
   Slices extends SliceConfigs,
-  Subscriptions extends Record<
-    keyof Subscriptions,
-    {
-      active: (state: any) => boolean;
-      selector: Selector;
-      injectable: Injectable<(val: any) => void>;
-    }
-  >,
->(services: Services, slices: Slices, subscriptions: Subscriptions) {
+  Subs extends Subscriptions,
+>(services: Services, slices: Slices, subscriptions: Subs) {
   const store = dynamicStore();
 
   const sliceRegistry = dynamicSliceRegistry(store, slices);

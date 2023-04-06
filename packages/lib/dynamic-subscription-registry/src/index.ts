@@ -1,23 +1,26 @@
 import { DynamicStore } from '@pivot/lib/dynamic-store';
-import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
+import { Injectable } from '@pivot/lib/injectable';
 
 type Subscription = (val: any) => void;
 
-type SubscriptionConfig<T extends Subscription> = {
-  injectable: Injectable<T, any>;
+export type SubscriptionConfig<T extends Subscription> = {
+  handler: T;
+  dependencies?: Injectable<any>[];
   selector: (state: any) => any;
 };
 
 type SubscriptionEntry<T extends Subscription> = SubscriptionConfig<T> & {
-  instance?: Subscription;
   currentValue: any;
 };
 
-export function dynamicSubscriptionRegistry<
-  T extends Record<keyof T, SubscriptionConfig<any>>,
->(store: DynamicStore, config: T) {
+export type Subscriptions = Record<string, SubscriptionConfig<any>>;
+
+export function dynamicSubscriptionRegistry<T extends Subscriptions>(
+  store: DynamicStore,
+  config: T,
+) {
   type SubscriptionEntryCollection = {
-    [K in keyof T]: SubscriptionEntry<ExtractInstance<T[K]['injectable']>>;
+    [K in keyof T]: SubscriptionEntry<T[K]['handler']>;
   };
 
   const entries = (Object.keys(config) as (keyof T)[]).reduce((acc, key) => {
@@ -39,12 +42,20 @@ export function dynamicSubscriptionRegistry<
     const subNames = Object.keys(config) as (keyof T & string)[];
 
     for (const subName of subNames) {
-      const { injectable, currentValue, selector } = entries[subName];
+      const { handler, currentValue, selector } = entries[subName];
 
       entries[subName].currentValue = selector(state);
 
       if (currentValue !== entries[subName].currentValue) {
-        injectable.getInstance()?.(entries[subName].currentValue);
+        const deps = (config[subName].dependencies || []).map((dep) =>
+          dep.getInstance(),
+        );
+
+        if (deps.length && !deps.every((dep) => dep !== undefined)) {
+          return;
+        }
+
+        handler(...deps)(entries[subName].currentValue);
       }
     }
   }

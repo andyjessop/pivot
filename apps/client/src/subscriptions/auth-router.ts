@@ -1,8 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { selectIsAuthenitcated, selectIsWaiting } from '@pivot/client/auth';
-import { routerService, selectRouteName } from '@pivot/client/router';
-import { injectable } from '@pivot/lib/injectable';
+import { Router, routerService, selectRouteName } from '@pivot/client/router';
 
 const authenticatedRoutes = ['projects', 'project'];
 
@@ -37,12 +36,16 @@ export const selectShouldRedirectToNotFound = createSelector(
   },
 );
 
-export const authRouter = injectable({
-  importFn: (router) =>
-    Promise.resolve((shouldRedirect: boolean) => {
-      if (shouldRedirect) {
-        router.navigate({ name: 'notFound' });
-      }
-    }),
+/**
+ * Auth-Router subscription. This handles the redirecting of the user to the not-found page
+ * if they are not authorized to view the current route.
+ */
+export const authRouter = {
+  selector: selectShouldRedirectToNotFound,
+  handler: (router: Router) => (shouldRedirect: boolean) => {
+    if (shouldRedirect) {
+      router.navigate({ name: 'notFound' });
+    }
+  },
   dependencies: [routerService],
-});
+};

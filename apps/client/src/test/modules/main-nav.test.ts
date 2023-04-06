@@ -13,10 +13,12 @@ describe('integration', () => {
   describe('main-nav', () => {
     beforeEach(async () => {
       await app.init();
+
+      await app.getService('router');
     });
 
     it('projects should not be active', async () => {
-      const items = await app.select(selectNavItems);
+      const items = app.select(selectNavItems);
 
       expect(items).toEqual([
         {
@@ -28,9 +30,13 @@ describe('integration', () => {
     });
 
     it('projects should be active', async () => {
+      const auth = await app.getService('auth');
+
+      await auth.login('user@user.com', 'password');
+
       visit('/projects');
 
-      const items = await app.select(selectNavItems);
+      const items = app.select(selectNavItems);
 
       expect(items).toEqual([
         {

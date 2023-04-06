@@ -1,7 +1,4 @@
-import {
-  authRouter,
-  selectShouldRedirectToNotFound,
-} from '../subscriptions/auth-router';
+import { authRouter } from '../subscriptions/auth-router';
 
 /**
  * This is the configuration for the subscriptions of the application. The `injectable` property
@@ -9,8 +6,5 @@ import {
  * is a function that returns a boolean indicating whether the subscription should be called
  */
 export const subscriptions = {
-  authRouter: {
-    selector: selectShouldRedirectToNotFound,
-    injectable: authRouter,
-  },
+  authRouter,
 };
