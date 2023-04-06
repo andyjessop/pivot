@@ -5,9 +5,9 @@ import { ExtractInstance } from '@pivot/lib/injectable';
 import { ServicesConfig } from './types';
 
 export function createUseService<T extends ServicesConfig>(config: T) {
-  return function useService<K extends keyof typeof config>(key: K) {
+  return function useService<K extends keyof T>(key: K) {
     // The context contains injectables, so we need to extract the instance.
-    type Service = ExtractInstance<(typeof config)[K]>;
+    type Service = ExtractInstance<T[K]>;
 
     const [service, setService] = useState<Service | null>(null);
 

@@ -57,16 +57,16 @@ export function service(auth: Actions, cache: Cache, http: Http) {
 
     const response = await http.login(email, password);
 
-    auth.setIsLoggingIn(false);
-
     if (response.access_token && response.refresh_token) {
       cache.set(CRUX_ACCESS_TOKEN_CACHE_KEY, response.access_token);
       cache.set(CRUX_REFRESH_TOKEN_CACHE_KEY, response.refresh_token);
 
       auth.setUser(response.user);
-
-      return;
     }
+
+    auth.setIsLoggingIn(false);
+
+    return;
   }
 
   async function logout() {
