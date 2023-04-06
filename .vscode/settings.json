@@ -1,4 +1,3 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "deno.enablePaths": ["apps/fixtures"]
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

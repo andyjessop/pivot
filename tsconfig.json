@@ -9,7 +9,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "ESNext",
+    "module": "es2020",
     "moduleResolution": "Node",
     "noEmit": true,
     "paths": {
@@ -76,5 +76,10 @@
   "references": [
     { "path": "./tsconfig.src.json" },
     { "path": "./tsconfig.test.json" }
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }
