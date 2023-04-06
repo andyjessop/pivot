@@ -22,9 +22,9 @@ describe('unauthorizedRedirect selectors', () => {
       expect(isUnauthorized(false, false, false, 'project')).toBe(true);
     });
 
-    it('returns true if the routeName is not in authenticatedRoutes and isAuthenitcated is true', () => {
-      expect(isUnauthorized(true, false, false, 'home')).toBe(true);
-      expect(isUnauthorized(true, false, false, 'about')).toBe(true);
+    it('returns false if the routeName is not in authenticatedRoutes and isAuthenitcated is true', () => {
+      expect(isUnauthorized(true, false, false, 'home')).toBe(false);
+      expect(isUnauthorized(true, false, false, 'about')).toBe(false);
     });
 
     it('returns false if the routeName is not in authenticatedRoutes and isAuthenitcated is false', () => {
