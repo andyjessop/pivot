@@ -11,5 +11,5 @@ export const selectIsAuthenitcated = createSelector(
 
 export const selectIsWaiting = createSelector(
   selectAuth,
-  (auth) => auth && (auth.isChecking || auth.isLoggingIn || auth.isLoggingOut),
+  (auth) => !auth || auth.isChecking || auth.isLoggingIn || auth.isLoggingOut,
 );

@@ -33,10 +33,9 @@ export function service(auth: Actions, cache: Cache, http: Http) {
 
     const response = await http.user(accessToken);
 
-    auth.setIsChecking(false);
-
     if (response.email) {
       auth.setUser(response);
+      auth.setIsChecking(false);
 
       // Refresh tokens.
       const userWithNewToken = await http.refreshToken(refreshToken);
