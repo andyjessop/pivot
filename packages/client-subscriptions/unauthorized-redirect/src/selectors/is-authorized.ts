@@ -16,6 +16,10 @@ export function isUnauthorized(
 
   const isAuthenticatedRoute = authenticatedRoutes.includes(routeName);
 
+  if (!isAuthenticatedRoute) {
+    return false;
+  }
+
   if (isAuthenticatedRoute && isAuthenitcated) {
     return false;
   }
