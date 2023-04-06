@@ -1,0 +1,13 @@
+{
+  "version": "2",
+  "remote": {
+    "https://deno.land/std@0.180.0/_util/asserts.ts": "178dfc49a464aee693a7e285567b3d0b555dc805ff490505a8aae34f9cfb1462",
+    "https://deno.land/std@0.180.0/collections/filter_values.ts": "5b9feaf17b9a6e5ffccdd36cf6f38fa4ffa94cff2602d381c2ad0c2a97929652",
+    "https://deno.land/std@0.180.0/collections/without_all.ts": "a89f5da0b5830defed4f59666e188df411d8fece35a5f6ca69be6ca71a95c185",
+    "https://deno.land/std@0.180.0/dotenv/mod.ts": "8dcbc8a40b896a0bf094582aaeadbfc76d3528872faf2efc0302beb1d2f6afd0",
+    "https://deno.land/std@0.180.0/flags/mod.ts": "d1cdefa18472ef69858a17df5cf7c98445ed27ac10e1460183081303b0ebc270",
+    "https://deno.land/x/openai@1.2.1/mod.ts": "33d22d2e4612a1a2f0ca2f395c806587f4201532d57ee609b34c91b491ee8496",
+    "https://deno.land/x/openai@1.2.1/src/openai.ts": "09816d892eea00cf79f5c0c49be5eb054049b88890242fbe7155a947d09fe453",
+    "https://deno.land/x/openai@1.2.1/src/types.ts": "94cceb7ecba3ef59d0c5991c3fac96d1ef9502965a130c4b145b7c8ba6f0c6c5"
+  }
+}
