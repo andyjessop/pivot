@@ -9,7 +9,12 @@ export const selectIsAuthenitcated = createSelector(
   (auth) => auth && auth.user !== null,
 );
 
-export const selectIsWaiting = createSelector(
+export const selectIsAwaitingAuthentication = createSelector(
   selectAuth,
-  (auth) => !auth || auth.isChecking || auth.isLoggingIn || auth.isLoggingOut,
+  (auth) => !auth || auth.isChecking || auth.isLoggingIn,
+);
+
+export const selectIsLoggingOut = createSelector(
+  selectAuth,
+  (auth) => auth && auth.isLoggingOut,
 );

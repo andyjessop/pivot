@@ -3,7 +3,8 @@ import { createSelector } from 'reselect';
 import {
   authService,
   selectIsAuthenitcated,
-  selectIsWaiting,
+  selectIsAwaitingAuthentication,
+  selectIsLoggingOut,
 } from '@pivot/client/auth';
 import { Router, routerService, selectRouteName } from '@pivot/client/router';
 
@@ -12,7 +13,8 @@ import { shouldRedirect } from './selectors/should-redirect';
 
 export const selectIsUnauthorized = createSelector(
   selectIsAuthenitcated,
-  selectIsWaiting,
+  selectIsAwaitingAuthentication,
+  selectIsLoggingOut,
   selectRouteName,
   isUnauthorized,
 );
@@ -24,10 +26,10 @@ export const selectShouldRedirectToNotFound = createSelector(
 );
 
 /**
- * Auth-Router subscription. This handles the redirecting of the user to the not-found page
+ * unauthorizedRedirect subscription. This handles the redirecting of the user to the not-found page
  * if they are not authorized to view the current route.
  */
-export const authRouter = {
+export const unauthorizedRedirect = {
   selector: selectShouldRedirectToNotFound,
   handler: (router: Router) => (shouldRedirect: boolean) => {
     if (shouldRedirect) {
