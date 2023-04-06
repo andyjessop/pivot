@@ -26,6 +26,7 @@ export function service(auth: Actions, cache: Cache, http: Http) {
     const refreshToken = cache.get(CRUX_REFRESH_TOKEN_CACHE_KEY) as string;
 
     if (!accessToken) {
+      auth.setIsChecking(false);
       return;
     }
 
@@ -33,10 +34,9 @@ export function service(auth: Actions, cache: Cache, http: Http) {
 
     const response = await http.user(accessToken);
 
-    auth.setIsChecking(false);
-
     if (response.email) {
       auth.setUser(response);
+      auth.setIsChecking(false);
 
       // Refresh tokens.
       const userWithNewToken = await http.refreshToken(refreshToken);
@@ -45,6 +45,8 @@ export function service(auth: Actions, cache: Cache, http: Http) {
         cache.set(CRUX_ACCESS_TOKEN_CACHE_KEY, userWithNewToken.access_token);
         cache.set(CRUX_REFRESH_TOKEN_CACHE_KEY, userWithNewToken.refresh_token);
       }
+    } else {
+      auth.setIsChecking(false);
     }
   }
 
@@ -65,6 +67,7 @@ export function service(auth: Actions, cache: Cache, http: Http) {
     }
 
     auth.setIsLoggingIn(false);
+    auth.setIsChecking(false);
 
     return;
   }
@@ -85,6 +88,7 @@ export function service(auth: Actions, cache: Cache, http: Http) {
     await http.logout(token);
 
     auth.setIsLoggingOut(false);
+    auth.setIsChecking(false);
     auth.setUser(null);
   }
 }

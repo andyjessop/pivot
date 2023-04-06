@@ -1,39 +1,26 @@
 import { createSelector } from 'reselect';
 
-import { selectIsAuthenitcated, selectIsWaiting } from '@pivot/client/auth';
+import {
+  authService,
+  selectIsAuthenitcated,
+  selectIsWaiting,
+} from '@pivot/client/auth';
 import { Router, routerService, selectRouteName } from '@pivot/client/router';
 
-const authenticatedRoutes = ['projects', 'project'];
+import { isUnauthorized } from './selectors/is-authorized';
+import { shouldRedirect } from './selectors/should-redirect';
 
-export const selectIsAuthorized = createSelector(
+export const selectIsUnauthorized = createSelector(
   selectIsAuthenitcated,
   selectIsWaiting,
   selectRouteName,
-  (isAuthenitcated, isWaiting, routeName) => {
-    if (!routeName || isWaiting) {
-      return true;
-    }
-
-    const isAuthenticatedRoute = authenticatedRoutes.includes(routeName);
-
-    if (isAuthenticatedRoute && isAuthenitcated) {
-      return true;
-    }
-
-    return false;
-  },
+  isUnauthorized,
 );
 
 export const selectShouldRedirectToNotFound = createSelector(
-  selectIsAuthorized,
+  selectIsUnauthorized,
   selectRouteName,
-  (isAuthorized, routeName) => {
-    if (!isAuthorized && routeName !== 'notFound') {
-      return true;
-    }
-
-    return false;
-  },
+  shouldRedirect,
 );
 
 /**
@@ -47,5 +34,5 @@ export const authRouter = {
       router.navigate({ name: 'notFound' });
     }
   },
-  dependencies: [routerService],
+  dependencies: [routerService, authService],
 };

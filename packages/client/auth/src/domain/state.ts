@@ -1,7 +1,7 @@
 import { State } from './types';
 
 export const initialState: State = {
-  isChecking: false,
+  isChecking: true,
   isLoggingIn: false,
   isLoggingOut: false,
   user: null,
