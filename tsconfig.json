@@ -9,7 +9,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "ESNext",
+    "module": "es2020",
     "moduleResolution": "Node",
     "noEmit": true,
     "paths": {
@@ -42,6 +42,7 @@
         "packages/design/custom-elements/src/index.ts"
       ],
       "@pivot/design/variables": ["packages/design/variables/src/index.ts"],
+      "@pivot/fixtures": ["packages/fixtures/src/index.ts"],
       "@pivot/lib/async-queue": ["packages/lib/async-queue/src/index.ts"],
       "@pivot/lib/create-store": ["packages/lib/create-store/src/index.ts"],
       "@pivot/lib/dynamic-slice-registry": [
@@ -76,5 +77,10 @@
   "references": [
     { "path": "./tsconfig.src.json" },
     { "path": "./tsconfig.test.json" }
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }
