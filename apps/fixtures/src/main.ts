@@ -6,6 +6,7 @@ import { format } from 'prettier';
 config();
 
 const PROJECT_NAME = 'pivot';
+const USER_ID = 'b6b92239-6bf7-46ed-949a-7249eb1c3116';
 const FIXTURE_PATH = resolve(__dirname, '../../../packages/fixtures/src');
 
 main();
@@ -33,6 +34,10 @@ export async function main() {
     features,
     variables,
   });
+
+  const teams = await getTeams();
+
+  writeUser({ teams });
 
   async function get(url: string) {
     const response = await fetch(
@@ -114,6 +119,10 @@ export async function main() {
     return await response.json();
   }
 
+  async function getTeams() {
+    return get(`team?select=*,users:team_user(*),projects:project(*)`);
+  }
+
   function writeProject({
     project,
     environments,
@@ -127,7 +136,7 @@ export async function main() {
     features: any[];
     variables: any[];
   }) {
-    const projectPath = resolve(FIXTURE_PATH, project.uuid);
+    const projectPath = resolve(FIXTURE_PATH, `project_${project.uuid}`);
 
     if (!existsSync(projectPath)) {
       mkdirSync(projectPath, { recursive: true });
@@ -162,6 +171,21 @@ export async function main() {
       `${projectPath}/index.ts`,
       `export * from './project';\nexport * from './environments';\nexport * from './deployments';\nexport * from './features';\nexport * from './variables';`,
     );
+  }
+
+  function writeUser({ teams }: { teams: any[] }) {
+    const projectPath = resolve(FIXTURE_PATH, `user_${USER_ID}`);
+
+    if (!existsSync(projectPath)) {
+      mkdirSync(projectPath, { recursive: true });
+    }
+
+    write(
+      `${projectPath}/teams.ts`,
+      `export const teams = ${JSON.stringify(teams)}`,
+    );
+
+    write(`${projectPath}/index.ts`, `export * from './teams';\n`);
   }
 }
 

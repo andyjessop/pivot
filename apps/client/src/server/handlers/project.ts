@@ -1,9 +1,9 @@
 import { ResponseComposition, rest, RestContext, RestRequest } from 'msw';
 
-import { getFixture } from '@pivot/fixtures';
+import { getProjectFixture } from '@pivot/fixtures';
 import { sleep } from '@pivot/util/time';
 
-export function authHandlers(apiUrl: string, { isBrowser = false } = {}) {
+export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
   return [
     rest.get(`${apiUrl}/rest/v1/project`, getComponent('project')),
     rest.get(`${apiUrl}/rest/v1/environment`, getComponent('environments')),
@@ -33,7 +33,7 @@ export function authHandlers(apiUrl: string, { isBrowser = false } = {}) {
         );
       }
 
-      return res(ctx.status(200), ctx.json(getFixture(uuid, component)));
+      return res(ctx.status(200), ctx.json(getProjectFixture(uuid, component)));
     };
   }
 
