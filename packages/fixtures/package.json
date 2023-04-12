@@ -1,0 +1,4 @@
+{
+  "name": "@pivot/fixtures",
+  "main": "./src/index.ts"
+}
