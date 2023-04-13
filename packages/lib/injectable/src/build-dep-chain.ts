@@ -5,6 +5,9 @@ export function buildDepChain(deps: Injectable[], current: Injectable[] = []) {
     if (!current.includes(dep)) {
       current.push(dep);
 
+      if (!dep) {
+        debugger; // eslint-disable-line
+      }
       buildDepChain(dep.dependencies || [], current);
     }
   }

@@ -1,7 +1,8 @@
-import { authService } from '@pivot/client/auth';
-import { cacheService } from '@pivot/client/cache';
-import { headService } from '@pivot/client/head';
-import { routerService } from '@pivot/client/router';
+import { authService } from './modules/auth';
+import { cacheService } from './modules/cache';
+import { envService } from './modules/env';
+import { headService } from './modules/head';
+import { routerService } from './modules/router';
 
 /**
  * This is the configuration for the services of the application. Services defined
@@ -14,6 +15,7 @@ import { routerService } from '@pivot/client/router';
 export const services = {
   auth: authService,
   cache: cacheService,
+  env: envService,
   head: headService,
   router: routerService,
 };

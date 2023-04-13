@@ -1,6 +1,6 @@
-import { selectNavItems } from '@pivot/client/nav';
 import { headless } from '@pivot/lib/headless';
 
+import { selectNavItems } from '~app/modules/nav';
 import { services } from '~app/services';
 import { slices } from '~app/slices';
 import { subscriptions } from '~app/subscriptions';

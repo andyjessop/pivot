@@ -34,12 +34,6 @@
       "@pivot/client/shared-interfaces": [
         "packages/client/shared-interfaces/src/index.ts"
       ],
-      "@pivot/client-subscriptions/unauthorized-redirect": [
-        "packages/client-subscriptions/unauthorized-redirect/src/index.ts"
-      ],
-      "@pivot/client-subscriptions/head-metadata": [
-        "packages/client-subscriptions/head-metadata/src/index.ts"
-      ],
       "@pivot/design/lit": ["packages/design/lit/src/index.ts"],
       "@pivot/design/css": ["packages/design/css/src/index.ts"],
       "@pivot/design/custom-elements": [

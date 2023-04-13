@@ -1,5 +1,5 @@
-import { authSlice } from '@pivot/client/auth';
-import { routerSlice } from '@pivot/client/router';
+import { authSlice } from './modules/auth';
+import { routerSlice } from './modules/router';
 
 /**
  * This is the configuration for the slices of the application. The `injectable` property
