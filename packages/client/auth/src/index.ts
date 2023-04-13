@@ -1,4 +1,6 @@
-export * from './pivot';
-export * from './domain/config';
-export * from './domain/types';
-export { http, service } from './domain';
+export * from './config';
+export * from './http';
+export * as reducers from './reducers';
+export * from './service';
+export * from './state';
+export * from './types';

@@ -1,13 +1,13 @@
 import { Suspense } from 'react';
 
-import { selectAuth } from '@pivot/client/auth';
 import { MainNav, Navbar, UserNav } from '@pivot/client/components';
-import { selectNavItems } from '@pivot/client/nav';
-import { selectRouteName } from '@pivot/client/router';
 import { horizontalLeftContent as layout } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
+import { selectAuth } from '~app/modules/auth';
+import { selectNavItems } from '~app/modules/nav';
+import { selectRouteName } from '~app/modules/router';
 import logo from '~assets/react.svg';
 
 import styles from './app.module.css';
@@ -16,12 +16,13 @@ import { routes } from './routes';
 export function Entry() {
   const router = useService('router');
   const auth = useService('auth');
+  const head = useService('head');
 
   const name = useSelector(selectRouteName) as keyof typeof routes;
   const navItems = useSelector(selectNavItems);
   const authState = useSelector(selectAuth);
 
-  if (!router || !auth || !name) {
+  if (!router || !auth || !head || !name) {
     return null;
   }
 

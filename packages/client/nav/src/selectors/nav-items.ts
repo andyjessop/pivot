@@ -2,7 +2,7 @@ import { Route } from '@pivot/client/router';
 
 import type { NavItem } from '../types';
 
-export function navItems(route: Route | null): NavItem[] {
+export function navItems(route?: Route | null): NavItem[] {
   return [
     {
       route: 'projects',
