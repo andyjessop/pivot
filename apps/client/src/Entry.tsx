@@ -16,12 +16,13 @@ import { routes } from './routes';
 export function Entry() {
   const router = useService('router');
   const auth = useService('auth');
+  const head = useService('head');
 
   const name = useSelector(selectRouteName) as keyof typeof routes;
   const navItems = useSelector(selectNavItems);
   const authState = useSelector(selectAuth);
 
-  if (!router || !auth || !name) {
+  if (!router || !auth || !head || !name) {
     return null;
   }
 

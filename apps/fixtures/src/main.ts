@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, rmSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { format } from 'prettier';
 
@@ -7,14 +7,23 @@ config();
 
 const PROJECT_NAME = 'pivot';
 const USER_ID = 'b6b92239-6bf7-46ed-949a-7249eb1c3116';
-const FIXTURE_PATH = resolve(__dirname, '../../../packages/fixtures/src');
+const TEAM_ID = '76ce0d5e-6766-4592-b6ff-14ecebbff3e5';
+const FIXTURE_PATH = resolve(
+  __dirname,
+  '../../../packages/fixtures/src/fixtures',
+);
 
 main();
 
 export async function main() {
+  setup();
+
   const accessToken = await getAccessToken();
 
   const projects = await getProjects();
+
+  writeTeam({ projects });
+
   const uuid = projects.find((project) => project.name === PROJECT_NAME)?.uuid;
   const pivot = (await getProject(uuid))[0];
 
@@ -28,10 +37,10 @@ export async function main() {
   const variables = await getVariables(pivot.uuid);
 
   writeProject({
-    project: pivot,
     environments,
     deployments,
     features,
+    projectId: pivot.uuid,
     variables,
   });
 
@@ -122,71 +131,11 @@ export async function main() {
   async function getTeams() {
     return get(`team?select=*,users:team_user(*),projects:project(*)`);
   }
+}
 
-  function writeProject({
-    project,
-    environments,
-    deployments,
-    features,
-    variables,
-  }: {
-    project: any;
-    environments: any[];
-    deployments: any[];
-    features: any[];
-    variables: any[];
-  }) {
-    const projectPath = resolve(FIXTURE_PATH, `project_${project.uuid}`);
-
-    if (!existsSync(projectPath)) {
-      mkdirSync(projectPath, { recursive: true });
-    }
-
-    write(
-      `${projectPath}/project.ts`,
-      `export const project = ${JSON.stringify(pivot)}`,
-    );
-
-    write(
-      `${projectPath}/environments.ts`,
-      `export const environments = ${JSON.stringify(environments)}`,
-    );
-
-    write(
-      `${projectPath}/deployments.ts`,
-      `export const deployments = ${JSON.stringify(deployments)}`,
-    );
-
-    write(
-      `${projectPath}/features.ts`,
-      `export const features = ${JSON.stringify(features)}`,
-    );
-
-    write(
-      `${projectPath}/variables.ts`,
-      `export const variables = ${JSON.stringify(variables)}`,
-    );
-
-    write(
-      `${projectPath}/index.ts`,
-      `export * from './project';\nexport * from './environments';\nexport * from './deployments';\nexport * from './features';\nexport * from './variables';`,
-    );
-  }
-
-  function writeUser({ teams }: { teams: any[] }) {
-    const projectPath = resolve(FIXTURE_PATH, `user_${USER_ID}`);
-
-    if (!existsSync(projectPath)) {
-      mkdirSync(projectPath, { recursive: true });
-    }
-
-    write(
-      `${projectPath}/teams.ts`,
-      `export const teams = ${JSON.stringify(teams)}`,
-    );
-
-    write(`${projectPath}/index.ts`, `export * from './teams';\n`);
-  }
+function setup() {
+  rmSync(FIXTURE_PATH, { recursive: true, force: true });
+  mkdirSync(FIXTURE_PATH, { recursive: true });
 }
 
 function write(path: string, content: string) {
@@ -198,4 +147,79 @@ function write(path: string, content: string) {
       trailingComma: 'all',
     }),
   );
+}
+
+function writeProject({
+  environments,
+  deployments,
+  features,
+  projectId,
+  variables,
+}: {
+  environments: any[];
+  deployments: any[];
+  features: any[];
+  projectId: string;
+  variables: any[];
+}) {
+  const projectPath = resolve(FIXTURE_PATH, `project_${projectId}`);
+
+  if (!existsSync(projectPath)) {
+    mkdirSync(projectPath, { recursive: true });
+  }
+
+  write(
+    `${projectPath}/environments.ts`,
+    `export const environments = ${JSON.stringify(environments)}`,
+  );
+
+  write(
+    `${projectPath}/deployments.ts`,
+    `export const deployments = ${JSON.stringify(deployments)}`,
+  );
+
+  write(
+    `${projectPath}/features.ts`,
+    `export const features = ${JSON.stringify(features)}`,
+  );
+
+  write(
+    `${projectPath}/variables.ts`,
+    `export const variables = ${JSON.stringify(variables)}`,
+  );
+
+  write(
+    `${projectPath}/index.ts`,
+    `export * from './environments';\nexport * from './deployments';\nexport * from './features';\nexport * from './variables';`,
+  );
+}
+
+function writeUser({ teams }: { teams: any[] }) {
+  const userPath = resolve(FIXTURE_PATH, `user_${USER_ID}`);
+
+  if (!existsSync(userPath)) {
+    mkdirSync(userPath, { recursive: true });
+  }
+
+  write(
+    `${userPath}/teams.ts`,
+    `export const teams = ${JSON.stringify(teams)}`,
+  );
+
+  write(`${userPath}/index.ts`, `export * from './teams';\n`);
+}
+
+function writeTeam({ projects }: { projects: any[] }) {
+  const teamPath = resolve(FIXTURE_PATH, `team_${TEAM_ID}`);
+
+  if (!existsSync(teamPath)) {
+    mkdirSync(teamPath, { recursive: true });
+  }
+
+  write(
+    `${teamPath}/projects.ts`,
+    `export const projects = ${JSON.stringify(projects)}`,
+  );
+
+  write(`${teamPath}/index.ts`, `export * from './projects';\n`);
 }

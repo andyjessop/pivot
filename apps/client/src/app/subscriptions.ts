@@ -1,3 +1,4 @@
+import { headMetadata } from '@pivot/client-subscriptions/head-metadata';
 import { unauthorizedRedirect } from '@pivot/client-subscriptions/unauthorized-redirect';
 
 /**
@@ -21,5 +22,6 @@ import { unauthorizedRedirect } from '@pivot/client-subscriptions/unauthorized-r
  * };
  */
 export const subscriptions = {
+  headMetadata,
   unauthorizedRedirect,
 };

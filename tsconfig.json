@@ -24,6 +24,7 @@
       "@pivot/client/feature-flags": [
         "packages/client/feature-flags/src/index.ts"
       ],
+      "@pivot/client/head": ["packages/client/head/src/index.ts"],
       "@pivot/client/nav": ["packages/client/nav/src/index.ts"],
       "@pivot/client/project": ["packages/client/project/src/index.ts"],
       "@pivot/client/pending-deployment": [
@@ -35,6 +36,9 @@
       ],
       "@pivot/client-subscriptions/unauthorized-redirect": [
         "packages/client-subscriptions/unauthorized-redirect/src/index.ts"
+      ],
+      "@pivot/client-subscriptions/head-metadata": [
+        "packages/client-subscriptions/head-metadata/src/index.ts"
       ],
       "@pivot/design/lit": ["packages/design/lit/src/index.ts"],
       "@pivot/design/css": ["packages/design/css/src/index.ts"],

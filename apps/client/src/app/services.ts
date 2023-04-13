@@ -1,5 +1,6 @@
 import { authService } from '@pivot/client/auth';
 import { cacheService } from '@pivot/client/cache';
+import { headService } from '@pivot/client/head';
 import { routerService } from '@pivot/client/router';
 
 /**
@@ -13,5 +14,6 @@ import { routerService } from '@pivot/client/router';
 export const services = {
   auth: authService,
   cache: cacheService,
+  head: headService,
   router: routerService,
 };
