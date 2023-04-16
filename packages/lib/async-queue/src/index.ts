@@ -11,7 +11,10 @@ export function asyncQueue(autoFlush = true): AsyncQueue {
     flush,
   };
 
-  function add(fn: AnyFunction, ...params: unknown[]): Promise<unknown> {
+  function add<T extends AnyFunction>(
+    fn: T,
+    ...params: unknown[]
+  ): Promise<ReturnType<T>> {
     let rej: AnyFunction = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
     let res: AnyFunction = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
 
@@ -31,7 +34,7 @@ export function asyncQueue(autoFlush = true): AsyncQueue {
       Promise.resolve(flush());
     }
 
-    return promise;
+    return promise as Promise<ReturnType<T>>;
   }
 
   function clear() {
