@@ -1,10 +1,8 @@
-import '@pivot/design/variables';
-import './main.css';
 import './app/index';
 
 import ReactDOM from 'react-dom/client';
 
-import { Entry } from './Entry';
+import { Entry } from './ui/Entry';
 
 main();
 

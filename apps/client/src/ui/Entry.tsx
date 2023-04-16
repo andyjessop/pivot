@@ -1,3 +1,6 @@
+import '@pivot/design/variables';
+import './entry.css';
+
 import { Suspense } from 'react';
 
 import { MainNav, Navbar, UserNav } from '@pivot/client/components';
@@ -11,14 +14,14 @@ import { selectRouteName } from '~app/modules/router';
 import logo from '~assets/react.svg';
 
 import styles from './app.module.css';
-import { routes } from './routes';
+import { routeComponents } from './route-components';
 
 export function Entry() {
   const router = useService('router');
   const auth = useService('auth');
   const head = useService('head');
 
-  const name = useSelector(selectRouteName) as keyof typeof routes;
+  const name = useSelector(selectRouteName) as keyof typeof routeComponents;
   const navItems = useSelector(selectNavItems);
   const authState = useSelector(selectAuth);
 
@@ -29,7 +32,7 @@ export function Entry() {
   /**
    * Lazy-loaded route handler component.
    */
-  const PageContent = routes[name] ?? routes['404'];
+  const PageContent = routeComponents[name] ?? routeComponents['404'];
 
   /**
    * Logo component.

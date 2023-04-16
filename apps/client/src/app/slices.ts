@@ -1,5 +1,5 @@
 import { authSlice } from './modules/auth';
-import { projectResourceSlice, projectSlice } from './modules/project';
+import { projectResourceSlice, projectUiSlice } from './modules/project';
 import { selectIsProjectRoute } from './modules/project/project.selectors';
 import { routerSlice } from './modules/router';
 
@@ -13,9 +13,9 @@ export const slices = {
     active: () => true,
     injectable: authSlice,
   },
-  project: {
+  projectUi: {
     active: selectIsProjectRoute,
-    injectable: projectSlice,
+    injectable: projectUiSlice,
   },
   projectResource: {
     active: selectIsProjectRoute,
