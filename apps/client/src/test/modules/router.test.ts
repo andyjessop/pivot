@@ -22,7 +22,7 @@ describe('integration', () => {
     it('should visit project page', async () => {
       visit('/projects/1');
 
-      const state = await app.getState('router');
+      const state = await app.getSlice('router');
 
       expect(state.route?.name).toEqual('project');
     });
@@ -30,7 +30,7 @@ describe('integration', () => {
     it('should visit projects page', async () => {
       visit('/projects');
 
-      const state = await app.getState('router');
+      const state = await app.getSlice('router');
 
       expect(state.route?.name).toEqual('projects');
     });
@@ -38,7 +38,7 @@ describe('integration', () => {
     it('should visit 404 page', async () => {
       visit('/projects/1/edit');
 
-      const state = await app.getState('router');
+      const state = await app.getSlice('router');
 
       expect(state.route?.name).toEqual('notFound');
     });
@@ -48,7 +48,7 @@ describe('integration', () => {
 
       router.navigate({ name: 'project', params: { id: '1' } });
 
-      const state = await app.getState('router');
+      const state = await app.getSlice('router');
 
       expect(state.route?.name).toEqual('project');
       expect(state.route?.params?.id).toEqual('1');
@@ -62,7 +62,7 @@ describe('integration', () => {
 
       router.navigate({ name: 'project', params: { id: '1' } });
 
-      const state = await app.getState('router');
+      const state = await app.getSlice('router');
 
       expect(state.route?.name).toEqual('notFound');
     });
@@ -74,7 +74,7 @@ describe('integration', () => {
 
       await auth.logout();
 
-      const state = await app.getState('router');
+      const state = await app.getSlice('router');
 
       expect(state.route?.name).toEqual('notFound');
     });

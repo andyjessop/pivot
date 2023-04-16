@@ -6,7 +6,6 @@ import {
   subscriptionManager,
   Subscriptions,
 } from '@pivot/lib/subscription-manager';
-import { retry } from '@pivot/util/function';
 
 type Selector<R = any> = (state: any) => R;
 
@@ -25,6 +24,7 @@ export function headless<
 
   return {
     getService,
+    getSlice,
     getState,
     init,
     select,
@@ -44,16 +44,7 @@ export function headless<
     return response as ExtractInstance<Services[T]>;
   }
 
-  async function getState<K extends keyof Slices>(sliceName: K) {
-    return retry(
-      () => getStateSync(sliceName),
-      (result) => result !== undefined,
-      10,
-      300,
-    );
-  }
-
-  function getStateSync<K extends keyof Slices>(sliceName: K) {
+  function getState<K extends keyof Slices>(sliceName: K) {
     return sliceRegistry.selector(sliceName)({}) as ReturnType<
       ExtractInstance<Slices[K]['injectable']>['select']
     >;
@@ -63,15 +54,23 @@ export function headless<
     return fn(store.getState());
   }
 
-  function waitForState<K extends keyof Slices>(
+  async function getSlice<K extends keyof Slices>(
+    sliceName: K,
+  ): Promise<ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>> {
+    const slice = getState(sliceName);
+
+    return slice ?? waitForState(sliceName, (state) => state);
+  }
+
+  async function waitForState<K extends keyof Slices, U>(
     sliceName: K,
     compare: (
       state: ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>,
-    ) => any,
-  ) {
+    ) => U,
+  ): Promise<ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>> {
     return new Promise((resolve) => {
       const unsubscribe = store.subscribe(() => {
-        const newState = getStateSync(sliceName);
+        const newState = getState(sliceName);
 
         if (compare(newState)) {
           unsubscribe();
