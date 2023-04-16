@@ -1,3 +1,5 @@
+import { fetchProject } from '~app/modules/project/fetch-project.subscription';
+
 import { headMetadata } from './head-metadata';
 import { unauthorizedRedirect } from './unauthorized-redirect';
 
@@ -22,6 +24,7 @@ import { unauthorizedRedirect } from './unauthorized-redirect';
  * };
  */
 export const subscriptions = {
+  fetchProject,
   headMetadata,
   unauthorizedRedirect,
 };

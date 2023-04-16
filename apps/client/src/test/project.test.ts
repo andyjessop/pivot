@@ -42,11 +42,29 @@ describe('integration', () => {
     it('should read project from remote', async () => {
       const project = await findProjectByName('pivot');
 
-      visit(`/projects/${project.uuid}`);
-
       const resource = await app.getService('projectResource');
 
       resource.read(project.uuid);
+
+      const loadedState = await app.waitForState(
+        'projectResource',
+        (state) => state.loaded,
+      );
+
+      expect(loadedState).toEqual({
+        data: project,
+        error: null,
+        loaded: true,
+        loading: false,
+        updating: false,
+      });
+    });
+
+    it('should read project from remote when visiting page', async () => {
+      const project = await findProjectByName('pivot');
+      await app.getService('projectResource');
+
+      visit(`/projects/${project.uuid}`);
 
       const loadedState = await app.waitForState(
         'projectResource',
