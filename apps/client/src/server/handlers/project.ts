@@ -1,11 +1,13 @@
 import { ResponseComposition, rest, RestContext, RestRequest } from 'msw';
 
-import { getProjectFixture } from '@pivot/fixtures';
+import { getProjectFixture, getTeamFixture } from '@pivot/fixtures';
 import { sleep } from '@pivot/util/time';
+
+const TEAM_ID = '76ce0d5e-6766-4592-b6ff-14ecebbff3e5';
 
 export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
   return [
-    rest.get(`${apiUrl}/rest/v1/project`, getComponent('project')),
+    rest.get(`${apiUrl}/rest/v1/project`, getProject),
     rest.get(`${apiUrl}/rest/v1/environment`, getComponent('environments')),
     rest.get(`${apiUrl}/rest/v1/deployment`, getComponent('deployments')),
     rest.get(`${apiUrl}/rest/v1/feature`, getComponent('features')),
@@ -25,16 +27,34 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
       const uuid = getProjectUuid(req);
 
       if (!uuid) {
-        return res(
-          ctx.status(404),
-          ctx.json({
-            message: 'Project not found',
-          }),
-        );
+        return res(ctx.status(200), ctx.json('Project not found'));
       }
 
       return res(ctx.status(200), ctx.json(getProjectFixture(uuid, component)));
     };
+  }
+
+  async function getProject(
+    req: RestRequest,
+    res: ResponseComposition,
+    ctx: RestContext,
+  ) {
+    if (isBrowser) {
+      await sleep(500);
+    }
+
+    const uuid = getProjectUuid(req);
+
+    const projects = await getTeamFixture(TEAM_ID, 'projects');
+
+    if (!uuid) {
+      return res(ctx.status(200), ctx.json(projects));
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json(projects.find((p: any) => p.uuid === uuid)),
+    );
   }
 
   function getProjectUuid(req: RestRequest) {

@@ -40,7 +40,7 @@ export function subscriptionManager<T extends Subscriptions>(
           dep.getInstance(),
         );
 
-        if (deps.length && deps.some((dep) => dep === undefined)) {
+        if (deps.some((dep) => dep === undefined)) {
           continue;
         }
 

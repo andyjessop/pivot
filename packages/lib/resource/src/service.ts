@@ -1,18 +1,19 @@
 import { asyncQueue } from '@pivot/lib/async-queue';
 
 import { ResourceSlice } from './slice';
-import { Config } from './types';
+import { Config, Service } from './types';
 
 export function resourceService<
   Data,
+  Error,
   ReadParams extends any[],
   CreateParams extends any[],
   DeleteParams extends any[],
   UpdateParams extends any[],
 >(
   config: Config<Data, ReadParams, CreateParams, DeleteParams, UpdateParams>,
-  slice: ResourceSlice<Data>,
-) {
+  slice: ResourceSlice<Data, Error>,
+): Service<Data, Error, ReadParams, CreateParams, DeleteParams, UpdateParams> {
   const { api, select } = slice;
   const queue = asyncQueue();
   let readParams: ReadParams;
@@ -24,7 +25,7 @@ export function resourceService<
     update,
   };
 
-  async function read(...params: ReadParams) {
+  async function read(...params: ReadParams): Promise<Data | Error> {
     const { pollingInterval, query } = config.read;
 
     if (!readParams) {
@@ -38,27 +39,30 @@ export function resourceService<
       updating: current.loaded,
     });
 
+    if (pollingInterval !== undefined) {
+      setTimeout(() => read(...params), pollingInterval);
+    }
+
     try {
       const res = await query(...params);
 
       api.set({
         data: res,
         loading: false,
+        loaded: true,
         updating: false,
         error: null,
       });
-    } catch (error) {
+
+      return res;
+    } catch (error: unknown) {
       api.set({
         loading: false,
         updating: false,
-        error,
+        error: error as Error,
       });
 
-      return;
-    }
-
-    if (pollingInterval !== undefined) {
-      setTimeout(() => read(...params), pollingInterval);
+      return error as Error;
     }
   }
 
@@ -77,7 +81,7 @@ export function resourceService<
   async function mutate(
     conf: typeof config.create | typeof config.delete | typeof config.update,
     ...params: DeleteParams | UpdateParams | CreateParams
-  ) {
+  ): Promise<Data | Error> {
     const res = queue.add(doMutation);
 
     return res;
@@ -88,7 +92,7 @@ export function resourceService<
       }
 
       if (!conf) {
-        return;
+        throw new Error('No mutation config provided');
       }
 
       const { optimistic, query, transform } = conf;
@@ -111,15 +115,15 @@ export function resourceService<
 
           return data;
         }
-      } catch (error) {
+      } catch (error: unknown) {
         api.set({
           loading: false,
           updating: false,
-          error,
+          error: error as Error,
         });
       }
 
-      read(...readParams);
+      return read(...readParams);
     }
   }
 }
