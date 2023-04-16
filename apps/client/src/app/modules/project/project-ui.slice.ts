@@ -4,6 +4,6 @@ import { slice } from '@pivot/lib/slice';
 export const projectUiSlice = injectable({
   importFn: () =>
     import('@pivot/client/project').then((mod) =>
-      slice('project', mod.initialState, mod.reducers),
+      slice('projectUi', mod.initialState, mod.reducers),
     ),
 });

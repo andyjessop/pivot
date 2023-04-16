@@ -54,22 +54,38 @@ export function headless<
     return fn(store.getState());
   }
 
-  async function getSlice<K extends keyof Slices>(
+  async function getSlice<K extends keyof Slices & string>(
     sliceName: K,
   ): Promise<ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>> {
     const slice = getState(sliceName);
 
-    return slice ?? waitForState(sliceName, (state) => state);
+    return (
+      slice ??
+      waitForState(sliceName, (state) => state, {
+        timeout: 2000,
+        message: `getSlice('${sliceName}') timed out.`,
+      })
+    );
   }
 
-  async function waitForState<K extends keyof Slices, U>(
+  async function waitForState<K extends keyof Slices & string, U>(
     sliceName: K,
     compare: (
       state: ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>,
     ) => U,
+    { timeout, message }: { timeout: number; message?: string } = {
+      timeout: 5000,
+    },
   ): Promise<ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const unsubscribe = store.subscribe(() => {
+        setTimeout(() => {
+          reject(
+            message ??
+              `waitForState('${sliceName}', ${compare.toString()}) timed out.`,
+          );
+        }, timeout);
+
         const newState = getState(sliceName);
 
         if (compare(newState)) {
