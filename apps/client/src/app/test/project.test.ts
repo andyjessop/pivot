@@ -31,7 +31,7 @@ describe('integration', () => {
       const projectResourceState = await app.getSlice('projectResource');
 
       expect(projectResourceState).toEqual({
-        data: 1,
+        data: null,
         error: null,
         loading: false,
         loaded: false,
