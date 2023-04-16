@@ -23,7 +23,7 @@ describe('integration', () => {
     it('should visit project page', async () => {
       visit('/projects/1');
 
-      const projectState = await app.getSlice('project');
+      const projectState = await app.getSlice('projectUi');
 
       expect(projectState.clonedDeploymentId).toEqual(null);
       expect(projectState.deployedReleaseId).toEqual(null);
