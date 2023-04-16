@@ -38,7 +38,7 @@ describe('integration', () => {
       });
     });
 
-    it('should read proejct from remote', async () => {
+    it('should read project from remote', async () => {
       visit('/projects/1');
 
       const resource = await app.getService('projectResource');
