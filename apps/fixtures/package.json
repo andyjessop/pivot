@@ -1,6 +1,6 @@
 {
   "name": "fixtures",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register ./src/main.ts"
+    "update": "ts-node -r tsconfig-paths/register ./src/main.ts"
   }
 }
