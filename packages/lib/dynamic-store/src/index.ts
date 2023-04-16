@@ -29,7 +29,16 @@ export function dynamicStore({ isDev }: { isDev?: boolean } = { isDev: true }) {
     store.dispatch({ type: '__pivot/reducer/add', payload: { id } });
 
     return () => {
+      // Remove reducer from combination
       remove();
+
+      // Remove key from state
+      const state = store.getState();
+
+      if (state[id]) {
+        delete state[id];
+      }
+
       store.dispatch({ type: '__pivot/reducer/remove', payload: { id } });
     };
   };

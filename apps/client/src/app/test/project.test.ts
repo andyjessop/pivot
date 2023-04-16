@@ -62,8 +62,10 @@ describe('integration', () => {
 
     it('should read project from remote when visiting page', async () => {
       const project = await findProjectByName('pivot');
+
       await app.getService('projectResource');
 
+      // The fetch-project subscription calls `resource.read` when on a project route
       visit(`/projects/${project.uuid}`);
 
       const loadedState = await app.waitForState(
