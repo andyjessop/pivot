@@ -3,7 +3,6 @@ import { createSelector } from 'reselect';
 import { Router } from '@pivot/client/router';
 
 import {
-  authService,
   selectIsAuthenitcated,
   selectIsAwaitingAuthentication,
   selectIsLoggingOut,
@@ -38,5 +37,5 @@ export const unauthorizedRedirect = {
       router.navigate({ name: 'notFound' });
     }
   },
-  dependencies: [routerService, authService],
+  dependencies: [routerService],
 };

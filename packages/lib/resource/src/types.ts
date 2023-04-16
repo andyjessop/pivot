@@ -35,3 +35,17 @@ export type Config<
     transform?: (res: UpdateReturn) => (data: Data | null) => Data;
   };
 };
+
+export type Service<
+  Data,
+  Error = any,
+  ReadParams extends any[] = [],
+  CreateParams extends any[] = [],
+  DeleteParams extends any[] = [],
+  UpdateParams extends any[] = [],
+> = {
+  create: (...params: CreateParams) => Promise<Data | Error>;
+  delete: (...params: DeleteParams) => Promise<Data | Error>;
+  read: (...params: ReadParams) => Promise<Data | Error>;
+  update: (...params: UpdateParams) => Promise<Data | Error>;
+};

@@ -29,6 +29,7 @@ export function headless<
     init,
     select,
     store,
+    waitForState,
   };
 
   async function init() {
@@ -53,8 +54,6 @@ export function headless<
   }
 
   function getStateSync<K extends keyof Slices>(sliceName: K) {
-    debugger; // eslint-disable-line
-
     return sliceRegistry.selector(sliceName)({}) as ReturnType<
       ExtractInstance<Slices[K]['injectable']>['select']
     >;
@@ -62,5 +61,23 @@ export function headless<
 
   function select(fn: Selector) {
     return fn(store.getState());
+  }
+
+  function waitForState<K extends keyof Slices>(
+    sliceName: K,
+    compare: (
+      state: ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>,
+    ) => any,
+  ) {
+    return new Promise((resolve) => {
+      const unsubscribe = store.subscribe(() => {
+        const newState = getStateSync(sliceName);
+
+        if (compare(newState)) {
+          unsubscribe();
+          resolve(newState);
+        }
+      });
+    });
   }
 }

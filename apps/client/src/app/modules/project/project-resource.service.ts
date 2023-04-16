@@ -1,5 +1,7 @@
+import { Model } from '@pivot/client/project';
 import { injectable } from '@pivot/lib/injectable';
 import { resourceService } from '@pivot/lib/resource';
+import { Service as ResourceService } from '@pivot/lib/resource';
 
 import { httpService } from '../http';
 
@@ -17,12 +19,13 @@ export const projectResourceService = injectable({
       resourceService(
         {
           read: {
-            pollingInterval: 1000,
-            query: (uuid: string) => http.get(`/project/${uuid}`),
+            query: (uuid: string) => http.get(uuid),
           },
         },
         slice,
       ),
     ),
-  dependencies: [projectResourceSlice, httpService],
+  dependencies: [projectResourceSlice, projectHttp],
 });
+
+export type ProjectResource = ResourceService<Model, Error, [string]>;

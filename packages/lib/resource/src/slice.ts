@@ -8,7 +8,9 @@ interface State<D, E> {
   updating: boolean;
 }
 
-export type ResourceSlice<Data> = ReturnType<typeof resourceSlice<Data, any>>;
+export type ResourceSlice<Data, Error = any> = ReturnType<
+  typeof resourceSlice<Data, Error>
+>;
 
 export function resourceSlice<D, E>(name: string) {
   return slice(
@@ -23,7 +25,7 @@ export function resourceSlice<D, E>(name: string) {
     {
       set: (state: State<D, E>, newState: Partial<State<D, E>>) => ({
         ...state,
-        newState,
+        ...newState,
       }),
     },
   );
