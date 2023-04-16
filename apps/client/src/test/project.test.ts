@@ -1,10 +1,11 @@
+import { findProjectByName } from '@pivot/fixtures';
 import { headless } from '@pivot/lib/headless';
 
 import { services } from '~app/services';
 import { slices } from '~app/slices';
 import { subscriptions } from '~app/subscriptions';
 
-import { visit } from '../utils/visit';
+import { visit } from './utils/visit';
 
 const app = headless(services, slices, subscriptions);
 
@@ -39,11 +40,13 @@ describe('integration', () => {
     });
 
     it('should read project from remote', async () => {
-      visit('/projects/1');
+      const project = await findProjectByName('pivot');
+
+      visit(`/projects/${project.uuid}`);
 
       const resource = await app.getService('projectResource');
 
-      resource.read('f4c727f9-6331-439e-b34d-8e056a2aa282');
+      resource.read(project.uuid);
 
       const loadedState = await app.waitForState(
         'projectResource',
@@ -51,12 +54,7 @@ describe('integration', () => {
       );
 
       expect(loadedState).toEqual({
-        data: {
-          created_at: '2022-08-31T09:34:39+00:00',
-          name: 'pivot',
-          team_id: '76ce0d5e-6766-4592-b6ff-14ecebbff3e5',
-          uuid: 'f4c727f9-6331-439e-b34d-8e056a2aa282',
-        },
+        data: project,
         error: null,
         loaded: true,
         loading: false,
