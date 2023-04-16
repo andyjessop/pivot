@@ -1,5 +1,3 @@
-import { Model } from './model';
+import { http } from '../http';
 
-export interface Http {
-  getOne(id: string): Promise<Model>;
-}
+export type Http = ReturnType<typeof http>;

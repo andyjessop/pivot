@@ -1,3 +1,3 @@
-export function isProjectRoute(routeName: string) {
+export function isProjectRoute(routeName?: string) {
   return routeName === 'project';
 }

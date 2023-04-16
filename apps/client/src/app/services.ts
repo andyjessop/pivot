@@ -2,6 +2,7 @@ import { authService } from './modules/auth';
 import { cacheService } from './modules/cache';
 import { envService } from './modules/env';
 import { headService } from './modules/head';
+import { projectResourceService } from './modules/project';
 import { routerService } from './modules/router';
 
 /**
@@ -17,5 +18,6 @@ export const services = {
   cache: cacheService,
   env: envService,
   head: headService,
+  projectResource: projectResourceService,
   router: routerService,
 };

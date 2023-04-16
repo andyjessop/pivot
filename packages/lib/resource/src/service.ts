@@ -3,7 +3,7 @@ import { asyncQueue } from '@pivot/lib/async-queue';
 import { ResourceSlice } from './slice';
 import { Config } from './types';
 
-export function service<
+export function resourceService<
   Data,
   ReadParams extends any[],
   CreateParams extends any[],
@@ -85,6 +85,10 @@ export function service<
     async function doMutation() {
       if (!readParams) {
         throw new Error('Cannot mutate before reading');
+      }
+
+      if (!conf) {
+        return;
       }
 
       const { optimistic, query, transform } = conf;

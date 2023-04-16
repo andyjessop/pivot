@@ -70,12 +70,12 @@ export function reducerRegistry() {
   function add(id: string, newReducer: Reducer) {
     reducers.set(id, newReducer);
 
-    currentReducer = combineReducers(Object.fromEntries(reducers)) as Reducer;
+    currentReducer = combineReducers(Object.fromEntries(reducers));
 
     return function unregisterReducer() {
       reducers.delete(id);
 
-      currentReducer = combineReducers(Object.fromEntries(reducers)) as Reducer;
+      currentReducer = combineReducers(Object.fromEntries(reducers));
     };
   }
 

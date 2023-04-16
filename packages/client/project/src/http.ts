@@ -1,27 +1,11 @@
-import { CRUX_ACCESS_TOKEN_CACHE_KEY } from '@pivot/client/auth';
-import { Cache } from '@pivot/client/cache';
-import { Service as Env, Variable } from '@pivot/client/env';
+import { Http } from '@pivot/client/http';
 
 import { Model } from './types';
 
-export function http(env: Env, cache: Cache) {
+export function http(baseHttp: Http) {
   return {
-    getOne: async (id: string): Promise<Model> => {
-      const token = cache.get(CRUX_ACCESS_TOKEN_CACHE_KEY);
-
-      return fetch(
-        `${env.get(
-          Variable.SUPABASE_FUNCTIONS_URL,
-        )}/deployments?projectId=${id}`,
-        {
-          headers: {
-            apiKey: env.get(Variable.SUPABASE_API_KEY),
-            authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          method: 'GET',
-        },
-      ).then((res) => res.json());
+    get: async (id: string): Promise<Model> => {
+      return baseHttp.get(`/rest/v1/project?uuid=eq.${id}`);
     },
   };
 }

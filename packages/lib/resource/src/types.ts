@@ -19,17 +19,17 @@ export type Config<
     pollingInterval?: number;
     query: (...params: ReadParams) => Promise<Data>;
   };
-  create: {
+  create?: {
     optimistic?: (...params: CreateParams) => (data: Data | null) => Data;
     query: (...params: CreateParams) => Promise<CreateReturn>;
     transform?: (res: CreateReturn) => (data: Data | null) => Data;
   };
-  delete: {
+  delete?: {
     optimistic?: (...params: DeleteParams) => (data: Data | null) => Data;
     query: (...params: DeleteParams) => Promise<DeleteReturn>;
     transform?: (res: DeleteReturn) => (data: Data | null) => Data;
   };
-  update: {
+  update?: {
     optimistic?: (...params: UpdateParams) => (data: Data | null) => Data;
     query: (...params: UpdateParams) => Promise<UpdateReturn>;
     transform?: (res: UpdateReturn) => (data: Data | null) => Data;
