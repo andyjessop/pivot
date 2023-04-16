@@ -24,6 +24,19 @@ export function service<T extends RouterConfig>(
 
   function link(route: Route<T>) {
     return function withEvent(event: any) {
+      const modifierPressed = ['Alt', 'Control', 'Meta', 'Shift'].some(
+        (key) => {
+          if (event.getModifierState(key)) {
+            return true;
+          }
+        },
+      );
+
+      // Avoid breaking native browser behavior
+      if (modifierPressed) {
+        return;
+      }
+
       event.preventDefault();
 
       navigate(route);

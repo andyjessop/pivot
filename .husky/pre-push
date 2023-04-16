@@ -2,6 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm install
+npx nx update fixtures
 npm run lint:affected
 npm run test:affected
 npm run stylelint:affected
