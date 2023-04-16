@@ -25,6 +25,7 @@
         "packages/client/feature-flags/src/index.ts"
       ],
       "@pivot/client/head": ["packages/client/head/src/index.ts"],
+      "@pivot/client/http": ["packages/client/http/src/index.ts"],
       "@pivot/client/nav": ["packages/client/nav/src/index.ts"],
       "@pivot/client/project": ["packages/client/project/src/index.ts"],
       "@pivot/client/pending-deployment": [
@@ -54,11 +55,13 @@
       "@pivot/lib/injectable": ["packages/lib/injectable/src/index.ts"],
       "@pivot/lib/redux-registry": ["packages/lib/redux-registry/src/index.ts"],
       "@pivot/lib/redux-types": ["packages/lib/redux-types/src/index.ts"],
+      "@pivot/lib/resource": ["packages/lib/resource/src/index.ts"],
       "@pivot/lib/slice": ["packages/lib/slice/src/index.ts"],
       "@pivot/lib/use-selector": ["packages/lib/use-selector/src/index.ts"],
       "@pivot/lib/use-service": ["packages/lib/use-service/src/index.ts"],
       "@pivot/template": ["packages/template/src/index.ts"],
       "@pivot/util/classname": ["packages/util/classname/src/index.ts"],
+      "@pivot/util/function": ["packages/util/function/src/index.ts"],
       "@pivot/util/promise": ["packages/util/promise/src/index.ts"],
       "@pivot/util/time": ["packages/util/time/src/index.ts"],
       "@pivot/util/url": ["packages/util/url/src/index.ts"]

@@ -6,6 +6,7 @@ import {
   subscriptionManager,
   Subscriptions,
 } from '@pivot/lib/subscription-manager';
+import { retry } from '@pivot/util/function';
 
 type Selector<R = any> = (state: any) => R;
 
@@ -19,6 +20,7 @@ export function headless<
   const store = dynamicStore();
 
   const sliceRegistry = dynamicSliceRegistry(store, slices);
+  store.addMiddleware(sliceRegistry.middleware);
   subscriptionManager(store, subscriptions);
 
   return {
@@ -41,7 +43,18 @@ export function headless<
     return response as ExtractInstance<Services[T]>;
   }
 
-  function getState<K extends keyof Slices>(sliceName: K) {
+  async function getState<K extends keyof Slices>(sliceName: K) {
+    return retry(
+      () => getStateSync(sliceName),
+      (result) => result !== undefined,
+      10,
+      300,
+    );
+  }
+
+  function getStateSync<K extends keyof Slices>(sliceName: K) {
+    debugger; // eslint-disable-line
+
     return sliceRegistry.selector(sliceName)({}) as ReturnType<
       ExtractInstance<Slices[K]['injectable']>['select']
     >;

@@ -1,5 +1,6 @@
 import { DynamicStore } from '@pivot/lib/dynamic-store';
 import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
+import { MiddlewareAPI } from '@pivot/lib/redux-types';
 import { Slice } from '@pivot/lib/slice';
 import {
   ExternallyResolvablePromise,
@@ -35,12 +36,11 @@ export function dynamicSliceRegistry<
     return acc;
   }, {} as SliceEntryCollection);
 
-  store.subscribe(listener);
-
-  listener();
+  listener(store.getState());
 
   return {
     get,
+    middleware,
     selector,
   };
 
@@ -50,8 +50,17 @@ export function dynamicSliceRegistry<
     return entries[sliceName].externallyResolvablePromise.promise;
   }
 
-  async function listener() {
-    const state = store.getState();
+  function middleware(store: MiddlewareAPI) {
+    return (next: any) => (action: any) => {
+      const result = next(action);
+
+      listener(store.getState());
+
+      return result;
+    };
+  }
+
+  async function listener(state: any) {
     const sliceNames = Object.keys(config) as (keyof T & string)[];
 
     for (const sliceName of sliceNames) {
@@ -81,9 +90,9 @@ export function dynamicSliceRegistry<
           instance,
           registering: false,
           unregister: () => {
+            entries[sliceName].unregister = undefined;
             removeMiddleware();
             removeReducer();
-            entries[sliceName].unregister = undefined;
           },
         };
 
