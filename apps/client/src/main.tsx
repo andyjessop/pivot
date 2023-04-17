@@ -1,8 +1,5 @@
-import './app/index';
-
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import { Entry } from './ui/Entry';
 
 main();
 
@@ -13,11 +10,16 @@ async function main() {
   if (import.meta.env.DEV || import.meta.env.VITE_CI) {
     const { server } = await import('./server/worker');
 
-    server.start({
+    await server.start({
       onUnhandledRequest: 'bypass',
       waitUntilReady: true,
     });
   }
+
+  // Import app and entry point after server has started.
+  await import('./app/index');
+
+  const Entry = React.lazy(() => import('./ui/Entry'));
 
   ReactDOM.createRoot(document.getElementById('root')!).render(<Entry />);
 }
