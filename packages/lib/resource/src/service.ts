@@ -35,8 +35,8 @@ export function resourceService<
     const current = select();
 
     api.set({
-      loading: !current.loaded,
-      updating: current.loaded,
+      loading: !current?.loaded,
+      updating: current?.loaded,
     });
 
     if (pollingInterval !== undefined) {

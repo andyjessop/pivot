@@ -16,7 +16,7 @@ import logo from '~assets/react.svg';
 import styles from './app.module.css';
 import { routeComponents } from './route-components';
 
-export function Entry() {
+export default function Entry() {
   const router = useService('router');
   const auth = useService('auth');
   const head = useService('head');

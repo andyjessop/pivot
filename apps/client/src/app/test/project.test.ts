@@ -9,6 +9,8 @@ import { visit } from './utils/visit';
 
 const app = headless(services, slices, subscriptions);
 
+const project = findProjectByName('pivot');
+
 describe('integration', () => {
   describe('project', () => {
     beforeEach(async () => {
@@ -21,7 +23,7 @@ describe('integration', () => {
     });
 
     it('should visit project page', async () => {
-      visit('/projects/1');
+      visit(`/projects/${project.uuid}`);
 
       const projectState = await app.getSlice('projectUi');
 
@@ -31,24 +33,22 @@ describe('integration', () => {
       const projectResourceState = await app.getSlice('projectResource');
 
       expect(projectResourceState).toEqual({
-        data: null,
+        data: project,
         error: null,
         loading: false,
-        loaded: false,
+        loaded: true,
         updating: false,
       });
     });
 
     it('should read project from remote', async () => {
-      const project = await findProjectByName('pivot');
-
       const resource = await app.getService('projectResource');
 
       resource.read(project.uuid);
 
       const loadedState = await app.waitForState(
         'projectResource',
-        (state) => state.loaded,
+        (state) => state.loaded && !state.updating,
       );
 
       expect(loadedState).toEqual({
@@ -61,8 +61,6 @@ describe('integration', () => {
     });
 
     it('should read project from remote when visiting page', async () => {
-      const project = await findProjectByName('pivot');
-
       await app.getService('projectResource');
 
       // The fetch-project subscription calls `resource.read` when on a project route

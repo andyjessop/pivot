@@ -12,7 +12,9 @@ export function http(env: Env, cache: Cache) {
   async function get<T>(path: string, baseUrl?: string): Promise<T> {
     const token = cache.get(CRUX_ACCESS_TOKEN_CACHE_KEY);
 
-    return fetch(`${baseUrl ?? env.get(Variable.SUPABASE_API_URL)}${path}`, {
+    const url = `${baseUrl ?? env.get(Variable.SUPABASE_API_URL)}${path}`;
+
+    return fetch(url, {
       headers: {
         apiKey: env.get(Variable.SUPABASE_API_KEY),
         authorization: `Bearer ${token}`,

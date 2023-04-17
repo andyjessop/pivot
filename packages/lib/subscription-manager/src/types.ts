@@ -10,6 +10,7 @@ export type SubscriptionConfig<T extends Subscription> = {
 
 export type SubscriptionEntry<T extends Subscription> =
   SubscriptionConfig<T> & {
+    called: boolean;
     currentValue: any;
   };
 

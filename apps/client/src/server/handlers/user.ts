@@ -17,7 +17,7 @@ export function userHandlers(apiUrl: string, { isBrowser = false } = {}) {
       await sleep(500);
     }
 
-    const teams = await findTeamsByUserId(USER_ID);
+    const teams = findTeamsByUserId(USER_ID);
 
     return res(ctx.status(200), ctx.json(teams));
   }

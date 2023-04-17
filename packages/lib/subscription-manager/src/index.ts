@@ -12,21 +12,19 @@ export function subscriptionManager<T extends Subscriptions>(
     [K in keyof T]: SubscriptionEntry<T[K]['handler']>;
   };
 
-  const entries = (Object.keys(config) as (keyof T)[]).reduce((acc, key) => {
-    acc[key] = {
-      ...config[key],
-      currentValue: null,
-    };
-    return acc;
-  }, {} as SubscriptionEntryCollection);
+  let entries = {} as SubscriptionEntryCollection;
+
+  reset();
 
   store.subscribe(listener);
 
   listener();
 
-  return {};
+  return {
+    reset,
+  };
 
-  function listener() {
+  async function listener() {
     const state = store.getState();
     const subNames = Object.keys(config) as (keyof T & string)[];
 
@@ -35,17 +33,36 @@ export function subscriptionManager<T extends Subscriptions>(
 
       entries[subName].currentValue = selector(state);
 
-      if (currentValue !== entries[subName].currentValue) {
-        const deps = (config[subName].dependencies || []).map((dep) =>
-          dep.getInstance(),
+      if (
+        // either the value has changed or
+        currentValue !== entries[subName].currentValue ||
+        // it's the first time we're calling the handler
+        (!entries[subName].called &&
+          entries[subName].currentValue !== undefined)
+      ) {
+        const deps = await Promise.all(
+          (config[subName].dependencies || []).map((dep) => dep.get()),
         );
 
         if (deps.some((dep) => dep === undefined)) {
           continue;
         }
 
+        entries[subName].called = true;
+
         handler(...deps)(entries[subName].currentValue);
       }
     }
+  }
+
+  function reset() {
+    entries = (Object.keys(config) as (keyof T)[]).reduce((acc, key) => {
+      acc[key] = {
+        ...config[key],
+        called: false,
+        currentValue: null,
+      };
+      return acc;
+    }, {} as SubscriptionEntryCollection);
   }
 }

@@ -20,7 +20,7 @@ export function headless<
 
   const sliceRegistry = dynamicSliceRegistry(store, slices);
   store.addMiddleware(sliceRegistry.middleware);
-  subscriptionManager(store, subscriptions);
+  const subsManager = subscriptionManager(store, subscriptions);
 
   return {
     getService,
@@ -29,6 +29,7 @@ export function headless<
     init,
     select,
     store,
+    waitFor,
     waitForState,
   };
 
@@ -36,6 +37,9 @@ export function headless<
     for (const serviceConfig of Object.values(services)) {
       serviceConfig.reset();
     }
+
+    sliceRegistry.resetState();
+    subsManager.reset();
   }
 
   async function getService<T extends keyof Services>(key: T) {
@@ -59,13 +63,26 @@ export function headless<
   ): Promise<ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>> {
     const slice = getState(sliceName);
 
-    return (
-      slice ??
-      waitForState(sliceName, (state) => state, {
-        timeout: 2000,
-        message: `getSlice('${sliceName}') timed out.`,
-      })
-    );
+    return slice ?? waitForState(sliceName, (state) => state);
+  }
+
+  async function waitFor(selector: Selector) {
+    const newState = selector(store.getState());
+
+    if (newState) {
+      return newState;
+    }
+
+    return new Promise((resolve) => {
+      const unsubscribe = store.subscribe(() => {
+        const newState = selector(store.getState());
+
+        if (newState) {
+          unsubscribe();
+          resolve(newState);
+        }
+      });
+    });
   }
 
   async function waitForState<K extends keyof Slices & string, U>(
@@ -73,20 +90,20 @@ export function headless<
     compare: (
       state: ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>,
     ) => U,
-    { timeout, message }: { timeout: number; message?: string } = {
-      timeout: 5000,
-    },
   ): Promise<ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>> {
-    return new Promise((resolve, reject) => {
-      const unsubscribe = store.subscribe(() => {
-        setTimeout(() => {
-          reject(
-            message ??
-              `waitForState('${sliceName}', ${compare.toString()}) timed out.`,
-          );
-        }, timeout);
+    const newState = getState(sliceName);
 
+    if (newState && compare(newState)) {
+      return newState;
+    }
+
+    return new Promise((resolve) => {
+      const unsubscribe = store.subscribe(() => {
         const newState = getState(sliceName);
+
+        if (newState === undefined) {
+          return;
+        }
 
         if (compare(newState)) {
           unsubscribe();

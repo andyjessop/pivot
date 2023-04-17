@@ -19,3 +19,8 @@ export const selectRouteSearch = createSelector(
   selectRoute,
   selectors.routeSearch,
 );
+
+export const selectIsNotFoundRoute = createSelector(
+  selectRouteName,
+  (routeName) => routeName === 'notFound',
+);

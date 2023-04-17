@@ -37,7 +37,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
         return res(ctx.status(200), ctx.json('Project not found'));
       }
 
-      const project = await findProjectById(uuid);
+      const project = findProjectById(uuid);
 
       if (!project) {
         return res(ctx.status(200), ctx.json('Project not found'));
@@ -47,16 +47,16 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
       switch (component) {
         case 'environments':
-          result = await findEnvironmentsByProjectId(uuid);
+          result = findEnvironmentsByProjectId(uuid);
           break;
         case 'deployments':
-          result = await findDeploymentsByProjectId(uuid);
+          result = findDeploymentsByProjectId(uuid);
           break;
         case 'features':
-          result = await findFeaturesByProjectId(uuid);
+          result = findFeaturesByProjectId(uuid);
           break;
         case 'variables':
-          result = await findVariablesByProjectId(uuid);
+          result = findVariablesByProjectId(uuid);
           break;
       }
 
@@ -75,7 +75,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
     const uuid = getProjectUuid(req);
 
-    const projects = await findProjectsByTeamId(TEAM_ID);
+    const projects = findProjectsByTeamId(TEAM_ID);
 
     if (!uuid) {
       return res(ctx.status(200), ctx.json(projects));

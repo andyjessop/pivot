@@ -41,6 +41,7 @@ export function dynamicSliceRegistry<
   return {
     get,
     middleware,
+    resetState,
     selector,
   };
 
@@ -107,6 +108,10 @@ export function dynamicSliceRegistry<
         externallyResolvablePromise();
       unregister?.();
     }
+  }
+
+  function resetState() {
+    listener({});
   }
 
   function selector<K extends keyof SliceEntryCollection>(

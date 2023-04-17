@@ -1,69 +1,38 @@
-import { Model } from '@pivot/client/project';
+import { deployments } from './fixtures/deployments';
+import { environments } from './fixtures/environments';
+import { features } from './fixtures/features';
+import { projects } from './fixtures/projects';
+import { teams } from './fixtures/teams';
+import { variables } from './fixtures/variables';
 
-export function getProjectFixture(projectId: string, component: string): any {
-  const project = import(`./fixtures/project_${projectId}`).then(
-    (m) => m[component],
-  );
-
-  return project;
+export function findEnvironmentsByProjectId(projectId: string) {
+  return environments.filter((e) => e.project_id === projectId)!;
 }
 
-export function getTeamFixture(teamId: string, component: string): any {
-  const project = import(`./fixtures/team_${teamId}`).then((m) => m[component]);
-
-  return project;
+export function findDeploymentsByProjectId(projectId: string) {
+  return deployments.filter((d) => d.project_id === projectId)!;
 }
 
-export function getUserFixture(userId: string, component: string): any {
-  const project = import(`./fixtures/user_${userId}`).then((m) => m[component]);
-
-  return project;
+export function findFeaturesByProjectId(projectId: string) {
+  return features.filter((f) => f.project_id === projectId)!;
 }
 
-export async function findEnvironmentsByProjectId(projectId: string) {
-  return import('./fixtures/environments').then((m) => {
-    return m.environments.filter((e) => e.project_id === projectId);
-  }) as Promise<Model[]>;
+export function findVariablesByProjectId(projectId: string) {
+  return variables.filter((v) => v.project_id === projectId)!;
 }
 
-export async function findDeploymentsByProjectId(projectId: string) {
-  return import('./fixtures/deployments').then((m) => {
-    return m.deployments.filter((d) => d.project_id === projectId);
-  }) as Promise<Model[]>;
+export function findProjectById(id: string) {
+  return projects.find((p) => p.uuid === id)!;
 }
 
-export async function findFeaturesByProjectId(projectId: string) {
-  return import('./fixtures/features').then((m) => {
-    return m.features.filter((f) => f.project_id === projectId);
-  }) as Promise<Model[]>;
+export function findProjectByName(name: string) {
+  return projects.find((p) => p.name === name)!;
 }
 
-export async function findVariablesByProjectId(projectId: string) {
-  return import('./fixtures/variables').then((m) => {
-    return m.variables.filter((v) => v.project_id === projectId);
-  }) as Promise<Model[]>;
+export function findProjectsByTeamId(teamId: string) {
+  return projects.filter((p) => p.team_id === teamId)!;
 }
 
-export async function findProjectById(id: string) {
-  return import('./fixtures/projects').then((m) => {
-    return m.projects.find((p) => p.uuid === id);
-  }) as Promise<Model>;
-}
-
-export async function findProjectByName(name: string) {
-  return import('./fixtures/projects').then((m) => {
-    return m.projects.find((p) => p.name === name);
-  }) as Promise<Model>;
-}
-
-export async function findProjectsByTeamId(teamId: string) {
-  return import('./fixtures/projects').then((m) => {
-    return m.projects.filter((p) => p.team_id === teamId);
-  }) as Promise<Model[]>;
-}
-
-export async function findTeamsByUserId(userId: string) {
-  return import('./fixtures/teams').then((m) => {
-    return m.teams.filter((t) => t.user_id === userId);
-  }) as Promise<Model[]>;
+export function findTeamsByUserId(userId: string) {
+  return teams.filter((t) => t.user_id === userId)!;
 }

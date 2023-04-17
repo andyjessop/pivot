@@ -12,7 +12,11 @@ import { config } from './config';
  */
 export const headMetadata = {
   selector: selectRoute,
-  handler: (head: Head) => (route: Route) => {
+  handler: (head: Head) => (route: Route | null) => {
+    if (!route) {
+      return;
+    }
+
     const routeConfig = config[route.name];
 
     if (!routeConfig) {
