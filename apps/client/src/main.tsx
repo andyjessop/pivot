@@ -11,11 +11,12 @@ async function main() {
     const { server } = await import('./server/worker');
 
     await server.start({
-      onUnhandledRequest: 'warn',
+      onUnhandledRequest: 'bypass',
       waitUntilReady: true,
     });
   }
 
+  // Import app and entry point after server has started.
   await import('./app/index');
 
   const Entry = React.lazy(() => import('./ui/Entry'));
