@@ -8,7 +8,7 @@
   grid-template-areas:
     'top top top top'
     'subheader subheader subheader subheader'
-    'left-content content content content';
+    'content content content content';
   height: 100%;
 }
 
@@ -26,11 +26,7 @@
   padding: 0 var(--page-horizontal-padding);
 }
 
-.left-content {
-  grid-area: left-content;
-  padding: 0 var(--page-horizontal-padding);
-}
-
 .content {
   grid-area: content;
+  padding: var(--spacing-2) var(--page-horizontal-padding);
 }

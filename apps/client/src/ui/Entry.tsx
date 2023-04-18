@@ -35,6 +35,13 @@ export default function Entry() {
   const PageContent = routeComponents[name] ?? routeComponents['404'];
 
   /**
+   * Fallback blank screen.
+   */
+  const PageFallback = (
+    <div className={cx(layout.subheader, styles.subheader)}></div>
+  );
+
+  /**
    * Logo component.
    */
   const Logo = <img width="25" height="25" src={logo} alt="Pivot" />;
@@ -54,7 +61,7 @@ export default function Entry() {
       <div className={cx(layout.top, styles.header)}>
         <Navbar Logo={Logo} LeftNav={LeftNav} RightNav={RightNav} />
       </div>
-      <Suspense>
+      <Suspense fallback={PageFallback}>
         <PageContent />
       </Suspense>
     </div>

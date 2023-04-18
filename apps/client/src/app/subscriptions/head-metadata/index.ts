@@ -1,18 +1,15 @@
 import { Head } from 'packages/client/head/src/types';
-
-import { Route } from '@pivot/client/router';
+import { createSelector } from 'reselect';
 
 import { headService } from '../../modules/head';
 import { selectRoute } from '../../modules/router';
 
 import { config } from './config';
 
-/**
- * Adds head metadata to the application when the route changes.
- */
-export const headMetadata = {
-  selector: selectRoute,
-  handler: (head: Head) => (route: Route | null) => {
+const selectHeadTitle = createSelector(
+  (state: any) => state,
+  selectRoute,
+  (state, route) => {
     if (!route) {
       return;
     }
@@ -23,7 +20,19 @@ export const headMetadata = {
       return;
     }
 
-    head.setTitle(routeConfig.title(route));
+    return routeConfig.title(state);
+  },
+);
+
+/**
+ * Adds head metadata to the application when the route changes.
+ */
+export const headMetadata = {
+  selector: selectHeadTitle,
+  handler: (head: Head) => (title?: string) => {
+    if (title) {
+      head.setTitle(title);
+    }
   },
   dependencies: [headService],
 };

@@ -1,6 +1,6 @@
 import { Model } from '@pivot/client/project';
 import { injectable } from '@pivot/lib/injectable';
-import { resourceService } from '@pivot/lib/resource';
+import { resourceService, State } from '@pivot/lib/resource';
 import { Service as ResourceService } from '@pivot/lib/resource';
 
 import { httpService } from '../http';
@@ -29,3 +29,4 @@ export const projectResourceService = injectable({
 });
 
 export type ProjectResource = ResourceService<Model, Error, [string]>;
+export type ProjectResourceState = State<Model, Error>;

@@ -1,7 +1,7 @@
 import { SliceConfigs } from '@pivot/lib/create-store';
 import { dynamicSliceRegistry } from '@pivot/lib/dynamic-slice-registry';
 import { dynamicStore } from '@pivot/lib/dynamic-store';
-import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
+import { ExtractInstance, Injectable, injectable } from '@pivot/lib/injectable';
 import {
   subscriptionManager,
   Subscriptions,
@@ -22,10 +22,15 @@ export function headless<
   store.addMiddleware(sliceRegistry.middleware);
   const subsManager = subscriptionManager(store, subscriptions);
 
+  const getStateService = injectable({
+    importFn: () => Promise.resolve(store.getState),
+  });
+
   return {
     getService,
     getSlice,
     getState,
+    getStateService,
     init,
     select,
     store,
