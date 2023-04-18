@@ -6,9 +6,15 @@
 .subheader {
   background-color: var(--subheader-background);
   color: var(--subheader-color);
+  border-top: 1px solid var(--subheader-border-color);
+  border-bottom: 1px solid var(--subheader-border-color);
 }
 
 .content {
-  background-color: var(--content-background);
+  background: linear-gradient(
+    318deg,
+    var(--content-background) 0%,
+    var(--content-background-highlight) 100%
+  );
   color: var(--content-color);
 }
