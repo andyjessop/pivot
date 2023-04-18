@@ -12,7 +12,6 @@ export function SubNav({
   items: SubheaderItems;
   link: Router['link'];
 }) {
-  console.log(items);
   return (
     <>
       {items.map((item) => (
