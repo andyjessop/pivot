@@ -2,6 +2,7 @@ import { deployments } from './fixtures/deployments';
 import { environments } from './fixtures/environments';
 import { features } from './fixtures/features';
 import { projects } from './fixtures/projects';
+import { releases } from './fixtures/releases';
 import { teams } from './fixtures/teams';
 import { variables } from './fixtures/variables';
 
@@ -15,6 +16,10 @@ export function findDeploymentsByProjectId(projectId: string) {
 
 export function findFeaturesByProjectId(projectId: string) {
   return features.filter((f) => f.project_id === projectId)!;
+}
+
+export function findReleasesByProjectId(projectId: string) {
+  return releases.filter((f) => f.project_id === projectId)!;
 }
 
 export function findVariablesByProjectId(projectId: string) {

@@ -14,17 +14,14 @@ export function subscriptionManager<T extends Subscriptions>(
 
   let entries = {} as SubscriptionEntryCollection;
 
-  reset();
-
-  store.subscribe(listener);
-
-  listener();
+  resetSubscriptions();
 
   return {
-    reset,
+    resetSubscriptions,
+    runSubscriptions,
   };
 
-  async function listener() {
+  async function runSubscriptions() {
     const state = store.getState();
     const subNames = Object.keys(config) as (keyof T & string)[];
 
@@ -53,9 +50,11 @@ export function subscriptionManager<T extends Subscriptions>(
         handler(...deps)(entries[subName].currentValue);
       }
     }
+
+    return true;
   }
 
-  function reset() {
+  function resetSubscriptions() {
     entries = (Object.keys(config) as (keyof T)[]).reduce((acc, key) => {
       acc[key] = {
         ...config[key],

@@ -1,7 +1,8 @@
 import { SliceConfigs } from '@pivot/lib/create-store';
 import { dynamicSliceRegistry } from '@pivot/lib/dynamic-slice-registry';
 import { dynamicStore } from '@pivot/lib/dynamic-store';
-import { ExtractInstance, Injectable, injectable } from '@pivot/lib/injectable';
+import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
+import { Action, Dispatch, MiddlewareAPI } from '@pivot/lib/redux-types';
 import {
   subscriptionManager,
   Subscriptions,
@@ -18,19 +19,20 @@ export function headless<
 >(services: Services, slices: Slices, subscriptions: Subs) {
   const store = dynamicStore();
 
-  const sliceRegistry = dynamicSliceRegistry(store, slices);
-  store.addMiddleware(sliceRegistry.middleware);
-  const subsManager = subscriptionManager(store, subscriptions);
+  const { resetRegistrations, selector, updateRegistrations } =
+    dynamicSliceRegistry(store, slices);
 
-  const getStateService = injectable({
-    importFn: () => Promise.resolve(store.getState),
-  });
+  const { resetSubscriptions, runSubscriptions } = subscriptionManager(
+    store,
+    subscriptions,
+  );
+
+  store.addMiddleware(middleware);
 
   return {
     getService,
     getSlice,
     getState,
-    getStateService,
     init,
     select,
     store,
@@ -43,8 +45,10 @@ export function headless<
       serviceConfig.reset();
     }
 
-    sliceRegistry.resetState();
-    subsManager.reset();
+    await resetRegistrations();
+    resetSubscriptions();
+
+    return true;
   }
 
   async function getService<T extends keyof Services>(key: T) {
@@ -54,7 +58,7 @@ export function headless<
   }
 
   function getState<K extends keyof Slices>(sliceName: K) {
-    return sliceRegistry.selector(sliceName)({}) as ReturnType<
+    return selector(sliceName)({}) as ReturnType<
       ExtractInstance<Slices[K]['injectable']>['select']
     >;
   }
@@ -90,6 +94,15 @@ export function headless<
     });
   }
 
+  function middleware(store: MiddlewareAPI) {
+    return (next: Dispatch) => async (action: Action) => {
+      next(action);
+
+      await updateRegistrations(store.getState());
+      await runSubscriptions();
+    };
+  }
+
   async function waitForState<K extends keyof Slices & string, U>(
     sliceName: K,
     compare: (
@@ -102,7 +115,11 @@ export function headless<
       return newState;
     }
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(store.getState());
+      }, 3000);
+
       const unsubscribe = store.subscribe(() => {
         const newState = getState(sliceName);
 

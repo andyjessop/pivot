@@ -20,10 +20,15 @@
       "@pivot/client/auth": ["packages/client/auth/src/index.ts"],
       "@pivot/client/cache": ["packages/client/cache/src/index.ts"],
       "@pivot/client/components": ["packages/client/components/src/index.ts"],
+      "@pivot/client/deployments": ["packages/client/deployments/src/index.ts"],
       "@pivot/client/env": ["packages/client/env/src/index.ts"],
+      "@pivot/client/environments": [
+        "packages/client/environments/src/index.ts"
+      ],
       "@pivot/client/feature-flags": [
         "packages/client/feature-flags/src/index.ts"
       ],
+      "@pivot/client/features": ["packages/client/features/src/index.ts"],
       "@pivot/client/head": ["packages/client/head/src/index.ts"],
       "@pivot/client/http": ["packages/client/http/src/index.ts"],
       "@pivot/client/nav": ["packages/client/nav/src/index.ts"],
@@ -31,10 +36,12 @@
       "@pivot/client/pending-deployment": [
         "packages/client/pending-deployment/src/index.ts"
       ],
+      "@pivot/client/releases": ["packages/client/releases/src/index.ts"],
       "@pivot/client/router": ["packages/client/router/src/index.ts"],
       "@pivot/client/shared-interfaces": [
         "packages/client/shared-interfaces/src/index.ts"
       ],
+      "@pivot/client/variables": ["packages/client/variables/src/index.ts"],
       "@pivot/design/lit": ["packages/design/lit/src/index.ts"],
       "@pivot/design/css": ["packages/design/css/src/index.ts"],
       "@pivot/design/custom-elements": [
@@ -53,6 +60,7 @@
       "@pivot/lib/dynamic-store": ["packages/lib/dynamic-store/src/index.ts"],
       "@pivot/lib/headless": ["packages/lib/headless/src/index.ts"],
       "@pivot/lib/injectable": ["packages/lib/injectable/src/index.ts"],
+      "@pivot/lib/lifecycle": ["packages/lib/lifecycle/src/index.ts"],
       "@pivot/lib/redux-registry": ["packages/lib/redux-registry/src/index.ts"],
       "@pivot/lib/redux-types": ["packages/lib/redux-types/src/index.ts"],
       "@pivot/lib/resource": ["packages/lib/resource/src/index.ts"],

@@ -23,6 +23,8 @@ describe('integration', () => {
     });
 
     it('should visit project page', async () => {
+      await app.getService('projectResource');
+
       visit(`/projects/${project.uuid}`);
 
       const projectState = await app.getSlice('projectUi');
@@ -30,9 +32,12 @@ describe('integration', () => {
       expect(projectState.clonedDeploymentId).toEqual(null);
       expect(projectState.deployedReleaseId).toEqual(null);
 
-      const projectResourceState = await app.getSlice('projectResource');
+      const loadedState = await app.waitForState(
+        'projectResource',
+        (state) => state.loaded && !state.updating,
+      );
 
-      expect(projectResourceState).toEqual({
+      expect(loadedState).toEqual({
         data: project,
         error: null,
         loading: false,

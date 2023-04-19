@@ -11,7 +11,7 @@ export const icon = {
   projects: 'las la-cubes',
   releases: 'las la-code-branch',
   shippingFast: 'las la-shipping-fast',
-  spinner: 'las la-spinner',
+  spinner: 'las la-hourglass-half',
   stream: 'las la-stream',
   tasks: 'las la-tasks',
   timesCircle: 'las la-times-circle',

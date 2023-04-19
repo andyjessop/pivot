@@ -1,9 +1,14 @@
 import { authService } from './modules/auth';
 import { cacheService } from './modules/cache';
+import { deploymentsResourceService } from './modules/deployments';
 import { envService } from './modules/env';
+import { environmentsResourceService } from './modules/environments';
+import { featuresResourceService } from './modules/features';
 import { headService } from './modules/head';
 import { projectResourceService } from './modules/project';
+import { releasesResourceService } from './modules/releases';
 import { routerService } from './modules/router';
+import { variablesResourceService } from './modules/variables';
 
 /**
  * This is the configuration for the services of the application. Services defined
@@ -16,8 +21,13 @@ import { routerService } from './modules/router';
 export const services = {
   auth: authService,
   cache: cacheService,
+  deploymentsResource: deploymentsResourceService,
   env: envService,
+  environmentsResource: environmentsResourceService,
+  featuresResource: featuresResourceService,
   head: headService,
   projectResource: projectResourceService,
+  releasesResource: releasesResourceService,
   router: routerService,
+  variablesResource: variablesResourceService,
 };

@@ -1,0 +1,23 @@
+.container {
+  --spin-speed: 2s;
+
+  animation: spin var(--spin-speed) infinite;
+
+  &.slow {
+    --spin-speed: 4s;
+  }
+
+  &.fast {
+    --spin-speed: 1s;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -17,7 +17,9 @@ async function main() {
   }
 
   // Import app and entry point after server has started.
-  await import('./app/index');
+  const app = await import('./app/index').then((m) => m.app);
+
+  app.init();
 
   const Entry = React.lazy(() => import('./ui/Entry'));
 
