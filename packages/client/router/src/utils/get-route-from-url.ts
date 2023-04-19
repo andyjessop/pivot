@@ -1,7 +1,7 @@
-import type { FullRoute } from '../types';
+import type { FullRoute, RouterConfig } from '../types';
 
 export function getRouteFromUrl(
-  config: Record<string, string>,
+  routes: RouterConfig,
   fullUrl: string,
 ): FullRoute | null {
   const { hash, pathname, searchParams } = new URL(fullUrl);
@@ -10,8 +10,8 @@ export function getRouteFromUrl(
 
   const params = {} as Record<string, string>;
 
-  const name = Object.entries(config).find(([_, path]) => {
-    const pathTokens: string[] = path.split('/');
+  const name = Object.entries(routes).find(([_, route]) => {
+    const pathTokens: string[] = route.path.split('/');
 
     if (pathTokens.length !== pathnameTokens.length) {
       return false;

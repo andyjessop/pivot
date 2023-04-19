@@ -1,4 +1,5 @@
 export const icon = {
+  angleRight: 'las la-angle-right',
   bell: 'las la-bell',
   checkCircle: 'las la-check-circle',
   clone: 'las la-clone',

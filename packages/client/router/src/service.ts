@@ -6,7 +6,7 @@ export function service<T extends RouterConfig>(
   initial: T,
   api: { navigateSuccess: (route: FullRoute) => void },
 ) {
-  const config = { notFound: '/404', ...initial };
+  const config = { notFound: { path: '/404' }, ...initial };
 
   addEventListener('popstate', onPopstate);
 

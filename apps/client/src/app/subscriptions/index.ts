@@ -5,8 +5,11 @@ import { fetchProject } from '~app/modules/project/fetch-project.subscription';
 import { fetchReleases } from '~app/modules/releases/fetch-releases.subscription';
 import { fetchVariables } from '~app/modules/variables/fetch-variables.subscription';
 
+import { setBreadcrumb } from '../modules/breadcrumb/set-breadcrumb.subscription';
+
 import { headMetadata } from './head-metadata';
 import { projectRedirect } from './project-redirect';
+import { setProjectBreadcrumb } from './set-project-breadcrumb';
 import { unauthorizedRedirect } from './unauthorized-redirect';
 
 /**
@@ -38,5 +41,7 @@ export const subscriptions = {
   fetchVariables,
   headMetadata,
   projectRedirect,
+  setBreadcrumb,
+  setProjectBreadcrumb,
   unauthorizedRedirect,
 };

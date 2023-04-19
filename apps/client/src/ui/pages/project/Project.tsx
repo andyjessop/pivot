@@ -1,3 +1,4 @@
+import { Breadcrumb } from '@pivot/client/breadcrumb';
 import {
   horizontalLeftContent as layout,
   outlet,
@@ -6,7 +7,7 @@ import {
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
-import { selectProjectName } from '~app/modules/project/project.selectors';
+import { selectBreadcrumbParts } from '~app/modules/breadcrumb';
 
 import appStyles from '../../app.module.css';
 
@@ -16,8 +17,8 @@ import { TitleLoader } from './title/TitleLoader';
 
 export default function Project() {
   const router = useService('router');
-  const projectName = useSelector(selectProjectName);
   const subheaderItems = useSelector(selectSubheaderItems);
+  const breadcrumbParts = useSelector(selectBreadcrumbParts);
 
   if (!router) {
     return null;
@@ -36,7 +37,11 @@ export default function Project() {
         <SubNav items={subheaderItems} link={router.link} />
       </div>
       <div className={layout.content}>
-        <h1>Project: {projectName ?? <TitleLoader />}</h1>
+        {breadcrumbParts ? (
+          <Breadcrumb link={router.link} parts={breadcrumbParts} />
+        ) : (
+          <TitleLoader />
+        )}
       </div>
     </div>
   );

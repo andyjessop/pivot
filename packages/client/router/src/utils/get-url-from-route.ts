@@ -1,13 +1,13 @@
-import type { Route } from '../types';
+import type { Route, RouterConfig } from '../types';
 
-export function getUrlFromRoute<T extends Record<string, string>>(
-  config: T,
+export function getUrlFromRoute<T extends RouterConfig>(
+  routes: T,
   name: keyof T & string,
   params: Route<T>['params'],
   search: Route<T>['search'],
   hash: Route<T>['hash'],
 ): string {
-  let pathname = config[name];
+  let pathname = routes[name].path;
 
   if (!pathname) {
     throw new Error(`Route "${name}" not found in config`);
@@ -21,7 +21,7 @@ export function getUrlFromRoute<T extends Record<string, string>>(
     const param = pathname.match(/(:)\w+/)![0];
     const value = params[param.replace(':', '')];
 
-    pathname = pathname.replace(param, value) as T[keyof T & string];
+    pathname = pathname.replace(param, value);
   }
 
   const searchStr = search
