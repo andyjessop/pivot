@@ -1,4 +1,5 @@
 import { authService } from './modules/auth';
+import { breadcrumbService } from './modules/breadcrumb';
 import { cacheService } from './modules/cache';
 import { deploymentsResourceService } from './modules/deployments';
 import { envService } from './modules/env';
@@ -20,6 +21,7 @@ import { variablesResourceService } from './modules/variables';
  */
 export const services = {
   auth: authService,
+  breadcrumb: breadcrumbService,
   cache: cacheService,
   deploymentsResource: deploymentsResourceService,
   env: envService,

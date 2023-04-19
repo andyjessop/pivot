@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  align-items: center;
+
+  & a.link {
+    --text-color: var(--nav-text-color);
+
+    color: var(--text-color);
+
+    &:hover,
+    &.active {
+      --text-color: var(--nav-text-color-active);
+    }
+  }
+}
+
+.icon {
+  --icon-color: var(--nav-icon-color);
+
+  font-size: 120%;
+  color: var(--icon-color);
+}

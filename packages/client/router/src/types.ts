@@ -14,9 +14,14 @@ export type FullRoute<T extends RouterConfig = any> = {
   search: Record<string, string>;
 };
 
-export type RouterConfig = Record<string, string> & {
-  notFound?: string;
+export type RouterConfig = Record<string, RouteConfig> & {
+  notFound?: RouteConfig;
 };
+
+export interface RouteConfig {
+  parent?: string;
+  path: string;
+}
 
 export interface RouterState {
   route: Route | null;

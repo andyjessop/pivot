@@ -3,13 +3,13 @@ import { createSelector } from 'reselect';
 import { icon } from '@pivot/design/css';
 
 import { selectProjectId } from '~app/modules/project/project.selectors';
-import { RouteName, selectRouteName } from '~app/modules/router';
+import { selectRouteName } from '~app/modules/router';
 
 export type SubheaderItem = {
   icon: string;
   isActive: boolean;
   text: string;
-  routeName: RouteName;
+  routeName: string;
   routeParams: Record<string, string>;
 };
 

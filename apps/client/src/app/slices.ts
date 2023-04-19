@@ -1,4 +1,5 @@
 import { authSlice } from './modules/auth';
+import { breadcrumbSlice } from './modules/breadcrumb';
 import {
   deploymentsResourceSlice,
   selectIsDeploymentsRoute,
@@ -32,6 +33,10 @@ export const slices = {
   auth: {
     active: () => true,
     injectable: authSlice,
+  },
+  breadcrumb: {
+    active: () => true,
+    injectable: breadcrumbSlice,
   },
   deploymentsResource: {
     active: selectIsDeploymentsRoute,
