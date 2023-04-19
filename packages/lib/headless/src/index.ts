@@ -102,7 +102,11 @@ export function headless<
       return newState;
     }
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(store.getState());
+      }, 3000);
+
       const unsubscribe = store.subscribe(() => {
         const newState = getState(sliceName);
 

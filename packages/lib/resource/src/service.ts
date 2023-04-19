@@ -45,7 +45,6 @@ export function resourceService<
 
     try {
       const res = await query(...params);
-
       api.set({
         data: res,
         loading: false,

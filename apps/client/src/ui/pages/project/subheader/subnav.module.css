@@ -1,18 +1,18 @@
 a.link {
-  --text-color: var(--nav-color-dull);
-  --icon-color: var(--nav-color-duller);
+  --text-color: var(--nav-text-color);
+  --icon-color: var(--nav-icon-color);
 
   color: var(--text-color);
   font-weight: var(--font-weight-quarterbold);
 
-  &:hover,
-  &.active {
-    --text-color: var(--nav-color-active);
-    --icon-color: var(--nav-color-dull);
-  }
-
   .icon {
     font-size: 120%;
     color: var(--icon-color);
+  }
+
+  &:hover,
+  &.active {
+    --text-color: var(--nav-text-color-active);
+    --icon-color: var(--nav-icon-color-active);
   }
 }

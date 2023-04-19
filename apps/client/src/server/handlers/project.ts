@@ -6,6 +6,7 @@ import {
   findFeaturesByProjectId,
   findProjectById,
   findProjectsByTeamId,
+  findReleasesByProjectId,
   findVariablesByProjectId,
 } from '@pivot/fixtures';
 import { sleep } from '@pivot/util/time';
@@ -18,6 +19,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
     rest.get(`${apiUrl}/rest/v1/environment`, getComponent('environments')),
     rest.get(`${apiUrl}/rest/v1/deployment`, getComponent('deployments')),
     rest.get(`${apiUrl}/rest/v1/feature`, getComponent('features')),
+    rest.get(`${apiUrl}/rest/v1/release`, getComponent('releases')),
     rest.get(`${apiUrl}/rest/v1/variable`, getComponent('variables')),
   ];
 
@@ -31,7 +33,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
         await sleep(500);
       }
 
-      const uuid = getProjectUuid(req);
+      const uuid = getProjectId(req);
 
       if (!uuid) {
         return res(ctx.status(200), ctx.json('Project not found'));
@@ -55,6 +57,9 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
         case 'features':
           result = findFeaturesByProjectId(uuid);
           break;
+        case 'releases':
+          result = findReleasesByProjectId(uuid);
+          break;
         case 'variables':
           result = findVariablesByProjectId(uuid);
           break;
@@ -73,7 +78,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
       await sleep(500);
     }
 
-    const uuid = getProjectUuid(req);
+    const uuid = getUuid(req);
 
     const projects = findProjectsByTeamId(TEAM_ID);
 
@@ -87,7 +92,11 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
     );
   }
 
-  function getProjectUuid(req: RestRequest) {
+  function getUuid(req: RestRequest) {
     return req.url.searchParams.get('uuid')?.split('.')[1];
+  }
+
+  function getProjectId(req: RestRequest) {
+    return req.url.searchParams.get('project_id')?.split('.')[1];
   }
 }

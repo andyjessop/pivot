@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Debug current file",
       "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
-      "args": ["run", "${relativeFile}", "--config", "vitest.vscode-config.js"],
+      "args": ["run", "${relativeFile}", "--config", "vitest.config.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "skipFiles": [

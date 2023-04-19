@@ -1,8 +1,8 @@
 .container {
   --skeleton-gap-default: var(--spacing-2);
   --skeleton-row-height: var(--font-size-1);
-  --skeleton-background-color: var(--color-gray-10);
-  --skeleton-background-color-highlighted: var(--color-gray-05);
+  --skeleton-background-color: var(--color-gray-80);
+  --skeleton-background-color-highlighted: var(--color-gray-70);
   --skeleton-border-radius: var(--border-radius);
   --skeleton-avatar-width: var(cx-avatar-size-1);
   --skeleton-avatar-height: var(cx-avatar-size-1);

@@ -16,6 +16,7 @@ const DEPLOYMENTS_PATH = resolve(FIXTURE_PATH, 'deployments.ts');
 const FEATURES_PATH = resolve(FIXTURE_PATH, 'features.ts');
 const VARIABLES_PATH = resolve(FIXTURE_PATH, 'variables.ts');
 const PROJECTS_PATH = resolve(FIXTURE_PATH, 'projects.ts');
+const RELEASES_PATH = resolve(FIXTURE_PATH, 'releases.ts');
 const TEAMS_PATH = resolve(FIXTURE_PATH, 'teams.ts');
 const USERS_PATH = resolve(FIXTURE_PATH, 'users.ts');
 
@@ -38,6 +39,7 @@ export async function main() {
   const environments = await fetchEnvironments(pivot.uuid);
   const deployments = await fetchDeployments(pivot.uuid);
   const features = await fetchFeatures(pivot.uuid);
+  const releases = await fetchReleases(pivot.uuid);
   const variables = await fetchVariables(pivot.uuid);
   const teams = await fetchTeams();
 
@@ -50,6 +52,7 @@ export async function main() {
     `export const deployments = ${JSON.stringify(deployments)}`,
   );
   write(FEATURES_PATH, `export const features = ${JSON.stringify(features)}`);
+  write(RELEASES_PATH, `export const releases = ${JSON.stringify(releases)}`);
   write(
     VARIABLES_PATH,
     `export const variables = ${JSON.stringify(variables)}`,
@@ -120,6 +123,10 @@ export async function main() {
 
   async function fetchFeatures(projectId: string) {
     return getProjectComponent(projectId, 'feature?select=*');
+  }
+
+  async function fetchReleases(projectId: string) {
+    return getProjectComponent(projectId, 'release?select=*');
   }
 
   async function fetchVariables(projectId: string) {

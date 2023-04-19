@@ -36,6 +36,7 @@
   --color-gray-80: hsl(0deg, 0%, 20%);
   --color-gray-85: hsl(0deg, 0%, 15%);
   --color-gray-90: hsl(0deg, 0%, 10%);
+  --color-gray-95: hsl(0deg, 0%, 5%);
   --color-gray-100: hsl(0deg, 0%, 0%);
   --border-width: 1px;
   --border-radius: 4px;
@@ -75,6 +76,10 @@
   --header-color: var(--color-white);
   --header-height: 4rem;
   --left-nav-width: 200px;
+  --nav-text-color: var(--color-gray-40);
+  --nav-icon-color: var(--color-gray-60);
+  --nav-text-color-active: var(--color-gray-10);
+  --nav-icon-color-active: var(--color-gray-40);
   --nav-color-dull: var(--color-gray-40);
   --nav-color-duller: var(--color-gray-60);
   --nav-color-active: var(--color-gray-10);

@@ -12,7 +12,7 @@ import appStyles from '../../app.module.css';
 
 import { selectSubheaderItems } from './subheader/subheader.selectors';
 import { SubNav } from './subheader/SubNav';
-import { TitleSkeleton } from './title/TitleSkeleton';
+import { TitleLoader } from './title/TitleLoader';
 
 export default function Project() {
   const router = useService('router');
@@ -36,7 +36,7 @@ export default function Project() {
         <SubNav items={subheaderItems} link={router.link} />
       </div>
       <div className={layout.content}>
-        <h1>Project: {projectName ?? <TitleSkeleton />}</h1>
+        <h1>Project: {projectName ?? <TitleLoader />}</h1>
       </div>
     </div>
   );

@@ -78,6 +78,7 @@ export function dynamicSliceRegistry<
       }
 
       if (shouldBeActive) {
+        console.log('registering slice: ', sliceName);
         // should be active and is not
         entries[sliceName].registering = true;
 
@@ -85,6 +86,8 @@ export function dynamicSliceRegistry<
 
         const removeMiddleware = store.addMiddleware(instance.middleware);
         const removeReducer = store.addReducer(sliceName, instance.reducer);
+
+        console.log('registered slice: ', sliceName);
 
         entries[sliceName] = {
           ...entries[sliceName],

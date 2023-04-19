@@ -19,8 +19,6 @@ export const selectSubheaderItems = createSelector(
   selectRouteName,
   selectProjectId,
   (routeName, projectId): SubheaderItems => {
-    debugger; // eslint-disable-line
-
     if (!projectId) {
       return [];
     }
@@ -56,7 +54,7 @@ export const selectSubheaderItems = createSelector(
       },
       {
         icon: icon.variables,
-        isActive: routeName === 'projectVaraibles',
+        isActive: routeName === 'projectVariables',
         routeName: 'projectVariables',
         routeParams: { id: projectId },
         text: 'Variables',
