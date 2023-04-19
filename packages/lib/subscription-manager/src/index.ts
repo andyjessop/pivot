@@ -14,22 +14,18 @@ export function subscriptionManager<T extends Subscriptions>(
 
   let entries = {} as SubscriptionEntryCollection;
 
-  reset();
-
-  store.subscribe(listener);
-
-  listener();
+  resetSubscriptions();
 
   return {
-    reset,
+    resetSubscriptions,
+    runSubscriptions,
   };
 
-  async function listener() {
+  async function runSubscriptions() {
     const state = store.getState();
     const subNames = Object.keys(config) as (keyof T & string)[];
 
     for (const subName of subNames) {
-      console.log('running subscription: ', subName);
       const { handler, currentValue, selector } = entries[subName];
 
       entries[subName].currentValue = selector(state);
@@ -52,13 +48,13 @@ export function subscriptionManager<T extends Subscriptions>(
         entries[subName].called = true;
 
         handler(...deps)(entries[subName].currentValue);
-
-        console.log('ran subscription: ', subName);
       }
     }
+
+    return true;
   }
 
-  function reset() {
+  function resetSubscriptions() {
     entries = (Object.keys(config) as (keyof T)[]).reduce((acc, key) => {
       acc[key] = {
         ...config[key],
