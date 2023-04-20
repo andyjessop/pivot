@@ -1,4 +1,12 @@
-const authenticatedRoutes = ['projects', 'project'];
+const authenticatedRoutes = [
+  'projects',
+  'project',
+  'projectDeployments',
+  'projectEnvironments',
+  'projectFeatures',
+  'projectReleases',
+  'projectVariables',
+];
 
 /**
  * Returns true if the user is unauthorized to view the route. In uncertain states, e.g. when

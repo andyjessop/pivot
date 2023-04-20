@@ -1,7 +1,7 @@
 import { findProjectByName } from '@pivot/fixtures';
 import { headless } from '@pivot/lib/headless';
 
-import { selectIsNotFoundRoute } from '~app/modules/router';
+import { selectRoute } from '~app/modules/router';
 import { services } from '~app/services';
 import { slices } from '~app/slices';
 import { subscriptions } from '~app/subscriptions';
@@ -66,9 +66,12 @@ describe('integration', () => {
 
       router.navigate({ name: 'project', params: { id: project.uuid } });
 
-      const isNotFoundRoute = await app.waitFor(selectIsNotFoundRoute);
+      const route = await app.waitFor(
+        selectRoute,
+        (route) => route?.name === 'notFound',
+      );
 
-      expect(isNotFoundRoute).toEqual(true);
+      expect(route?.name).toEqual('notFound');
     });
 
     it('should navigate to notFound on authorized route then logged out', async () => {
@@ -78,9 +81,12 @@ describe('integration', () => {
 
       await auth.logout();
 
-      const isNotFoundRoute = await app.waitFor(selectIsNotFoundRoute);
+      const route = await app.waitFor(
+        selectRoute,
+        (route) => route?.name === 'notFound',
+      );
 
-      expect(isNotFoundRoute).toEqual(true);
+      expect(route?.name).toEqual('notFound');
     });
   });
 });

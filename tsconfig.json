@@ -71,6 +71,7 @@
       "@pivot/template": ["packages/template/src/index.ts"],
       "@pivot/util/classname": ["packages/util/classname/src/index.ts"],
       "@pivot/util/function": ["packages/util/function/src/index.ts"],
+      "@pivot/util/object": ["packages/util/object/src/index.ts"],
       "@pivot/util/promise": ["packages/util/promise/src/index.ts"],
       "@pivot/util/string": ["packages/util/string/src/index.ts"],
       "@pivot/util/time": ["packages/util/time/src/index.ts"],

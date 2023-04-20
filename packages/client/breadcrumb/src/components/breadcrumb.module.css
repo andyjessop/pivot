@@ -1,7 +1,4 @@
 .container {
-  display: flex;
-  align-items: center;
-
   & a.link {
     --text-color: var(--nav-text-color);
 
@@ -19,4 +16,8 @@
 
   font-size: 120%;
   color: var(--icon-color);
+}
+
+.home {
+  line-height: 1;
 }
