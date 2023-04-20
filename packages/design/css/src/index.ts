@@ -1,3 +1,4 @@
+export * from './alignment';
 export * from './card';
 export * from './icon';
 export * from './layout';

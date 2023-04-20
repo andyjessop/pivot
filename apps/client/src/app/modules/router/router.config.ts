@@ -4,6 +4,7 @@ export const config: RouterConfig = {
   notFound: {
     path: '/404',
   },
+  home: { path: '/' },
   project: { parent: 'projects', path: '/projects/:id' },
   projectDeployments: { parent: 'project', path: '/projects/:id/deployments' },
   projectEnvironments: {
@@ -13,7 +14,7 @@ export const config: RouterConfig = {
   projectFeatures: { parent: 'project', path: '/projects/:id/features' },
   projectReleases: { parent: 'project', path: '/projects/:id/releases' },
   projectVariables: { parent: 'project', path: '/projects/:id/variables' },
-  projects: { path: '/projects' },
+  projects: { parent: 'home', path: '/projects' },
 };
 
 export type RouteName = keyof typeof config;

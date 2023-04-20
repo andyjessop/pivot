@@ -6,6 +6,7 @@ export const icon = {
   deployments: 'las la-cloud-upload-alt',
   environments: 'las la-layer-group',
   features: 'las la-flag',
+  home: 'las la-home',
   mapMarked: 'las la-map-marked',
   mountain: 'las la-mountain',
   plus: 'las la-plus',

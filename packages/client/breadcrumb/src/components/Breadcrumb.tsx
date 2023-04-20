@@ -1,5 +1,5 @@
 import { Router } from '@pivot/client/router';
-import { icon, spaced } from '@pivot/design/css';
+import { alignment, icon, spaced } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { Part } from '../types';
@@ -12,12 +12,25 @@ interface BreadcrumbProps {
 }
 export function Breadcrumb({ link, parts }: BreadcrumbProps) {
   return (
-    <div className={cx(spaced.container, spaced.small)}>
-      <span className={cx(style.icon, icon.mapMarked)}></span>
+    <div
+      className={cx(
+        spaced.container,
+        spaced.small,
+        alignment['center-vertical'],
+      )}
+    >
+      <a href="#" className={style.home} onClick={link({ name: 'home' })}>
+        <span className={cx(style.icon, icon.home)}></span>
+      </a>
       {parts.map((part, ndx) => (
         <div
           key={part.text}
-          className={cx(style.container, spaced.container, spaced.small)}
+          className={cx(
+            style.container,
+            spaced.container,
+            spaced.small,
+            alignment['center-vertical'],
+          )}
         >
           <a
             href="#"
