@@ -75,10 +75,13 @@ export function headless<
     return slice ?? waitForState(sliceName, (state) => state);
   }
 
-  async function waitFor(selector: Selector) {
+  async function waitFor<T>(
+    selector: Selector<T>,
+    predicate: (s: T) => boolean = (s) => s !== undefined,
+  ): Promise<T> {
     const newState = selector(store.getState());
 
-    if (newState) {
+    if (predicate(newState)) {
       return newState;
     }
 
@@ -86,7 +89,7 @@ export function headless<
       const unsubscribe = store.subscribe(() => {
         const newState = selector(store.getState());
 
-        if (newState) {
+        if (predicate(newState)) {
           unsubscribe();
           resolve(newState);
         }

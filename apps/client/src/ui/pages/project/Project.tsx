@@ -37,7 +37,7 @@ export default function Project() {
         <SubNav items={subheaderItems} link={router.link} />
       </div>
       <div className={layout.content}>
-        {breadcrumbParts ? (
+        {breadcrumbParts.length ? (
           <Breadcrumb link={router.link} parts={breadcrumbParts} />
         ) : (
           <TitleLoader />

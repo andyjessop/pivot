@@ -1,5 +1,6 @@
 import { Part } from '@pivot/client/breadcrumb';
 import { Route } from '@pivot/client/router';
+import { pick } from '@pivot/util/object';
 
 import { BreadcrumbService, breadcrumbService } from '~app/modules/breadcrumb';
 import { selectRoute } from '~app/modules/router';
@@ -41,11 +42,16 @@ function getParts(
       .split('/')
       .filter((part) => part.length > 0);
 
+    const pathParamKeys = pathParts
+      .filter((part) => part.startsWith(':'))
+      .map((part) => part.slice(1));
+
+    const pathParams = params && pick(params, pathParamKeys);
     breadcrumbs.unshift({
       text: pathParts[pathParts.length - 1],
       route: {
         name: route,
-        params,
+        params: pathParamKeys.length ? pathParams : undefined,
       },
     });
 

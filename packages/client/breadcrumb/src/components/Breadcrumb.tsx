@@ -13,6 +13,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({ link, parts }: BreadcrumbProps) {
   return (
     <div className={cx(spaced.container, spaced.small)}>
+      <span className={cx(style.icon, icon.mapMarked)}></span>
       {parts.map((part, ndx) => (
         <div
           key={part.text}
