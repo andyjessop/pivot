@@ -28,5 +28,5 @@ export const featuresResourceService = injectable({
   dependencies: [featuresResourceSlice, projectHttp],
 });
 
-export type FeaturesResource = ResourceService<Feature, Error, [string]>;
-export type FeaturesResourceState = State<Feature, Error>;
+export type FeaturesResource = ResourceService<Feature[], Error, [string]>;
+export type FeaturesResourceState = State<Feature[], Error>;

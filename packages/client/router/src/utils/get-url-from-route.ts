@@ -21,7 +21,9 @@ export function getUrlFromRoute<T extends RouterConfig>(
     const param = pathname.match(/(:)\w+/)![0];
     const value = params[param.replace(':', '')];
 
-    pathname = pathname.replace(param, value);
+    if (param && value) {
+      pathname = pathname.replace(param, value);
+    }
   }
 
   const searchStr = search

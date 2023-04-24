@@ -18,7 +18,7 @@ export function MainNav({ items, link }: NavbarProps) {
             className={cx({ [styles.active]: item.active }, styles.item)}
             key={item.text}
           >
-            <a href="#" onClick={link({ name: item.route })}>
+            <a href="" onClick={link({ name: item.route })}>
               {item.text}
             </a>
           </li>

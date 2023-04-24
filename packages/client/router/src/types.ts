@@ -3,14 +3,14 @@ import { service } from './service';
 export type Route<T extends RouterConfig = any> = {
   name: keyof T & string;
   hash?: string;
-  params?: Record<string, string>;
+  params?: Record<string, string | undefined>;
   search?: Record<string, string>;
 };
 
 export type FullRoute<T extends RouterConfig = any> = {
   name: keyof T & string;
   hash: string;
-  params: Record<string, string>;
+  params: Record<string, string | undefined>;
   search: Record<string, string>;
 };
 

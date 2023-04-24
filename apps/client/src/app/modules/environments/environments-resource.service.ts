@@ -33,4 +33,4 @@ export type EnvironmentsResource = ResourceService<
   Error,
   [string]
 >;
-export type EnvironmentsResourceState = State<Environment, Error>;
+export type EnvironmentsResourceState = State<Environment[], Error>;

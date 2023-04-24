@@ -28,5 +28,9 @@ export const deploymentsResourceService = injectable({
   dependencies: [deploymentsResourceSlice, projectHttp],
 });
 
-export type DeploymentsResource = ResourceService<Deployment, Error, [string]>;
-export type DeploymentsResourceState = State<Deployment, Error>;
+export type DeploymentsResource = ResourceService<
+  Deployment[],
+  Error,
+  [string]
+>;
+export type DeploymentsResourceState = State<Deployment[], Error>;

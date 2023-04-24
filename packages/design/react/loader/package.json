@@ -1,0 +1,11 @@
+{
+  "name": "@pivot/design-react-loader",
+  "main": "./src/index.ts",
+  "scripts": {
+    "stylelint": "stylelint \"src/**/*.css\" --allow-empty-input",
+    "lint": "eslint src --config ../../../../.eslintrc.json",
+    "lint:strict": "eslint src --config ../../../../.eslintrc.strict.json",
+    "test": "vitest --config ../../../../vitest.config.js",
+    "type-check": "tsc --noEmit"
+  }
+}
