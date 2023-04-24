@@ -4,25 +4,19 @@ import {
   deploymentsResourceSlice,
   selectIsDeploymentsRoute,
 } from './modules/deployments';
-import {
-  environmentsResourceSlice,
-  selectIsEnvironmentsRoute,
-} from './modules/environments';
-import {
-  featuresResourceSlice,
-  selectIsFeaturesRoute,
-} from './modules/features';
+import { environmentsResourceSlice } from './modules/environments';
+import { featuresResourceSlice } from './modules/features';
 import { projectResourceSlice, projectUiSlice } from './modules/project';
 import { selectIsProjectRoute } from './modules/project/project.selectors';
-import {
-  releasesResourceSlice,
-  selectIsReleasesRoute,
-} from './modules/releases';
+import { releasesResourceSlice } from './modules/releases';
 import { routerSlice } from './modules/router';
+import { variablesResourceSlice } from './modules/variables';
 import {
-  selectIsVariablesRoute,
-  variablesResourceSlice,
-} from './modules/variables';
+  selectShouldLoadEnvironementsResource,
+  selectShouldLoadFeaturesResource,
+  selectShouldLoadReleasesResource,
+  selectShouldLoadVariablesResource,
+} from './selectors/project-resource.selectors';
 
 /**
  * This is the configuration for the slices of the application. The `injectable` property
@@ -43,11 +37,11 @@ export const slices = {
     injectable: deploymentsResourceSlice,
   },
   environmentsResource: {
-    active: selectIsEnvironmentsRoute,
+    active: selectShouldLoadEnvironementsResource,
     injectable: environmentsResourceSlice,
   },
   featuresResource: {
-    active: selectIsFeaturesRoute,
+    active: selectShouldLoadFeaturesResource,
     injectable: featuresResourceSlice,
   },
   projectUi: {
@@ -59,7 +53,7 @@ export const slices = {
     injectable: projectResourceSlice,
   },
   releasesResource: {
-    active: selectIsReleasesRoute,
+    active: selectShouldLoadReleasesResource,
     injectable: releasesResourceSlice,
   },
   router: {
@@ -67,7 +61,7 @@ export const slices = {
     injectable: routerSlice,
   },
   variablesResource: {
-    active: selectIsVariablesRoute,
+    active: selectShouldLoadVariablesResource,
     injectable: variablesResourceSlice,
   },
 };

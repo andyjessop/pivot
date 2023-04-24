@@ -28,5 +28,5 @@ export const variablesResourceService = injectable({
   dependencies: [variablesResourceSlice, variablesHttp],
 });
 
-export type VariablesResource = ResourceService<Variable, Error, [string]>;
-export type VariablesResourceState = State<Variable, Error>;
+export type VariablesResource = ResourceService<Variable[], Error, [string]>;
+export type VariablesResourceState = State<Variable[], Error>;

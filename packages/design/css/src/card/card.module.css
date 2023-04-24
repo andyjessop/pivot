@@ -4,7 +4,7 @@
   --card-padding-vertical: var(--spacing-2);
   --card-border-width: var(--border-width);
   --card-border-color: var(--color-gray-10);
-  --card-padding: var(--border-radius);
+  --card-padding: var(--border-radius-1);
 
   background-color: var(--card-background-color);
   padding: var(--card-padding-vertical) var(--card-padding-horizontal);

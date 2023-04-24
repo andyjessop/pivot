@@ -7,7 +7,7 @@ export const selectBreadcrumb = (state: { breadcrumb: State }) =>
 
 export const selectParts = createSelector(
   selectBreadcrumb,
-  (breadcrumb) => breadcrumb.parts,
+  (breadcrumb) => breadcrumb?.parts ?? [],
 );
 
 export const selectBreadcrumbParts = createSelector(

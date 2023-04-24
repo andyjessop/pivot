@@ -48,6 +48,9 @@
       "@pivot/design/custom-elements": [
         "packages/design/custom-elements/src/index.ts"
       ],
+      "@pivot/design/react/loader": [
+        "packages/design/react/loader/src/index.ts"
+      ],
       "@pivot/design/variables": ["packages/design/variables/src/index.ts"],
       "@pivot/fixtures": ["packages/fixtures/src/index.ts"],
       "@pivot/lib/async-queue": ["packages/lib/async-queue/src/index.ts"],

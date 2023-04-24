@@ -19,7 +19,7 @@ export function SubNav({
           className={cx(spaced.container, spaced.small, styles.link, {
             [styles.active]: item.isActive,
           })}
-          href="#"
+          href=""
           key={item.text}
           onClick={link({ name: item.routeName, params: item.routeParams })}
         >

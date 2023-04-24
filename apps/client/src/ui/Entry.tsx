@@ -3,15 +3,16 @@ import './entry.css';
 
 import { Suspense } from 'react';
 
-import { MainNav, Navbar, UserNav } from '@pivot/client/components';
+import { Breadcrumb } from '@pivot/client/breadcrumb';
+import { Navbar, UserNav } from '@pivot/client/components';
 import { horizontalLeftContent as layout } from '@pivot/design/css';
+import { Loader } from '@pivot/design/react/loader';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
 import { selectAuth } from '~app/modules/auth';
-import { selectNavItems } from '~app/modules/nav';
+import { selectBreadcrumbParts } from '~app/modules/breadcrumb';
 import { selectRouteName } from '~app/modules/router';
-import logo from '~assets/react.svg';
 
 import styles from './app.module.css';
 import { routeComponents } from './route-components';
@@ -22,7 +23,7 @@ export default function Entry() {
   const head = useService('head');
 
   const name = useSelector(selectRouteName) as keyof typeof routeComponents;
-  const navItems = useSelector(selectNavItems);
+  const breadcrumbParts = useSelector(selectBreadcrumbParts);
   const authState = useSelector(selectAuth);
 
   if (!router || !auth || !head || !name) {
@@ -42,14 +43,17 @@ export default function Entry() {
   );
 
   /**
-   * Logo component.
-   */
-  const Logo = <img width="25" height="25" src={logo} alt="Pivot" />;
-
-  /**
    * Main navigation component.
    */
-  const LeftNav = <MainNav items={navItems} link={router.link} />;
+  const LeftNav = (
+    <>
+      {breadcrumbParts.length ? (
+        <Breadcrumb link={router.link} parts={breadcrumbParts} />
+      ) : (
+        <Loader />
+      )}
+    </>
+  );
 
   /**
    * User login component.
@@ -59,7 +63,7 @@ export default function Entry() {
   return (
     <div className={cx(layout.container, styles.content)}>
       <div className={cx(layout.top, styles.header)}>
-        <Navbar Logo={Logo} LeftNav={LeftNav} RightNav={RightNav} />
+        <Navbar LeftNav={LeftNav} RightNav={RightNav} />
       </div>
       <Suspense fallback={PageFallback}>
         <PageContent />

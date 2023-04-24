@@ -2,6 +2,33 @@ import { pick } from '@pivot/util/object';
 
 import { Part } from '../types';
 
+/**
+ * Get the breadcrumb parts for a given route. This will recursively build the breadcrumb
+ * parts for the given route and all of its parents.
+ *
+ * Dynamic parts will contain the part id as the text:
+ *
+ * @example
+ *
+ * const config = {
+ *   project: {
+ *     path: '/projects/:id',
+ *     parent: 'projects',
+ *   },
+ *   projects: {
+ *     path: '/projects',
+ *   },
+ * };
+ *
+ * const parts = getParts(config, 'project', { id: '123' });
+ *
+ * // parts = [
+ * //  { text: 'projects', route: { name: 'projects' } },
+ * //  { text: ':id', route: { name: 'project', params: { id: '123' } } },
+ * // ];
+ *
+ * The id is to be subsituted by the route handler.
+ */
 export function getParts(
   config: Record<string, { path: string; parent?: string }>,
   routeName: string,

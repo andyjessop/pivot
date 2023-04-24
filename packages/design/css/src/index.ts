@@ -5,4 +5,7 @@ export * from './layout';
 export * from './skeleton';
 export * from './spaced';
 export * from './spin';
+export * from './table';
+export * from './tag';
 export * from './typography';
+export * from './variants';

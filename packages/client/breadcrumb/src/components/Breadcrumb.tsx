@@ -19,7 +19,7 @@ export function Breadcrumb({ link, parts }: BreadcrumbProps) {
         alignment['center-vertical'],
       )}
     >
-      <a href="#" className={style.home} onClick={link({ name: 'home' })}>
+      <a href="" className={style.home} onClick={link({ name: 'home' })}>
         <span className={cx(style.icon, icon.home)}></span>
       </a>
       {parts.map((part, ndx) => (
@@ -33,7 +33,7 @@ export function Breadcrumb({ link, parts }: BreadcrumbProps) {
           )}
         >
           <a
-            href="#"
+            href=""
             className={cx(style.link, {
               [style.active]: ndx === parts.length - 1,
             })}

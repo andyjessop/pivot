@@ -28,5 +28,5 @@ export const releasesResourceService = injectable({
   dependencies: [releasesResourceSlice, projectHttp],
 });
 
-export type ReleasesResource = ResourceService<Release, Error, [string]>;
-export type ReleasesResourceState = State<Release, Error>;
+export type ReleasesResource = ResourceService<Release[], Error, [string]>;
+export type ReleasesResourceState = State<Release[], Error>;

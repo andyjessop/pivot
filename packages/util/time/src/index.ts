@@ -37,3 +37,31 @@ export function relativeTime(time: number | string) {
 export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function humanReadableDate(
+  dateString: string,
+  userLocale = 'en-US',
+): string {
+  const currentDate = new Date();
+  const inputDate = new Date(dateString);
+
+  if (isNaN(inputDate.valueOf())) {
+    throw new Error('Invalid date string provided');
+  }
+
+  const options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  };
+
+  if (inputDate.getFullYear() !== currentDate.getFullYear()) {
+    options.year = 'numeric';
+  }
+
+  const formatter = new Intl.DateTimeFormat(userLocale, options);
+
+  return formatter.format(inputDate);
+}
