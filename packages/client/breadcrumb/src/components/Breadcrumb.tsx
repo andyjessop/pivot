@@ -7,10 +7,10 @@ import { Part } from '../types';
 import style from './breadcrumb.module.css';
 
 interface BreadcrumbProps {
-  link: Router['link'];
+  Link: Router['Link'];
   parts: Part[];
 }
-export function Breadcrumb({ link, parts }: BreadcrumbProps) {
+export function Breadcrumb({ Link, parts }: BreadcrumbProps) {
   return (
     <div
       className={cx(
@@ -19,9 +19,9 @@ export function Breadcrumb({ link, parts }: BreadcrumbProps) {
         alignment['center-vertical'],
       )}
     >
-      <a href="" className={style.home} onClick={link({ name: 'home' })}>
+      <Link className={style.home} to={{ name: 'home' }}>
         <span className={cx(style.icon, icon.home)}></span>
-      </a>
+      </Link>
       {parts.map((part, ndx) => (
         <div
           key={part.text}
@@ -32,15 +32,14 @@ export function Breadcrumb({ link, parts }: BreadcrumbProps) {
             alignment['center-vertical'],
           )}
         >
-          <a
-            href=""
+          <Link
             className={cx(style.link, {
               [style.active]: ndx === parts.length - 1,
             })}
-            onClick={link({ name: part.route.name, params: part.route.params })}
+            to={{ name: part.route.name, params: part.route.params }}
           >
             {part.text}
-          </a>
+          </Link>
           {ndx < parts.length - 1 ? (
             <span className={cx(style.icon, icon.angleRight)}></span>
           ) : null}

@@ -6,10 +6,10 @@ import { NavItem } from './types';
 
 interface NavbarProps {
   items: NavItem[];
-  link: Router['link'];
+  Link: Router['Link'];
 }
 
-export function MainNav({ items, link }: NavbarProps) {
+export function MainNav({ items, Link }: NavbarProps) {
   return (
     <nav role="navigation" aria-label="main navigation">
       <ul className={styles.nav}>
@@ -18,9 +18,7 @@ export function MainNav({ items, link }: NavbarProps) {
             className={cx({ [styles.active]: item.active }, styles.item)}
             key={item.text}
           >
-            <a href="" onClick={link({ name: item.route })}>
-              {item.text}
-            </a>
+            <Link to={{ name: item.route }}>{item.text}</Link>
           </li>
         ))}
       </ul>

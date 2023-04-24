@@ -7,25 +7,24 @@ import styles from './subnav.module.css';
 
 export function SubNav({
   items,
-  link,
+  Link,
 }: {
   items: SubheaderItems;
-  link: Router['link'];
+  Link: Router['Link'];
 }) {
   return (
     <>
       {items.map((item) => (
-        <a
+        <Link
           className={cx(spaced.container, spaced.small, styles.link, {
             [styles.active]: item.isActive,
           })}
-          href=""
           key={item.text}
-          onClick={link({ name: item.routeName, params: item.routeParams })}
+          to={{ name: item.routeName, params: item.routeParams }}
         >
           <span className={cx(item.icon, styles.icon)}></span>
           {item.text}
-        </a>
+        </Link>
       ))}
     </>
   );

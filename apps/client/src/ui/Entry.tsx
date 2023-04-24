@@ -48,7 +48,7 @@ export default function Entry() {
   const LeftNav = (
     <>
       {breadcrumbParts.length ? (
-        <Breadcrumb link={router.link} parts={breadcrumbParts} />
+        <Breadcrumb Link={router.Link} parts={breadcrumbParts} />
       ) : (
         <Loader />
       )}
