@@ -32,7 +32,7 @@ import { Part } from '../types';
 export function getParts(
   config: Record<string, { path: string; parent?: string }>,
   routeName: string,
-  routeParams?: Record<string, string>,
+  routeParams?: Record<string, string | undefined>,
 ): Part[] {
   const breadcrumbs: Part[] = [];
 
@@ -40,7 +40,10 @@ export function getParts(
 
   return breadcrumbs;
 
-  function buildBreadcrumb(route?: string, params?: Record<string, string>) {
+  function buildBreadcrumb(
+    route?: string,
+    params?: Record<string, string | undefined>,
+  ) {
     if (!route) {
       return;
     }
