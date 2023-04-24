@@ -12,11 +12,11 @@ export default function Deployments() {
     return null;
   }
 
-  const { link } = router;
+  const { Link } = router;
 
   return (
     <>
-      <table className={cx(table.container, table.large)}>
+      <table className={cx(table.container)}>
         <thead>
           <tr>
             <th>Release</th>
@@ -30,28 +30,26 @@ export default function Deployments() {
             ({ created_at, environment, release, url, urlText, uuid }) => (
               <tr key={uuid}>
                 <td>
-                  <a
+                  <Link
                     className={cx(tag.container, tag.success)}
-                    href=""
-                    onClick={link({
+                    to={{
                       name: 'projectReleases',
                       params: { releaseId: release?.uuid },
-                    })}
+                    }}
                   >
                     {release?.hash}
-                  </a>
+                  </Link>
                 </td>
                 <td>
-                  <a
+                  <Link
                     className={cx(tag.container, tag.info)}
-                    href=""
-                    onClick={link({
+                    to={{
                       name: 'projectEnvironments',
                       params: { environmentId: environment?.uuid },
-                    })}
+                    }}
                   >
                     {environment?.name}
-                  </a>
+                  </Link>
                 </td>
                 <td>
                   <a href={url} target="_blank">

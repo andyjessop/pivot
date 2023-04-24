@@ -40,7 +40,7 @@ export default function Project() {
           spaced.large,
         )}
       >
-        <SubNav items={subheaderItems} link={router.link} />
+        <SubNav items={subheaderItems} Link={router.Link} />
       </div>
       <div className={cx(layout.content, styles.container)}>
         <div className={styles.info}></div>

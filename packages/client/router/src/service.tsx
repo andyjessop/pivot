@@ -15,6 +15,7 @@ export function service<T extends RouterConfig>(
   return {
     destroy,
     link,
+    Link,
     navigate,
   };
 
@@ -41,6 +42,22 @@ export function service<T extends RouterConfig>(
 
       navigate(route);
     };
+  }
+
+  function Link({
+    children,
+    className = '',
+    to,
+  }: {
+    children: React.ReactNode;
+    className?: string;
+    to: Route;
+  }) {
+    return (
+      <a className={className} href="" onClick={link(to)}>
+        {children}
+      </a>
+    );
   }
 
   function navigate(route: Route<T> | null): void {
