@@ -16,7 +16,7 @@ export default function Deployments() {
 
   return (
     <>
-      <table className={table.container}>
+      <table className={cx(table.container, table.large)}>
         <thead>
           <tr>
             <th>Release</th>

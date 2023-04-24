@@ -1,5 +1,5 @@
 .container {
-  --cell-padding: var(--spacing-1);
+  --cell-padding: var(--spacing-2);
   --header-font-weight: var(--font-weight-quarterbold);
   --header-color: var(--color-body-duller);
 
@@ -12,5 +12,13 @@
   & th {
     font-weight: var(--header-font-weight);
     color: var(--header-color);
+  }
+
+  &.small {
+    --cell-padding: var(--spacing-1);
+  }
+
+  &.xlarge {
+    --cell-padding: var(--spacing-3);
   }
 }
