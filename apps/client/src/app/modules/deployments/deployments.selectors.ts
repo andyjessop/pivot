@@ -6,10 +6,8 @@ import { humanReadableDate } from '@pivot/util/time';
 import { stripProtocol } from '@pivot/util/url';
 
 import { selectEnvironmentsResourceData } from '../environments';
-import { selectFeaturesResourceData } from '../features';
 import { selectReleasesResourceData } from '../releases';
 import { selectRouteName, selectRouteParams } from '../router';
-import { selectVariablesResourceData } from '../variables';
 
 import { DeploymentsResourceState } from './deployments-resource.service';
 

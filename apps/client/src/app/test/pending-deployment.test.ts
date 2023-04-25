@@ -40,7 +40,6 @@ describe('integration', () => {
       const dep = deployments?.find((d) => d.uuid === deployment.uuid);
 
       if (!dep) {
-        console.log(deployments);
         throw new Error('Deployment not found');
       }
 

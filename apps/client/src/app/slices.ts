@@ -4,7 +4,7 @@ import { deploymentsResourceSlice } from './modules/deployments';
 import { environmentsResourceSlice } from './modules/environments';
 import { featuresResourceSlice } from './modules/features';
 import { pendingDeploymentSlice } from './modules/pending-deployment';
-import { projectResourceSlice, projectUiSlice } from './modules/project';
+import { projectResourceSlice } from './modules/project';
 import { selectIsProjectRoute } from './modules/project/project.selectors';
 import { releasesResourceSlice } from './modules/releases';
 import { routerSlice } from './modules/router';
@@ -39,10 +39,6 @@ export const slices = {
   pendingDeployment: {
     active: selectIsProjectRoute,
     injectable: pendingDeploymentSlice,
-  },
-  projectUi: {
-    active: selectIsProjectRoute,
-    injectable: projectUiSlice,
   },
   projectResource: {
     active: selectIsProjectRoute,
