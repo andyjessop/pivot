@@ -19,6 +19,7 @@ export const projectResourceService = injectable({
       resourceService(
         {
           read: {
+            pollingInterval: 5000,
             query: (uuid: string) => http.get(uuid),
           },
         },

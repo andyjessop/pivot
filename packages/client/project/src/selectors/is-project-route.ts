@@ -1,3 +1,10 @@
 export function isProjectRoute(routeName?: string) {
-  return Boolean(routeName?.startsWith('project'));
+  return [
+    'project',
+    'deployments',
+    'environments',
+    'features',
+    'releases',
+    'variables',
+  ].includes(routeName || '');
 }

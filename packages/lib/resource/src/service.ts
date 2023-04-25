@@ -21,12 +21,24 @@ export function resourceService<
   return {
     create,
     delete: del,
-    read,
+    read: (...params: ReadParams) =>
+      // Force the read if the polling interval is undefined because otherwise
+      // the read will never happen.
+      read(params, config.read.pollingInterval === undefined),
     update,
   };
 
-  async function read(...params: ReadParams): Promise<Data | Error> {
+  async function read(
+    params: ReadParams,
+    force = false,
+  ): Promise<Data | Error | undefined> {
     const { pollingInterval, query } = config.read;
+
+    // If we have readParams and we're not forcing, then just let the polling interval
+    // take care of the next read.
+    if (readParams && !force) {
+      return;
+    }
 
     if (!readParams) {
       readParams = params;
@@ -40,11 +52,12 @@ export function resourceService<
     });
 
     if (pollingInterval !== undefined) {
-      setTimeout(() => read(...params), pollingInterval);
+      setTimeout(() => read(params, true), pollingInterval);
     }
 
     try {
       const res = await query(...params);
+
       api.set({
         data: res,
         loading: false,
@@ -122,7 +135,7 @@ export function resourceService<
         });
       }
 
-      return read(...readParams);
+      return read(readParams, true) as Promise<Data | Error>;
     }
   }
 }

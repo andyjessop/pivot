@@ -1,11 +1,11 @@
 const authenticatedRoutes = [
   'projects',
   'project',
-  'projectDeployments',
-  'projectEnvironments',
-  'projectFeatures',
-  'projectReleases',
-  'projectVariables',
+  'deployments',
+  'environments',
+  'features',
+  'releases',
+  'variables',
 ];
 
 /**

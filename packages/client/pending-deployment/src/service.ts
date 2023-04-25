@@ -1,16 +1,21 @@
-import { Actions, Service } from './types';
+import { Actions, PendingDeployment, Service } from './types';
 
 export function service(actions: Actions): Service {
   return {
-    clearPendingDeployment,
-    createFromDeployment,
+    clear,
+    create,
+    update,
   };
 
-  function clearPendingDeployment() {
-    actions.setDeploymentId(null);
+  function clear() {
+    actions.set(null);
   }
 
-  function createFromDeployment(deploymentId: string) {
-    actions.setDeploymentId(deploymentId);
+  function create(deployment: PendingDeployment) {
+    actions.set(deployment);
+  }
+
+  function update(deployment: Partial<PendingDeployment>) {
+    actions.update(deployment);
   }
 }

@@ -6,14 +6,14 @@ export const config: RouterConfig = {
   },
   home: { path: '/' },
   project: { parent: 'projects', path: '/projects/:id' },
-  projectDeployments: { parent: 'project', path: '/projects/:id/deployments' },
-  projectEnvironments: {
+  deployments: { parent: 'project', path: '/projects/:id/deployments' },
+  environments: {
     parent: 'project',
     path: '/projects/:id/environments',
   },
-  projectFeatures: { parent: 'project', path: '/projects/:id/features' },
-  projectReleases: { parent: 'project', path: '/projects/:id/releases' },
-  projectVariables: { parent: 'project', path: '/projects/:id/variables' },
+  features: { parent: 'project', path: '/projects/:id/features' },
+  releases: { parent: 'project', path: '/projects/:id/releases' },
+  variables: { parent: 'project', path: '/projects/:id/variables' },
   projects: { parent: 'home', path: '/projects' },
 };
 

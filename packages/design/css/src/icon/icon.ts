@@ -5,6 +5,7 @@ export const icon = {
   clone: 'las la-clone',
   deployments: 'las la-cloud-upload-alt',
   environments: 'las la-layer-group',
+  externalLink: 'las la-external-link-square-alt',
   features: 'las la-flag',
   home: 'las la-home',
   mapMarked: 'las la-map-marked',
@@ -20,4 +21,4 @@ export const icon = {
   timesCircle: 'las la-times-circle',
   user: 'las la-user',
   variables: 'las la-tags',
-} as Record<string, string>;
+};

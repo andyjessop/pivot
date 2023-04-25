@@ -6,6 +6,7 @@ import { envService } from './modules/env';
 import { environmentsResourceService } from './modules/environments';
 import { featuresResourceService } from './modules/features';
 import { headService } from './modules/head';
+import { pendingDeploymentService } from './modules/pending-deployment';
 import { projectResourceService } from './modules/project';
 import { releasesResourceService } from './modules/releases';
 import { routerService } from './modules/router';
@@ -28,6 +29,7 @@ export const services = {
   environmentsResource: environmentsResourceService,
   featuresResource: featuresResourceService,
   head: headService,
+  pendingDeployment: pendingDeploymentService,
   projectResource: projectResourceService,
   releasesResource: releasesResourceService,
   router: routerService,

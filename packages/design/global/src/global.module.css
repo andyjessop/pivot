@@ -1,0 +1,8 @@
+a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+}

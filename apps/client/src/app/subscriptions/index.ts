@@ -1,9 +1,4 @@
-import { fetchDeployments } from '~app/modules/deployments/fetch-deployments.subscription';
-import { fetchEnvironments } from '~app/modules/environments/fetch-environments.subscription';
-import { fetchFeatures } from '~app/modules/features/fetch-features.subscription';
 import { fetchProject } from '~app/modules/project/fetch-project.subscription';
-import { fetchReleases } from '~app/modules/releases/fetch-releases.subscription';
-import { fetchVariables } from '~app/modules/variables/fetch-variables.subscription';
 
 import { setBreadcrumb } from '../modules/breadcrumb/set-breadcrumb.subscription';
 
@@ -33,12 +28,7 @@ import { unauthorizedRedirect } from './unauthorized-redirect';
  * };
  */
 export const subscriptions = {
-  fetchDeployments,
-  fetchEnvironments,
-  fetchFeatures,
-  fetchReleases,
   fetchProject,
-  fetchVariables,
   headMetadata,
   projectRedirect,
   setBreadcrumb,
