@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 
 import { projectId } from '@pivot/client/project';
 import { isReleasesRoute } from '@pivot/client/releases';
+import { humanReadableDate } from '@pivot/util/time';
 
 import { selectRouteName, selectRouteParams } from '../router';
 
@@ -24,4 +25,13 @@ export const selectReleasesResource = (state: unknown) =>
 export const selectReleasesResourceData = createSelector(
   selectReleasesResource,
   (releasesResource) => releasesResource?.data,
+);
+
+export const selectReleasesData = createSelector(
+  selectReleasesResourceData,
+  (releases) =>
+    releases?.map((release) => ({
+      ...release,
+      created_at: humanReadableDate(release.created_at),
+    })),
 );

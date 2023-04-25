@@ -46,6 +46,10 @@ export type Service<
 > = {
   create: (...params: CreateParams) => Promise<Data | Error>;
   delete: (...params: DeleteParams) => Promise<Data | Error>;
-  read: (...params: ReadParams) => Promise<Data | Error>;
+  read: (...params: ReadParams) => Promise<Data | Error | undefined>;
   update: (...params: UpdateParams) => Promise<Data | Error>;
 };
+
+export interface Options {
+  throttle?: number;
+}

@@ -21,7 +21,7 @@ export const projectRedirect = {
     }
 
     router.navigate({
-      name: 'projectDeployments',
+      name: 'deployments',
       params: projectRoute.params,
     });
   },

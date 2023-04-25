@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 
 import { isEnvironmentsRoute } from '@pivot/client/environments';
 import { projectId } from '@pivot/client/project';
+import { stripProtocol } from '@pivot/util/url';
 
 import { selectRouteName, selectRouteParams } from '../router';
 
@@ -24,4 +25,13 @@ export const selectEnvironmentsResource = (state: unknown) =>
 export const selectEnvironmentsResourceData = createSelector(
   selectEnvironmentsResource,
   (environmentsResource) => environmentsResource?.data,
+);
+
+export const selectEnvironmentsData = createSelector(
+  selectEnvironmentsResourceData,
+  (environments) =>
+    environments?.map((environment) => ({
+      ...environment,
+      urlText: environment.url && stripProtocol(environment.url),
+    })),
 );

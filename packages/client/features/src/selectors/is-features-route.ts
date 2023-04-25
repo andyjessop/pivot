@@ -1,3 +1,3 @@
 export function isFeaturesRoute(routeName?: string) {
-  return routeName === 'projectFeatures';
+  return routeName === 'features';
 }

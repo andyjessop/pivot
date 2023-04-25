@@ -1,22 +1,14 @@
 import { authSlice } from './modules/auth';
 import { breadcrumbSlice } from './modules/breadcrumb';
-import {
-  deploymentsResourceSlice,
-  selectIsDeploymentsRoute,
-} from './modules/deployments';
+import { deploymentsResourceSlice } from './modules/deployments';
 import { environmentsResourceSlice } from './modules/environments';
 import { featuresResourceSlice } from './modules/features';
+import { pendingDeploymentSlice } from './modules/pending-deployment';
 import { projectResourceSlice, projectUiSlice } from './modules/project';
 import { selectIsProjectRoute } from './modules/project/project.selectors';
 import { releasesResourceSlice } from './modules/releases';
 import { routerSlice } from './modules/router';
 import { variablesResourceSlice } from './modules/variables';
-import {
-  selectShouldLoadEnvironementsResource,
-  selectShouldLoadFeaturesResource,
-  selectShouldLoadReleasesResource,
-  selectShouldLoadVariablesResource,
-} from './selectors/project-resource.selectors';
 
 /**
  * This is the configuration for the slices of the application. The `injectable` property
@@ -33,16 +25,20 @@ export const slices = {
     injectable: breadcrumbSlice,
   },
   deploymentsResource: {
-    active: selectIsDeploymentsRoute,
+    active: selectIsProjectRoute,
     injectable: deploymentsResourceSlice,
   },
   environmentsResource: {
-    active: selectShouldLoadEnvironementsResource,
+    active: selectIsProjectRoute,
     injectable: environmentsResourceSlice,
   },
   featuresResource: {
-    active: selectShouldLoadFeaturesResource,
+    active: selectIsProjectRoute,
     injectable: featuresResourceSlice,
+  },
+  pendingDeployment: {
+    active: selectIsProjectRoute,
+    injectable: pendingDeploymentSlice,
   },
   projectUi: {
     active: selectIsProjectRoute,
@@ -53,7 +49,7 @@ export const slices = {
     injectable: projectResourceSlice,
   },
   releasesResource: {
-    active: selectShouldLoadReleasesResource,
+    active: selectIsProjectRoute,
     injectable: releasesResourceSlice,
   },
   router: {
@@ -61,7 +57,7 @@ export const slices = {
     injectable: routerSlice,
   },
   variablesResource: {
-    active: selectShouldLoadVariablesResource,
+    active: selectIsProjectRoute,
     injectable: variablesResourceSlice,
   },
 };
