@@ -4,3 +4,8 @@ export interface Feature {
   uuid: string;
   project_id: string;
 }
+
+export type FeatureWithValue = Feature & {
+  enabled: boolean;
+  value: string;
+};

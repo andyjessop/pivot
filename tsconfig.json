@@ -54,6 +54,7 @@
       ],
       "@pivot/design/variables": ["packages/design/variables/src/index.ts"],
       "@pivot/fixtures": ["packages/fixtures/src/index.ts"],
+      "@pivot/hooks": ["packages/hooks/src/index.ts"],
       "@pivot/lib/async-queue": ["packages/lib/async-queue/src/index.ts"],
       "@pivot/lib/create-store": ["packages/lib/create-store/src/index.ts"],
       "@pivot/lib/dynamic-slice-registry": [
