@@ -60,6 +60,7 @@ export function Features({ features, updateFeature }: Props) {
                 <label htmlFor={uuid}></label>
                 <input
                   className={cx(styles.slider, 'slider', 'is-normal')}
+                  disabled={!enabled}
                   step="0.05"
                   min="0"
                   max="1"
