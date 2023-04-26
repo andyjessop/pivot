@@ -12,6 +12,7 @@ import { selectRouteName } from '~app/modules/router';
 
 import appStyles from '../../app.module.css';
 
+import { PendingDeployment } from './PendingDeployment';
 import styles from './project.module.css';
 import { routeComponents } from './route-components';
 import { selectSubheaderItems } from './subheader/subheader.selectors';
@@ -50,6 +51,7 @@ export default function Project() {
           </Suspense>
         </div>
       </div>
+      <PendingDeployment />
     </div>
   );
 }
