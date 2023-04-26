@@ -32,7 +32,7 @@ export function PendingDeployment() {
     return null;
   }
 
-  const { clear, update, updateFeature, updateVariable } = service;
+  const { set, update, updateFeature, updateVariable } = service;
 
   const FeaturesComponent = (
     <Features features={features} updateFeature={updateFeature} />
@@ -44,7 +44,7 @@ export function PendingDeployment() {
 
   return (
     <PendingDeploymentModal
-      clear={clear}
+      clear={() => set(null)}
       environments={environments}
       Features={FeaturesComponent}
       pendingDeployment={pendingDeployment}

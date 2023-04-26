@@ -48,7 +48,7 @@ describe('integration', () => {
         ...pick(dep, ['environment_id', 'features', 'release_id', 'variables']),
       };
 
-      pendingDeployment.create(newPendingDeployment);
+      pendingDeployment.set(newPendingDeployment);
 
       const loadedState = await app.waitFor(
         selectPendingDeploymentData,

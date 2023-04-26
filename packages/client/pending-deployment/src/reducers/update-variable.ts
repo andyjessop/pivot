@@ -1,12 +1,6 @@
-import { DeploymentVariable } from '@pivot/client/deployments';
-
 import { State } from '../types';
 
-export function updateVariable(
-  state: State,
-  uuid: string,
-  deploymentVariable: Partial<DeploymentVariable>,
-) {
+export function updateVariable(state: State, uuid: string, value: string) {
   if (!state.data) {
     return state;
   }
@@ -27,7 +21,7 @@ export function updateVariable(
         ...state.data.variables.slice(0, ndx),
         {
           ...state.data.variables[ndx],
-          ...deploymentVariable,
+          value,
         },
         ...state.data.variables.slice(ndx + 1),
       ],
