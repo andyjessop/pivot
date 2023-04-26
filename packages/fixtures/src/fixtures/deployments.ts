@@ -13,6 +13,7 @@ export const deployments = [
         deployment_id: 'a989f772-3b47-4081-8428-aeb0e852ab2f',
         feature_id: 'cf490256-f32b-48ec-ba32-7d16557799c0',
         value: 1,
+        enabled: true,
       },
     ],
     variables: [],

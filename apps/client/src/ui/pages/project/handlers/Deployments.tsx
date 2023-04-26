@@ -25,7 +25,7 @@ export default function Deployments() {
       throw new Error(`Deployment ${uuid} not found`);
     }
 
-    pendingDeployment.create({
+    pendingDeployment.set({
       deployment_id: deployment.uuid,
       ...pick(deployment, [
         'environment_id',

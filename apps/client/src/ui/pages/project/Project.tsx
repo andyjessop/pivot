@@ -1,10 +1,6 @@
 import { Suspense } from 'react';
 
-import {
-  horizontalLeftContent as layout,
-  outlet,
-  spaced,
-} from '@pivot/design/css';
+import { horizontalLeftContent as layout, spaced } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -12,6 +8,7 @@ import { selectRouteName } from '~app/modules/router';
 
 import appStyles from '../../app.module.css';
 
+import { PendingDeployment } from './PendingDeployment';
 import styles from './project.module.css';
 import { routeComponents } from './route-components';
 import { selectSubheaderItems } from './subheader/subheader.selectors';
@@ -30,7 +27,7 @@ export default function Project() {
   const PageContent = routeComponents[name] ?? (() => <></>);
 
   return (
-    <div className={outlet.container}>
+    <>
       <div
         className={cx(
           layout.subheader,
@@ -50,6 +47,7 @@ export default function Project() {
           </Suspense>
         </div>
       </div>
-    </div>
+      <PendingDeployment />
+    </>
   );
 }

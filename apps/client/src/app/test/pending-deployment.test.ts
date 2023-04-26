@@ -16,7 +16,7 @@ const project = findProjectByName('pivot');
 const deployment = findDeploymentsByProjectId(project.uuid)[0];
 
 describe('integration', () => {
-  describe('project', () => {
+  describe('pending-deployment', () => {
     beforeEach(async () => {
       await app.init();
 
@@ -48,7 +48,7 @@ describe('integration', () => {
         ...pick(dep, ['environment_id', 'features', 'release_id', 'variables']),
       };
 
-      pendingDeployment.create(newPendingDeployment);
+      pendingDeployment.set(newPendingDeployment);
 
       const loadedState = await app.waitFor(
         selectPendingDeploymentData,
