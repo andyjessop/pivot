@@ -1,5 +1,6 @@
 import { Environment } from '@pivot/client/environments';
 import { Release } from '@pivot/client/releases';
+import { form, modal, spaced, typography } from '@pivot/design/css';
 import { useEscapeKey } from '@pivot/hooks';
 import { cx } from '@pivot/util/classname';
 
@@ -33,50 +34,73 @@ export function PendingDeploymentModal({
   };
 
   return (
-    <div className="modal is-active is-dark">
-      <div onClick={clear} className="modal-background"></div>
-      <div className="modal-card">
-        <header className="modal-card-head">
-          <h4 className="modal-card-title">Create New Deployment</h4>
+    <div className={modal.base}>
+      <div className={modal.overlay} onClick={clear}></div>
+      <div className={cx(modal.container, modal.large)}>
+        <header className={modal.header}>
+          <h2 className={typography.heading}>Create New Deployment</h2>
           <button
             className="delete"
             aria-label="close"
             onClick={clear}
           ></button>
         </header>
-        <section className="modal-card-body">
-          <h4 className="is-size-6 has-text-weight-semibold mb-2">Release</h4>
-          <div className="select">
-            <select defaultValue={release_id}>
-              {releases.map((release) => (
-                <option key={release.uuid} value={release.uuid}>
-                  {release.hash}
-                </option>
-              ))}
-            </select>
+        <section className={modal.body}>
+          <div className={cx(spaced.container, form.fieldset)}>
+            <div>
+              <label
+                className={cx(typography.heading, form.label)}
+                htmlFor={release_id}
+              >
+                Release
+              </label>
+              <div className="select">
+                <select defaultValue={release_id} id={release_id}>
+                  {releases.map((release) => (
+                    <option key={release.uuid} value={release.uuid}>
+                      {release.hash}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label
+                className={cx(typography.heading, form.label)}
+                htmlFor={environment_id}
+              >
+                Environment
+              </label>
+              <div className="select">
+                <select
+                  defaultValue={environment_id}
+                  id={environment_id}
+                  onChange={selectEnvironment}
+                >
+                  {environments.map((env) => (
+                    <option key={env.uuid} value={env.uuid}>
+                      {env.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </div>
-          <h4 className="is-size-6 has-text-weight-semibold mb-2">
-            Environment
-          </h4>
-          <div className="select">
-            <select defaultValue={environment_id} onChange={selectEnvironment}>
-              {environments.map((env) => (
-                <option key={env.uuid} value={env.uuid}>
-                  {env.name}
-                </option>
-              ))}
-            </select>
+
+          <div className={form.fieldset}>
+            <h4 className={cx(typography.heading, form.label)}>
+              Feature Overrides
+            </h4>
+            {Features}
           </div>
-          <h4 className="is-size-6 has-text-weight-semibold mb-2 mt-4">
-            Feature Overrides
-          </h4>
-          {Features}
-          <h4 className="is-size-6 has-text-weight-semibold mb-2">
-            Variable Overrides
-          </h4>
-          {Variables}
+          <div className={form.fieldset}>
+            <h4 className={cx(typography.heading, form.label)}>
+              Variable Overrides
+            </h4>
+            {Variables}
+          </div>
         </section>
-        <footer className="modal-card-foot">
+        <footer className={modal.footer}>
           <div className="buttons is-right">
             <button className={cx('button', 'is-dark')}>
               <span className="icon is-medium">

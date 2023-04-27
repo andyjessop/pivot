@@ -1,12 +1,13 @@
 .container {
-  --cell-padding: var(--spacing-2);
+  --cell-padding-vertical: var(--spacing-1);
+  --cell-padding-horizontal: var(--spacing-3);
   --header-font-weight: var(--font-weight-quarterbold);
-  --header-color: var(--color-body-duller);
+  --header-color: var(--color-body-dull);
 
   & tr,
   & th,
   & td {
-    padding: var(--cell-padding);
+    padding: var(--cell-padding-vertical) var(--cell-padding-horizontal);
     vertical-align: middle;
   }
 

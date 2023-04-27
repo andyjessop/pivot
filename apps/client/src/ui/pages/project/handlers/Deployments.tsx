@@ -1,4 +1,4 @@
-import { icon, table, tag } from '@pivot/design/css';
+import { card, icon, table, tag, typography } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 import { pick } from '@pivot/util/object';
 
@@ -37,15 +37,15 @@ export default function Deployments() {
   };
 
   return (
-    <>
+    <div className={cx(card.container)}>
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
-            <th>Release</th>
-            <th>Environment</th>
-            <th>URL</th>
-            <th>Deployed At</th>
-            <th>Actions</th>
+            <th className={typography.heading}>Release</th>
+            <th className={typography.heading}>Environment</th>
+            <th className={typography.heading}>URL</th>
+            <th className={typography.heading}>Deployed At</th>
+            <th className={typography.heading}>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +54,6 @@ export default function Deployments() {
               <tr key={uuid}>
                 <td>
                   <Link
-                    className={cx(tag.container, tag.primary)}
                     to={{
                       name: 'releases',
                       params: { id: projectId },
@@ -76,7 +75,7 @@ export default function Deployments() {
                 </td>
                 <td>
                   <a href={url} target="_blank">
-                    <span className={tag.container}>
+                    <span>
                       {urlText}&nbsp;<span className={icon.externalLink}></span>
                     </span>
                   </a>
@@ -95,6 +94,6 @@ export default function Deployments() {
           )}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

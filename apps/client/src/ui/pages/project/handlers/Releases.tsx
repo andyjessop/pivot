@@ -1,4 +1,4 @@
-import { icon, table, tag } from '@pivot/design/css';
+import { card, icon, table, typography } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -13,13 +13,13 @@ export default function Releases() {
   }
 
   return (
-    <>
+    <div className={cx(card.container)}>
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
-            <th>Commit</th>
-            <th>Created At</th>
-            <th>Actions</th>
+            <th className={typography.heading}>Commit</th>
+            <th className={typography.heading}>Created At</th>
+            <th className={typography.heading}>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@ export default function Releases() {
             <tr key={release.uuid}>
               <td>
                 <a href={release.commit_url} target="_blank">
-                  <span className={tag.container}>
+                  <span>
                     {release.hash}&nbsp;
                     <span className={icon.externalLink}></span>
                   </span>
@@ -43,6 +43,6 @@ export default function Releases() {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

@@ -2,9 +2,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
-  border: 1px solid #e8e8e8;
-  border-radius: 4px;
   margin-bottom: 1rem;
 }
 
@@ -20,8 +17,9 @@
   flex: 1;
 }
 
-.slider {
+input[type='range'].slider {
   width: 100%;
+  margin: 0.5rem 0;
 }
 
 .inputs {
