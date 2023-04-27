@@ -25,6 +25,7 @@
   --color-dark-dark: hsl(0deg, 0%, 10%);
   --color-dark-contrast: var(--color-white);
   --color-white: hsl(0deg, 0%, 100%);
+  --color-darken-20: rgba(0, 0, 0, 20%);
   --color-darken-50: rgba(0, 0, 0, 50%);
   --color-lighten-03: rgba(255, 255, 255, 3%);
   --color-lighten-15: rgba(255, 255, 255, 15%);
@@ -76,7 +77,7 @@
   --avatar-size-2: 3rem;
 
   /* App */
-  --card-background-color: var(--color-lighten-03);
+  --card-background-color: var(--color-gray-85);
   --card-border-radius: var(--border-radius-1);
   --card-padding-horizontal: var(--spacing-2);
   --card-padding-horizontal-small: var(--spacing-1);
@@ -97,7 +98,7 @@
   --content-color: var(--color-gray-10);
   --form-label-margin-bottom: var(--spacing-1);
   --form-spacing: var(--spacing-3);
-  --header-background: var(--color-gray-90);
+  --header-background: var(--color-darken-20);
   --header-color: var(--color-white);
   --header-height: 4rem;
   --heading-color: var(--color-gray-40);
@@ -107,16 +108,16 @@
   --main-nav-item-color: var(--nav-color-dull);
   --main-nav-item-hover-color: var(--nav-color-active);
   --main-nav-item-active-color: var(--nav-color-active);
-  --modal-background-color: var(--color-lighten-03);
+  --modal-background-color: var(--card-background-color);
   --modal-base-z-index: 1000;
   --modal-border-color: var(--card-border-color);
   --modal-border-radius: var(--card-border-radius);
   --modal-border-width: var(--card-border-width);
   --modal-footer-height: 70px;
   --modal-header-height: 70px;
-  --modal-height: calc(100% - 8rem);
-  --modal-overlay-background-color: hsl(0deg, 0%, 10%, 90%);
-  --modal-overlay-background-color-highlight: hsl(200deg, 14%, 21%, 90%);
+  --modal-height: calc(100% - 4rem);
+  --modal-overlay-background-color: transparent;
+  --modal-overlay-background-color-highlight: transparent;
   --modal-padding: var(--spacing-2);
   --modal-padding-small: var(--spacing-1);
   --modal-padding-medium: var(--spacing-3);
@@ -125,7 +126,7 @@
   --modal-width-small: 300px;
   --modal-width-medium: 500px;
   --modal-width-large: 100%;
-  --modal-margin-large: 4rem;
+  --modal-margin-large: 2rem;
   --nav-text-color: var(--color-gray-40);
   --nav-icon-color: var(--color-gray-60);
   --nav-text-color-active: var(--color-gray-10);
@@ -134,7 +135,7 @@
   --nav-color-duller: var(--color-gray-60);
   --nav-color-active: var(--color-gray-10);
   --page-horizontal-padding: var(--spacing-5);
-  --subheader-background: var(--color-gray-85);
+  --subheader-background: var(--color-darken-20);
   --subheader-border-color: var(--color-gray-70);
   --subheader-color: var(--nav-color-dull);
   --subheader-height: 3rem;
