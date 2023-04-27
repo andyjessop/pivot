@@ -6,3 +6,10 @@
   font-size: 80%;
   color: var(--typography-subtitle-color);
 }
+
+.heading {
+  text-transform: uppercase;
+  font-size: var(--heading-font-size-relative);
+  font-weight: var(--heading-font-weight);
+  color: var(--heading-color);
+}

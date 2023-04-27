@@ -1,0 +1,8 @@
+.fieldset {
+  margin-bottom: var(--form-spacing);
+}
+
+.label {
+  margin-bottom: var(--form-label-margin-bottom);
+  display: block;
+}

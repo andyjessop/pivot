@@ -11,10 +11,10 @@
 }
 
 .content {
-  background: linear-gradient(
-    318deg,
-    var(--content-background) 0%,
-    var(--content-background-highlight) 100%
+  background: radial-gradient(
+    circle at top,
+    var(--content-background-highlight) 0%,
+    var(--content-background) 100%
   );
   color: var(--content-color);
 }

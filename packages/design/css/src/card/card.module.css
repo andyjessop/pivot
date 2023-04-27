@@ -1,28 +1,29 @@
 .container {
-  --card-background-color: var(--color-white);
-  --card-padding-horizontal: var(--spacing-2);
-  --card-padding-vertical: var(--spacing-2);
-  --card-border-width: var(--border-width);
-  --card-border-color: var(--color-gray-10);
-  --card-padding: var(--border-radius-1);
+  --container-background-color: var(--card-background-color);
+  --container-padding-horizontal: var(--card-padding-horizontal);
+  --container-padding-vertical: var(--card-padding-vertical);
+  --container-border-width: var(--card-border-width);
+  --container-border-color: var(--card-border-color);
+  --container-border-radius: var(--card-border-radius);
+  --container-padding: var(--card-padding);
 
-  background-color: var(--card-background-color);
-  padding: var(--card-padding-vertical) var(--card-padding-horizontal);
-  border: var(--card-border-width) solid var(--card-border-color);
-  border-radius: var(--card-padding);
+  background-color: var(--container-background-color);
+  padding: var(--container-padding-vertical) var(--container-padding-horizontal);
+  border: var(--container-border-width) solid var(--container-border-color);
+  border-radius: var(--container-border-radius);
 }
 
 .container.small {
-  --card-padding-horizontal: var(--spacing-1);
-  --card-padding-vertical: var(--spacing-1);
+  --container-padding-horizontal: var(--card-padding-horizontal-small);
+  --container-padding-vertical: var(--card-padding-vertical-small);
 }
 
 .container.medium {
-  --card-padding-horizontal: var(--spacing-2);
-  --card-padding-vertical: var(--spacing-2);
+  --container-padding-horizontal: var(--card-padding-horizontal-medium);
+  --container-padding-vertical: var(--card-padding-vertical-medium);
 }
 
 .container.large {
-  --card-padding-horizontal: var(--spacing-4);
-  --card-padding-vertical: var(--spacing-4);
+  --container-padding-horizontal: var(--card-padding-horizontal-large);
+  --container-padding-vertical: var(--card-padding-vertical-large);
 }

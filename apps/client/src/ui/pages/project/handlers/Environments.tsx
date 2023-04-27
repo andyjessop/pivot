@@ -1,4 +1,4 @@
-import { icon, table, tag } from '@pivot/design/css';
+import { card, icon, table, tag, typography } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -13,12 +13,12 @@ export default function Environments() {
   }
 
   return (
-    <>
+    <div className={cx(card.container)}>
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>URL</th>
+            <th className={typography.heading}>Name</th>
+            <th className={typography.heading}>URL</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@ export default function Environments() {
               <td>
                 {url ? (
                   <a href={url} target="_blank">
-                    <span className={tag.container}>
+                    <span>
                       {urlText}&nbsp;<span className={icon.externalLink}></span>
                     </span>
                   </a>
@@ -42,6 +42,6 @@ export default function Environments() {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

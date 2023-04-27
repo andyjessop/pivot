@@ -1,4 +1,4 @@
-import { table, tag } from '@pivot/design/css';
+import { card, table, typography } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -13,21 +13,19 @@ export default function Releases() {
   }
 
   return (
-    <>
+    <div className={cx(card.container)}>
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Created At</th>
+            <th className={typography.heading}>Name</th>
+            <th className={typography.heading}>Created At</th>
           </tr>
         </thead>
         <tbody>
           {features.map((feature) => (
             <tr key={feature.uuid}>
               <td>
-                <span className={cx(tag.container, tag.success)}>
-                  {feature.name}
-                </span>
+                <span>{feature.name}</span>
               </td>
               <td>
                 <span>{feature.created_at}</span>
@@ -36,6 +34,6 @@ export default function Releases() {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

@@ -1,0 +1,87 @@
+.base {
+  --base-background-color: var(--modal-base-background-color);
+
+  position: fixed;
+  inset: 0 100% 100% 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--modal-base-z-index));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--base-background-color);
+}
+
+.overlay {
+  --overlay-background-color: var(--modal-overlay-background-color);
+  --overlay-background-color-highlight: var(--modal-overlay-background-color-highlight);
+
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at top,
+    var(--overlay-background-color-highlight) 0%,
+    var(--overlay-background-color) 100%
+  );
+  position: absolute;
+  inset: 0 100% 100% 0;
+}
+
+.container {
+  --container-background-color: var(--modal-background-color);
+  --container-padding: var(--modal-padding);
+  --container-border-width: var(--modal-border-width);
+  --container-border-color: var(--modal-border-color);
+  --container-border-radius: var(--modal-border-radius);
+  --container-height: var(--modal-height);
+  --container-width: var(--modal-width);
+  --container-margin: 0;
+
+  background-color: var(--container-background-color);
+  border: var(--container-border-width) solid var(--container-border-color);
+  border-radius: var(--container-border-radius);
+  width: var(--container-width);
+  height: var(--container-height);
+  margin: var(--container-margin);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  height: var(--modal-header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--container-padding) var(--container-padding) calc(var(--container-padding) / 2) var(--container-padding);
+}
+
+.footer {
+  height: var(--modal-footer-height);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: calc(var(--container-padding) / 2) var(--container-padding) var(--container-padding)  var(--container-padding);
+}
+
+.body {
+  flex: 1;
+  padding: calc(var(--container-padding) / 2) var(--container-padding);
+}
+
+.container.small {
+  --container-padding: var(--modal-padding-small);
+  --container-width: var(--modal-width-small);
+}
+
+.container.medium {
+  --container-padding: var(--modal-padding-medium);
+  --container-width: var(--modal-width-medium);
+}
+
+.container.large {
+  --container-padding: var(--modal-padding-large);
+  --container-width: var(--modal-width-large);
+  --container-margin: var(--modal-margin-large);
+}
