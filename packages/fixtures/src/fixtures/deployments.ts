@@ -1,0 +1,41 @@
+export const deployments = [
+  {
+    created_at: '2023-02-05T18:35:05.293128+00:00',
+    uuid: 'a989f772-3b47-4081-8428-aeb0e852ab2f',
+    release_id: 'd445b390-8719-43f9-abd1-876b83d3243c',
+    environment_id: '35902513-4df9-4625-a191-833532a190ce',
+    url: 'https://aj-new-feature.runestone.io',
+    project_id: 'f4c727f9-6331-439e-b34d-8e056a2aa282',
+    features: [
+      {
+        created_at: '2023-02-08T18:42:40.104064+00:00',
+        uuid: '24ea97d0-15c4-4eec-a720-530030c6708b',
+        deployment_id: 'a989f772-3b47-4081-8428-aeb0e852ab2f',
+        feature_id: 'cf490256-f32b-48ec-ba32-7d16557799c0',
+        value: 1,
+        enabled: true,
+      },
+    ],
+    variables: [],
+  },
+  {
+    created_at: '2023-02-05T18:33:45.58612+00:00',
+    uuid: '83e754b4-750e-4710-b74d-b9ee1e6f0a14',
+    release_id: 'd445b390-8719-43f9-abd1-876b83d3243c',
+    environment_id: 'f83e9a3b-5f96-45ce-a832-10e1b87732bf',
+    url: 'https://www.runestone.io',
+    project_id: 'f4c727f9-6331-439e-b34d-8e056a2aa282',
+    features: [],
+    variables: [],
+  },
+  {
+    created_at: '2023-02-09T13:36:37.103965+00:00',
+    uuid: 'f7d2a6b9-1180-4214-8f8b-c41693b1f8ac',
+    release_id: 'd445b390-8719-43f9-abd1-876b83d3243c',
+    environment_id: 'f83e9a3b-5f96-45ce-a832-10e1b87732bf',
+    url: 'https://www.runestone.io',
+    project_id: 'f4c727f9-6331-439e-b34d-8e056a2aa282',
+    features: [],
+    variables: [],
+  },
+];
