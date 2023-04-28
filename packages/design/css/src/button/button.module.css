@@ -1,0 +1,90 @@
+.base {
+  --base-background-color: var(--button-background-color);
+  --base-border-color: var(--button-border-color);
+  --base-border-width: var(--button-border-width);
+  --base-border-radius: var(--button-border-radius);
+  --base-color: var(--button-color);
+  --base-font-size: var(--button-font-size);
+  --base-font-weight: var(--button-font-weight);
+  --base-padding: var(--button-padding);
+  --base-box-shadow: var(--button-box-shadow);
+  --base-box-shadow-inset: var(--button-box-shadow-inset);
+
+  background-color: var(--base-background-color);
+  border-color: var(--base-border-color);
+  border-width: var(--base-border-width);
+  border-radius: var(--base-border-radius);
+  box-shadow: var(--base-box-shadow), var(--base-box-shadow-inset);
+  color: var(--base-color);
+  cursor: pointer;
+  font-size: var(--base-font-size);
+  font-weight: var(--base-font-weight);
+  justify-content: center;
+  padding: var(--base-padding);
+  text-align: center;
+  white-space: nowrap;
+
+  &:hover {
+    --base-background-color: var(--button-background-color-hover);
+  }
+
+  .icon {
+    font-size: var(--base-font-size);
+  }
+
+  .before {
+    margin-right: 0.5em;
+  }
+
+  .after {
+    margin-left: 0.5em;
+  }
+
+  &.primary {
+    --base-background-color: var(--color-primary);
+
+    &:hover {
+      --base-background-color: var(--color-primary-light);
+    }
+  }
+
+  &.success {
+    --base-background-color: var(--color-success);
+
+    &:hover {
+      --base-background-color: var(--color-success-light);
+    }
+  }
+
+  &.warning {
+    --base-background-color: var(--color-warning);
+
+    &:hover {
+      --base-background-color: var(--color-warning-light);
+    }
+  }
+
+  &.danger {
+    --base-background-color: var(--color-danger);
+
+    &:hover {
+      --base-background-color: var(--color-danger-light);
+    }
+  }
+
+  &.info {
+    --base-background-color: var(--color-info);
+
+    &:hover {
+      --base-background-color: var(--color-info-light);
+    }
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}

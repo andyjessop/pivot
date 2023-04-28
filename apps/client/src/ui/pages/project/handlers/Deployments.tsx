@@ -1,4 +1,4 @@
-import { card, icon, table, tag, typography } from '@pivot/design/css';
+import { button, card, icon, table, tag, typography } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 import { pick } from '@pivot/util/object';
 
@@ -31,6 +31,7 @@ export default function Deployments() {
         'environment_id',
         'features',
         'release_id',
+        'url',
         'variables',
       ]),
     });
@@ -64,7 +65,7 @@ export default function Deployments() {
                 </td>
                 <td>
                   <Link
-                    className={cx(tag.container, tag.info)}
+                    className={cx(tag.container, tag.success)}
                     to={{
                       name: 'environments',
                       params: { id: projectId },
@@ -82,11 +83,11 @@ export default function Deployments() {
                 </td>
                 <td>{created_at}</td>
                 <td>
-                  <button
-                    onClick={() => clone(uuid)}
-                    className="button is-dark"
-                  >
-                    Clone
+                  <button onClick={() => clone(uuid)} className={button.base}>
+                    <span className={cx(button.icon, button.before)}>
+                      <i className={icon.copy}></i>
+                    </span>
+                    <span>Duplicate</span>
                   </button>
                 </td>
               </tr>

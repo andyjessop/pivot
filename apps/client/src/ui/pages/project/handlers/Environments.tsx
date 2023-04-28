@@ -25,7 +25,7 @@ export default function Environments() {
           {environments.map(({ name, url, urlText, uuid }) => (
             <tr key={uuid}>
               <td>
-                <span className={cx(tag.container, tag.info)}>{name}</span>
+                <span className={cx(tag.container, tag.success)}>{name}</span>
               </td>
               <td>
                 {url ? (

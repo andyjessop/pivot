@@ -16,3 +16,12 @@ export interface Model {
   }[];
   variables: { variable_id: string; name: string; value: string }[];
 }
+
+export type VariablesList = {
+  variableType: string;
+  name: string;
+  created_at: string;
+  uuid: string;
+  variable_id: string;
+  value: string;
+}[];

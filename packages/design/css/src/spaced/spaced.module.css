@@ -7,6 +7,14 @@
   flex-direction: row;
   align-items: center;
   gap: var(--spaced-gap-default);
+
+  &.stretched {
+    width: 100%;
+
+    :last-child {
+      flex: 1;
+    }
+  }
 }
 
 .container.small {

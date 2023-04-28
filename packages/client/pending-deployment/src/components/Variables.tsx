@@ -1,10 +1,10 @@
-import { DeploymentVariableWithName } from '@pivot/client/deployments';
+import { VariablesList } from '@pivot/client/pending-deployment';
 import { cx } from '@pivot/util/classname';
 
 import styles from './variables.module.css';
 
 interface Props {
-  variables: DeploymentVariableWithName[];
+  variables: VariablesList;
   updateVariable: (uuid: string, value: string) => void;
 }
 
@@ -19,10 +19,10 @@ export function Variables({ variables, updateVariable }: Props) {
   return (
     <>
       {variables.map(({ name, value, uuid }) => (
-        <div className={styles.variable}>
+        <div className={styles.variable} key={uuid}>
           <div className={cx(styles.inner, 'field is-grouped')}>
             <div className="control has-icons-left is-expanded">
-              <input className="input" type="text" value={name} />
+              <input className="input" disabled type="text" value={name} />
               <span className="icon is-left">
                 <i className="las la-tags"></i>
               </span>
