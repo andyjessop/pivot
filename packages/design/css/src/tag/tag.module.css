@@ -1,10 +1,11 @@
 .container {
   --tag-background-color: var(--color-gray-40);
   --tag-color: var(--color-gray-10);
-  --tag-border-radius: var(--border-radius-1);
-  --tag-font-size: var(--font-size-3);
-  --tag-height: var(--spacing-4);
-  --tag-horizontal-padding: var(--spacing-1);
+  --tag-border-radius: var(--border-radius-4);
+  --tag-font-size: var(--font-size-2);
+  --tag-font-weight: var(--font-weight-quarterbold);
+  --tag-height: var(--spacing-3);
+  --tag-horizontal-padding: var(--spacing-15);
 
   align-items: center;
   background-color: var(--tag-background-color);
@@ -12,6 +13,7 @@
   color: var(--tag-color);
   display: inline-flex;
   font-size: var(--tag-font-size);
+  font-weight: var(--tag-font-weight);
   height: var(--tag-height);
   justify-content: center;
   line-height: 1.5;
@@ -20,21 +22,21 @@
 }
 
 .primary {
-  --tag-background-color: var(--color-primary-dark);
+  --tag-background-color: var(--color-primary);
 }
 
 .success {
-  --tag-background-color: var(--color-success-dark);
+  --tag-background-color: var(--color-success);
 }
 
 .warning {
-  --tag-background-color: var(--color-warning-dark);
+  --tag-background-color: var(--color-warning);
 }
 
 .danger {
-  --tag-background-color: var(--color-danger-dark);
+  --tag-background-color: var(--color-danger);
 }
 
 .info {
-  --tag-background-color: var(--color-info-dark);
+  --tag-background-color: var(--color-info);
 }

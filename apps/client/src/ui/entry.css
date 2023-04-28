@@ -8,3 +8,79 @@ body,
   height: 100%;
   width: 100%;
 }
+
+a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-lighten-40);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+.input,
+.select select,
+.textarea {
+  background-color: #333;
+  border-color: #505050;
+  border-radius: 4px;
+  color: #cfcfcf;
+}
+
+.input:active,
+.input:focus,
+.is-active.input,
+.is-active.textarea,
+.is-focused.input,
+.is-focused.textarea,
+.select select.is-active,
+.select select.is-focused,
+.select select:active,
+.select select:focus,
+.textarea:active,
+.textarea:focus {
+  border-color: #979797;
+  box-shadow: none;
+}
+
+input[disabled],
+.select fieldset[disabled] select,
+.select select[disabled],
+.textarea[disabled],
+fieldset[disabled] .input,
+fieldset[disabled] .select select,
+fieldset[disabled] .textarea {
+  border-color: transparent !important;
+  background-color: #222 !important;
+}
+
+/* stylelint-disable */
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: #767676;
+  right: 1.125em;
+  z-index: 4;
+}
+
+.select:not(.is-multiple):not(.is-loading):hover::after {
+  border-color: #b5b5b5;
+}
+/* stylelint-enable */
+
+.delete {
+  height: 30px;
+  max-height: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  min-width: 30px;
+  width: 30px;
+  background-color: #363636;
+}
+
+.delete:hover {
+  background-color: #4c4c4c;
+}

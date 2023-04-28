@@ -36,10 +36,12 @@
   --container-height: var(--modal-height);
   --container-width: var(--modal-width);
   --container-margin: 0;
+  --container-box-shadow: var(--modal-box-shadow);
 
   background-color: var(--container-background-color);
   border: var(--container-border-width) solid var(--container-border-color);
   border-radius: var(--container-border-radius);
+  box-shadow: var(--container-box-shadow);
   width: var(--container-width);
   height: var(--container-height);
   margin: var(--container-margin);
@@ -47,6 +49,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .header {
@@ -68,6 +71,7 @@
 .body {
   flex: 1;
   padding: calc(var(--container-padding) / 2) var(--container-padding);
+  overflow-y: scroll;
 }
 
 .container.small {

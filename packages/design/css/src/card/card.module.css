@@ -11,6 +11,7 @@
   padding: var(--container-padding-vertical) var(--container-padding-horizontal);
   border: var(--container-border-width) solid var(--container-border-color);
   border-radius: var(--container-border-radius);
+  box-shadow: var(--card-box-shadow);
 }
 
 .container.small {

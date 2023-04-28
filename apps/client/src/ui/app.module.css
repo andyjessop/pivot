@@ -8,6 +8,7 @@
   color: var(--subheader-color);
   border-top: 1px solid var(--subheader-border-color);
   border-bottom: 1px solid var(--subheader-border-color);
+  box-shadow: var(--subheader-box-shadow);
 }
 
 .content {

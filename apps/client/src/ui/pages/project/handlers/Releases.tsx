@@ -1,4 +1,4 @@
-import { card, icon, table, typography } from '@pivot/design/css';
+import { button, card, icon, table, typography } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -37,7 +37,7 @@ export default function Releases() {
                 <span>{release.created_at}</span>
               </td>
               <td>
-                <button className="button is-dark">Deploy</button>
+                <button className={button.base}>Deploy</button>
               </td>
             </tr>
           ))}

@@ -1,6 +1,5 @@
 import './entry.css';
 import '@pivot/design/variables';
-import '@pivot/design/global';
 
 import { Suspense } from 'react';
 
