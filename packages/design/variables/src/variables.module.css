@@ -97,7 +97,7 @@
   --button-background-color-hover: var(--color-lighten-07);
   --button-border-width: 1px;
   --button-border-color: var(--color-lighten-15);
-  --button-border-radius: var(--border-radius-1);
+  --button-border-radius: var(--border-radius-4);
   --button-box-shadow: 1px 1px 0 var(--color-darken-10);
   --button-box-shadow-inset: inset 0 1px 0 var(--color-lighten-03);
   --button-color: var(--color-gray-10);

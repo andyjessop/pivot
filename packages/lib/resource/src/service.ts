@@ -21,6 +21,7 @@ export function resourceService<
   return {
     create,
     delete: del,
+    getData: () => select().data,
     read: (...params: ReadParams) =>
       // Force the read if the polling interval is undefined because otherwise
       // the read will never happen.

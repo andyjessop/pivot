@@ -7,7 +7,6 @@ import { useSelector, useService } from '~app';
 import { selectEnvironmentsResourceData } from '~app/modules/environments';
 import {
   selectPendingDeploymentData,
-  selectPendingDeploymentFeatures,
   selectVariablesList,
 } from '~app/modules/pending-deployment';
 import { selectReleasesResourceData } from '~app/modules/releases';
@@ -16,13 +15,11 @@ export function PendingDeployment() {
   const service = useService('pendingDeployment');
   const environments = useSelector(selectEnvironmentsResourceData);
   const pendingDeployment = useSelector(selectPendingDeploymentData);
-  const features = useSelector(selectPendingDeploymentFeatures);
   const releases = useSelector(selectReleasesResourceData);
   const variables = useSelector(selectVariablesList);
 
   if (
     !environments ||
-    !features ||
     !pendingDeployment ||
     !releases ||
     !service ||

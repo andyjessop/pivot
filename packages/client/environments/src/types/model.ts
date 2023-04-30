@@ -17,7 +17,7 @@ interface EnvironmentFeature {
   value: number;
 }
 
-interface EnvironmentVariable {
+export interface EnvironmentVariable {
   created_at: string;
   uuid: string;
   environment_id: string;
