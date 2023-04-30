@@ -3,8 +3,8 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
-    "lint": "prettier src --write && eslint src --config ../../.eslintrc.json",
-    "lint:strict": "prettier src --write && eslint src --config ../../.eslintrc.strict.json",
+    "lint": "eslint src --config ../../.eslintrc.json",
+    "lint:strict": "eslint src --config ../../.eslintrc.strict.json",
     "preview": "vite preview",
     "stylelint": "stylelint \"src/**/*.css\" --allow-empty-input",
     "test": "vitest --config vitest.config.ts",
