@@ -17,8 +17,7 @@ export function Breadcrumb({ Link, parts }: BreadcrumbProps) {
         spaced.container,
         spaced.small,
         alignment['center-vertical'],
-      )}
-    >
+      )}>
       <Link className={style.home} to={{ name: 'home' }}>
         <span className={cx(style.icon, icon.home)}></span>
       </Link>
@@ -30,14 +29,12 @@ export function Breadcrumb({ Link, parts }: BreadcrumbProps) {
             spaced.container,
             spaced.small,
             alignment['center-vertical'],
-          )}
-        >
+          )}>
           <Link
             className={cx(style.link, {
               [style.active]: ndx === parts.length - 1,
             })}
-            to={{ name: part.route.name, params: part.route.params }}
-          >
+            to={{ name: part.route.name, params: part.route.params }}>
             {part.text}
           </Link>
           {ndx < parts.length - 1 ? (

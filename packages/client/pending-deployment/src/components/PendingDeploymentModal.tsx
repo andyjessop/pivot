@@ -16,7 +16,7 @@ import { PendingDeployment } from '../types';
 interface Props {
   clear: () => void;
   environments: Environment[];
-  Features?: JSX.Element;
+  // Features?: JSX.Element;
   pendingDeployment: PendingDeployment;
   releases: Release[];
   update: (deployment: Partial<PendingDeployment>) => void;
@@ -26,7 +26,7 @@ interface Props {
 export function PendingDeploymentModal({
   clear,
   environments,
-  Features,
+  // Features,
   pendingDeployment,
   releases,
   update,
@@ -55,26 +55,22 @@ export function PendingDeploymentModal({
           <button
             className="delete"
             aria-label="close"
-            onClick={clear}
-          ></button>
+            onClick={clear}></button>
         </header>
         <section className={modal.body}>
           <div
-            className={cx(spaced.container, spaced.stretched, form.fieldset)}
-          >
+            className={cx(spaced.container, spaced.stretched, form.fieldset)}>
             <div>
               <label
                 className={cx(typography.heading, form.label)}
-                htmlFor={release_id}
-              >
+                htmlFor={release_id}>
                 Release
               </label>
               <div className="select">
                 <select
                   defaultValue={release_id}
                   id={release_id}
-                  autoFocus={true}
-                >
+                  autoFocus={true}>
                   {releases.map((release) => (
                     <option key={release.uuid} value={release.uuid}>
                       {release.hash}
@@ -86,16 +82,14 @@ export function PendingDeploymentModal({
             <div>
               <label
                 className={cx(typography.heading, form.label)}
-                htmlFor={environment_id}
-              >
+                htmlFor={environment_id}>
                 Environment
               </label>
               <div className="select">
                 <select
                   defaultValue={environment_id}
                   id={environment_id}
-                  onChange={selectEnvironment}
-                >
+                  onChange={selectEnvironment}>
                   {environments.map((env) => (
                     <option key={env.uuid} value={env.uuid}>
                       {env.name}
@@ -108,8 +102,7 @@ export function PendingDeploymentModal({
               <div>
                 <label
                   className={cx(typography.heading, form.label)}
-                  htmlFor={environment_id}
-                >
+                  htmlFor={environment_id}>
                   URL
                 </label>
                 <div className="control">
@@ -123,20 +116,20 @@ export function PendingDeploymentModal({
               </div>
             ) : null}
           </div>
-
-          {Features ? (
+          {/* {Features ? (
             <div className={form.fieldset}>
               <h4 className={cx(typography.heading, form.label)}>
                 Feature Overrides
               </h4>
               {Features}
             </div>
-          ) : null}
+          ) : null} */}
           <div className={form.fieldset}>
             <h4 className={cx(typography.heading, form.label)}>Variables</h4>
             {Variables}
           </div>
         </section>
+
         <footer className={modal.footer}>
           <div className={button.container}>
             <button className={button.base} onClick={clear}>

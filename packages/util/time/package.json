@@ -2,8 +2,8 @@
   "name": "@pivot/util-time",
   "main": "./src/index.ts",
   "scripts": {
-    "lint": "eslint src --config ../../../.eslintrc.json",
-    "lint:strict": "eslint src --config ../../../.eslintrc.strict.json",
+    "lint": "prettier src --write && eslint src --config ../../../.eslintrc.json",
+    "lint:strict": "prettier src --write && eslint src --config ../../../.eslintrc.strict.json",
     "test": "vitest --config ../../../vitest.config.js",
     "type-check": "tsc --noEmit"
   }

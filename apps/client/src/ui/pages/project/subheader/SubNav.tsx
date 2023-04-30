@@ -20,8 +20,7 @@ export function SubNav({
             [styles.active]: item.isActive,
           })}
           key={item.text}
-          to={{ name: item.routeName, params: item.routeParams }}
-        >
+          to={{ name: item.routeName, params: item.routeParams }}>
           <span className={cx(item.icon, styles.icon)}></span>
           {item.text}
         </Link>

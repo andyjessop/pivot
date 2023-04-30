@@ -11,8 +11,7 @@ export function date(str: string) {
         'has-text-weight-bold',
         'has-text-grey-light',
         'is-capitalized',
-      )}
-    >
+      )}>
       ${relativeTime(str)}
     </span>
   `;
