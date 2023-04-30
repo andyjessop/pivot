@@ -117,7 +117,7 @@ export function PendingDeploymentModal({
                     className="input"
                     onChange={updateUrl}
                     type="text"
-                    value={pendingDeployment.url}
+                    value={pendingDeployment.url || ''}
                   />
                 </div>
               </div>
