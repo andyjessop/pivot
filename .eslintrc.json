@@ -10,7 +10,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -24,6 +24,7 @@
     "no-debugger": "off",
     "no-console": "off",
     "no-unused-vars": "off",
+    "prettier/prettier": "error",
     "simple-import-sort/imports": [
       "error",
       {

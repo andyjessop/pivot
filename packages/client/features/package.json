@@ -3,8 +3,8 @@
   "main": "./src/index.ts",
   "scripts": {
     "stylelint": "stylelint \"src/**/*.css\" --allow-empty-input",
-    "lint": "prettier src --write && eslint src --config ../../../.eslintrc.json",
-    "lint:strict": "prettier src --write && eslint src --config ../../../.eslintrc.strict.json",
+    "lint": "eslint src --config ../../../.eslintrc.json",
+    "lint:strict": "eslint src --config ../../../.eslintrc.strict.json",
     "test": "vitest --config ../../../vitest.config.js",
     "type-check": "bash -c tsc --noEmit"
   }
