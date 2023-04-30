@@ -5,13 +5,13 @@ import { pick } from '@pivot/util/object';
 import { Actions } from './types';
 
 export function service(
-  pendingDeployment: Actions,
+  pendingDeploymentApi: Actions,
   getDeployments: () => Deployment[] | null,
   getEnvironments: () => Environment[] | null,
 ) {
   return {
     cloneDeployment,
-    ...pendingDeployment,
+    ...pendingDeploymentApi,
   };
 
   /**
@@ -21,43 +21,57 @@ export function service(
     const deployments = getDeployments();
     const environments = getEnvironments();
 
-    if (!deployments || !environments) {
-      throw new Error('Deployments or environments not loaded');
-    }
-
-    const deployment = deployments.find((d) => d.uuid === uuid);
-
-    if (!deployment) {
-      throw new Error(`Deployment ${uuid} not found`);
-    }
-
-    const environment = environments.find(
-      (e) => e.uuid === deployment?.environment_id,
+    const pendingDeployment = getPendingDeployment(
+      uuid,
+      deployments,
+      environments,
     );
 
-    const props = [
-      'environment_id',
-      'features',
-      'release_id',
-      'variables',
-    ] as (keyof Deployment)[];
+    pendingDeploymentApi.set(pendingDeployment);
+  }
+}
 
-    // If the environment doesn't have a URL by default (e.g. example.com, staging.example.com)
-    // then we need to set the URL by cloning the deployment's URL.
-    if (!environment?.url) {
-      // If the deployment URL doesn't exist, then it's an error.
-      if (!deployment.url) {
-        throw new Error(
-          `Deployment ${uuid} does not have a URL and its environment does not have a URL`,
-        );
-      }
+export function getPendingDeployment(
+  uuid: string,
+  deployments: Deployment[] | null,
+  environments: Environment[] | null,
+) {
+  if (!deployments || !environments) {
+    throw new Error('Deployments or environments not loaded');
+  }
 
-      props.push('url');
+  const deployment = deployments.find((d) => d.uuid === uuid);
+
+  if (!deployment) {
+    throw new Error(`Deployment ${uuid} not found`);
+  }
+
+  const environment = environments.find(
+    (e) => e.uuid === deployment?.environment_id,
+  );
+
+  const props = [
+    'environment_id',
+    'features',
+    'release_id',
+    'variables',
+  ] as (keyof Deployment)[];
+
+  // If the environment doesn't have a URL by default (e.g. example.com, staging.example.com)
+  // then we need to set the URL by cloning the deployment's URL.
+  if (!environment?.url) {
+    // If the deployment URL doesn't exist, then it's an error.
+    if (!deployment.url) {
+      throw new Error(
+        `Deployment ${uuid} does not have a URL and its environment does not have a URL`,
+      );
     }
 
-    pendingDeployment.set({
-      deployment_id: deployment.uuid,
-      ...pick(deployment, props),
-    });
+    props.push('url');
   }
+
+  return {
+    deployment_id: deployment.uuid,
+    ...pick(deployment, props),
+  };
 }
