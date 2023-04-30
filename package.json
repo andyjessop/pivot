@@ -20,7 +20,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "redux": "^4.2.1",
-    "reselect": "^4.1.7",
+    "reselect": "^4.1.8",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0"
   },
