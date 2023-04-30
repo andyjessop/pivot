@@ -35,8 +35,7 @@ export default function Project() {
           styles.subheader,
           spaced.container,
           spaced.large,
-        )}
-      >
+        )}>
         <SubNav items={subheaderItems} Link={router.Link} />
       </div>
       <div className={cx(layout.content, styles.container)}>

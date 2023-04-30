@@ -40,8 +40,7 @@ export default function Deployments() {
                     to={{
                       name: 'releases',
                       params: { id: projectId },
-                    }}
-                  >
+                    }}>
                     {release?.hash}
                   </Link>
                 </td>
@@ -51,8 +50,7 @@ export default function Deployments() {
                     to={{
                       name: 'environments',
                       params: { id: projectId },
-                    }}
-                  >
+                    }}>
                     {environment?.name}
                   </Link>
                 </td>
@@ -67,8 +65,7 @@ export default function Deployments() {
                 <td>
                   <button
                     onClick={() => pendingDeployment.cloneDeployment(uuid)}
-                    className={button.base}
-                  >
+                    className={button.base}>
                     <span className={cx(button.icon, button.before)}>
                       <i className={icon.copy}></i>
                     </span>

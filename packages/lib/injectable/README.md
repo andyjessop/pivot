@@ -22,8 +22,7 @@ Or lazy-loading:
 
 ```ts
 const myInjectable = injectable({
-  importFn: (dep1, dep2) =>
-    import('./my-module').then((mod) => mod.myFunction(dep1, dep2)),
+  importFn: (dep1, dep2) => import('./my-module').then((mod) => mod.myFunction(dep1, dep2)),
   dependencies: [dep1, dep2],
 });
 ```

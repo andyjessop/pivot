@@ -9,8 +9,7 @@ export function tag(url: string, text: string) {
     href=${url}
     class=${styles.link}
     target="_blank"
-    rel="noopener noreferrer"
-  >
+    rel="noopener noreferrer">
     <span class=${cx('is-info', styles.tag, 'tag', 'is-normal')}>
       <span class="icon"> <i class="las la-code-branch"></i> </span
       ><span>${text}</span>

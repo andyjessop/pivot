@@ -16,8 +16,7 @@ export function MainNav({ items, Link }: NavbarProps) {
         {items.map((item) => (
           <li
             className={cx({ [styles.active]: item.active }, styles.item)}
-            key={item.text}
-          >
+            key={item.text}>
             <Link to={{ name: item.route }}>{item.text}</Link>
           </li>
         ))}

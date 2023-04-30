@@ -34,8 +34,7 @@ export function features(featuresData: Project.Model['features']) {
                       type="checkbox"
                       name=${environment}
                       class="switch is-info is-rounded"
-                      .checked=${value > 0}
-                    />
+                      .checked=${value > 0} />
                     <label for=${environment}></label>
                     <input
                       class=${cx(styles.slider, 'slider', 'is-normal')}
@@ -43,8 +42,7 @@ export function features(featuresData: Project.Model['features']) {
                       min="0"
                       max="1"
                       value=${value}
-                      type="range"
-                    />
+                      type="range" />
                     <span>${value}</span>
                   </div>
                 </div>

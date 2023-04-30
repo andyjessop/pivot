@@ -97,8 +97,7 @@ export class PivotPopover extends clickOutside(LitElement) {
             name="trigger"
             @click=${this.onToggle}
             @focus=${this.onOpen}
-            @blur=${this.onClose}
-          >
+            @blur=${this.onClose}>
           </slot>`
         : null}
       ${this.trigger === 'hover'
@@ -107,14 +106,12 @@ export class PivotPopover extends clickOutside(LitElement) {
             @mouseenter=${this.onOpen}
             @mouseleave=${this.onClose}
             @focus=${this.onOpen}
-            @blur=${this.onClose}
-          ></slot>`
+            @blur=${this.onClose}></slot>`
         : null}
       <slot
         name="content"
         class=${cx('content', this.placement, !this.open ? 'hidden' : '')}
-        @close-popover=${this.onClose}
-      ></slot>
+        @close-popover=${this.onClose}></slot>
     </div>`;
   }
 }

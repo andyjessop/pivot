@@ -7,8 +7,7 @@ export function link(url: string, text: string) {
     href=${url}
     class=${styles.message}
     target="_blank"
-    rel="noopener noreferrer"
-  >
+    rel="noopener noreferrer">
     ${text}
   </a>`;
 }
