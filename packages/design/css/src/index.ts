@@ -11,4 +11,5 @@ export * from './spin';
 export * from './table';
 export * from './tag';
 export * from './typography';
+export * from './util';
 export * from './variants';

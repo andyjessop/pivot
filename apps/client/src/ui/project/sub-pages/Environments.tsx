@@ -1,4 +1,4 @@
-import { card, icon, table, tag, typography } from '@pivot/design/css';
+import { card, icon, table, tag, typography, util } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -13,7 +13,7 @@ export default function Environments() {
   }
 
   return (
-    <div className={cx(card.container)}>
+    <div className={cx(card.container, util.center)}>
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
