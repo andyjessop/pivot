@@ -55,6 +55,9 @@
     "@nx/eslint-plugin": "16.0.1",
     "@nx/js": "16.0.1"
   },
+  "engines": {
+    "node": "18.13.0"
+  },
   "workspaces": {
     "packages": [
       "apps/**",
