@@ -1,9 +1,9 @@
 import React from 'react';
 
-const project = React.lazy(() => import('../pages/project/Project'));
+const project = React.lazy(() => import('../project/Project'));
 
 export const routeComponents = {
-  '404': React.lazy(() => import('../pages/NotFound')),
+  '404': React.lazy(() => import('../NotFound')),
   project: project,
   deployments: project,
   environments: project,
