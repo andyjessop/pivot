@@ -1,4 +1,4 @@
-import './entry.css';
+import './app.css';
 import '@pivot/design/variables';
 
 import { RenderRoute } from '@pivot/client/router';
@@ -7,7 +7,7 @@ import { useSelector, useService } from '~app';
 import { selectRouteName } from '~app/modules/router';
 import { routes } from '~routes';
 
-export default function Entry() {
+export function App() {
   const router = useService('router');
   const head = useService('head');
 

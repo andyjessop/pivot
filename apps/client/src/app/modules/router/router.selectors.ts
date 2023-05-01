@@ -2,8 +2,6 @@ import { createSelector } from 'reselect';
 
 import { RouterState, selectors } from '@pivot/client/router';
 
-// import { config } from './router.config';
-
 export const selectRouter = (state: { router: RouterState }) => state.router;
 
 export const selectRoute = createSelector(selectRouter, selectors.route);
