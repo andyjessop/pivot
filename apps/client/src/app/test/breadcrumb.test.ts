@@ -75,12 +75,6 @@ describe('integration', () => {
 
       expect(parts).toEqual([
         {
-          text: 'Projects',
-          route: {
-            name: 'projects',
-          },
-        },
-        {
           text: 'Pivot',
           route: {
             name: 'project',
@@ -105,12 +99,6 @@ describe('integration', () => {
       const parts = await app.waitFor(selectBreadcrumbParts, lastPartIsDeployments);
 
       expect(parts).toEqual([
-        {
-          text: 'Projects',
-          route: {
-            name: 'projects',
-          },
-        },
         {
           text: 'Pivot',
           route: {
