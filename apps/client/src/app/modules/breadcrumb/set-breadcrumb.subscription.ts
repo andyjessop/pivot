@@ -3,7 +3,7 @@ import { Route } from '@pivot/client/router';
 
 import { BreadcrumbService, breadcrumbService } from '~app/modules/breadcrumb';
 import { selectRoute } from '~app/modules/router';
-import { config } from '~app/modules/router/router.config';
+import { routes } from '~routes';
 
 /**
  * Set the breadcrumbs.
@@ -15,7 +15,7 @@ export const setBreadcrumb = {
       return;
     }
 
-    const parts = getParts(config, route?.name, route?.params);
+    const parts = getParts(routes, route?.name, route?.params);
 
     service.replaceParts(parts);
   },
