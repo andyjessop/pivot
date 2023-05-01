@@ -4,7 +4,7 @@ import { buildRoutes } from '@pivot/client/router';
 
 export const routes = buildRoutes({
   notFound: {
-    component: React.lazy(() => import('./ui/NotFound')),
+    component: React.lazy(() => import('./ui/not-found/NotFound')),
     path: '/404',
   },
   project: {

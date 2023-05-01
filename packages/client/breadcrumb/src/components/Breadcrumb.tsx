@@ -13,7 +13,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({ Link, parts }: BreadcrumbProps) {
   return (
     <div className={cx(spaced.container, spaced.small, alignment['center-vertical'])}>
-      <Link className={style.home} to={{ name: 'home' }}>
+      <Link className={style.root} to={{ name: 'root' }}>
         <span className={cx(style.icon, icon.home)}></span>
       </Link>
       {parts.map((part, ndx) => (

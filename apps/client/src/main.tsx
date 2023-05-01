@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { App } from './ui/App';
+
 main();
 
 async function main() {
@@ -21,7 +23,5 @@ async function main() {
 
   app.init();
 
-  const Entry = React.lazy(() => import('./ui/Entry'));
-
-  ReactDOM.createRoot(document.getElementById('root')!).render(<Entry />);
+  ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
 }
