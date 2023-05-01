@@ -8,11 +8,12 @@ import { httpService } from '../http';
 import { variablesResourceSlice } from './variables-resource.slice';
 
 export const variablesHttp = injectable({
-  importFn: (http) => import('@pivot/client/variables').then((mod) => mod.http(http)),
   dependencies: [httpService],
+  importFn: (http) => import('@pivot/client/variables').then((mod) => mod.http(http)),
 });
 
 export const variablesResourceService = injectable({
+  dependencies: [variablesResourceSlice, variablesHttp],
   importFn: (slice, http) =>
     Promise.resolve(
       resourceService(
@@ -24,7 +25,6 @@ export const variablesResourceService = injectable({
         slice,
       ),
     ),
-  dependencies: [variablesResourceSlice, variablesHttp],
 });
 
 export type VariablesResource = ResourceService<Variable[], Error, [string]>;

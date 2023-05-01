@@ -16,9 +16,9 @@ export function http(env: Env, cache: Cache) {
 
     return fetch(url, {
       headers: {
+        'Content-Type': 'application/json',
         apiKey: env.get(Variable.SUPABASE_API_KEY),
         authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
       },
       method: 'GET',
     }).then((res) => res.json());

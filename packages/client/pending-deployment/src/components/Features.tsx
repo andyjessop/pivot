@@ -39,24 +39,24 @@ export function Features({ features, updateFeature }: Props) {
             <div className="field">
               <div className={cx(styles['inputs'], 'field', 'is-grouped')}>
                 <input
+                  checked={enabled}
+                  className="switch is-info is-rounded"
                   id={uuid}
-                  type="checkbox"
                   name={uuid}
                   onChange={onToggle(uuid)}
-                  className="switch is-info is-rounded"
-                  checked={enabled}
+                  type="checkbox"
                   value={uuid}
                 />
                 <label htmlFor={uuid}></label>
                 <input
                   className={cx(styles.slider, 'slider', 'is-normal')}
                   disabled={!enabled}
-                  step="0.05"
-                  min="0"
                   max="1"
+                  min="0"
                   onChange={onSliderChange(uuid)}
-                  value={value}
+                  step="0.05"
                   type="range"
+                  value={value}
                 />
                 <span>{value}</span>
               </div>

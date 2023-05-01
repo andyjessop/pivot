@@ -1,5 +1,5 @@
 export interface Actions {
-  createFromRelease(releaseId: string): void;
   createFromDeployment(deploymentId: string): void;
+  createFromRelease(releaseId: string): void;
   setCurrentNavItem(item: string): void;
 }

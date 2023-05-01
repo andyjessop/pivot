@@ -32,7 +32,7 @@ export default function Project({ Outlet }: Props) {
           spaced.container,
           spaced.large,
         )}>
-        <SubNav items={subheaderItems} Link={router.Link} />
+        <SubNav Link={router.Link} items={subheaderItems} />
       </div>
       <div className={cx(layout.content, styles.container)}>
         <div className={styles.info}></div>

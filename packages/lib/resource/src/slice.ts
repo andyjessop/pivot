@@ -3,8 +3,8 @@ import { slice } from '@pivot/lib/slice';
 interface State<D, E> {
   data: D | null;
   error: E | null;
-  loading: boolean;
   loaded: boolean;
+  loading: boolean;
   updating: boolean;
 }
 
@@ -16,8 +16,8 @@ export function resourceSlice<D, E>(name: string) {
     {
       data: null,
       error: null,
-      loading: false,
       loaded: false,
+      loading: false,
       updating: false,
     } as State<D, E>,
     {

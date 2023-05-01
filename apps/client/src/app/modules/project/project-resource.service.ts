@@ -8,11 +8,12 @@ import { httpService } from '../http';
 import { projectResourceSlice } from './project-resource.slice';
 
 export const projectHttp = injectable({
-  importFn: (http) => import('@pivot/client/project').then((mod) => mod.http(http)),
   dependencies: [httpService],
+  importFn: (http) => import('@pivot/client/project').then((mod) => mod.http(http)),
 });
 
 export const projectResourceService = injectable({
+  dependencies: [projectResourceSlice, projectHttp],
   importFn: (slice, http) =>
     Promise.resolve(
       resourceService(
@@ -25,7 +26,6 @@ export const projectResourceService = injectable({
         slice,
       ),
     ),
-  dependencies: [projectResourceSlice, projectHttp],
 });
 
 export type ProjectResource = ResourceService<Model, Error, [string]>;

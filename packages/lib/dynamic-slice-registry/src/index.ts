@@ -9,8 +9,8 @@ type SliceConfig<T extends Slice<any>> = {
 };
 
 type SliceEntry<T extends Slice<any>> = SliceConfig<T> & {
-  instance?: Slice<any>;
   externallyResolvablePromise: ExternallyResolvablePromise<Slice<any, any, any>>;
+  instance?: Slice<any>;
   registering?: boolean;
   unregister?: () => void;
 };

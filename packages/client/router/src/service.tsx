@@ -13,9 +13,9 @@ export function service<T extends RouterConfig>(
   navigate(getRouteFromUrl(config, window.location.href));
 
   return {
+    Link,
     destroy,
     link,
-    Link,
     navigate,
   };
 
@@ -82,10 +82,10 @@ export function service<T extends RouterConfig>(
 
     if (!route) {
       api.navigateSuccess({
+        hash: '',
         name: 'notFound',
         params: {},
         search: {},
-        hash: '',
       });
 
       return;

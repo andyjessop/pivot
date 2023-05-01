@@ -9,7 +9,7 @@ import { routes } from '~routes';
  * Set the breadcrumbs.
  */
 export const setBreadcrumb = {
-  selector: selectRoute,
+  dependencies: [breadcrumbService],
   handler: (service: BreadcrumbService) => (route?: Route | null) => {
     if (!route) {
       return;
@@ -19,5 +19,5 @@ export const setBreadcrumb = {
 
     service.replaceParts(parts);
   },
-  dependencies: [breadcrumbService],
+  selector: selectRoute,
 };

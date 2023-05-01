@@ -7,13 +7,13 @@ import { cx } from '@pivot/util/classname';
 import { PendingDeployment } from '../types';
 
 interface Props {
+  Variables: JSX.Element;
   clear: () => void;
   environments: Environment[];
   // Features?: JSX.Element;
   pendingDeployment: PendingDeployment;
   releases: Release[];
   update: (deployment: Partial<PendingDeployment>) => void;
-  Variables: JSX.Element;
 }
 
 export function PendingDeploymentModal({
@@ -45,7 +45,7 @@ export function PendingDeploymentModal({
       <dialog aria-modal="true" className={cx(modal.container)}>
         <header className={modal.header}>
           <h2 className={typography.heading}>Create New Deployment</h2>
-          <button className="delete" aria-label="close" onClick={clear}></button>
+          <button aria-label="close" className="delete" onClick={clear}></button>
         </header>
         <section className={modal.body}>
           <div className={cx(spaced.container, spaced.stretched, form.fieldset)}>
@@ -54,7 +54,7 @@ export function PendingDeploymentModal({
                 Release
               </label>
               <div className="select">
-                <select defaultValue={release_id} id={release_id} autoFocus={true}>
+                <select autoFocus={true} defaultValue={release_id} id={release_id}>
                   {releases.map((release) => (
                     <option key={release.uuid} value={release.uuid}>
                       {release.hash}

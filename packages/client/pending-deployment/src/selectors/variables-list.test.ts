@@ -19,8 +19,8 @@ const environments = [
 ];
 
 const variables = [
-  { uuid: 'v1', name: 'deployment-variable' },
-  { uuid: 'v2', name: 'environment-variable' },
+  { name: 'deployment-variable', uuid: 'v1' },
+  { name: 'environment-variable', uuid: 'v2' },
 ] as Variable[];
 
 describe('variablesList', () => {
@@ -59,14 +59,14 @@ describe('variablesList', () => {
   test('returns the correct variables list', () => {
     expect(variablesList(pendingDeployment, environments, variables)).toEqual([
       {
-        variable_id: 'v1',
-        variableType: 'deployment',
         name: 'deployment-variable',
+        variableType: 'deployment',
+        variable_id: 'v1',
       },
       {
-        variable_id: 'v2',
-        variableType: 'environment',
         name: 'environment-variable',
+        variableType: 'environment',
+        variable_id: 'v2',
       },
     ]);
   });

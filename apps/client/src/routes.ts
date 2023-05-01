@@ -3,15 +3,6 @@ import React from 'react';
 import { buildRoutes } from '@pivot/client/router';
 
 export const routes = buildRoutes({
-  notFound: {
-    component: React.lazy(() => import('./ui/not-found/NotFound')),
-    path: '/404',
-  },
-  project: {
-    component: React.lazy(() => import('./ui/project/Project')),
-    parent: 'root',
-    path: '/projects/:id',
-  },
   deployments: {
     component: React.lazy(() => import('./ui/deployments/Deployments')),
     path: '/projects/:id/deployments',
@@ -23,6 +14,15 @@ export const routes = buildRoutes({
   features: {
     component: React.lazy(() => import('./ui/features/Features')),
     path: '/projects/:id/features',
+  },
+  notFound: {
+    component: React.lazy(() => import('./ui/not-found/NotFound')),
+    path: '/404',
+  },
+  project: {
+    component: React.lazy(() => import('./ui/project/Project')),
+    parent: 'root',
+    path: '/projects/:id',
   },
   projects: {
     component: React.lazy(() => import('./ui/project/Project')),

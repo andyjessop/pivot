@@ -26,7 +26,7 @@ export default function Releases() {
           {releases.map((release) => (
             <tr key={release.uuid}>
               <td>
-                <a href={release.commit_url} target="_blank">
+                <a href={release.commit_url} rel="noreferrer" target="_blank">
                   <span>
                     {release.hash}&nbsp;
                     <span className={icon.externalLink}></span>

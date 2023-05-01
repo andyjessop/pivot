@@ -1,5 +1,5 @@
 export interface State {
-  currentNavItem: string;
   clonedDeploymentId: string | null;
+  currentNavItem: string;
   deployedReleaseId: string | null;
 }

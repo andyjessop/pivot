@@ -1,26 +1,26 @@
 export interface Environment {
-  uuid: string;
+  clone_of: string | null;
   created_at: string;
+  features: EnvironmentFeature[];
   name: string;
   project_id: string;
   url: string | null;
-  clone_of: string | null;
-  features: EnvironmentFeature[];
+  uuid: string;
   variables: EnvironmentVariable[];
 }
 
 interface EnvironmentFeature {
   created_at: string;
-  uuid: string;
   environment_id: string;
   feature_id: string;
+  uuid: string;
   value: number;
 }
 
 export interface EnvironmentVariable {
   created_at: string;
-  uuid: string;
   environment_id: string;
-  variable_id: string;
+  uuid: string;
   value: string;
+  variable_id: string;
 }

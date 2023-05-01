@@ -5,6 +5,6 @@ export interface State {
 }
 
 export interface Part {
-  text: string;
   route: Route;
+  text: string;
 }

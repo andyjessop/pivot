@@ -1,11 +1,11 @@
 import { getParts } from './get-parts';
 
 const sampleConfig = {
+  about: { parent: 'home', path: '/about' },
   home: { path: '/' },
-  about: { path: '/about', parent: 'home' },
-  users: { path: '/user', parent: 'home' },
-  user: { path: '/user/:id', parent: 'users' },
-  settings: { path: '/user/:id/settings', parent: 'user' },
+  settings: { parent: 'user', path: '/user/:id/settings' },
+  user: { parent: 'users', path: '/user/:id' },
+  users: { parent: 'home', path: '/user' },
 };
 
 describe('getParts', () => {
@@ -27,7 +27,7 @@ describe('getParts', () => {
     const result = getParts(sampleConfig, 'about');
     expect(result).toEqual([
       { route: { name: 'home' } },
-      { text: 'about', route: { name: 'about' } },
+      { route: { name: 'about' }, text: 'about' },
     ]);
   });
 
@@ -35,8 +35,8 @@ describe('getParts', () => {
     const result = getParts(sampleConfig, 'user', { id: '42' });
     expect(result).toEqual([
       { route: { name: 'home' } },
-      { text: 'user', route: { name: 'users' } },
-      { text: ':id', route: { name: 'user', params: { id: '42' } } },
+      { route: { name: 'users' }, text: 'user' },
+      { route: { name: 'user', params: { id: '42' } }, text: ':id' },
     ]);
   });
 
@@ -44,9 +44,9 @@ describe('getParts', () => {
     const result = getParts(sampleConfig, 'settings', { id: '42' });
     expect(result).toEqual([
       { route: { name: 'home' } },
-      { text: 'user', route: { name: 'users' } },
-      { text: ':id', route: { name: 'user', params: { id: '42' } } },
-      { text: 'settings', route: { name: 'settings', params: { id: '42' } } },
+      { route: { name: 'users' }, text: 'user' },
+      { route: { name: 'user', params: { id: '42' } }, text: ':id' },
+      { route: { name: 'settings', params: { id: '42' } }, text: 'settings' },
     ]);
   });
 });

@@ -31,10 +31,10 @@ describe('integration', () => {
 
       expect(parts).toEqual([
         {
-          text: 'Projects',
           route: {
             name: 'projects',
           },
+          text: 'Projects',
         },
       ]);
     });
@@ -46,24 +46,24 @@ describe('integration', () => {
 
       expect(parts).toEqual([
         {
-          text: 'Projects',
           route: {
             name: 'projects',
           },
+          text: 'Projects',
         },
         {
-          text: 'Pivot',
           route: {
             name: 'project',
             params: { id: project.uuid },
           },
+          text: 'Pivot',
         },
         {
-          text: 'Deployments',
           route: {
             name: 'deployments',
             params: { id: project.uuid },
           },
+          text: 'Deployments',
         },
       ]);
     });
@@ -75,18 +75,18 @@ describe('integration', () => {
 
       expect(parts).toEqual([
         {
-          text: 'Pivot',
           route: {
             name: 'project',
             params: { id: project.uuid },
           },
+          text: 'Pivot',
         },
         {
-          text: 'Environments',
           route: {
             name: 'environments',
             params: { id: project.uuid },
           },
+          text: 'Environments',
         },
       ]);
     });
@@ -100,18 +100,18 @@ describe('integration', () => {
 
       expect(parts).toEqual([
         {
-          text: 'Pivot',
           route: {
             name: 'project',
             params: { id: project.uuid },
           },
+          text: 'Pivot',
         },
         {
-          text: 'Deployments',
           route: {
             name: 'deployments',
             params: { id: project.uuid },
           },
+          text: 'Deployments',
         },
       ]);
     });

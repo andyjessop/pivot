@@ -41,8 +41,8 @@ export function variablesList(
 
     return {
       ...variable,
-      variableType: 'environment',
       name: variableData.name,
+      variableType: 'environment',
     };
   });
 
@@ -63,8 +63,8 @@ export function variablesList(
 
     return {
       ...variable,
-      variableType: 'deployment',
       name: variableData.name,
+      variableType: 'deployment',
     };
   });
 

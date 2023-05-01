@@ -30,7 +30,7 @@ import { Part } from '../types';
  * The id is to be subsituted by the route handler.
  */
 export function getParts(
-  config: Record<string, { path: string; parent?: string }>,
+  config: Record<string, { parent?: string; path: string }>,
   routeName: string,
   routeParams?: Record<string, string | undefined>,
 ): Part[] {
@@ -58,11 +58,11 @@ export function getParts(
     const pathParams = params && pick(params, pathParamKeys);
 
     breadcrumbs.unshift({
-      text: pathParts[pathParts.length - 1],
       route: {
         name: route,
         params: pathParamKeys.length ? pathParams : undefined,
       },
+      text: pathParts[pathParts.length - 1],
     });
 
     if (config[route].parent) {

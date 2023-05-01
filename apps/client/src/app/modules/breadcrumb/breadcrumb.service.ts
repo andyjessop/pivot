@@ -3,8 +3,8 @@ import { ExtractInstance, injectable } from '@pivot/lib/injectable';
 import { BreadcrumbSlice, breadcrumbSlice } from './breadcrumb.slice';
 
 export const breadcrumbService = injectable({
-  importFn: (slice: BreadcrumbSlice) => Promise.resolve(slice.api),
   dependencies: [breadcrumbSlice],
+  importFn: (slice: BreadcrumbSlice) => Promise.resolve(slice.api),
 });
 
 export type BreadcrumbService = ExtractInstance<typeof breadcrumbService>;

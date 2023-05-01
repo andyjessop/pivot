@@ -40,8 +40,8 @@ describe('integration', () => {
       expect(loadedState).toEqual({
         data: project,
         error: null,
-        loading: false,
         loaded: true,
+        loading: false,
         updating: false,
       });
     });

@@ -1,27 +1,27 @@
 import { Project } from '@pivot/client/shared-interfaces';
 
 export interface Model {
-  release: Project.Release;
   environmentId: string;
   environments: Project.Environment[];
-  url?: string;
   features: {
+    created_at: string;
+    environment_id: string;
+    feature_id: string;
     fromEnvironment: boolean;
     name: string;
-    created_at: string;
-    feature_id: string;
     uuid: string;
     value: number;
-    environment_id: string;
   }[];
-  variables: { variable_id: string; name: string; value: string }[];
+  release: Project.Release;
+  url?: string;
+  variables: { name: string; value: string; variable_id: string }[];
 }
 
 export type VariablesList = {
-  variableType: string;
-  name: string;
   created_at: string;
+  name: string;
   uuid: string;
-  variable_id: string;
   value: string;
+  variableType: string;
+  variable_id: string;
 }[];

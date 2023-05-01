@@ -15,10 +15,6 @@ export type Config<
   DeleteReturn = any,
   UpdateReturn = any,
 > = {
-  read: {
-    pollingInterval?: number;
-    query: (...params: ReadParams) => Promise<Data>;
-  };
   create?: {
     optimistic?: (...params: CreateParams) => (data: Data | null) => Data;
     query: (...params: CreateParams) => Promise<CreateReturn>;
@@ -28,6 +24,10 @@ export type Config<
     optimistic?: (...params: DeleteParams) => (data: Data | null) => Data;
     query: (...params: DeleteParams) => Promise<DeleteReturn>;
     transform?: (res: DeleteReturn) => (data: Data | null) => Data;
+  };
+  read: {
+    pollingInterval?: number;
+    query: (...params: ReadParams) => Promise<Data>;
   };
   update?: {
     optimistic?: (...params: UpdateParams) => (data: Data | null) => Data;

@@ -12,9 +12,9 @@ export function createProjectHttpApi(env: Env, cache: Cache) {
 
       return fetch(`${env.get(Variable.SUPABASE_FUNCTIONS_URL)}/deployments?projectId=${id}`, {
         headers: {
+          'Content-Type': 'application/json',
           apiKey: env.get(Variable.SUPABASE_API_KEY),
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
         },
         method: 'GET',
       }).then((res) => res.json());

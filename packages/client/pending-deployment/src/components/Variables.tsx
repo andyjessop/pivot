@@ -4,8 +4,8 @@ import { cx } from '@pivot/util/classname';
 import styles from './variables.module.css';
 
 interface Props {
-  variables: VariablesList;
   updateVariable: (uuid: string, value: string) => void;
+  variables: VariablesList;
 }
 
 export function Variables({ variables, updateVariable }: Props) {

@@ -6,8 +6,8 @@ import { button, spaced } from '@pivot/design/css';
 import styles from './user-nav.module.css';
 
 interface UserNavProps {
-  data: State;
   actions: Service;
+  data: State;
 }
 
 export function UserNav({ actions, data }: UserNavProps) {
@@ -38,10 +38,10 @@ export function UserNav({ actions, data }: UserNavProps) {
       <form onSubmit={onSubmit}>
         <div className="field is-grouped">
           <div className="control">
-            <input className="input" type="email" placeholder="Email" />
+            <input className="input" placeholder="Email" type="email" />
           </div>
           <div className="control">
-            <input className="input" type="password" placeholder="Password" />
+            <input className="input" placeholder="Password" type="password" />
           </div>
           <div className="control">
             <button className={button.base} type="submit">

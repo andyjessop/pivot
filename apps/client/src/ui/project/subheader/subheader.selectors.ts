@@ -8,9 +8,9 @@ import { selectRouteName } from '~app/modules/router';
 export type SubheaderItem = {
   icon: string;
   isActive: boolean;
-  text: string;
   routeName: string;
   routeParams: Record<string, string>;
+  text: string;
 };
 
 export type SubheaderItems = SubheaderItem[];
