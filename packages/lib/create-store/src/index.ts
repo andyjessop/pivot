@@ -6,8 +6,8 @@ import { createUseSelector } from '@pivot/lib/use-selector';
 
 export type SliceConfigs = {
   [key: string]: {
-    injectable: Injectable<Slice<any>>;
     active: (state: any) => boolean;
+    injectable: Injectable<Slice<any>>;
   };
 };
 

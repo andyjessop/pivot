@@ -30,7 +30,7 @@ import { Part } from '../types';
  * The id is to be subsituted by the route handler.
  */
 export function getParts(
-  config: Record<string, { path: string; parent?: string }>,
+  config: Record<string, { parent?: string; path: string }>,
   routeName: string,
   routeParams?: Record<string, string | undefined>,
 ): Part[] {

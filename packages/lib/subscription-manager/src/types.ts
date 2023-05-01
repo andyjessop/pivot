@@ -3,8 +3,8 @@ import { Injectable } from '@pivot/lib/injectable';
 export type Subscription = (val: any) => void;
 
 export type SubscriptionConfig<T extends Subscription> = {
-  handler: T;
   dependencies?: Injectable<any>[];
+  handler: T;
   selector: (state: any) => any;
 };
 

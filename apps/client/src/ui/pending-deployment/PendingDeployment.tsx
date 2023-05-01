@@ -22,17 +22,17 @@ export function PendingDeployment() {
   //   <Features features={features} updateFeature={updateFeature} />
   // );
 
-  const VariablesComponent = <Variables variables={variables} updateVariable={updateVariable} />;
+  const VariablesComponent = <Variables updateVariable={updateVariable} variables={variables} />;
 
   return (
     <PendingDeploymentModal
+      Variables={VariablesComponent}
       clear={() => set(null)}
       environments={environments}
-      // Features={FeaturesComponent}
       pendingDeployment={pendingDeployment}
       releases={releases}
       update={update}
-      Variables={VariablesComponent}
+      // Features={FeaturesComponent}
     />
   );
 }

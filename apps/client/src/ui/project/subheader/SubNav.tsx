@@ -5,7 +5,7 @@ import { cx } from '@pivot/util/classname';
 import { SubheaderItems } from './subheader.selectors';
 import styles from './subnav.module.css';
 
-export function SubNav({ items, Link }: { items: SubheaderItems; Link: Router['Link'] }) {
+export function SubNav({ items, Link }: { Link: Router['Link']; items: SubheaderItems }) {
   return (
     <>
       {items.map((item) => (

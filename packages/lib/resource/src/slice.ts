@@ -3,8 +3,8 @@ import { slice } from '@pivot/lib/slice';
 interface State<D, E> {
   data: D | null;
   error: E | null;
-  loading: boolean;
   loaded: boolean;
+  loading: boolean;
   updating: boolean;
 }
 

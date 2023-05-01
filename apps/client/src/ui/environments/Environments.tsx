@@ -29,7 +29,7 @@ export default function Environments() {
               </td>
               <td>
                 {url ? (
-                  <a href={url} target="_blank">
+                  <a href={url} rel="noreferrer" target="_blank">
                     <span>
                       {urlText}&nbsp;<span className={icon.externalLink}></span>
                     </span>

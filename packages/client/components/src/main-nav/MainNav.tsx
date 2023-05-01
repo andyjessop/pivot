@@ -5,13 +5,13 @@ import styles from './main-nav.module.css';
 import { NavItem } from './types';
 
 interface NavbarProps {
-  items: NavItem[];
   Link: Router['Link'];
+  items: NavItem[];
 }
 
 export function MainNav({ items, Link }: NavbarProps) {
   return (
-    <nav role="navigation" aria-label="main navigation">
+    <nav aria-label="main navigation" role="navigation">
       <ul className={styles.nav}>
         {items.map((item) => (
           <li className={cx({ [styles.active]: item.active }, styles.item)} key={item.text}>

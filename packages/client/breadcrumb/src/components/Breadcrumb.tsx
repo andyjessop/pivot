@@ -18,13 +18,13 @@ export function Breadcrumb({ Link, parts }: BreadcrumbProps) {
       </Link>
       {parts.map((part, ndx) => (
         <div
-          key={part.text}
           className={cx(
             style.container,
             spaced.container,
             spaced.small,
             alignment['center-vertical'],
-          )}>
+          )}
+          key={part.text}>
           <Link
             className={cx(style.link, {
               [style.active]: ndx === parts.length - 1,

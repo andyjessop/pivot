@@ -10,7 +10,7 @@ interface NavbarProps {
 export function Navbar({ LeftNav, RightNav }: NavbarProps) {
   return (
     <nav className={cx('navbar', styles.container)} role="navigation">
-      <div id="main-nav" className="navbar-menu">
+      <div className="navbar-menu" id="main-nav">
         <div className="navbar-start">{LeftNav}</div>
       </div>
 

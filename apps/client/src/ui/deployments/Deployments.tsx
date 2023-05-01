@@ -54,7 +54,7 @@ export default function Deployments() {
                 </Link>
               </td>
               <td>
-                <a href={url} target="_blank">
+                <a href={url} rel="noreferrer" target="_blank">
                   <span>
                     {urlText}&nbsp;<span className={icon.externalLink}></span>
                   </span>
@@ -63,8 +63,8 @@ export default function Deployments() {
               <td>{created_at}</td>
               <td>
                 <button
-                  onClick={() => pendingDeployment.cloneDeployment(uuid)}
-                  className={button.base}>
+                  className={button.base}
+                  onClick={() => pendingDeployment.cloneDeployment(uuid)}>
                   <span className={cx(button.icon, button.before)}>
                     <i className={icon.copy}></i>
                   </span>

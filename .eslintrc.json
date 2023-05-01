@@ -3,6 +3,7 @@
     "eslint:recommended",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -10,7 +11,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort", "sort-keys-fix"],
+  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort", "sort-keys-fix", "typescript-sort-keys"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -21,10 +22,12 @@
         "caughtErrorsIgnorePattern": "^_"
       }
     ],
+    "react/jsx-sort-props": "error",
     "no-debugger": "off",
     "no-console": "off",
     "no-unused-vars": "off",
     "prettier/prettier": "error",
+    "react/react-in-jsx-scope": "off",
     "simple-import-sort/imports": [
       "error",
       {
@@ -40,6 +43,8 @@
         ]
       }
     ],
-    "sort-keys-fix/sort-keys-fix": "error"
+    "sort-keys-fix/sort-keys-fix": "error",
+    "typescript-sort-keys/interface": "error",
+    "typescript-sort-keys/string-enum": "error"
   }
 }
