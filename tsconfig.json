@@ -79,7 +79,8 @@
       "~app": ["apps/client/src/app/index.ts"],
       "~app/*": ["apps/client/src/app/*"],
       "~assets/*": ["apps/client/src/assets/*"],
-      "~modules/*": ["apps/client/src/modules/*"]
+      "~modules/*": ["apps/client/src/modules/*"],
+      "~routes": ["apps/client/src/routes.ts"]
     },
     "plugins": [
       {
