@@ -47,7 +47,7 @@
     "stylelint-config-standard": "^33.0.0",
     "typescript": "^5.0.4",
     "typescript-plugin-css-modules": "^5.0.0",
-    "vite": "^4.2.0",
+    "vite": "^4.3.3",
     "vitest": "^0.29.7",
     "nx-cloud": "16.0.5",
     "@nx/devkit": "16.0.1",
