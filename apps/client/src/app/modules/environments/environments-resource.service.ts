@@ -8,8 +8,7 @@ import { httpService } from '../http';
 import { environmentsResourceSlice } from './environments-resource.slice';
 
 export const projectHttp = injectable({
-  importFn: (http) =>
-    import('@pivot/client/environments').then((mod) => mod.http(http)),
+  importFn: (http) => import('@pivot/client/environments').then((mod) => mod.http(http)),
   dependencies: [httpService],
 });
 
@@ -28,9 +27,5 @@ export const environmentsResourceService = injectable({
   dependencies: [environmentsResourceSlice, projectHttp],
 });
 
-export type EnvironmentsResource = ResourceService<
-  Environment,
-  Error,
-  [string]
->;
+export type EnvironmentsResource = ResourceService<Environment, Error, [string]>;
 export type EnvironmentsResourceState = State<Environment[], Error>;

@@ -77,14 +77,7 @@ export function envTag(env: string) {
   }
 
   return html`
-    <span
-      class=${cx(
-        tagClass,
-        deploymentCard['tag'],
-        'tag',
-        'is-normal',
-        'is-capitalized',
-      )}
+    <span class=${cx(tagClass, deploymentCard['tag'], 'tag', 'is-normal', 'is-capitalized')}
       >${env}</span
     >
   `;

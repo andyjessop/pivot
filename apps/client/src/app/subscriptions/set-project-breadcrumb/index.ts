@@ -1,10 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { BreadcrumbService, breadcrumbService } from '~app/modules/breadcrumb';
-import {
-  selectIsProjectRoute,
-  selectProjectName,
-} from '~app/modules/project/project.selectors';
+import { selectIsProjectRoute, selectProjectName } from '~app/modules/project/project.selectors';
 import { selectRoute } from '~app/modules/router';
 
 const selectBreadcrumbPart = createSelector(
@@ -27,15 +24,14 @@ const selectBreadcrumbPart = createSelector(
  */
 export const setProjectBreadcrumb = {
   selector: selectBreadcrumbPart,
-  handler:
-    (service: BreadcrumbService) => (part?: { key: string; text: string }) => {
-      if (!part) {
-        return;
-      }
+  handler: (service: BreadcrumbService) => (part?: { key: string; text: string }) => {
+    if (!part) {
+      return;
+    }
 
-      const { key, text } = part;
+    const { key, text } = part;
 
-      service.setPart(key, text);
-    },
+    service.setPart(key, text);
+  },
   dependencies: [breadcrumbService],
 };

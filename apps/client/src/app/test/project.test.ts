@@ -71,10 +71,7 @@ describe('integration', () => {
       // The fetch-project subscription calls `resource.read` when on a project route
       visit(`/projects/${project.uuid}`);
 
-      const loadedState = await app.waitForState(
-        'projectResource',
-        (state) => state.loaded,
-      );
+      const loadedState = await app.waitForState('projectResource', (state) => state.loaded);
 
       expect(loadedState).toEqual({
         data: project,
@@ -91,30 +88,15 @@ describe('integration', () => {
       // The fetch-project subscription calls `resource.read` when on a project route
       visit(`/projects/${project.uuid}`);
 
-      const deployments = await app.waitFor(
-        selectDeploymentsData,
-        (data) => data?.length !== 0,
-      );
+      const deployments = await app.waitFor(selectDeploymentsData, (data) => data?.length !== 0);
 
-      const environments = await app.waitFor(
-        selectEnvironmentsData,
-        (data) => data?.length !== 0,
-      );
+      const environments = await app.waitFor(selectEnvironmentsData, (data) => data?.length !== 0);
 
-      const features = await app.waitFor(
-        selectFeaturesData,
-        (data) => data?.length !== 0,
-      );
+      const features = await app.waitFor(selectFeaturesData, (data) => data?.length !== 0);
 
-      const releases = await app.waitFor(
-        selectReleasesData,
-        (data) => data?.length !== 0,
-      );
+      const releases = await app.waitFor(selectReleasesData, (data) => data?.length !== 0);
 
-      const variables = await app.waitFor(
-        selectVariablesData,
-        (data) => data?.length !== 0,
-      );
+      const variables = await app.waitFor(selectVariablesData, (data) => data?.length !== 0);
 
       expect(
         [deployments, environments, features, releases, variables].every(

@@ -8,10 +8,7 @@ import { selectRouteName, selectRouteParams } from '../router';
 
 import { EnvironmentsResourceState } from './environments-resource.service';
 
-export const selectIsEnvironmentsRoute = createSelector(
-  selectRouteName,
-  isEnvironmentsRoute,
-);
+export const selectIsEnvironmentsRoute = createSelector(selectRouteName, isEnvironmentsRoute);
 
 export const selectEnvironmentsProjectId = createSelector(
   selectIsEnvironmentsRoute,

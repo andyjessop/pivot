@@ -14,9 +14,7 @@ export function MainNav({ items, Link }: NavbarProps) {
     <nav role="navigation" aria-label="main navigation">
       <ul className={styles.nav}>
         {items.map((item) => (
-          <li
-            className={cx({ [styles.active]: item.active }, styles.item)}
-            key={item.text}>
+          <li className={cx({ [styles.active]: item.active }, styles.item)} key={item.text}>
             <Link to={{ name: item.route }}>{item.text}</Link>
           </li>
         ))}

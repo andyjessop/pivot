@@ -40,10 +40,7 @@ export function getParts(
 
   return breadcrumbs;
 
-  function buildBreadcrumb(
-    route?: string,
-    params?: Record<string, string | undefined>,
-  ) {
+  function buildBreadcrumb(route?: string, params?: Record<string, string | undefined>) {
     if (!route) {
       return;
     }
@@ -52,9 +49,7 @@ export function getParts(
       throw new Error(`Invalid route: ${route}`);
     }
 
-    const pathParts = config[route].path
-      .split('/')
-      .filter((part) => part.length > 0);
+    const pathParts = config[route].path.split('/').filter((part) => part.length > 0);
 
     const pathParamKeys = pathParts
       .filter((part) => part.startsWith(':'))

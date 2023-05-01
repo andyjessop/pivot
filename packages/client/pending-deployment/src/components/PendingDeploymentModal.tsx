@@ -1,13 +1,6 @@
 import { Environment } from '@pivot/client/environments';
 import { Release } from '@pivot/client/releases';
-import {
-  button,
-  form,
-  icon,
-  modal,
-  spaced,
-  typography,
-} from '@pivot/design/css';
+import { button, form, icon, modal, spaced, typography } from '@pivot/design/css';
 import { useEscapeKey } from '@pivot/hooks';
 import { cx } from '@pivot/util/classname';
 
@@ -52,25 +45,16 @@ export function PendingDeploymentModal({
       <dialog aria-modal="true" className={cx(modal.container)}>
         <header className={modal.header}>
           <h2 className={typography.heading}>Create New Deployment</h2>
-          <button
-            className="delete"
-            aria-label="close"
-            onClick={clear}></button>
+          <button className="delete" aria-label="close" onClick={clear}></button>
         </header>
         <section className={modal.body}>
-          <div
-            className={cx(spaced.container, spaced.stretched, form.fieldset)}>
+          <div className={cx(spaced.container, spaced.stretched, form.fieldset)}>
             <div>
-              <label
-                className={cx(typography.heading, form.label)}
-                htmlFor={release_id}>
+              <label className={cx(typography.heading, form.label)} htmlFor={release_id}>
                 Release
               </label>
               <div className="select">
-                <select
-                  defaultValue={release_id}
-                  id={release_id}
-                  autoFocus={true}>
+                <select defaultValue={release_id} id={release_id} autoFocus={true}>
                   {releases.map((release) => (
                     <option key={release.uuid} value={release.uuid}>
                       {release.hash}
@@ -80,9 +64,7 @@ export function PendingDeploymentModal({
               </div>
             </div>
             <div>
-              <label
-                className={cx(typography.heading, form.label)}
-                htmlFor={environment_id}>
+              <label className={cx(typography.heading, form.label)} htmlFor={environment_id}>
                 Environment
               </label>
               <div className="select">
@@ -100,9 +82,7 @@ export function PendingDeploymentModal({
             </div>
             {env?.url === null ? (
               <div>
-                <label
-                  className={cx(typography.heading, form.label)}
-                  htmlFor={environment_id}>
+                <label className={cx(typography.heading, form.label)} htmlFor={environment_id}>
                   URL
                 </label>
                 <div className="control">

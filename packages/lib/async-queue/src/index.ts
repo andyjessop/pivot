@@ -11,10 +11,7 @@ export function asyncQueue(autoFlush = true): AsyncQueue {
     flush,
   };
 
-  function add<T extends AnyFunction>(
-    fn: T,
-    ...params: unknown[]
-  ): Promise<ReturnType<T>> {
+  function add<T extends AnyFunction>(fn: T, ...params: unknown[]): Promise<ReturnType<T>> {
     let rej: AnyFunction = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
     let res: AnyFunction = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
 

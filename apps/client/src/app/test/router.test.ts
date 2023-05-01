@@ -66,10 +66,7 @@ describe('integration', () => {
 
       router.navigate({ name: 'project', params: { id: project.uuid } });
 
-      const route = await app.waitFor(
-        selectRoute,
-        (route) => route?.name === 'notFound',
-      );
+      const route = await app.waitFor(selectRoute, (route) => route?.name === 'notFound');
 
       expect(route?.name).toEqual('notFound');
     });
@@ -81,10 +78,7 @@ describe('integration', () => {
 
       await auth.logout();
 
-      const route = await app.waitFor(
-        selectRoute,
-        (route) => route?.name === 'notFound',
-      );
+      const route = await app.waitFor(selectRoute, (route) => route?.name === 'notFound');
 
       expect(route?.name).toEqual('notFound');
     });

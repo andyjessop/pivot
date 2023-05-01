@@ -8,8 +8,7 @@ import { httpService } from '../http';
 import { variablesResourceSlice } from './variables-resource.slice';
 
 export const variablesHttp = injectable({
-  importFn: (http) =>
-    import('@pivot/client/variables').then((mod) => mod.http(http)),
+  importFn: (http) => import('@pivot/client/variables').then((mod) => mod.http(http)),
   dependencies: [httpService],
 });
 

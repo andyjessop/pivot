@@ -7,9 +7,7 @@ export function navItems(route?: Route | null): NavItem[] {
     {
       route: 'projects',
       text: 'Projects',
-      active: route?.name
-        ? ['project', 'projects'].includes(route?.name)
-        : false,
+      active: route?.name ? ['project', 'projects'].includes(route?.name) : false,
     },
   ];
 }

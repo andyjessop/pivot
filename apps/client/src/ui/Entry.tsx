@@ -38,9 +38,7 @@ export default function Entry() {
   /**
    * Fallback blank screen.
    */
-  const PageFallback = (
-    <div className={cx(layout.subheader, styles.subheader)}></div>
-  );
+  const PageFallback = <div className={cx(layout.subheader, styles.subheader)}></div>;
 
   /**
    * Main navigation component.

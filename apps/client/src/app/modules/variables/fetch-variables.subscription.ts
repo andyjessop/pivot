@@ -1,8 +1,5 @@
 import { selectVariablesProjectId } from './variables.selectors';
-import {
-  VariablesResource,
-  variablesResourceService,
-} from './variables-resource.service';
+import { VariablesResource, variablesResourceService } from './variables-resource.service';
 
 export const fetchVariables = {
   selector: selectVariablesProjectId,

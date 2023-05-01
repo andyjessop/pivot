@@ -1,14 +1,8 @@
-import {
-  PendingDeploymentModal,
-  Variables,
-} from '@pivot/client/pending-deployment';
+import { PendingDeploymentModal, Variables } from '@pivot/client/pending-deployment';
 
 import { useSelector, useService } from '~app';
 import { selectEnvironmentsResourceData } from '~app/modules/environments';
-import {
-  selectPendingDeploymentData,
-  selectVariablesList,
-} from '~app/modules/pending-deployment';
+import { selectPendingDeploymentData, selectVariablesList } from '~app/modules/pending-deployment';
 import { selectReleasesResourceData } from '~app/modules/releases';
 
 export function PendingDeployment() {
@@ -18,13 +12,7 @@ export function PendingDeployment() {
   const releases = useSelector(selectReleasesResourceData);
   const variables = useSelector(selectVariablesList);
 
-  if (
-    !environments ||
-    !pendingDeployment ||
-    !releases ||
-    !service ||
-    !variables
-  ) {
+  if (!environments || !pendingDeployment || !releases || !service || !variables) {
     return null;
   }
 
@@ -34,9 +22,7 @@ export function PendingDeployment() {
   //   <Features features={features} updateFeature={updateFeature} />
   // );
 
-  const VariablesComponent = (
-    <Variables variables={variables} updateVariable={updateVariable} />
-  );
+  const VariablesComponent = <Variables variables={variables} updateVariable={updateVariable} />;
 
   return (
     <PendingDeploymentModal
