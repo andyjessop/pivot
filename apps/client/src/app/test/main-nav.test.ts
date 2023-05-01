@@ -22,9 +22,9 @@ describe('integration', () => {
 
       expect(items).toEqual([
         {
+          active: false,
           route: 'projects',
           text: 'Projects',
-          active: false,
         },
       ]);
     });
@@ -40,9 +40,9 @@ describe('integration', () => {
 
       expect(items).toEqual([
         {
+          active: true,
           route: 'projects',
           text: 'Projects',
-          active: true,
         },
       ]);
     });

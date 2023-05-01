@@ -14,7 +14,7 @@ export const selectProjectRoute = createSelector(selectRoute, (route) => {
  * Redirect /projects/:id to /projects/:id/deployments.
  */
 export const projectRedirect = {
-  selector: selectProjectRoute,
+  dependencies: [routerService],
   handler: (router: Router) => (projectRoute: Route) => {
     if (!projectRoute) {
       return;
@@ -25,5 +25,5 @@ export const projectRedirect = {
       params: projectRoute.params,
     });
   },
-  dependencies: [routerService],
+  selector: selectProjectRoute,
 };

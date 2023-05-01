@@ -58,11 +58,11 @@ export function getParts(
     const pathParams = params && pick(params, pathParamKeys);
 
     breadcrumbs.unshift({
-      text: pathParts[pathParts.length - 1],
       route: {
         name: route,
         params: pathParamKeys.length ? pathParams : undefined,
       },
+      text: pathParts[pathParts.length - 1],
     });
 
     if (config[route].parent) {

@@ -16,8 +16,8 @@ export function resourceSlice<D, E>(name: string) {
     {
       data: null,
       error: null,
-      loading: false,
       loaded: false,
+      loading: false,
       updating: false,
     } as State<D, E>,
     {

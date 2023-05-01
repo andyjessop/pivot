@@ -28,11 +28,11 @@ const selectHeadTitle = createSelector(
  * Adds head metadata to the application when the route changes.
  */
 export const headMetadata = {
-  selector: selectHeadTitle,
+  dependencies: [headService],
   handler: (head: Head) => (title?: string) => {
     if (title) {
       head.setTitle(title);
     }
   },
-  dependencies: [headService],
+  selector: selectHeadTitle,
 };

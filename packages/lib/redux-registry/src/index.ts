@@ -32,8 +32,8 @@ export function middlewareRegistry() {
     return function withDispatch(next: Dispatch) {
       return function withAction(action: Action) {
         const middlewareAPI = {
-          getState,
           dispatch: dynamicMiddlewareDispatch,
+          getState,
         } as MiddlewareAPI;
 
         const chain = mdw.map(bindMiddlewareAPI);

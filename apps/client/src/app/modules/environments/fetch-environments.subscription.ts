@@ -3,11 +3,11 @@ import { selectEnvironmentsProjectId } from '../environments/environments.select
 import { EnvironmentsResource, environmentsResourceService } from './environments-resource.service';
 
 export const fetchEnvironments = {
-  selector: selectEnvironmentsProjectId,
+  dependencies: [environmentsResourceService],
   handler: (resource: EnvironmentsResource) => (projectId: string) => {
     if (projectId) {
       resource.read(projectId);
     }
   },
-  dependencies: [environmentsResourceService],
+  selector: selectEnvironmentsProjectId,
 };

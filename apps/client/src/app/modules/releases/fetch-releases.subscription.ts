@@ -3,11 +3,11 @@ import { selectReleasesProjectId } from '../releases/releases.selectors';
 import { ReleasesResource, releasesResourceService } from './releases-resource.service';
 
 export const fetchReleases = {
-  selector: selectReleasesProjectId,
+  dependencies: [releasesResourceService],
   handler: (resource: ReleasesResource) => (projectId: string) => {
     if (projectId) {
       resource.read(projectId);
     }
   },
-  dependencies: [releasesResourceService],
+  selector: selectReleasesProjectId,
 };

@@ -7,8 +7,8 @@ import { authSlice } from './auth.slice';
 import { httpService } from './http.service';
 
 export const authService = injectable({
+  dependencies: [authSlice, cacheService, httpService],
   importFn: (auth, cache, http) => {
     return Promise.resolve(service(auth.api, cache, http));
   },
-  dependencies: [authSlice, cacheService, httpService],
 });

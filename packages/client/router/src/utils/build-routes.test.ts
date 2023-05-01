@@ -2,15 +2,6 @@ import { buildRoutes } from './build-routes';
 import { Routes } from './types';
 
 export const routes = {
-  notFound: {
-    path: '/404',
-  },
-  project: {
-    path: '/projects/:id',
-  },
-  projects: {
-    path: '/projects',
-  },
   deployments: {
     path: '/projects/:id/deployments',
   },
@@ -22,6 +13,15 @@ export const routes = {
   },
   home: {
     path: '/',
+  },
+  notFound: {
+    path: '/404',
+  },
+  project: {
+    path: '/projects/:id',
+  },
+  projects: {
+    path: '/projects',
   },
   releases: {
     path: '/projects/:id/releases',
@@ -35,12 +35,12 @@ describe('buildRoutes', () => {
   it('should convert routes to config', () => {
     const config = buildRoutes(routes);
     const expectedConfig = {
-      notFound: { parent: 'home', path: '/404' },
-      home: { path: '/' },
-      project: { parent: 'projects', path: '/projects/:id' },
       deployments: { parent: 'project', path: '/projects/:id/deployments' },
       environments: { parent: 'project', path: '/projects/:id/environments' },
       features: { parent: 'project', path: '/projects/:id/features' },
+      home: { path: '/' },
+      notFound: { parent: 'home', path: '/404' },
+      project: { parent: 'projects', path: '/projects/:id' },
       projects: { parent: 'home', path: '/projects' },
       releases: { parent: 'project', path: '/projects/:id/releases' },
       variables: { parent: 'project', path: '/projects/:id/variables' },

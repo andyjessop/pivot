@@ -31,11 +31,11 @@ export const selectShouldRedirectToNotFound = createSelector(
  * if they are not authorized to view the current route.
  */
 export const unauthorizedRedirect = {
-  selector: selectShouldRedirectToNotFound,
+  dependencies: [routerService],
   handler: (router: Router) => (shouldRedirect: boolean) => {
     if (shouldRedirect) {
       router.navigate({ name: 'notFound' });
     }
   },
-  dependencies: [routerService],
+  selector: selectShouldRedirectToNotFound,
 };

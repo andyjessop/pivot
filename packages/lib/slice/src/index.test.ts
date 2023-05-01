@@ -27,13 +27,13 @@ describe('slice', () => {
 
     // eslint-disable-next-line
     // @ts-expect-error
-    expect(reducer(undefined, { type: add.type, payload: 1 })).toEqual({
+    expect(reducer(undefined, { payload: 1, type: add.type })).toEqual({
       count: 1,
     });
-    expect(reducer(initial, { type: add.type, payload: 1 })).toEqual({
+    expect(reducer(initial, { payload: 1, type: add.type })).toEqual({
       count: 1,
     });
-    expect(reducer(initial, { type: add.type, payload: undefined })).toEqual({
+    expect(reducer(initial, { payload: undefined, type: add.type })).toEqual({
       count: NaN,
     });
 
@@ -55,7 +55,7 @@ describe('slice', () => {
     const { add } = actions;
 
     expect(add(1, 2)).toEqual({ payload: [1, 2], type: add.type });
-    expect(reducer(initial, { type: add.type, payload: [1, 2] })).toEqual({
+    expect(reducer(initial, { payload: [1, 2], type: add.type })).toEqual({
       count: 3,
     });
   });
@@ -75,12 +75,12 @@ describe('slice', () => {
     const { add, addOptional } = actions;
 
     expect(add(1, 2)).toEqual({ payload: [1, 2], type: add.type });
-    expect(reducer(initial, { type: add.type, payload: [1, 2] })).toEqual({
+    expect(reducer(initial, { payload: [1, 2], type: add.type })).toEqual({
       count: 3,
     });
 
     expect(addOptional(2)).toEqual({ payload: [2], type: addOptional.type });
-    expect(reducer(initial, { type: addOptional.type, payload: [2] })).toEqual({
+    expect(reducer(initial, { payload: [2], type: addOptional.type })).toEqual({
       count: 2,
     });
 
@@ -88,7 +88,7 @@ describe('slice', () => {
       payload: [2, 1],
       type: addOptional.type,
     });
-    expect(reducer(initial, { type: addOptional.type, payload: [2, 1] })).toEqual({ count: 3 });
+    expect(reducer(initial, { payload: [2, 1], type: addOptional.type })).toEqual({ count: 3 });
   });
 
   it('should handle optional parameters (1)', () => {
@@ -102,7 +102,7 @@ describe('slice', () => {
     const { addOptional } = actions;
 
     expect(addOptional(2)).toEqual({ payload: 2, type: addOptional.type });
-    expect(reducer(initial, { type: addOptional.type, payload: 2 })).toEqual({
+    expect(reducer(initial, { payload: 2, type: addOptional.type })).toEqual({
       count: 2,
     });
 
@@ -110,7 +110,7 @@ describe('slice', () => {
       payload: undefined,
       type: addOptional.type,
     });
-    expect(reducer(initial, { type: addOptional.type, payload: undefined })).toEqual({ count: 0 });
+    expect(reducer(initial, { payload: undefined, type: addOptional.type })).toEqual({ count: 0 });
   });
 
   it('should handle optional parameters (2)', () => {
@@ -128,7 +128,7 @@ describe('slice', () => {
       payload: [2],
       type: addOptional.type,
     });
-    expect(reducer(initial, { type: addOptional.type, payload: [2] })).toEqual({
+    expect(reducer(initial, { payload: [2], type: addOptional.type })).toEqual({
       count: 2,
     });
 
@@ -136,7 +136,7 @@ describe('slice', () => {
       payload: [2, 1],
       type: addOptional.type,
     });
-    expect(reducer(initial, { type: addOptional.type, payload: [2, 1] })).toEqual({ count: 3 });
+    expect(reducer(initial, { payload: [2, 1], type: addOptional.type })).toEqual({ count: 3 });
   });
 
   it('should work with array type params', () => {
@@ -150,7 +150,7 @@ describe('slice', () => {
     const { add } = actions;
 
     expect(add([1, 2])).toEqual({ payload: [1, 2], type: add.type });
-    expect(reducer(initial, { type: add.type, payload: [1, 2] })).toEqual({
+    expect(reducer(initial, { payload: [1, 2], type: add.type })).toEqual({
       count: 3,
     });
   });
@@ -228,8 +228,8 @@ describe('slice', () => {
     addListener(listener);
 
     store.dispatch({
-      type: 'some-other-action',
       payload: [1, 2],
+      type: 'some-other-action',
     });
 
     expect(listener).toBeCalledTimes(0);

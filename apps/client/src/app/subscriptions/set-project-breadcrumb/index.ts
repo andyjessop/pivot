@@ -23,7 +23,7 @@ const selectBreadcrumbPart = createSelector(
  * Set the breadcrumbs.
  */
 export const setProjectBreadcrumb = {
-  selector: selectBreadcrumbPart,
+  dependencies: [breadcrumbService],
   handler: (service: BreadcrumbService) => (part?: { key: string; text: string }) => {
     if (!part) {
       return;
@@ -33,5 +33,5 @@ export const setProjectBreadcrumb = {
 
     service.setPart(key, text);
   },
-  dependencies: [breadcrumbService],
+  selector: selectBreadcrumbPart,
 };

@@ -58,18 +58,18 @@ export function resourceService<
 
       api.set({
         data: res,
-        loading: false,
-        loaded: true,
-        updating: false,
         error: null,
+        loaded: true,
+        loading: false,
+        updating: false,
       });
 
       return res;
     } catch (error: unknown) {
       api.set({
+        error: error as Error,
         loading: false,
         updating: false,
-        error: error as Error,
       });
 
       return error as Error;
@@ -127,9 +127,9 @@ export function resourceService<
         }
       } catch (error: unknown) {
         api.set({
+          error: error as Error,
           loading: false,
           updating: false,
-          error: error as Error,
         });
       }
 

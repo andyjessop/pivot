@@ -26,7 +26,7 @@ export function dynamicStore({ isDev }: { isDev?: boolean } = { isDev: true }) {
   const addReducer = (id: string, reducer: Reducer) => {
     const remove = rRegistry.add(id, reducer);
 
-    store.dispatch({ type: '__pivot/reducer/add', payload: { id } });
+    store.dispatch({ payload: { id }, type: '__pivot/reducer/add' });
 
     return () => {
       // Remove reducer from combination
@@ -39,7 +39,7 @@ export function dynamicStore({ isDev }: { isDev?: boolean } = { isDev: true }) {
         delete state[id];
       }
 
-      store.dispatch({ type: '__pivot/reducer/remove', payload: { id } });
+      store.dispatch({ payload: { id }, type: '__pivot/reducer/remove' });
     };
   };
 

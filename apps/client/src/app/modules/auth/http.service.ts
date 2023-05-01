@@ -4,6 +4,6 @@ import { injectable } from '@pivot/lib/injectable';
 import { envService } from '../env/env.service';
 
 export const httpService = injectable({
-  importFn: (env) => Promise.resolve(http(env)),
   dependencies: [envService],
+  importFn: (env) => Promise.resolve(http(env)),
 });

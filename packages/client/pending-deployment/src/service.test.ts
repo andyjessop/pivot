@@ -5,45 +5,45 @@ import { getPendingDeployment } from './service';
 
 const deployment1: Deployment = {
   created_at: '2023-04-29T10:00:00Z',
-  uuid: 'd1',
-  release_id: 'r1',
   environment_id: 'e1',
-  url: 'https://deployment1.example.com',
-  project_id: 'p1',
   features: [],
+  project_id: 'p1',
+  release_id: 'r1',
+  url: 'https://deployment1.example.com',
+  uuid: 'd1',
   variables: [],
 };
 
 const deployment2: Deployment = {
   created_at: '2023-04-29T11:00:00Z',
-  uuid: 'd2',
-  release_id: 'r2',
   environment_id: 'e2',
-  url: '',
-  project_id: 'p1',
   features: [],
+  project_id: 'p1',
+  release_id: 'r2',
+  url: '',
+  uuid: 'd2',
   variables: [],
 };
 
 const environment1: Environment = {
-  uuid: 'e1',
+  clone_of: null,
   created_at: '2023-04-29T08:00:00Z',
+  features: [],
   name: 'env1',
   project_id: 'p1',
   url: 'https://env1.example.com',
-  clone_of: null,
-  features: [],
+  uuid: 'e1',
   variables: [],
 };
 
 const environment2: Environment = {
-  uuid: 'e2',
+  clone_of: null,
   created_at: '2023-04-29T09:00:00Z',
+  features: [],
   name: 'env2',
   project_id: 'p1',
   url: null,
-  clone_of: null,
-  features: [],
+  uuid: 'e2',
   variables: [],
 };
 

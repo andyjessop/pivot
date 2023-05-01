@@ -39,7 +39,7 @@ export const selectDeploymentsData = createSelector(
         (environment) => environment.uuid === deployment.environment_id,
       ),
       release: releases?.find((release) => release.uuid === deployment.release_id),
-      urlText: stripProtocol(deployment.url),
       url: deployment.url,
+      urlText: stripProtocol(deployment.url),
     })),
 );

@@ -8,7 +8,14 @@ import { selectProjectId } from './project.selectors';
 import { ProjectResource, projectResourceService } from './project-resource.service';
 
 export const fetchProject = {
-  selector: selectProjectId,
+  dependencies: [
+    projectResourceService,
+    deploymentsResourceService,
+    environmentsResourceService,
+    featuresResourceService,
+    releasesResourceService,
+    variablesResourceService,
+  ],
   handler:
     (
       project: ProjectResource,
@@ -28,12 +35,5 @@ export const fetchProject = {
         variables.read(projectId);
       }
     },
-  dependencies: [
-    projectResourceService,
-    deploymentsResourceService,
-    environmentsResourceService,
-    featuresResourceService,
-    releasesResourceService,
-    variablesResourceService,
-  ],
+  selector: selectProjectId,
 };

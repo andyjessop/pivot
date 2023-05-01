@@ -11,8 +11,8 @@ export function http(env: Env) {
       fetch(`${env.get(Variable.SUPABASE_API_URL)}/auth/v1/token?grant_type=password`, {
         body: JSON.stringify({ email, password }),
         headers: {
-          apiKey: env.get(Variable.SUPABASE_API_KEY),
           'Content-Type': 'application/json',
+          apiKey: env.get(Variable.SUPABASE_API_KEY),
         },
         method: 'POST',
       }).then((res) => res.json()),
@@ -20,9 +20,9 @@ export function http(env: Env) {
     logout: (token: string): Promise<any> =>
       fetch(`${env.get(Variable.SUPABASE_API_URL)}/auth/v1/logout`, {
         headers: {
+          'Content-Type': 'application/json',
           apiKey: env.get(Variable.SUPABASE_API_KEY),
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
         },
         method: 'POST',
       }).then((res) => res.json()),
@@ -31,8 +31,8 @@ export function http(env: Env) {
       fetch(`${env.get(Variable.SUPABASE_API_URL)}/auth/v1/token?grant_type=refresh_token`, {
         body: JSON.stringify({ refresh_token: token }),
         headers: {
-          apiKey: env.get(Variable.SUPABASE_API_KEY),
           'Content-Type': 'application/json',
+          apiKey: env.get(Variable.SUPABASE_API_KEY),
         },
         method: 'POST',
       }).then((res) => res.json()),
@@ -43,9 +43,9 @@ export function http(env: Env) {
     user: (token: string): Promise<User> =>
       fetch(`${env.get(Variable.SUPABASE_API_URL)}/auth/v1/user`, {
         headers: {
+          'Content-Type': 'application/json',
           apiKey: env.get(Variable.SUPABASE_API_KEY),
           authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
         },
         method: 'GET',
       }).then((res) => res.json()),

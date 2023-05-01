@@ -48,10 +48,10 @@ export function humanReadableDate(dateString: string, userLocale = 'en-US'): str
 
   const options: Intl.DateTimeFormatOptions = {
     day: 'numeric',
-    month: 'short',
     hour: '2-digit',
-    minute: '2-digit',
     hour12: false,
+    minute: '2-digit',
+    month: 'short',
   };
 
   if (inputDate.getFullYear() !== currentDate.getFullYear()) {
