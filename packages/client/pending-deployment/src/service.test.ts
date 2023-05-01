@@ -61,9 +61,9 @@ describe('getPendingDeployment', () => {
   });
 
   test('throws error when deployment not found', () => {
-    expect(() =>
-      getPendingDeployment('non-existent-uuid', deployments, environments),
-    ).toThrow('Deployment non-existent-uuid not found');
+    expect(() => getPendingDeployment('non-existent-uuid', deployments, environments)).toThrow(
+      'Deployment non-existent-uuid not found',
+    );
   });
 
   test('throws error when deployment and environment do not have URLs', () => {
@@ -90,10 +90,7 @@ describe('getPendingDeployment', () => {
       url: 'https://env2.example.com',
     };
 
-    const result = getPendingDeployment('d2', deployments, [
-      environment1,
-      environment2WithUrl,
-    ]);
+    const result = getPendingDeployment('d2', deployments, [environment1, environment2WithUrl]);
 
     expect(result).toEqual({
       deployment_id: 'd2',

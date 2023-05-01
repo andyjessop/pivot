@@ -29,10 +29,7 @@ export function resourceService<
     update,
   };
 
-  async function read(
-    params: ReadParams,
-    force = false,
-  ): Promise<Data | Error | undefined> {
+  async function read(params: ReadParams, force = false): Promise<Data | Error | undefined> {
     const { pollingInterval, query } = config.read;
 
     // If we have readParams and we're not forcing, then just let the polling interval

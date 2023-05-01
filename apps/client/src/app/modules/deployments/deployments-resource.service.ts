@@ -8,8 +8,7 @@ import { httpService } from '../http';
 import { deploymentsResourceSlice } from './deployments-resource.slice';
 
 export const projectHttp = injectable({
-  importFn: (http) =>
-    import('@pivot/client/deployments').then((mod) => mod.http(http)),
+  importFn: (http) => import('@pivot/client/deployments').then((mod) => mod.http(http)),
   dependencies: [httpService],
 });
 
@@ -28,9 +27,5 @@ export const deploymentsResourceService = injectable({
   dependencies: [deploymentsResourceSlice, projectHttp],
 });
 
-export type DeploymentsResource = ResourceService<
-  Deployment[],
-  Error,
-  [string]
->;
+export type DeploymentsResource = ResourceService<Deployment[], Error, [string]>;
 export type DeploymentsResourceState = State<Deployment[], Error>;

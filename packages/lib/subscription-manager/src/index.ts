@@ -4,10 +4,7 @@ import { SubscriptionEntry, Subscriptions } from './types';
 
 export type { Subscriptions } from './types';
 
-export function subscriptionManager<T extends Subscriptions>(
-  store: DynamicStore,
-  config: T,
-) {
+export function subscriptionManager<T extends Subscriptions>(store: DynamicStore, config: T) {
   type SubscriptionEntryCollection = {
     [K in keyof T]: SubscriptionEntry<T[K]['handler']>;
   };
@@ -34,8 +31,7 @@ export function subscriptionManager<T extends Subscriptions>(
         // either the value has changed or
         currentValue !== entries[subName].currentValue ||
         // it's the first time we're calling the handler
-        (!entries[subName].called &&
-          entries[subName].currentValue !== undefined)
+        (!entries[subName].called && entries[subName].currentValue !== undefined)
       ) {
         const deps = await Promise.all(
           (config[subName].dependencies || []).map((dep) => dep.get()),

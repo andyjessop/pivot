@@ -71,11 +71,7 @@ export function authHandlers(apiUrl: string, { isBrowser = false } = {}) {
   ];
 }
 
-async function handleLogin(
-  req: RestRequest,
-  res: ResponseComposition,
-  ctx: RestContext,
-) {
+async function handleLogin(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
   const { email, password } = await req.json();
   const apiKey = req.headers.get('apiKey');
   const contentType = req.headers.get('Content-Type');
@@ -95,9 +91,7 @@ async function handleLogin(
 
   const users = cache.get(USERS_CACHE_KEY) as User[];
 
-  const user = users.find(
-    (user) => user.email === email && user.password === password,
-  );
+  const user = users.find((user) => user.email === email && user.password === password);
 
   if (!user) {
     return res(
@@ -126,11 +120,7 @@ async function handleLogin(
   );
 }
 
-async function handleRefreshToken(
-  req: RestRequest,
-  res: ResponseComposition,
-  ctx: RestContext,
-) {
+async function handleRefreshToken(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
   const { refresh_token } = await req.json();
   const apiKey = req.headers.get('apiKey');
   const contentType = req.headers.get('Content-Type');
@@ -184,11 +174,7 @@ async function handleRefreshToken(
   );
 }
 
-async function handleUser(
-  req: RestRequest,
-  res: ResponseComposition,
-  ctx: RestContext,
-) {
+async function handleUser(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
   const apiKey = req.headers.get('apiKey');
   const authorization = req.headers.get('authorization');
   const contentType = req.headers.get('Content-Type');
@@ -242,11 +228,7 @@ async function handleUser(
   );
 }
 
-async function handleLogout(
-  req: RestRequest,
-  res: ResponseComposition,
-  ctx: RestContext,
-) {
+async function handleLogout(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
   const apiKey = req.headers.get('apiKey');
   const authorization = req.headers.get('authorization');
 

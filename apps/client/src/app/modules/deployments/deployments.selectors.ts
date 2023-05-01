@@ -11,10 +11,7 @@ import { selectRouteName, selectRouteParams } from '../router';
 
 import { DeploymentsResourceState } from './deployments-resource.service';
 
-export const selectIsDeploymentsRoute = createSelector(
-  selectRouteName,
-  isDeploymentsRoute,
-);
+export const selectIsDeploymentsRoute = createSelector(selectRouteName, isDeploymentsRoute);
 
 export const selectDeploymentsProjectId = createSelector(
   selectIsDeploymentsRoute,
@@ -41,9 +38,7 @@ export const selectDeploymentsData = createSelector(
       environment: environments?.find(
         (environment) => environment.uuid === deployment.environment_id,
       ),
-      release: releases?.find(
-        (release) => release.uuid === deployment.release_id,
-      ),
+      release: releases?.find((release) => release.uuid === deployment.release_id),
       urlText: stripProtocol(deployment.url),
       url: deployment.url,
     })),

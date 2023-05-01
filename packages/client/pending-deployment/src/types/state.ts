@@ -1,7 +1,4 @@
-import {
-  DeploymentFeature,
-  DeploymentVariable,
-} from '@pivot/client/deployments';
+import { DeploymentFeature, DeploymentVariable } from '@pivot/client/deployments';
 
 export interface State {
   data: PendingDeployment | null;

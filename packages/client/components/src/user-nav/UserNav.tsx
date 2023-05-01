@@ -25,9 +25,7 @@ export function UserNav({ actions, data }: UserNavProps) {
   if (user) {
     return (
       <div className={spaced.container}>
-        <span className={styles.text}>
-          {isLoggingOut ? 'Logging out...' : user.email}
-        </span>
+        <span className={styles.text}>{isLoggingOut ? 'Logging out...' : user.email}</span>
         <button className={button.base} onClick={logout}>
           Logout
         </button>

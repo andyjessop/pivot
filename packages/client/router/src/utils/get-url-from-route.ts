@@ -32,7 +32,7 @@ export function getUrlFromRoute<T extends RouterConfig>(
         .join('&')
     : '';
 
-  return `${window.location.origin}${pathname}${
-    searchStr.length ? `?${searchStr}` : ''
-  }${hash ? `#${hash}` : ''}`;
+  return `${window.location.origin}${pathname}${searchStr.length ? `?${searchStr}` : ''}${
+    hash ? `#${hash}` : ''
+  }`;
 }

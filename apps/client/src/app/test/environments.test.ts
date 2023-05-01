@@ -1,7 +1,4 @@
-import {
-  findEnvironmentsByProjectId,
-  findProjectByName,
-} from '@pivot/fixtures';
+import { findEnvironmentsByProjectId, findProjectByName } from '@pivot/fixtures';
 import { headless } from '@pivot/lib/headless';
 
 import { services } from '~app/services';

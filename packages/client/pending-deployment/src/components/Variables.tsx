@@ -9,12 +9,11 @@ interface Props {
 }
 
 export function Variables({ variables, updateVariable }: Props) {
-  const onTextChange =
-    (uuid: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+  const onTextChange = (uuid: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
 
-      updateVariable(uuid, value);
-    };
+    updateVariable(uuid, value);
+  };
 
   return (
     <>
@@ -28,12 +27,7 @@ export function Variables({ variables, updateVariable }: Props) {
               </span>
             </div>
             <div className="control has-icons-left is-expanded">
-              <input
-                className="input"
-                onChange={onTextChange(uuid)}
-                type="text"
-                value={value}
-              />
+              <input className="input" onChange={onTextChange(uuid)} type="text" value={value} />
               <span className="icon is-left">
                 <i className="las la-key"></i>
               </span>

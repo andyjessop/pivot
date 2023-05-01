@@ -46,17 +46,11 @@ describe('variablesList', () => {
     const environmentWithMissingVariable = [
       {
         ...environments[0],
-        variables: [
-          { variable_id: 'non-existent-variable' } as EnvironmentVariable,
-        ],
+        variables: [{ variable_id: 'non-existent-variable' } as EnvironmentVariable],
       },
     ];
     expect(() =>
-      variablesList(
-        pendingDeployment,
-        environmentWithMissingVariable,
-        variables,
-      ),
+      variablesList(pendingDeployment, environmentWithMissingVariable, variables),
     ).toThrow(
       'Variable with id non-existent-variable not found in list of variables with ids v1, v2',
     );

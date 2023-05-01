@@ -8,9 +8,7 @@ interface State<D, E> {
   updating: boolean;
 }
 
-export type ResourceSlice<Data, Error = any> = ReturnType<
-  typeof resourceSlice<Data, Error>
->;
+export type ResourceSlice<Data, Error = any> = ReturnType<typeof resourceSlice<Data, Error>>;
 
 export function resourceSlice<D, E>(name: string) {
   return slice(

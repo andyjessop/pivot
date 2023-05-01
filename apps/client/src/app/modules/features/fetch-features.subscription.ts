@@ -1,9 +1,6 @@
 import { selectFeaturesProjectId } from '../features/features.selectors';
 
-import {
-  FeaturesResource,
-  featuresResourceService,
-} from './features-resource.service';
+import { FeaturesResource, featuresResourceService } from './features-resource.service';
 
 export const fetchFeatures = {
   selector: selectFeaturesProjectId,

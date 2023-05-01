@@ -1,12 +1,4 @@
-import {
-  button,
-  card,
-  icon,
-  table,
-  tag,
-  typography,
-  util,
-} from '@pivot/design/css';
+import { button, card, icon, table, tag, typography, util } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -40,49 +32,47 @@ export default function Deployments() {
           </tr>
         </thead>
         <tbody>
-          {deployments.map(
-            ({ created_at, environment, release, url, urlText, uuid }) => (
-              <tr key={uuid}>
-                <td>
-                  <Link
-                    to={{
-                      name: 'releases',
-                      params: { id: projectId },
-                    }}>
-                    {release?.hash}
-                  </Link>
-                </td>
-                <td>
-                  <Link
-                    className={cx(tag.container, tag.success)}
-                    to={{
-                      name: 'environments',
-                      params: { id: projectId },
-                    }}>
-                    {environment?.name}
-                  </Link>
-                </td>
-                <td>
-                  <a href={url} target="_blank">
-                    <span>
-                      {urlText}&nbsp;<span className={icon.externalLink}></span>
-                    </span>
-                  </a>
-                </td>
-                <td>{created_at}</td>
-                <td>
-                  <button
-                    onClick={() => pendingDeployment.cloneDeployment(uuid)}
-                    className={button.base}>
-                    <span className={cx(button.icon, button.before)}>
-                      <i className={icon.copy}></i>
-                    </span>
-                    <span>Duplicate</span>
-                  </button>
-                </td>
-              </tr>
-            ),
-          )}
+          {deployments.map(({ created_at, environment, release, url, urlText, uuid }) => (
+            <tr key={uuid}>
+              <td>
+                <Link
+                  to={{
+                    name: 'releases',
+                    params: { id: projectId },
+                  }}>
+                  {release?.hash}
+                </Link>
+              </td>
+              <td>
+                <Link
+                  className={cx(tag.container, tag.success)}
+                  to={{
+                    name: 'environments',
+                    params: { id: projectId },
+                  }}>
+                  {environment?.name}
+                </Link>
+              </td>
+              <td>
+                <a href={url} target="_blank">
+                  <span>
+                    {urlText}&nbsp;<span className={icon.externalLink}></span>
+                  </span>
+                </a>
+              </td>
+              <td>{created_at}</td>
+              <td>
+                <button
+                  onClick={() => pendingDeployment.cloneDeployment(uuid)}
+                  className={button.base}>
+                  <span className={cx(button.icon, button.before)}>
+                    <i className={icon.copy}></i>
+                  </span>
+                  <span>Duplicate</span>
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

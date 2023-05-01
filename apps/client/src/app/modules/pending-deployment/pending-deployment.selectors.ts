@@ -6,9 +6,8 @@ import { selectDeploymentsResourceData } from '../deployments';
 import { selectEnvironmentsResourceData } from '../environments';
 import { selectVariablesResourceData } from '../variables';
 
-export const selectPendingDeploymentState = (state: {
-  pendingDeployment?: State;
-}) => state.pendingDeployment;
+export const selectPendingDeploymentState = (state: { pendingDeployment?: State }) =>
+  state.pendingDeployment;
 
 export const selectPendingDeploymentData = createSelector(
   selectPendingDeploymentState,
@@ -36,8 +35,6 @@ export const selectDeployment = createSelector(
       return;
     }
 
-    return deployments.find(
-      (deployment) => deployment.uuid === pendingDeployment.deployment_id,
-    );
+    return deployments.find((deployment) => deployment.uuid === pendingDeployment.deployment_id);
   },
 );

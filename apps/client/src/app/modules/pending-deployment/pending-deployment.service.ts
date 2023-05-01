@@ -10,9 +10,5 @@ export const pendingDeploymentService = injectable({
     import('@pivot/client/pending-deployment').then((m) =>
       m.service(slice.api, deployments.getData, environments.getData),
     ),
-  dependencies: [
-    pendingDeploymentSlice,
-    deploymentsResourceService,
-    environmentsResourceService,
-  ],
+  dependencies: [pendingDeploymentSlice, deploymentsResourceService, environmentsResourceService],
 });

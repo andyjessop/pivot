@@ -1,10 +1,7 @@
 import { DynamicStore } from '@pivot/lib/dynamic-store';
 import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
 import { Slice } from '@pivot/lib/slice';
-import {
-  ExternallyResolvablePromise,
-  externallyResolvablePromise,
-} from '@pivot/util/promise';
+import { ExternallyResolvablePromise, externallyResolvablePromise } from '@pivot/util/promise';
 
 type SliceConfig<T extends Slice<any>> = {
   active: (state: any) => boolean;
@@ -13,16 +10,15 @@ type SliceConfig<T extends Slice<any>> = {
 
 type SliceEntry<T extends Slice<any>> = SliceConfig<T> & {
   instance?: Slice<any>;
-  externallyResolvablePromise: ExternallyResolvablePromise<
-    Slice<any, any, any>
-  >;
+  externallyResolvablePromise: ExternallyResolvablePromise<Slice<any, any, any>>;
   registering?: boolean;
   unregister?: () => void;
 };
 
-export function dynamicSliceRegistry<
-  T extends Record<keyof T, SliceConfig<any>>,
->(store: DynamicStore, config: T) {
+export function dynamicSliceRegistry<T extends Record<keyof T, SliceConfig<any>>>(
+  store: DynamicStore,
+  config: T,
+) {
   type SliceEntryCollection = {
     [K in keyof T]: SliceEntry<ExtractInstance<T[K]['injectable']>>;
   };
@@ -52,8 +48,7 @@ export function dynamicSliceRegistry<
     const sliceNames = Object.keys(config) as (keyof T & string)[];
 
     for (const sliceName of sliceNames) {
-      const { active, injectable, registering, unregister } =
-        entries[sliceName];
+      const { active, injectable, registering, unregister } = entries[sliceName];
 
       const shouldBeActive = active(state);
 
@@ -91,8 +86,7 @@ export function dynamicSliceRegistry<
 
       // should not be active and is
       entries[sliceName].registering = false;
-      entries[sliceName].externallyResolvablePromise =
-        externallyResolvablePromise();
+      entries[sliceName].externallyResolvablePromise = externallyResolvablePromise();
       unregister?.();
     }
 

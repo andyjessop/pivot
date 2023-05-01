@@ -8,10 +8,7 @@ import { selectRouteName, selectRouteParams } from '../router';
 
 import { ReleasesResourceState } from './releases-resource.service';
 
-export const selectIsReleasesRoute = createSelector(
-  selectRouteName,
-  isReleasesRoute,
-);
+export const selectIsReleasesRoute = createSelector(selectRouteName, isReleasesRoute);
 
 export const selectReleasesProjectId = createSelector(
   selectIsReleasesRoute,
@@ -27,11 +24,9 @@ export const selectReleasesResourceData = createSelector(
   (releasesResource) => releasesResource?.data,
 );
 
-export const selectReleasesData = createSelector(
-  selectReleasesResourceData,
-  (releases) =>
-    releases?.map((release) => ({
-      ...release,
-      created_at: humanReadableDate(release.created_at),
-    })),
+export const selectReleasesData = createSelector(selectReleasesResourceData, (releases) =>
+  releases?.map((release) => ({
+    ...release,
+    created_at: humanReadableDate(release.created_at),
+  })),
 );

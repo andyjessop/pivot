@@ -8,10 +8,7 @@ import { selectRouteName, selectRouteParams } from '../router';
 
 import { VariablesResourceState } from './variables-resource.service';
 
-export const selectIsVariablesRoute = createSelector(
-  selectRouteName,
-  isVariablesRoute,
-);
+export const selectIsVariablesRoute = createSelector(selectRouteName, isVariablesRoute);
 
 export const selectVariablesProjectId = createSelector(
   selectIsVariablesRoute,
@@ -27,11 +24,9 @@ export const selectVariablesResourceData = createSelector(
   (variablesResource) => variablesResource?.data,
 );
 
-export const selectVariablesData = createSelector(
-  selectVariablesResourceData,
-  (variables) =>
-    variables?.map((variable) => ({
-      ...variable,
-      created_at: humanReadableDate(variable.created_at),
-    })),
+export const selectVariablesData = createSelector(selectVariablesResourceData, (variables) =>
+  variables?.map((variable) => ({
+    ...variable,
+    created_at: humanReadableDate(variable.created_at),
+  })),
 );

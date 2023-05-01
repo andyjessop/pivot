@@ -8,10 +8,7 @@ import { selectRouteName, selectRouteParams } from '../router';
 
 import { FeaturesResourceState } from './features-resource.service';
 
-export const selectIsFeaturesRoute = createSelector(
-  selectRouteName,
-  isFeaturesRoute,
-);
+export const selectIsFeaturesRoute = createSelector(selectRouteName, isFeaturesRoute);
 
 export const selectFeaturesProjectId = createSelector(
   selectIsFeaturesRoute,
@@ -27,11 +24,9 @@ export const selectFeaturesResourceData = createSelector(
   (featuresResource) => featuresResource?.data,
 );
 
-export const selectFeaturesData = createSelector(
-  selectFeaturesResourceData,
-  (features) =>
-    features?.map((feature) => ({
-      ...feature,
-      created_at: humanReadableDate(feature.created_at),
-    })),
+export const selectFeaturesData = createSelector(selectFeaturesResourceData, (features) =>
+  features?.map((feature) => ({
+    ...feature,
+    created_at: humanReadableDate(feature.created_at),
+  })),
 );

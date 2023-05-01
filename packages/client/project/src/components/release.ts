@@ -8,8 +8,7 @@ import styles from './releases.module.css';
 export function release(releaseData: Project.Release) {
   return html` <div class=${styles['card']}>
     ${tag(releaseData.commit_url, releaseData.hash)}
-    ${link(releaseData.commit_url, releaseData.commit_message)}
-    ${date(releaseData.created_at)}
+    ${link(releaseData.commit_url, releaseData.commit_message)} ${date(releaseData.created_at)}
 
     <div class=${styles.actions}>
       <button class="button is-dark">

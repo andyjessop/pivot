@@ -50,9 +50,8 @@ describe('integration', () => {
 
       pendingDeployment.set(newPendingDeployment);
 
-      const loadedState = await app.waitFor(
-        selectPendingDeploymentData,
-        (state) => Boolean(state?.deployment_id),
+      const loadedState = await app.waitFor(selectPendingDeploymentData, (state) =>
+        Boolean(state?.deployment_id),
       );
 
       expect(loadedState).toEqual(newPendingDeployment);

@@ -24,11 +24,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
   ];
 
   function getComponent(component: string) {
-    return async function get(
-      req: RestRequest,
-      res: ResponseComposition,
-      ctx: RestContext,
-    ) {
+    return async function get(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
       if (isBrowser) {
         await sleep(500);
       }
@@ -69,11 +65,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
     };
   }
 
-  async function getProject(
-    req: RestRequest,
-    res: ResponseComposition,
-    ctx: RestContext,
-  ) {
+  async function getProject(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
     if (isBrowser) {
       await sleep(500);
     }
@@ -86,10 +78,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
       return res(ctx.status(200), ctx.json(projects));
     }
 
-    return res(
-      ctx.status(200),
-      ctx.json(projects.find((p: any) => p.uuid === uuid)),
-    );
+    return res(ctx.status(200), ctx.json(projects.find((p: any) => p.uuid === uuid)));
   }
 
   function getUuid(req: RestRequest) {

@@ -10,19 +10,14 @@ export function createProjectHttpApi(env: Env, cache: Cache) {
     getOne: async (id: string): Promise<Project.Model> => {
       const token = cache.get(CRUX_ACCESS_TOKEN_CACHE_KEY);
 
-      return fetch(
-        `${env.get(
-          Variable.SUPABASE_FUNCTIONS_URL,
-        )}/deployments?projectId=${id}`,
-        {
-          headers: {
-            apiKey: env.get(Variable.SUPABASE_API_KEY),
-            authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          method: 'GET',
+      return fetch(`${env.get(Variable.SUPABASE_FUNCTIONS_URL)}/deployments?projectId=${id}`, {
+        headers: {
+          apiKey: env.get(Variable.SUPABASE_API_KEY),
+          authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      ).then((res) => res.json());
+        method: 'GET',
+      }).then((res) => res.json());
     },
   };
 }

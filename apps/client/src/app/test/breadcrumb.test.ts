@@ -27,10 +27,7 @@ describe('integration', () => {
     it.skip('should show breadcrumb for project page', async () => {
       visit(`/projects`);
 
-      const parts = await app.waitFor(
-        selectBreadcrumbParts,
-        lastPartIsProjects,
-      );
+      const parts = await app.waitFor(selectBreadcrumbParts, lastPartIsProjects);
 
       expect(parts).toEqual([
         {
@@ -45,10 +42,7 @@ describe('integration', () => {
     it.skip('should show breadcrumb for project page', async () => {
       visit(`/projects/${project.uuid}/deployments`);
 
-      const parts = await app.waitFor(
-        selectBreadcrumbParts,
-        lastPartIsDeployments,
-      );
+      const parts = await app.waitFor(selectBreadcrumbParts, lastPartIsDeployments);
 
       expect(parts).toEqual([
         {
@@ -77,10 +71,7 @@ describe('integration', () => {
     it('should show breadcrumb for environments project page', async () => {
       visit(`/projects/${project.uuid}/environments`);
 
-      const parts = await app.waitFor(
-        selectBreadcrumbParts,
-        lastPartIsEnvironments,
-      );
+      const parts = await app.waitFor(selectBreadcrumbParts, lastPartIsEnvironments);
 
       expect(parts).toEqual([
         {
@@ -111,10 +102,7 @@ describe('integration', () => {
 
       router.navigate({ name: 'project', params: { id: project.uuid } });
 
-      const parts = await app.waitFor(
-        selectBreadcrumbParts,
-        lastPartIsDeployments,
-      );
+      const parts = await app.waitFor(selectBreadcrumbParts, lastPartIsDeployments);
 
       expect(parts).toEqual([
         {

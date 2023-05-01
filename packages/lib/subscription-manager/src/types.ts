@@ -8,10 +8,9 @@ export type SubscriptionConfig<T extends Subscription> = {
   selector: (state: any) => any;
 };
 
-export type SubscriptionEntry<T extends Subscription> =
-  SubscriptionConfig<T> & {
-    called: boolean;
-    currentValue: any;
-  };
+export type SubscriptionEntry<T extends Subscription> = SubscriptionConfig<T> & {
+  called: boolean;
+  currentValue: any;
+};
 
 export type Subscriptions = Record<string, SubscriptionConfig<any>>;
