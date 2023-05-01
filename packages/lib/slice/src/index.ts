@@ -47,9 +47,7 @@ export type Slice<
   api: {
     [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
   };
-  middleware: (
-    api: MiddlewareAPI,
-  ) => (next: Dispatch) => (action: Action) => any;
+  middleware: (api: MiddlewareAPI) => (next: Dispatch) => (action: Action) => any;
   reducer: (state: S, action: Action) => S;
   select: () => S;
 };
@@ -120,14 +118,10 @@ export function slice<
    * calls dispatch instead of just creating an action.
    */
   const api = (
-    Object.entries(actions) as Array<
-      [keyof T & string, (param?: any) => Action]
-    >
+    Object.entries(actions) as Array<[keyof T & string, (param?: any) => Action]>
   ).reduce(
     (acc, [key, actionCreator]) => {
-      acc[key] = function <K extends keyof T & string>(
-        ...params: DropFirst<Parameters<T[K]>>
-      ) {
+      acc[key] = function <K extends keyof T & string>(...params: DropFirst<Parameters<T[K]>>) {
         if (!dispatch) {
           throw `${name} slice middleware has not yet been registered with the store. Dispatch is not available.`;
         }
@@ -230,9 +224,7 @@ export function slice<
   }
 }
 
-function inverse<T extends string, U extends string>(
-  obj: Record<T, U>,
-): Record<U, T> {
+function inverse<T extends string, U extends string>(obj: Record<T, U>): Record<U, T> {
   const ret = {} as Record<U, T>;
 
   for (const key in obj) {

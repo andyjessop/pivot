@@ -1,9 +1,6 @@
 import type { FullRoute, RouterConfig } from '../types';
 
-export function getRouteFromUrl(
-  routes: RouterConfig,
-  fullUrl: string,
-): FullRoute | null {
+export function getRouteFromUrl(routes: RouterConfig, fullUrl: string): FullRoute | null {
   const { hash, pathname, searchParams } = new URL(fullUrl);
 
   const pathnameTokens = pathname.split('/');

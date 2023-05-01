@@ -11,9 +11,7 @@
  * resolve([data]);
  * ```
  */
-export function externallyResolvablePromise<
-  T,
->(): ExternallyResolvablePromise<T> {
+export function externallyResolvablePromise<T>(): ExternallyResolvablePromise<T> {
   let res: promiseResolveReject | undefined;
   let rej: promiseResolveReject | undefined;
 

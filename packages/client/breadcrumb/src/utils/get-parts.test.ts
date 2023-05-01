@@ -15,9 +15,7 @@ describe('getParts', () => {
   });
 
   it('should throw an error for an invalid route', () => {
-    expect(() => getParts(sampleConfig, 'invalid')).toThrowError(
-      'Invalid route: invalid',
-    );
+    expect(() => getParts(sampleConfig, 'invalid')).toThrowError('Invalid route: invalid');
   });
 
   it('should build correct parts for a top-level route', () => {

@@ -6,9 +6,7 @@ export interface ClickOutsideInterface {
 
 type Constructor<T = Record<string, any>> = new (...args: any[]) => T;
 
-export const clickOutside = <T extends Constructor<LitElement>>(
-  superClass: T,
-) => {
+export const clickOutside = <T extends Constructor<LitElement>>(superClass: T) => {
   class ClickOutside extends superClass {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     constructor(...args: any[]) {

@@ -12,9 +12,7 @@ export function variablesList(
     return [];
   }
 
-  const environment = environments.find(
-    (env) => env.uuid === pendingDeployment.environment_id,
-  );
+  const environment = environments.find((env) => env.uuid === pendingDeployment.environment_id);
 
   if (!environment) {
     throw new Error(

@@ -1,10 +1,5 @@
 export function isProjectRoute(routeName?: string) {
-  return [
-    'project',
-    'deployments',
-    'environments',
-    'features',
-    'releases',
-    'variables',
-  ].includes(routeName || '');
+  return ['project', 'deployments', 'environments', 'features', 'releases', 'variables'].includes(
+    routeName || '',
+  );
 }

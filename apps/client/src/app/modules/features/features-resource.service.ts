@@ -8,8 +8,7 @@ import { httpService } from '../http';
 import { featuresResourceSlice } from './features-resource.slice';
 
 export const projectHttp = injectable({
-  importFn: (http) =>
-    import('@pivot/client/features').then((mod) => mod.http(http)),
+  importFn: (http) => import('@pivot/client/features').then((mod) => mod.http(http)),
   dependencies: [httpService],
 });
 

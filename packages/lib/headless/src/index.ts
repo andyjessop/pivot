@@ -3,10 +3,7 @@ import { dynamicSliceRegistry } from '@pivot/lib/dynamic-slice-registry';
 import { dynamicStore } from '@pivot/lib/dynamic-store';
 import { ExtractInstance, Injectable } from '@pivot/lib/injectable';
 import { Action, Dispatch, MiddlewareAPI } from '@pivot/lib/redux-types';
-import {
-  subscriptionManager,
-  Subscriptions,
-} from '@pivot/lib/subscription-manager';
+import { subscriptionManager, Subscriptions } from '@pivot/lib/subscription-manager';
 
 type Selector<R = any> = (state: any) => R;
 
@@ -19,13 +16,9 @@ export function headless<
 >(services: Services, slices: Slices, subscriptions: Subs) {
   const store = dynamicStore();
 
-  const { resetRegistrations, selector, updateRegistrations } =
-    dynamicSliceRegistry(store, slices);
+  const { resetRegistrations, selector, updateRegistrations } = dynamicSliceRegistry(store, slices);
 
-  const { resetSubscriptions, runSubscriptions } = subscriptionManager(
-    store,
-    subscriptions,
-  );
+  const { resetSubscriptions, runSubscriptions } = subscriptionManager(store, subscriptions);
 
   store.addMiddleware(middleware);
 
@@ -108,9 +101,7 @@ export function headless<
 
   async function waitForState<K extends keyof Slices & string, U>(
     sliceName: K,
-    compare: (
-      state: ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>,
-    ) => U,
+    compare: (state: ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>) => U,
   ): Promise<ReturnType<ExtractInstance<Slices[K]['injectable']>['select']>> {
     const newState = getState(sliceName);
 

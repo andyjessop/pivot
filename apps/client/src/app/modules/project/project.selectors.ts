@@ -6,16 +6,9 @@ import { selectRouteName, selectRouteParams } from '../router';
 
 import { ProjectResourceState } from './project-resource.service';
 
-export const selectIsProjectRoute = createSelector(
-  selectRouteName,
-  isProjectRoute,
-);
+export const selectIsProjectRoute = createSelector(selectRouteName, isProjectRoute);
 
-export const selectProjectId = createSelector(
-  selectIsProjectRoute,
-  selectRouteParams,
-  projectId,
-);
+export const selectProjectId = createSelector(selectIsProjectRoute, selectRouteParams, projectId);
 
 export const selectProjectResource = (state: unknown) =>
   (state as any).projectResource as ProjectResourceState;

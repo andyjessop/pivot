@@ -1,9 +1,6 @@
 import { selectReleasesProjectId } from '../releases/releases.selectors';
 
-import {
-  ReleasesResource,
-  releasesResourceService,
-} from './releases-resource.service';
+import { ReleasesResource, releasesResourceService } from './releases-resource.service';
 
 export const fetchReleases = {
   selector: selectReleasesProjectId,

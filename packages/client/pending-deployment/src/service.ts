@@ -21,11 +21,7 @@ export function service(
     const deployments = getDeployments();
     const environments = getEnvironments();
 
-    const pendingDeployment = getPendingDeployment(
-      uuid,
-      deployments,
-      environments,
-    );
+    const pendingDeployment = getPendingDeployment(uuid, deployments, environments);
 
     pendingDeploymentApi.set(pendingDeployment);
   }
@@ -46,16 +42,9 @@ export function getPendingDeployment(
     throw new Error(`Deployment ${uuid} not found`);
   }
 
-  const environment = environments.find(
-    (e) => e.uuid === deployment?.environment_id,
-  );
+  const environment = environments.find((e) => e.uuid === deployment?.environment_id);
 
-  const props = [
-    'environment_id',
-    'features',
-    'release_id',
-    'variables',
-  ] as (keyof Deployment)[];
+  const props = ['environment_id', 'features', 'release_id', 'variables'] as (keyof Deployment)[];
 
   // If the environment doesn't have a URL by default (e.g. example.com, staging.example.com)
   // then we need to set the URL by cloning the deployment's URL.

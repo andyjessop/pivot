@@ -38,10 +38,7 @@ export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function humanReadableDate(
-  dateString: string,
-  userLocale = 'en-US',
-): string {
+export function humanReadableDate(dateString: string, userLocale = 'en-US'): string {
   const currentDate = new Date();
   const inputDate = new Date(dateString);
 

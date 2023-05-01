@@ -15,14 +15,9 @@ export type GetState<S = any> = () => S;
 
 export type Thunk = (dispatch: Dispatch, getState: GetState) => void;
 
-export type DispatchActionOrThunk<T extends Action = Action> = (
-  action: T | Thunk,
-) => T;
+export type DispatchActionOrThunk<T extends Action = Action> = (action: T | Thunk) => T;
 
-export type Reducer<S = any, A extends Action = Action> = (
-  state: S | undefined,
-  action: A,
-) => S;
+export type Reducer<S = any, A extends Action = Action> = (state: S | undefined, action: A) => S;
 
 export interface MiddlewareAPI<D extends Dispatch = Dispatch, S = any> {
   dispatch: D;
@@ -37,10 +32,7 @@ export interface Store<S = any, A extends Action = Action> {
   subscribe(listener: () => void): () => void;
 }
 
-export interface StoreWithThunkableDispatch<
-  S = any,
-  A extends Action = Action,
-> {
+export interface StoreWithThunkableDispatch<S = any, A extends Action = Action> {
   dispatch: DispatchActionOrThunk<A>;
   getState: GetState<S>;
 }

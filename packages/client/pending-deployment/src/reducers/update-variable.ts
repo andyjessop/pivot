@@ -5,9 +5,7 @@ export function updateVariable(state: State, uuid: string, value: string) {
     return state;
   }
 
-  const ndx = state.data.variables.findIndex(
-    (variable) => variable.uuid === uuid,
-  );
+  const ndx = state.data.variables.findIndex((variable) => variable.uuid === uuid);
 
   if (ndx === -1) {
     return state;

@@ -88,9 +88,7 @@ describe('slice', () => {
       payload: [2, 1],
       type: addOptional.type,
     });
-    expect(
-      reducer(initial, { type: addOptional.type, payload: [2, 1] }),
-    ).toEqual({ count: 3 });
+    expect(reducer(initial, { type: addOptional.type, payload: [2, 1] })).toEqual({ count: 3 });
   });
 
   it('should handle optional parameters (1)', () => {
@@ -112,9 +110,7 @@ describe('slice', () => {
       payload: undefined,
       type: addOptional.type,
     });
-    expect(
-      reducer(initial, { type: addOptional.type, payload: undefined }),
-    ).toEqual({ count: 0 });
+    expect(reducer(initial, { type: addOptional.type, payload: undefined })).toEqual({ count: 0 });
   });
 
   it('should handle optional parameters (2)', () => {
@@ -140,9 +136,7 @@ describe('slice', () => {
       payload: [2, 1],
       type: addOptional.type,
     });
-    expect(
-      reducer(initial, { type: addOptional.type, payload: [2, 1] }),
-    ).toEqual({ count: 3 });
+    expect(reducer(initial, { type: addOptional.type, payload: [2, 1] })).toEqual({ count: 3 });
   });
 
   it('should work with array type params', () => {
@@ -193,16 +187,12 @@ describe('slice', () => {
   it('should add listener', () => {
     const initial: State = { count: 0 };
 
-    const { addListener, api, middleware, reducer } = slice(
-      'counter',
-      initial,
-      {
-        add: (state: State, one: number[]) => ({
-          ...state,
-          count: state.count + one.reduce((acc, cur) => acc + cur, 0),
-        }),
-      },
-    );
+    const { addListener, api, middleware, reducer } = slice('counter', initial, {
+      add: (state: State, one: number[]) => ({
+        ...state,
+        count: state.count + one.reduce((acc, cur) => acc + cur, 0),
+      }),
+    });
 
     const store = dynamicStore();
 

@@ -1,9 +1,6 @@
 import { selectEnvironmentsProjectId } from '../environments/environments.selectors';
 
-import {
-  EnvironmentsResource,
-  environmentsResourceService,
-} from './environments-resource.service';
+import { EnvironmentsResource, environmentsResourceService } from './environments-resource.service';
 
 export const fetchEnvironments = {
   selector: selectEnvironmentsProjectId,

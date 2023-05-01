@@ -1,7 +1,4 @@
-import {
-  DeploymentFeature,
-  DeploymentFeatureWithName,
-} from '@pivot/client/deployments';
+import { DeploymentFeature, DeploymentFeatureWithName } from '@pivot/client/deployments';
 import { cx } from '@pivot/util/classname';
 
 import styles from './features.module.css';
@@ -12,19 +9,17 @@ interface Props {
 }
 
 export function Features({ features, updateFeature }: Props) {
-  const onSliderChange =
-    (uuid: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+  const onSliderChange = (uuid: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
 
-      updateFeature(uuid, { value: parseFloat(value) });
-    };
+    updateFeature(uuid, { value: parseFloat(value) });
+  };
 
-  const onToggle =
-    (uuid: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { checked } = e.target;
+  const onToggle = (uuid: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
 
-      updateFeature(uuid, { enabled: checked });
-    };
+    updateFeature(uuid, { enabled: checked });
+  };
 
   return (
     <>
@@ -33,12 +28,7 @@ export function Features({ features, updateFeature }: Props) {
           <div className={styles.key}>
             <div className="field">
               <div className="control has-icons-left">
-                <input
-                  className="input"
-                  disabled={true}
-                  type="text"
-                  value={name}
-                />
+                <input className="input" disabled={true} type="text" value={name} />
                 <span className="icon is-left">
                   <i className="las la-tags"></i>
                 </span>
