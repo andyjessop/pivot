@@ -1,5 +1,5 @@
-import { service } from '@pivot/lib/router';
 import { injectable } from '@pivot/lib/injectable';
+import { service } from '@pivot/lib/router';
 
 import { routes } from '~routes';
 

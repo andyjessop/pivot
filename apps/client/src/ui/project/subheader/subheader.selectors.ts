@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-import { RouterConfig } from '@pivot/lib/router';
 import { icon } from '@pivot/design/css';
+import { RouterConfig } from '@pivot/lib/router';
 
 import { selectProjectId } from '~app/modules/project/project.selectors';
 import { selectRouteName } from '~app/modules/router';

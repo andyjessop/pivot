@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { buildRoutes } from '@pivot/lib/router';
 
 export const routes = buildRoutes({

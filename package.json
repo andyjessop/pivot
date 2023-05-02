@@ -4,11 +4,11 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
-    "lint:affected": "npx nx affected --target=lint:strict",
-    "lint:all": "npx nx run-many --target=lint",
+    "lint:affected": "npx nx affected --target=lint:strict --fix",
+    "lint:all": "npx nx run-many --target=lint --fix",
     "test:affected": "npx nx affected --target=test --watch=false",
     "test:all": "npx nx run-many --target=test --watch=false",
-    "lint:all:strict": "npx nx run-many --target=lint:strict",
+    "lint:all:strict": "npx nx run-many --target=lint:strict --fix",
     "stylelint:affected": "npx nx affected --target=stylelint",
     "type-check": "tsc -p ./tsconfig.src.json --noEmit"
   },
