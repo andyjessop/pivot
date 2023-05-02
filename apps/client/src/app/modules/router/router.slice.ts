@@ -1,4 +1,4 @@
-import { initialState, reducers } from '@pivot/client/router';
+import { initialState, reducers } from '@pivot/lib/router';
 import { injectable } from '@pivot/lib/injectable';
 import { slice } from '@pivot/lib/slice';
 

@@ -1,5 +1,3 @@
-import { State } from './types';
-
-export const initialState: State = {
+export const initialState = {
   parts: [],
 };

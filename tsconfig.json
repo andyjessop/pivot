@@ -34,7 +34,6 @@
       ],
       "@pivot/client/project": ["packages/client/project/src/index.ts"],
       "@pivot/client/releases": ["packages/client/releases/src/index.ts"],
-      "@pivot/client/router": ["packages/client/router/src/index.ts"],
       "@pivot/client/shared-interfaces": [
         "packages/client/shared-interfaces/src/index.ts"
       ],
@@ -62,6 +61,7 @@
       "@pivot/lib/redux-registry": ["packages/lib/redux-registry/src/index.ts"],
       "@pivot/lib/redux-types": ["packages/lib/redux-types/src/index.ts"],
       "@pivot/lib/resource": ["packages/lib/resource/src/index.ts"],
+      "@pivot/lib/router": ["packages/lib/router/src/index.ts"],
       "@pivot/lib/slice": ["packages/lib/slice/src/index.ts"],
       "@pivot/lib/subscription-manager": [
         "packages/lib/subscription-manager/src/index.ts"

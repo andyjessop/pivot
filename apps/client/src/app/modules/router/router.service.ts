@@ -1,4 +1,4 @@
-import { service } from '@pivot/client/router';
+import { service } from '@pivot/lib/router';
 import { injectable } from '@pivot/lib/injectable';
 
 import { routes } from '~routes';

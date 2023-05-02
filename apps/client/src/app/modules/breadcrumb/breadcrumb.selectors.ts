@@ -1,12 +1,16 @@
 import { createSelector } from 'reselect';
 
-import { selectors, State } from '@pivot/client/breadcrumb';
+import { selectors } from '@pivot/client/breadcrumb';
 
-export const selectBreadcrumb = (state: { breadcrumb: State }) => state.breadcrumb;
+import { Routes } from '../router/router.types';
+
+import { BreadcrumbState } from './breadcrumb.types';
+
+export const selectBreadcrumb = (state: { breadcrumb: BreadcrumbState }) => state.breadcrumb;
 
 export const selectParts = createSelector(
   selectBreadcrumb,
   (breadcrumb) => breadcrumb?.parts ?? [],
 );
 
-export const selectBreadcrumbParts = createSelector(selectParts, selectors.parts);
+export const selectBreadcrumbParts = createSelector(selectParts, selectors.parts<Routes>);

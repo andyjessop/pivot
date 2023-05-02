@@ -1,8 +1,7 @@
-import type { Route } from '@pivot/client/router';
+import { NavItem } from '@pivot/client/nav';
+import type { Route, RouterConfig } from '@pivot/lib/router';
 
-import type { NavItem } from './types';
-
-export function navItems(route?: Route | null): NavItem[] {
+export function navItems<T extends RouterConfig>(route?: Route<T> | null): NavItem<T>[] {
   const routeName = route?.name ?? '';
 
   return [

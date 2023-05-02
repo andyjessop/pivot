@@ -1,5 +1,8 @@
-import { Route } from '@pivot/client/router';
+import { Route, RouterConfig } from '@pivot/lib/router';
 
-export function projectId(isProjectRoute: boolean, params: Route['params']) {
-  return isProjectRoute ? params?.id : undefined;
+export function projectId<T extends RouterConfig>(
+  isProjectRoute: boolean,
+  params: Route<T>['params'],
+) {
+  return isProjectRoute ? (params as { id: string }).id : undefined;
 }

@@ -1,3 +1,4 @@
+import { Route, RouterConfig } from '@pivot/lib/router';
 import { pick } from '@pivot/util/object';
 
 import { Part } from '../types';
@@ -29,18 +30,18 @@ import { Part } from '../types';
  *
  * The id is to be subsituted by the route handler.
  */
-export function getParts(
+export function getParts<T extends RouterConfig>(
   config: Record<string, { parent?: string; path: string }>,
-  routeName: string,
+  routeName: keyof T & string,
   routeParams?: Record<string, string | undefined>,
-): Part[] {
-  const breadcrumbs: Part[] = [];
+): Part<T>[] {
+  const breadcrumbs: Part<T>[] = [];
 
   buildBreadcrumb(routeName, routeParams);
 
   return breadcrumbs;
 
-  function buildBreadcrumb(route?: string, params?: Record<string, string | undefined>) {
+  function buildBreadcrumb(route?: keyof T & string, params?: Record<string, string | undefined>) {
     if (!route) {
       return;
     }
@@ -61,7 +62,7 @@ export function getParts(
       route: {
         name: route,
         params: pathParamKeys.length ? pathParams : undefined,
-      },
+      } as Route<T>,
       text: pathParts[pathParts.length - 1],
     });
 

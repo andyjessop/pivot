@@ -4,7 +4,7 @@ import { getUrlFromRoute } from './utils/get-url-from-route';
 
 export function service<T extends RouterConfig>(
   initial: T,
-  api: { navigateSuccess: (route: FullRoute) => void },
+  api: { navigateSuccess: (route: FullRoute<T>) => void },
 ) {
   const config = { notFound: { path: '/404' }, ...initial };
 
@@ -49,7 +49,7 @@ export function service<T extends RouterConfig>(
   }: {
     children: React.ReactNode;
     className?: string;
-    to: Route;
+    to: Route<T>;
   }) {
     return (
       <a className={className} href="" onClick={link(to)}>
@@ -72,7 +72,7 @@ export function service<T extends RouterConfig>(
     api.navigateSuccess({
       hash: hash ?? '',
       name,
-      params: params ?? {},
+      params: params ?? ({} as FullRoute<T>['params']),
       search: search ?? {},
     });
   }
@@ -84,7 +84,7 @@ export function service<T extends RouterConfig>(
       api.navigateSuccess({
         hash: '',
         name: 'notFound',
-        params: {},
+        params: {} as FullRoute<T>['params'],
         search: {},
       });
 
