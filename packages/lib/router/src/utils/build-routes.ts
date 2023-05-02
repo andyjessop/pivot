@@ -4,8 +4,8 @@ import { Routes } from './types';
  * Takes a route configuration and returns a new route configuration with
  * parent routes added to each route entry.
  */
-export function buildRoutes(routes: Routes): Routes {
-  const updatedRoutes: Routes = {};
+export function buildRoutes<T extends Routes>(routes: T): T {
+  const updatedRoutes: T = {} as unknown as T;
 
   const findParent = (currentKey: string, currentPathParts: string[]): string | undefined => {
     for (const key in routes) {

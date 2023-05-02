@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
 
-import { RouterState, selectors } from '@pivot/client/router';
+import { selectors } from '@pivot/lib/router';
+
+import { RouterState, Routes } from './router.types';
 
 export const selectRouter = (state: { router: RouterState }) => state.router;
 
-export const selectRoute = createSelector(selectRouter, selectors.route);
+export const selectRoute = createSelector(selectRouter, selectors.route<Routes>);
 
 export const selectRouteHash = createSelector(selectRoute, selectors.routeHash);
 

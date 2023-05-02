@@ -19,7 +19,7 @@ export function getUrlFromRoute<T extends RouterConfig>(
 
   while (params && pathname.match(/(:)\w+/)) {
     const param = pathname.match(/(:)\w+/)![0];
-    const value = params[param.replace(':', '')];
+    const value = params[param.replace(':', '') as keyof Route<T>['params']];
 
     if (param && value) {
       pathname = pathname.replace(param, value);

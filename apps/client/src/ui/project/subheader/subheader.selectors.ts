@@ -1,19 +1,21 @@
 import { createSelector } from 'reselect';
 
 import { icon } from '@pivot/design/css';
+import { RouterConfig } from '@pivot/lib/router';
 
 import { selectProjectId } from '~app/modules/project/project.selectors';
 import { selectRouteName } from '~app/modules/router';
+import { Routes } from '~app/modules/router/router.types';
 
-export type SubheaderItem = {
+export type SubheaderItem<T extends RouterConfig> = {
   icon: string;
   isActive: boolean;
-  routeName: string;
+  routeName: keyof T;
   routeParams: Record<string, string>;
   text: string;
 };
 
-export type SubheaderItems = SubheaderItem[];
+export type SubheaderItems = SubheaderItem<Routes>[];
 
 export const selectSubheaderItems = createSelector(
   selectRouteName,

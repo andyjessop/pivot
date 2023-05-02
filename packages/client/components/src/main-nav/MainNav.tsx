@@ -1,12 +1,13 @@
-import { Router } from '@pivot/client/router';
+import { NavItem } from '@pivot/client/nav';
 import { cx } from '@pivot/util/classname';
 
+import { Link, Routes } from '~app/modules/router/router.types';
+
 import styles from './main-nav.module.css';
-import { NavItem } from './types';
 
 interface NavbarProps {
-  Link: Router['Link'];
-  items: NavItem[];
+  Link: Link;
+  items: NavItem<Routes>[];
 }
 
 export function MainNav({ items, Link }: NavbarProps) {

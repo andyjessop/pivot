@@ -1,8 +1,10 @@
+import { RouterConfig } from '@pivot/lib/router';
+
 import { Part, State } from '../types';
 /**
  * Sets a part in the state.
  */
-export function setPart(state: State, key: string, text: string) {
+export function setPart<T extends RouterConfig>(state: State<T>, key: string, text: string) {
   const parts = [...state.parts];
 
   addOrReplace(parts, key, text);
@@ -13,7 +15,7 @@ export function setPart(state: State, key: string, text: string) {
   };
 }
 
-function addOrReplace(parts: Part[], key: string, text: string) {
+function addOrReplace<T extends RouterConfig>(parts: Part<T>[], key: string, text: string) {
   const index = parts.findIndex((item) => item.text === key);
 
   if (index !== -1) {

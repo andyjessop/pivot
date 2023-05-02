@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { Router } from '@pivot/client/router';
+import { Router } from '@pivot/lib/router';
 
 import {
   selectIsAuthenitcated,

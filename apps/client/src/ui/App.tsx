@@ -1,7 +1,7 @@
 import './app.css';
 import '@pivot/design/variables';
 
-import { RenderRoute } from '@pivot/client/router';
+import { RenderRoute } from '@pivot/lib/router';
 
 import { useSelector, useService } from '~app';
 import { selectRouteName } from '~app/modules/router';

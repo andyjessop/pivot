@@ -8,6 +8,7 @@ a.link {
   .icon {
     font-size: 120%;
     color: var(--icon-color);
+    width: 1em;
   }
 
   &:hover,

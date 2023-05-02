@@ -1,10 +1,12 @@
 import { createSelector } from 'reselect';
 
-import { Route, Router } from '@pivot/client/router';
+import { Router } from '@pivot/lib/router';
+
+import { Route } from '~app/modules/router/router.types';
 
 import { routerService, selectRoute } from '../../modules/router';
 
-export const selectProjectRoute = createSelector(selectRoute, (route) => {
+export const selectProjectRoute = createSelector(selectRoute, (route?: Route | null) => {
   if (route?.name === 'project') {
     return route;
   }

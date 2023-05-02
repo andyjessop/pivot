@@ -1,11 +1,12 @@
-import { Router } from '@pivot/client/router';
 import { spaced } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
+
+import { Link } from '~app/modules/router/router.types';
 
 import { SubheaderItems } from './subheader.selectors';
 import styles from './subnav.module.css';
 
-export function SubNav({ items, Link }: { Link: Router['Link']; items: SubheaderItems }) {
+export function SubNav({ items, Link }: { Link: Link; items: SubheaderItems }) {
   return (
     <>
       {items.map((item) => (

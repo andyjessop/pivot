@@ -1,10 +1,10 @@
-import { Route } from '@pivot/client/router';
+import { Route, RouterConfig } from '@pivot/lib/router';
 
-export interface State {
-  parts: Part[];
+export interface State<T extends RouterConfig> {
+  parts: Part<T>[];
 }
 
-export interface Part {
-  route: Route;
+export interface Part<T extends RouterConfig> {
+  route: Route<T>;
   text: string;
 }

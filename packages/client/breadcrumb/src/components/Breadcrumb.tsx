@@ -1,16 +1,16 @@
-import { Router } from '@pivot/client/router';
 import { alignment, icon, spaced } from '@pivot/design/css';
+import { Link, RouterConfig } from '@pivot/lib/router';
 import { cx } from '@pivot/util/classname';
 
 import { Part } from '../types';
 
 import style from './breadcrumb.module.css';
 
-interface BreadcrumbProps {
-  Link: Router['Link'];
-  parts: Part[];
+interface BreadcrumbProps<T extends RouterConfig> {
+  Link: Link<T>;
+  parts: Part<T>[];
 }
-export function Breadcrumb({ Link, parts }: BreadcrumbProps) {
+export function Breadcrumb<T extends RouterConfig>({ Link, parts }: BreadcrumbProps<T>) {
   return (
     <div className={cx(spaced.container, spaced.small, alignment['center-vertical'])}>
       <Link className={style.root} to={{ name: 'root' }}>
