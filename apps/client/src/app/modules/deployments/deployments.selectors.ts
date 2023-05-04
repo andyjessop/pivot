@@ -27,6 +27,11 @@ export const selectDeploymentsResourceData = createSelector(
   (deploymentsResource) => deploymentsResource?.data,
 );
 
+export const selectDeploymentById = (deploymentId: string) =>
+  createSelector(selectDeploymentsResourceData, (deployments) =>
+    deployments?.find((deployment) => deployment.uuid === deploymentId),
+  );
+
 export const selectDeploymentsData = createSelector(
   selectDeploymentsResourceData,
   selectEnvironmentsResourceData,

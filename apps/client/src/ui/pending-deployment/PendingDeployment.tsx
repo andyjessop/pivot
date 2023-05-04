@@ -22,12 +22,21 @@ export function PendingDeployment() {
   //   <Features features={features} updateFeature={updateFeature} />
   // );
 
+  const deploy = () => {
+    if (!pendingDeployment) {
+      throw new Error('No pending deployment');
+    }
+
+    service.deploy(pendingDeployment);
+  };
+
   const VariablesComponent = <Variables updateVariable={updateVariable} variables={variables} />;
 
   return (
     <PendingDeploymentModal
       Variables={VariablesComponent}
       clear={() => set(null)}
+      deploy={deploy}
       environments={environments}
       pendingDeployment={pendingDeployment}
       releases={releases}

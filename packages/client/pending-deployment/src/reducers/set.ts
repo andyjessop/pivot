@@ -1,5 +1,5 @@
-import { PendingDeployment, State } from '../types';
+import { Model, State } from '../types';
 
-export function set(state: State, pendingDeployment: PendingDeployment | null) {
+export function set(state: State, pendingDeployment: Model | null) {
   return { ...state, data: pendingDeployment };
 }

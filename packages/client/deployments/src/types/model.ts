@@ -33,3 +33,18 @@ export interface DeploymentVariable {
 export type DeploymentVariableWithName = DeploymentVariable & {
   name: string;
 };
+
+export const isDeployment = (deployment: any): deployment is Deployment => {
+  return (
+    typeof deployment === 'object' &&
+    deployment !== null &&
+    typeof deployment.created_at === 'string' &&
+    typeof deployment.environment_id === 'string' &&
+    Array.isArray(deployment.features) &&
+    typeof deployment.project_id === 'string' &&
+    typeof deployment.release_id === 'string' &&
+    typeof deployment.url === 'string' &&
+    typeof deployment.uuid === 'string' &&
+    Array.isArray(deployment.variables)
+  );
+};

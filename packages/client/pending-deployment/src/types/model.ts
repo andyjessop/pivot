@@ -1,21 +1,6 @@
-import { Project } from '@pivot/client/shared-interfaces';
+import { Deployment } from '@pivot/client/deployments';
 
-export interface Model {
-  environmentId: string;
-  environments: Project.Environment[];
-  features: {
-    created_at: string;
-    environment_id: string;
-    feature_id: string;
-    fromEnvironment: boolean;
-    name: string;
-    uuid: string;
-    value: number;
-  }[];
-  release: Project.Release;
-  url?: string;
-  variables: { name: string; value: string; variable_id: string }[];
-}
+export type Model = Omit<Deployment, 'created_at' | 'uuid'>;
 
 export type VariablesList = {
   created_at: string;
@@ -25,3 +10,15 @@ export type VariablesList = {
   variableType: string;
   variable_id: string;
 }[];
+
+export function isPendingDeployment(deployment: any): deployment is Model {
+  return (
+    typeof deployment === 'object' &&
+    deployment !== null &&
+    typeof deployment.environment_id === 'string' &&
+    Array.isArray(deployment.features) &&
+    typeof deployment.project_id === 'string' &&
+    typeof deployment.release_id === 'string' &&
+    Array.isArray(deployment.variables)
+  );
+}

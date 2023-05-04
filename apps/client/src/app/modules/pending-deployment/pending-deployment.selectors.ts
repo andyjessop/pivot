@@ -2,7 +2,6 @@ import { createSelector } from 'reselect';
 
 import { State, variablesList } from '@pivot/client/pending-deployment';
 
-import { selectDeploymentsResourceData } from '../deployments';
 import { selectEnvironmentsResourceData } from '../environments';
 import { selectVariablesResourceData } from '../variables';
 
@@ -24,17 +23,5 @@ export const selectVariablesList = createSelector(
     }
 
     return variablesList(pendingDeployment, environments, variables);
-  },
-);
-
-export const selectDeployment = createSelector(
-  selectPendingDeploymentData,
-  selectDeploymentsResourceData,
-  (pendingDeployment, deployments) => {
-    if (!pendingDeployment || !deployments) {
-      return;
-    }
-
-    return deployments.find((deployment) => deployment.uuid === pendingDeployment.deployment_id);
   },
 );
