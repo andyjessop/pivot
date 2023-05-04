@@ -1,7 +1,6 @@
 import { ResponseComposition, rest, RestContext, RestRequest } from 'msw';
 
 import {
-  findDeploymentsByProjectId,
   findEnvironmentsByProjectId,
   findFeaturesByProjectId,
   findProjectById,
@@ -17,7 +16,6 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
   return [
     rest.get(`${apiUrl}/rest/v1/project`, getProject),
     rest.get(`${apiUrl}/rest/v1/environment`, getComponent('environments')),
-    rest.get(`${apiUrl}/rest/v1/deployment`, getComponent('deployments')),
     rest.get(`${apiUrl}/rest/v1/feature`, getComponent('features')),
     rest.get(`${apiUrl}/rest/v1/release`, getComponent('releases')),
     rest.get(`${apiUrl}/rest/v1/variable`, getComponent('variables')),
@@ -46,9 +44,6 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
       switch (component) {
         case 'environments':
           result = findEnvironmentsByProjectId(uuid);
-          break;
-        case 'deployments':
-          result = findDeploymentsByProjectId(uuid);
           break;
         case 'features':
           result = findFeaturesByProjectId(uuid);

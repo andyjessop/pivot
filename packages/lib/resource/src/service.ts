@@ -42,11 +42,11 @@ export function resourceService<
       readParams = params;
     }
 
-    const current = select();
+    const currentState = select();
 
     api.set({
-      loading: !current?.loaded,
-      updating: current?.loaded,
+      loading: !currentState?.loaded,
+      updating: currentState?.loaded,
     });
 
     if (pollingInterval !== undefined) {
@@ -107,11 +107,11 @@ export function resourceService<
 
       const { optimistic, query, transform } = conf;
 
-      const oldData = select();
+      const currentState = select();
 
       if (optimistic) {
         api.set({
-          data: optimistic(...params)(oldData.data),
+          data: optimistic(...params)(currentState.data),
         });
       }
 
@@ -119,7 +119,7 @@ export function resourceService<
         const res = await query(...params);
 
         if (transform) {
-          const data = transform(res)(oldData.data);
+          const data = transform(res)(currentState.data);
 
           api.set({ data });
 

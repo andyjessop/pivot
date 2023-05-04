@@ -1,10 +1,10 @@
 import { Environment } from '@pivot/client/environments';
 import { Variable } from '@pivot/client/variables';
 
-import { PendingDeployment, VariablesList } from '../types';
+import { Model, VariablesList } from '../types';
 
 export function variablesList(
-  pendingDeployment: PendingDeployment | null,
+  pendingDeployment: Model | null,
   environments: Environment[] | null,
   variables: Variable[] | null,
 ): VariablesList {

@@ -4,20 +4,22 @@ import { button, form, icon, modal, spaced, typography } from '@pivot/design/css
 import { useEscapeKey } from '@pivot/hooks';
 import { cx } from '@pivot/util/classname';
 
-import { PendingDeployment } from '../types';
+import { Model } from '../types';
 
 interface Props {
   Variables: JSX.Element;
   clear: () => void;
+  deploy: () => void;
   environments: Environment[];
   // Features?: JSX.Element;
-  pendingDeployment: PendingDeployment;
+  pendingDeployment: Model;
   releases: Release[];
-  update: (deployment: Partial<PendingDeployment>) => void;
+  update: (deployment: Partial<Model>) => void;
 }
 
 export function PendingDeploymentModal({
   clear,
+  deploy,
   environments,
   // Features,
   pendingDeployment,
@@ -115,7 +117,7 @@ export function PendingDeploymentModal({
             <button className={button.base} onClick={clear}>
               Cancel
             </button>
-            <button className={cx(button.base, button.success)}>
+            <button className={cx(button.base, button.success)} onClick={deploy}>
               <span className={cx(button.icon, button.before)}>
                 <i className={icon.deployments}></i>
               </span>

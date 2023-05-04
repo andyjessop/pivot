@@ -9,5 +9,11 @@ export function http(baseHttp: Http) {
         `/rest/v1/deployment?project_id=eq.${projectId}&select=*,features:deployment_feature(*),variables:deployment_variable(*)`,
       );
     },
+
+    post: async (deployment: Omit<Deployment, 'created_at' | 'uuid'>): Promise<Deployment> => {
+      const result = await baseHttp.post<Deployment[]>(`/rest/v1/deployment`, deployment);
+
+      return result[0];
+    },
   };
 }
