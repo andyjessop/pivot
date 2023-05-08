@@ -47,7 +47,7 @@
     "eslint-plugin-typescript-sort-keys": "^2.3.0",
     "husky": "^8.0.3",
     "jsdom": "^21.1.1",
-    "nx": "16.0.1",
+    "nx": "16.1.1",
     "nx-cloud": "16.0.5",
     "postcss-nesting": "^11.2.1",
     "prettier": "^2.8.8",
