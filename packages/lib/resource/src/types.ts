@@ -1,4 +1,4 @@
-export type State<Data, Error> = {
+export type State<Data, Error = any> = {
   data: Data | null;
   error: Error | null;
   loading: boolean;
@@ -38,18 +38,37 @@ export type Config<
 
 export type Service<
   Data,
-  Error = any,
   ReadParams extends any[] = [],
   CreateParams extends any[] = [],
   DeleteParams extends any[] = [],
   UpdateParams extends any[] = [],
 > = {
-  create: (...params: CreateParams) => Promise<Data | Error>;
-  delete: (...params: DeleteParams) => Promise<Data | Error>;
+  create: (...params: CreateParams) => Promise<Data>;
+  delete: (...params: DeleteParams) => Promise<Data>;
   getData: () => Data | null;
-  read: (...params: ReadParams) => Promise<Data | Error | undefined>;
-  update: (...params: UpdateParams) => Promise<Data | Error>;
+  read: (...params: ReadParams) => Promise<Data | undefined>;
+  update: (...params: UpdateParams) => Promise<Data>;
 };
+
+export type ExtractServiceFromConfig<T extends Config<any, any[], any[], any[], any[]>> = Service<
+  T['read']['query'] extends (...params: any[]) => Promise<infer Data> ? Data : never,
+  T['read']['query'] extends (...params: infer ReadParams) => Promise<any> ? ReadParams : never,
+  T['create'] extends {
+    query: (...params: infer CreateParams) => Promise<any>;
+  }
+    ? CreateParams
+    : [],
+  T['delete'] extends {
+    query: (...params: infer DeleteParams) => Promise<any>;
+  }
+    ? DeleteParams
+    : [],
+  T['update'] extends {
+    query: (...params: infer UpdateParams) => Promise<any>;
+  }
+    ? UpdateParams
+    : []
+>;
 
 export interface Options {
   throttle?: number;

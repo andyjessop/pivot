@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/client-shared-interfaces",
+  "name": "@pivot/util-model",
   "main": "./src/index.ts",
   "scripts": {
     "lint": "eslint src --config ../../../.eslintrc.json",

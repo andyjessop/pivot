@@ -1,9 +1,9 @@
 import { findDeploymentsByProjectId, findProjectByName } from '@pivot/fixtures';
 import { headless } from '@pivot/lib/headless';
-import { pick } from '@pivot/util/object';
+import { omit } from '@pivot/util/object';
 
 import { selectDeploymentsData } from '~app/modules/deployments';
-import { selectPendingDeploymentData } from '~app/modules/pending-deployment';
+import { selectPendingDeployment } from '~app/modules/pending-deployment';
 import { services } from '~app/services';
 import { slices } from '~app/slices';
 import { subscriptions } from '~app/subscriptions';
@@ -32,10 +32,9 @@ describe('integration', () => {
       // The fetch-project subscription calls `resource.read` when on a project route
       visit(`/projects/${project.uuid}`);
 
-      const deployments = await app.waitFor(
-        selectDeploymentsData,
-        (state) => state?.length !== undefined && state?.length !== 0,
-      );
+      const deployments = await app.waitFor(selectDeploymentsData, (state) => {
+        return state?.length !== undefined && state?.length !== 0;
+      });
 
       const dep = deployments?.find((d) => d.uuid === deployment.uuid);
 
@@ -43,16 +42,11 @@ describe('integration', () => {
         throw new Error('Deployment not found');
       }
 
-      const newPendingDeployment = {
-        deployment_id: dep.uuid,
-        ...pick(dep, ['environment_id', 'features', 'release_id', 'variables']),
-      };
+      const newPendingDeployment = omit(dep, ['created_at', 'uuid']);
 
-      pendingDeployment.set(newPendingDeployment);
+      pendingDeployment.setDeployment(newPendingDeployment);
 
-      const loadedState = await app.waitFor(selectPendingDeploymentData, (state) =>
-        Boolean(state?.deployment_id),
-      );
+      const loadedState = await app.waitFor(selectPendingDeployment, (state) => state !== null);
 
       expect(loadedState).toEqual(newPendingDeployment);
     });

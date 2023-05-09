@@ -1,18 +1,20 @@
+import { DeploymentVariable } from '@pivot/client/deployment-variables';
 import { VariablesList } from '@pivot/client/pending-deployment';
 import { cx } from '@pivot/util/classname';
+import { Draft } from '@pivot/util/model';
 
 import styles from './variables.module.css';
 
 interface Props {
-  updateVariable: (uuid: string, value: string) => void;
+  setVariable: (uuid: string, variable: Partial<Draft<DeploymentVariable>>) => void;
   variables: VariablesList;
 }
 
-export function Variables({ variables, updateVariable }: Props) {
+export function Variables({ variables, setVariable }: Props) {
   const onTextChange = (uuid: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    updateVariable(uuid, value);
+    setVariable(uuid, { value });
   };
 
   return (

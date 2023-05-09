@@ -12,8 +12,8 @@ export function injectable<T, Deps extends Injectable<any>[]>({
     /* ... */
   },
 }: {
-  importFn: AsyncFactoryFn<T, Deps>;
   dependencies?: [...Deps];
+  importFn: AsyncFactoryFn<T, Deps>;
   onDestroy?: (instance: T) => void;
 }): Injectable<T> {
   let resolvablePromise = externallyResolvablePromise<T>();
@@ -24,13 +24,13 @@ export function injectable<T, Deps extends Injectable<any>[]>({
   const depChain = buildDepChain(deps);
 
   return {
-    importFn,
     depChain,
     dependencies: deps,
     get,
     getInstance,
-    isResolving,
     hasResolved,
+    importFn,
+    isResolving,
     onDestroy,
     reset,
   };

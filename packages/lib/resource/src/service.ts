@@ -13,7 +13,7 @@ export function resourceService<
 >(
   config: Config<Data, ReadParams, CreateParams, DeleteParams, UpdateParams>,
   slice: ResourceSlice<Data, Error>,
-): Service<Data, Error, ReadParams, CreateParams, DeleteParams, UpdateParams> {
+): Service<Data, ReadParams, CreateParams, DeleteParams, UpdateParams> {
   const { api, select } = slice;
   const queue = asyncQueue();
   let readParams: ReadParams;
@@ -29,7 +29,7 @@ export function resourceService<
     update,
   };
 
-  async function read(params: ReadParams, force = false): Promise<Data | Error | undefined> {
+  async function read(params: ReadParams, force = false): Promise<Data | undefined> {
     const { pollingInterval, query } = config.read;
 
     // If we have readParams and we're not forcing, then just let the polling interval
@@ -71,8 +71,6 @@ export function resourceService<
         loading: false,
         updating: false,
       });
-
-      return error as Error;
     }
   }
 
@@ -91,7 +89,7 @@ export function resourceService<
   async function mutate(
     conf: typeof config.create | typeof config.delete | typeof config.update,
     ...params: DeleteParams | UpdateParams | CreateParams
-  ): Promise<Data | Error> {
+  ): Promise<Data> {
     const res = queue.add(doMutation);
 
     return res;
@@ -133,7 +131,7 @@ export function resourceService<
         });
       }
 
-      return read(readParams, true) as Promise<Data | Error>;
+      return read(readParams, true) as Promise<Data>;
     }
   }
 }

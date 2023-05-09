@@ -1,3 +1,5 @@
+import { deploymentFeatures } from './fixtures/deployment-features';
+import { deploymentVariables } from './fixtures/deployment-variables';
 import { deployments } from './fixtures/deployments';
 import { environments } from './fixtures/environments';
 import { features } from './fixtures/features';
@@ -12,6 +14,14 @@ export function findEnvironmentsByProjectId(projectId: string) {
 
 export function findDeploymentsByProjectId(projectId: string) {
   return deployments.filter((d) => d.project_id === projectId)!;
+}
+
+export function findDeploymentFeaturesByDeploymentId(deploymentId: string) {
+  return deploymentFeatures.filter((d) => d.deployment_id === deploymentId)!;
+}
+
+export function findDeploymentVariablesByDeploymentId(deploymentId: string) {
+  return deploymentVariables.filter((d) => d.deployment_id === deploymentId)!;
 }
 
 export function findFeaturesByProjectId(projectId: string) {

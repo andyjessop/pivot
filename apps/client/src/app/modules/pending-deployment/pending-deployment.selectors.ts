@@ -8,20 +8,20 @@ import { selectVariablesResourceData } from '../variables';
 export const selectPendingDeploymentState = (state: { pendingDeployment?: State }) =>
   state.pendingDeployment;
 
-export const selectPendingDeploymentData = createSelector(
+export const selectPendingDeployment = createSelector(
   selectPendingDeploymentState,
-  (state) => state?.data,
+  (state) => state?.deployment,
 );
 
 export const selectVariablesList = createSelector(
-  selectPendingDeploymentData,
+  selectPendingDeployment,
   selectEnvironmentsResourceData,
   selectVariablesResourceData,
-  (pendingDeployment, environments, variables) => {
-    if (!pendingDeployment || !environments || !variables) {
+  (deployment, environments, variables) => {
+    if (!deployment || !environments || !variables) {
       return;
     }
 
-    return variablesList(pendingDeployment, environments, variables);
+    return variablesList(deployment, environments, variables);
   },
 );

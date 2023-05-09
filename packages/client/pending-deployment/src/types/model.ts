@@ -1,6 +1,5 @@
 import { Deployment } from '@pivot/client/deployments';
-
-export type Model = Omit<Deployment, 'created_at' | 'uuid'>;
+import { Draft } from '@pivot/util/model';
 
 export type VariablesList = {
   created_at: string;
@@ -11,7 +10,7 @@ export type VariablesList = {
   variable_id: string;
 }[];
 
-export function isPendingDeployment(deployment: any): deployment is Model {
+export function isPendingDeployment(deployment: any): deployment is Draft<Deployment> {
   return (
     typeof deployment === 'object' &&
     deployment !== null &&

@@ -1,4 +1,6 @@
-import { DeploymentsResource, deploymentsResourceService } from '../deployments';
+import { DeploymentsResourceService } from '@pivot/client/deployments';
+
+import { deploymentsResourceService } from '../deployments';
 import { EnvironmentsResource, environmentsResourceService } from '../environments';
 import { FeaturesResource, featuresResourceService } from '../features';
 import { ReleasesResource, releasesResourceService } from '../releases';
@@ -19,7 +21,7 @@ export const fetchProject = {
   handler:
     (
       project: ProjectResource,
-      deployments: DeploymentsResource,
+      deployments: DeploymentsResourceService,
       environments: EnvironmentsResource,
       features: FeaturesResource,
       releases: ReleasesResource,

@@ -27,5 +27,5 @@ export const releasesResourceService = injectable({
     ),
 });
 
-export type ReleasesResource = ResourceService<Release[], Error, [string]>;
+export type ReleasesResource = ResourceService<Release[], [string]>;
 export type ReleasesResourceState = State<Release[], Error>;
