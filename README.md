@@ -54,17 +54,18 @@ The code is split between framework (dirty) code, and domain (clean) code. The f
 ├── packages
 │   └── client
 │       ├── project
-│       │   ├── components
-│       │   │   ├── ProjectTable.tsx
-│       │   ├── reducers.ts
-│       │   ├── selectors.ts
-│       │   ├── service.ts
-│       │   ├── index.ts
+│       │   ├── src
+│       │   │   ├── components
+│       │   │   │    ├── ProjectTable.tsx
+│       │   │   ├── reducers.ts
+│       │   │   ├── selectors.ts
+│       │   │   ├── service.ts
+│       │   │   ├── index.ts
 ```
 
 ### Domain Code
 
-A crucial aspect of Pivot is that business logic is kept separate and isolated from framework code. The `packages/client/[module-name]` folders contain isolated functions whose dependencies are injected by the framwork. This allows for easy testing and reuse of code within this folder.
+A crucial aspect of Pivot is that business logic is kept separate and isolated from framework code. The `packages/client/[module-name]` folders contain isolated functions whose dependencies are injected by the framework. This allows for easy testing and reuse of code within this folder.
 
 #### Reducers
 
@@ -105,7 +106,7 @@ export function toasterService(toaster: ToasterRepository) {
 }
 ```
 
-Notice how the service is just a function that returns an object. The function defines the shape of its arguments (in this case `Toaster`) and the returned object defines the API that the framework can use to interact with the service. 
+Notice how the service is just a function that returns an object. The function defines the shape of its arguments (in this case `ToasterRepository`) and the returned object defines the API that the framework can use to interact with the service. 
 
 #### Selectors
 
@@ -156,7 +157,7 @@ The first thing we need to look at is the dependency injection system. It's cent
 
 #### Injectable
 
-An app is a `headless` instance, which takes services, slices, and subscriptions as arguments. The form they take, however, is very specific: they need to be _injectable_. `Injectable` objects are those which can be injected into services, and used by the app themselves. In order to create an injectable, you need to use the `injectable` function to wrap the domain code we wrote in the previous section. For example:
+An app is a `headless` instance, which takes services, slices, and subscriptions as arguments. The form they take, however, is very specific: they need to be _injectable_. `Injectable` objects are those which can be injected into services, and used by the app themselves. In order to create an `injectable`, you need to use the `injectable` function to wrap the domain code we wrote in the previous section. For example:
 
 ```ts
 
@@ -166,7 +167,7 @@ const serviceA = injectable({
 });
 ```
 
-Let's take a look at this more closely. The `importFn` is a function that takes the dependencies as arguments, and returns a promise that resolves to the injectable. The `dependencies` are the injectables that this injectable depends on. This is how the framework knows how to resolve the dependencies of the injectable.
+Let's take a look at this more closely. The `importFn` is a function that takes the dependencies as arguments, and returns a promise that resolves to the instantiated service. The `dependencies` are the injectables that this injectable depends on. This is how the framework knows how to resolve the dependencies of the injectable.
 
 So we've just created a service. This service can either be used directly by the app, or it can be used by other services. Let's create another service that depends on serviceA:
 
@@ -201,7 +202,7 @@ const sliceA = injectable({
 });
 ```
 
-The `slice` function returns an object with an `api` property, which is an API that allows you to dispatch actions directly, without actually calling `dispatch`. This means that we can use the slice as a service:
+The `slice` function returns an object with an `api` property, which is an API that allows you to dispatch actions directly, without actually calling `dispatch`. This means that we can use the slice as a service if we want to update the state from a separate service:
 
 ```ts
 
@@ -211,10 +212,10 @@ const serviceA = injectable({
 });
 ```
 
-`serviceA` now has access to the slice's API:
+`serviceA` now has access to the slice's API, which we'll call `ARepository`:
 
 ```ts
-export function serviceA(api: SliceApi) {
+export function serviceA(api: ARepository) {
   return {
     setFlag: (flag: boolean) => api.setFlag(flag),
   };
@@ -223,7 +224,7 @@ export function serviceA(api: SliceApi) {
 
 Notice how we're not using `dispatch` here. This is because the `api.setFlag` is calling `dispatch` behind the scenes. 
 
-So, now we have a slice that is injectable, and is also dynamically-loaded. This is important to understand for the next step: how to add this slice to the app:
+So, now we have a slice that is injectable, and is also **dynamically-loaded**. This is important to understand for the next step: how to add this slice to the app:
 
 ```ts
 const slices = {
@@ -238,7 +239,7 @@ This is slightly different from how we defined services. Services are available 
 
 #### Subscriptions
 
-Pivot is a state-driven app, and that counts for reacting to events as well. The way we do this is with subscriptions. Subscriptions are functions that take the state as an argument, and return an object that contains the subscriptions. Let's take a look at an example:
+Pivot is a state-driven app, and that counts for reacting to events as well. The way we do this is with subscriptions. Let's take a look at an example:
 
 ```ts
 export const unauthorizedRedirect = {
@@ -252,9 +253,9 @@ export const unauthorizedRedirect = {
 };
 ```
 
-Here, we have a selector that determines - from the state - whether or not we should redirect to `notFound`. If this selector returns `true`, then the handler is first called with its dependency injectables, and then the resulting function is called with the result of the selector. This function will be called whenever the selected value changes (and is not `null` or `undefined`).
+Here, we have a selector that determines - from the state - whether or not we should redirect to `notFound`. If this selector returns anything other than `undefined`, then the handler is first called with its dependency injectables, and then the resulting function is called with the result of the selector. This function will be called whenever the selected value changes (and is not `undefined`).
 
-Subscriptions can be used to connect different slices. For example, maybe you want to clear the state of a slice when the user logs out. You can do that with subscriptions.
+Subscriptions can be used to connect different slices. For example, maybe you want to clear the state of an otherwise unrelated slice when the user logs out. You can do that with subscriptions.
 
 #### Putting it all together
 
@@ -267,7 +268,7 @@ const app = headless({
   subscriptions,
 });
 
-app.init();
+await app.init();
 ```
 
 We now have a fully-functioning headless app. We can use this for integration testing our various modules within Node (e.g. Jest or Vitest). But how do we interact with it. Well, if we're doing integration tests, we can use the `app` object directly. It provides handy methods like:
@@ -284,7 +285,7 @@ We now have a fully-functioning headless app. We can use this for integration te
 
 ```
 
-We can write a test like this, for instance:
+We can write an integration test like this, for instance:
 
 ```ts
 it('should login', async () => {
@@ -319,4 +320,4 @@ it('should navigate to notFound on authorized route then logged out', async () =
 });
 ```
 
-This test will run without a UI, and will be very fast.
+This test will run without a UI, and will be very fast. It doesn't give you as much confidence as a traditional integration or E2E test, but it gets you half the way there without the performance and flakiness issues. This reduces the burden on your E2E tests, so they can be streamlined.
