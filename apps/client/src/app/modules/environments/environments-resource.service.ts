@@ -27,5 +27,5 @@ export const environmentsResourceService = injectable({
     ),
 });
 
-export type EnvironmentsResource = ResourceService<Environment, Error, [string]>;
+export type EnvironmentsResource = ResourceService<Environment, [string]>;
 export type EnvironmentsResourceState = State<Environment[], Error>;

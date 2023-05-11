@@ -1,10 +1,14 @@
-import { DeploymentFeature } from '@pivot/client/deployments';
+import { DeploymentFeature } from '@pivot/client/deployment-features';
+import { DeploymentVariable } from '@pivot/client/deployment-variables';
+import { Deployment } from '@pivot/client/deployments';
+import { Draft } from '@pivot/util/model';
 
-import { Model } from './model';
+import { State } from './state';
 
 export interface Actions {
-  set(deployment: Model | null): void;
-  update(deployment: Partial<Model>): void;
-  updateFeature(uuid: string, feature: Partial<DeploymentFeature>): void;
-  updateVariable(uuid: string, value: string): void;
+  clearDrafts(): void;
+  getState(): State;
+  setDeployment(deployment: Draft<Deployment> | null): void;
+  setFeature(feature_id: string, feature: Partial<Draft<DeploymentFeature>>): void;
+  setVariable(variable_id: string, variable: Partial<Draft<DeploymentVariable>>): void;
 }
