@@ -1,14 +1,17 @@
 import { Deployment } from '@pivot/client/deployments';
 import { Draft } from '@pivot/util/model';
 
-export type VariablesList = {
-  created_at: string;
+export enum DisplayVariableType {
+  Deployment = 'deployment',
+  Environment = 'environment',
+}
+
+export type DisplayVariable = {
   name: string;
-  uuid: string;
   value: string;
-  variableType: string;
+  variableType: DisplayVariableType;
   variable_id: string;
-}[];
+};
 
 export function isPendingDeployment(deployment: any): deployment is Draft<Deployment> {
   return (

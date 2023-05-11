@@ -1,5 +1,5 @@
 import { DeploymentVariable } from '@pivot/client/deployment-variables';
-import { VariablesList } from '@pivot/client/pending-deployment';
+import { DisplayVariable } from '@pivot/client/pending-deployment';
 import { cx } from '@pivot/util/classname';
 import { Draft } from '@pivot/util/model';
 
@@ -7,7 +7,7 @@ import styles from './variables.module.css';
 
 interface Props {
   setVariable: (uuid: string, variable: Partial<Draft<DeploymentVariable>>) => void;
-  variables: VariablesList;
+  variables: DisplayVariable[];
 }
 
 export function Variables({ variables, setVariable }: Props) {
@@ -19,8 +19,8 @@ export function Variables({ variables, setVariable }: Props) {
 
   return (
     <>
-      {variables.map(({ name, value, uuid }) => (
-        <div className={styles.variable} key={uuid}>
+      {variables.map(({ name, value }) => (
+        <div className={styles.variable} key={name}>
           <div className={cx(styles.inner, 'field is-grouped')}>
             <div className="control has-icons-left is-expanded">
               <input className="input" disabled type="text" value={name} />
@@ -29,7 +29,7 @@ export function Variables({ variables, setVariable }: Props) {
               </span>
             </div>
             <div className="control has-icons-left is-expanded">
-              <input className="input" onChange={onTextChange(uuid)} type="text" value={value} />
+              <input className="input" onChange={onTextChange(name)} type="text" value={value} />
               <span className="icon is-left">
                 <i className="las la-key"></i>
               </span>

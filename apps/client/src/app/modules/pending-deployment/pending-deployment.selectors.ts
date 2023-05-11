@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { State, variablesList } from '@pivot/client/pending-deployment';
+import { buildDisplayVariables, State } from '@pivot/client/pending-deployment';
 
 import { selectEnvironmentsResourceData } from '../environments';
 import { selectVariablesResourceData } from '../variables';
@@ -13,15 +13,26 @@ export const selectPendingDeployment = createSelector(
   (state) => state?.deployment,
 );
 
-export const selectVariablesList = createSelector(
+export const selectPendingFeatures = createSelector(
+  selectPendingDeploymentState,
+  (state) => state?.features,
+);
+
+export const selectPendingVariables = createSelector(
+  selectPendingDeploymentState,
+  (state) => state?.variables,
+);
+
+export const selectDisplayVariables = createSelector(
   selectPendingDeployment,
-  selectEnvironmentsResourceData,
+  selectPendingVariables,
   selectVariablesResourceData,
-  (deployment, environments, variables) => {
-    if (!deployment || !environments || !variables) {
-      return;
+  selectEnvironmentsResourceData,
+  (deployment, deploymentVariables, variables, environments) => {
+    if (!deployment || !deploymentVariables || !variables || !environments) {
+      return [];
     }
 
-    return variablesList(deployment, environments, variables);
+    return buildDisplayVariables(deployment, deploymentVariables, variables, environments);
   },
 );

@@ -2,16 +2,17 @@ import { DeploymentVariable } from '@pivot/client/deployment-variables';
 import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
 import { Variable } from '@pivot/client/variables';
+import { Draft } from '@pivot/util/model';
 
-import { VariablesList } from '../types';
+import { DisplayVariable, DisplayVariableType } from '../types';
 
-export function variablesList(
-  deployment: Deployment | null,
-  deploymentVariables: DeploymentVariable[],
-  environments: Environment[] | null,
-  variables: Variable[] | null,
-): VariablesList {
-  if (!deployment || !environments || !variables) {
+export function buildDisplayVariables(
+  deployment: Draft<Deployment>,
+  deploymentVariables: Draft<DeploymentVariable>[] = [],
+  variables: Variable[] = [],
+  environments: Environment[] = [],
+): DisplayVariable[] {
+  if (!deploymentVariables || !variables) {
     return [];
   }
 
@@ -45,7 +46,7 @@ export function variablesList(
     return {
       ...variable,
       name: variableData.name,
-      variableType: 'environment',
+      variableType: DisplayVariableType.Environment,
     };
   });
 
@@ -67,7 +68,7 @@ export function variablesList(
     return {
       ...variable,
       name: variableData.name,
-      variableType: 'deployment',
+      variableType: DisplayVariableType.Deployment,
     };
   });
 

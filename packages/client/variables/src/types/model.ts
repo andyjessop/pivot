@@ -4,3 +4,8 @@ export interface Variable {
   project_id: string;
   uuid: string;
 }
+
+export interface VariableValue {
+  name: string;
+  value: string;
+}

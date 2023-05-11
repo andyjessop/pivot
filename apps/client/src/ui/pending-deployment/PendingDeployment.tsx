@@ -2,28 +2,28 @@ import { PendingDeploymentModal, Variables } from '@pivot/client/pending-deploym
 
 import { useSelector, useService } from '~app';
 import { selectEnvironmentsResourceData } from '~app/modules/environments';
-import { selectPendingDeployment, selectVariablesList } from '~app/modules/pending-deployment';
+import { selectDisplayVariables, selectPendingDeployment } from '~app/modules/pending-deployment';
 import { selectReleasesResourceData } from '~app/modules/releases';
 
 export function PendingDeployment() {
   const service = useService('pendingDeployment');
   const environments = useSelector(selectEnvironmentsResourceData);
-  const pendingDeployment = useSelector(selectPendingDeployment);
+  const deployment = useSelector(selectPendingDeployment);
   const releases = useSelector(selectReleasesResourceData);
-  const variables = useSelector(selectVariablesList);
+  const variables = useSelector(selectDisplayVariables);
 
-  if (!environments || !pendingDeployment || !releases || !service || !variables) {
+  if (!environments || !deployment || !releases || !service || !variables) {
     return null;
   }
 
-  const { clearDrafts, setDeployment, setVariable } = service;
+  const { clearDrafts, setVariable } = service;
 
   // const FeaturesComponent = (
   //   <Features features={features} updateFeature={updateFeature} />
   // );
 
   const deploy = () => {
-    if (!pendingDeployment) {
+    if (!deployment) {
       throw new Error('No pending deployment');
     }
 
@@ -37,10 +37,9 @@ export function PendingDeployment() {
       Variables={VariablesComponent}
       clear={clearDrafts}
       deploy={deploy}
+      deployment={deployment}
       environments={environments}
-      pendingDeployment={pendingDeployment}
       releases={releases}
-      update={update}
       // Features={FeaturesComponent}
     />
   );

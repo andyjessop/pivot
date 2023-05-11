@@ -9,7 +9,7 @@ export function service(
   pendingDeploymentState: Actions,
   deploymentsResource: DeploymentsResourceService,
   deploymentFeaturesHttp: DeploymentFeaturesHttp,
-  DeploymentVariablesHttp: DeploymentVariablesHttp,
+  deploymentVariablesHttp: DeploymentVariablesHttp,
 ) {
   return {
     cloneDeployment,
@@ -23,13 +23,15 @@ export function service(
   async function cloneDeployment(deployment: Deployment) {
     const strippedDeployment = makeDraft(deployment);
 
-    const features = await deploymentFeaturesHttp.get(deployment.uuid);
-    const variables = await DeploymentVariablesHttp.get(deployment.uuid);
+    pendingDeploymentState.setDeployment(strippedDeployment);
+
+    const [features, variables] = await Promise.all([
+      deploymentFeaturesHttp.get(deployment.uuid),
+      deploymentVariablesHttp.get(deployment.uuid),
+    ]);
 
     const strippedFeatures = features.map((feature) => makeDraft(feature));
     const strippedVariables = variables.map((variable) => makeDraft(variable));
-
-    pendingDeploymentState.setDeployment(strippedDeployment);
 
     for (const feature of strippedFeatures) {
       pendingDeploymentState.setFeature(feature.feature_id, feature);
@@ -52,7 +54,7 @@ export function service(
     }
 
     for (const variable of variables) {
-      DeploymentVariablesHttp.post(variable);
+      deploymentVariablesHttp.post(variable);
     }
 
     pendingDeploymentState.clearDrafts();
