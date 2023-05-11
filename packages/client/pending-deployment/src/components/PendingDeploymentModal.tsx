@@ -30,10 +30,12 @@ export function PendingDeploymentModal({
   const { environment_id, release_id } = deployment;
 
   const selectEnvironment = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // eslint-disable-next-line no-console
     console.log('selectEnvironment', e.target.value);
   };
 
   const updateUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // eslint-disable-next-line no-console
     console.log('updateUrl', e.target.value);
   };
 
