@@ -1,3 +1,5 @@
+import { DeploymentVariable } from '@pivot/client/deployment-variables';
+
 import { deploymentFeatures } from './fixtures/deployment-features';
 import { deploymentVariables } from './fixtures/deployment-variables';
 import { deployments } from './fixtures/deployments';
@@ -21,7 +23,9 @@ export function findDeploymentFeaturesByDeploymentId(deploymentId: string) {
 }
 
 export function findDeploymentVariablesByDeploymentId(deploymentId: string) {
-  return deploymentVariables.filter((d) => d.deployment_id === deploymentId)!;
+  return (deploymentVariables as DeploymentVariable[]).filter(
+    (d) => d.deployment_id === deploymentId,
+  )!;
 }
 
 export function findFeaturesByProjectId(projectId: string) {
