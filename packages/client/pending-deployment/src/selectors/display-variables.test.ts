@@ -88,12 +88,12 @@ describe('displayVariables', () => {
       {
         name: 'Variable 1',
         uuid: 'var-1',
-        variableType: 'Deployment',
+        variableType: 'deployment',
         variable_id: 'var-1',
       },
       {
         name: 'Variable 1',
-        variableType: 'Environment',
+        variableType: 'environment',
         variable_id: 'var-1',
       },
     ];
