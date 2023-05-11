@@ -1,6 +1,9 @@
 import { Http } from '@pivot/client/http';
+import { Draft } from '@pivot/util/model';
 
 import { Deployment } from './types';
+
+export type DeploymentsHttp = ReturnType<typeof http>;
 
 export function http(baseHttp: Http) {
   return {
@@ -10,7 +13,7 @@ export function http(baseHttp: Http) {
       );
     },
 
-    post: async (deployment: Omit<Deployment, 'created_at' | 'uuid'>): Promise<Deployment> => {
+    post: async (deployment: Draft<Deployment>): Promise<Deployment> => {
       const result = await baseHttp.post<Deployment[]>(`/rest/v1/deployment`, deployment);
 
       return result[0];

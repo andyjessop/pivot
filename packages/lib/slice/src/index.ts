@@ -19,6 +19,14 @@ export type ExtractActions<T, S = any> = T extends Record<
     }
   : any;
 
+export type ExtractApi<T, S = any> = T extends Record<keyof T, (state: S, ...params: any[]) => S>
+  ? {
+      [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
+    } & {
+      getState: () => S;
+    }
+  : any;
+
 export type Slice<
   T extends Record<keyof T, (state: S, ...params: any[]) => S>,
   N extends string = any,
@@ -46,6 +54,8 @@ export type Slice<
   addListener: (listener: (state: S) => void) => () => void;
   api: {
     [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
+  } & {
+    getState: () => S;
   };
   middleware: (api: MiddlewareAPI) => (next: Dispatch) => (action: Action) => any;
   reducer: (state: S, action: Action) => S;
@@ -142,8 +152,12 @@ export function slice<
 
       return acc;
     },
-    {} as {
+    {
+      getState: select,
+    } as {
       [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
+    } & {
+      getState: () => S;
     },
   );
 

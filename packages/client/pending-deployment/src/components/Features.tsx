@@ -1,4 +1,4 @@
-import { DeploymentFeature, DeploymentFeatureWithName } from '@pivot/client/deployments';
+import { DeploymentFeature, DeploymentFeatureWithName } from '@pivot/client/deployment-features';
 import { cx } from '@pivot/util/classname';
 
 import styles from './features.module.css';

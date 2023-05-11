@@ -7,12 +7,11 @@ config();
 
 const PROJECT_NAME = 'pivot';
 const USER_ID = 'b6b92239-6bf7-46ed-949a-7249eb1c3116';
-const FIXTURE_PATH = resolve(
-  __dirname,
-  '../../../packages/fixtures/src/fixtures',
-);
+const FIXTURE_PATH = resolve(__dirname, '../../../packages/fixtures/src/fixtures');
 const ENVIRONMENTS_PATH = resolve(FIXTURE_PATH, 'environments.ts');
 const DEPLOYMENTS_PATH = resolve(FIXTURE_PATH, 'deployments.ts');
+const DEPLOYMENT_FEATURES_PATH = resolve(FIXTURE_PATH, 'deployment-features.ts');
+const DEPLOYMENT_VARIABLES_PATH = resolve(FIXTURE_PATH, 'deployment-variables.ts');
 const FEATURES_PATH = resolve(FIXTURE_PATH, 'features.ts');
 const VARIABLES_PATH = resolve(FIXTURE_PATH, 'variables.ts');
 const PROJECTS_PATH = resolve(FIXTURE_PATH, 'projects.ts');
@@ -38,43 +37,38 @@ export async function main() {
 
   const environments = await fetchEnvironments(pivot.uuid);
   const deployments = await fetchDeployments(pivot.uuid);
+  const deploymentFeatures = await fetchDeploymentFeatures(pivot.uuid);
+  const deploymentVariables = await fetchDeploymentVariables(pivot.uuid);
   const features = await fetchFeatures(pivot.uuid);
   const releases = await fetchReleases(pivot.uuid);
   const variables = await fetchVariables(pivot.uuid);
   const teams = await fetchTeams();
 
+  write(ENVIRONMENTS_PATH, `export const environments = ${JSON.stringify(environments)}`);
+  write(DEPLOYMENTS_PATH, `export const deployments = ${JSON.stringify(deployments)}`);
   write(
-    ENVIRONMENTS_PATH,
-    `export const environments = ${JSON.stringify(environments)}`,
+    DEPLOYMENT_FEATURES_PATH,
+    `export const deploymentFeatures = ${JSON.stringify(deploymentFeatures)}`,
   );
   write(
-    DEPLOYMENTS_PATH,
-    `export const deployments = ${JSON.stringify(deployments)}`,
+    DEPLOYMENT_VARIABLES_PATH,
+    `export const deploymentVariables = ${JSON.stringify(deploymentVariables)}`,
   );
   write(FEATURES_PATH, `export const features = ${JSON.stringify(features)}`);
   write(RELEASES_PATH, `export const releases = ${JSON.stringify(releases)}`);
-  write(
-    VARIABLES_PATH,
-    `export const variables = ${JSON.stringify(variables)}`,
-  );
+  write(VARIABLES_PATH, `export const variables = ${JSON.stringify(variables)}`);
   write(PROJECTS_PATH, `export const projects = ${JSON.stringify(projects)}`);
   write(TEAMS_PATH, `export const teams = ${JSON.stringify(teams)}`);
-  write(
-    USERS_PATH,
-    `export const users = ${JSON.stringify([{ id: USER_ID }])}`,
-  );
+  write(USERS_PATH, `export const users = ${JSON.stringify([{ id: USER_ID }])}`);
 
   async function get(url: string) {
-    const response = await fetch(
-      `https://bzorcyxlshyjsykloifx.supabase.co/rest/v1/${url}`,
-      {
-        method: 'GET',
-        headers: {
-          ApiKey: process.env.SUPABASE_API_KEY as string,
-          Authorization: `Bearer ${accessToken}`,
-        },
+    const response = await fetch(`https://bzorcyxlshyjsykloifx.supabase.co/rest/v1/${url}`, {
+      headers: {
+        ApiKey: process.env.SUPABASE_API_KEY as string,
+        Authorization: `Bearer ${accessToken}`,
       },
-    );
+      method: 'GET',
+    });
 
     return await response.json();
   }
@@ -83,12 +77,12 @@ export async function main() {
     const response = await fetch(
       'https://bzorcyxlshyjsykloifx.supabase.co/auth/v1/token?grant_type=password',
       {
-        method: 'POST',
-        headers: { ApiKey: process.env.SUPABASE_API_KEY as string },
         body: JSON.stringify({
           email: process.env.USER_EMAIL,
           password: process.env.USER_PASSWORD,
         }),
+        headers: { ApiKey: process.env.SUPABASE_API_KEY as string },
+        method: 'POST',
       },
     );
 
@@ -121,6 +115,30 @@ export async function main() {
     );
   }
 
+  async function fetchDeploymentFeatures(projectId: string) {
+    const deployments = await fetchDeployments(projectId);
+
+    const arrayOfArrays = await Promise.all(
+      deployments.map(async (deployment: any) => {
+        return get(`deployment_feature?deployment_id=eq.${deployment.uuid}&select=*`);
+      }),
+    );
+
+    return arrayOfArrays.flat();
+  }
+
+  async function fetchDeploymentVariables(projectId: string) {
+    const deployments = await fetchDeployments(projectId);
+
+    const arrayOfArrays = await Promise.all(
+      deployments.flatMap(async (deployment: any) => {
+        return get(`deployment_variable?deployment_id=eq.${deployment.uuid}&select=*`);
+      }),
+    );
+
+    return arrayOfArrays.flat();
+  }
+
   async function fetchFeatures(projectId: string) {
     return getProjectComponent(projectId, 'feature?select=*');
   }
@@ -137,11 +155,11 @@ export async function main() {
     const response = await fetch(
       `https://bzorcyxlshyjsykloifx.supabase.co/rest/v1/${relativePath}&project_id=eq.${projectId}`,
       {
-        method: 'GET',
         headers: {
           ApiKey: process.env.SUPABASE_API_KEY as string,
           Authorization: `Bearer ${accessToken}`,
         },
+        method: 'GET',
       },
     );
 
@@ -154,7 +172,7 @@ export async function main() {
 }
 
 function setup() {
-  rmSync(FIXTURE_PATH, { recursive: true, force: true });
+  rmSync(FIXTURE_PATH, { force: true, recursive: true });
   mkdirSync(FIXTURE_PATH, { recursive: true });
 }
 

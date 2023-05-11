@@ -27,5 +27,5 @@ export const variablesResourceService = injectable({
     ),
 });
 
-export type VariablesResource = ResourceService<Variable[], Error, [string]>;
+export type VariablesResource = ResourceService<Variable[], [string]>;
 export type VariablesResourceState = State<Variable[], Error>;

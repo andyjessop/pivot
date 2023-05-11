@@ -1,42 +1,42 @@
+import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
 import { Release } from '@pivot/client/releases';
 import { button, form, icon, modal, spaced, typography } from '@pivot/design/css';
 import { useEscapeKey } from '@pivot/hooks';
 import { cx } from '@pivot/util/classname';
-
-import { Model } from '../types';
+import { Draft } from '@pivot/util/model';
 
 interface Props {
   Variables: JSX.Element;
   clear: () => void;
   deploy: () => void;
-  environments: Environment[];
   // Features?: JSX.Element;
-  pendingDeployment: Model;
+  deployment: Draft<Deployment>;
+  environments: Environment[];
   releases: Release[];
-  update: (deployment: Partial<Model>) => void;
 }
 
 export function PendingDeploymentModal({
   clear,
   deploy,
+  deployment,
   environments,
   // Features,
-  pendingDeployment,
   releases,
-  update,
   Variables,
 }: Props) {
   useEscapeKey(clear);
 
-  const { environment_id, release_id } = pendingDeployment;
+  const { environment_id, release_id } = deployment;
 
   const selectEnvironment = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    update({ environment_id: e.target.value });
+    // eslint-disable-next-line no-console
+    console.log('selectEnvironment', e.target.value);
   };
 
   const updateUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    update({ url: e.target.value });
+    // eslint-disable-next-line no-console
+    console.log('updateUrl', e.target.value);
   };
 
   const env = environments.find((env) => env.uuid === environment_id);
@@ -92,7 +92,7 @@ export function PendingDeploymentModal({
                     className="input"
                     onChange={updateUrl}
                     type="text"
-                    value={pendingDeployment.url || ''}
+                    value={deployment.url || ''}
                   />
                 </div>
               </div>

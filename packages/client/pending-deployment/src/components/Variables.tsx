@@ -1,24 +1,26 @@
-import { VariablesList } from '@pivot/client/pending-deployment';
+import { DeploymentVariable } from '@pivot/client/deployment-variables';
+import { DisplayVariable } from '@pivot/client/pending-deployment';
 import { cx } from '@pivot/util/classname';
+import { Draft } from '@pivot/util/model';
 
 import styles from './variables.module.css';
 
 interface Props {
-  updateVariable: (uuid: string, value: string) => void;
-  variables: VariablesList;
+  setVariable: (uuid: string, variable: Partial<Draft<DeploymentVariable>>) => void;
+  variables: DisplayVariable[];
 }
 
-export function Variables({ variables, updateVariable }: Props) {
+export function Variables({ variables, setVariable }: Props) {
   const onTextChange = (uuid: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    updateVariable(uuid, value);
+    setVariable(uuid, { value });
   };
 
   return (
     <>
-      {variables.map(({ name, value, uuid }) => (
-        <div className={styles.variable} key={uuid}>
+      {variables.map(({ name, value }) => (
+        <div className={styles.variable} key={name}>
           <div className={cx(styles.inner, 'field is-grouped')}>
             <div className="control has-icons-left is-expanded">
               <input className="input" disabled type="text" value={name} />
@@ -27,7 +29,7 @@ export function Variables({ variables, updateVariable }: Props) {
               </span>
             </div>
             <div className="control has-icons-left is-expanded">
-              <input className="input" onChange={onTextChange(uuid)} type="text" value={value} />
+              <input className="input" onChange={onTextChange(name)} type="text" value={value} />
               <span className="icon is-left">
                 <i className="las la-key"></i>
               </span>

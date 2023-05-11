@@ -1,1 +1,1 @@
-export * from './variables-list';
+export * from './display-variables';

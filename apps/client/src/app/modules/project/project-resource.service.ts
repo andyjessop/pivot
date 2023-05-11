@@ -28,5 +28,5 @@ export const projectResourceService = injectable({
     ),
 });
 
-export type ProjectResource = ResourceService<Model, Error, [string]>;
+export type ProjectResource = ResourceService<Model, [string]>;
 export type ProjectResourceState = State<Model, Error>;

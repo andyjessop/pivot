@@ -1,8 +1,7 @@
 import { Deployment } from '@pivot/client/deployments';
-import { Model as PendingDeployment } from '@pivot/client/pending-deployment';
 import { injectable } from '@pivot/lib/injectable';
-import { resourceService, State } from '@pivot/lib/resource';
-import { Service as ResourceService } from '@pivot/lib/resource';
+import { resourceService } from '@pivot/lib/resource';
+import { Draft } from '@pivot/util/model';
 
 import { httpService } from '../http';
 
@@ -20,7 +19,7 @@ export const deploymentsResourceService = injectable({
       resourceService(
         {
           create: {
-            query: (deployment: PendingDeployment) => http.post(deployment),
+            query: (deployment: Draft<Deployment>) => http.post(deployment),
           },
           read: {
             query: (uuid: string) => http.get(uuid),
@@ -30,6 +29,3 @@ export const deploymentsResourceService = injectable({
       ),
     ),
 });
-
-export type DeploymentsResource = ResourceService<Deployment[], Error, [string]>;
-export type DeploymentsResourceState = State<Deployment[], Error>;

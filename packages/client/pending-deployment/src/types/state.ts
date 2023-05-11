@@ -1,5 +1,10 @@
-import { Model } from './model';
+import { DeploymentFeature } from '@pivot/client/deployment-features';
+import { DeploymentVariable } from '@pivot/client/deployment-variables';
+import { Deployment } from '@pivot/client/deployments';
+import { Draft } from '@pivot/util/model';
 
 export interface State {
-  data: Model | null;
+  deployment: Draft<Deployment> | null;
+  features: Draft<DeploymentFeature>[];
+  variables: Draft<DeploymentVariable>[];
 }

@@ -2,45 +2,44 @@ import { PendingDeploymentModal, Variables } from '@pivot/client/pending-deploym
 
 import { useSelector, useService } from '~app';
 import { selectEnvironmentsResourceData } from '~app/modules/environments';
-import { selectPendingDeploymentData, selectVariablesList } from '~app/modules/pending-deployment';
+import { selectDisplayVariables, selectPendingDeployment } from '~app/modules/pending-deployment';
 import { selectReleasesResourceData } from '~app/modules/releases';
 
 export function PendingDeployment() {
   const service = useService('pendingDeployment');
   const environments = useSelector(selectEnvironmentsResourceData);
-  const pendingDeployment = useSelector(selectPendingDeploymentData);
+  const deployment = useSelector(selectPendingDeployment);
   const releases = useSelector(selectReleasesResourceData);
-  const variables = useSelector(selectVariablesList);
+  const variables = useSelector(selectDisplayVariables);
 
-  if (!environments || !pendingDeployment || !releases || !service || !variables) {
+  if (!environments || !deployment || !releases || !service || !variables) {
     return null;
   }
 
-  const { set, update, updateVariable } = service;
+  const { clearDrafts, setVariable } = service;
 
   // const FeaturesComponent = (
   //   <Features features={features} updateFeature={updateFeature} />
   // );
 
   const deploy = () => {
-    if (!pendingDeployment) {
+    if (!deployment) {
       throw new Error('No pending deployment');
     }
 
-    service.deploy(pendingDeployment);
+    service.deploy();
   };
 
-  const VariablesComponent = <Variables updateVariable={updateVariable} variables={variables} />;
+  const VariablesComponent = <Variables setVariable={setVariable} variables={variables} />;
 
   return (
     <PendingDeploymentModal
       Variables={VariablesComponent}
-      clear={() => set(null)}
+      clear={clearDrafts}
       deploy={deploy}
+      deployment={deployment}
       environments={environments}
-      pendingDeployment={pendingDeployment}
       releases={releases}
-      update={update}
       // Features={FeaturesComponent}
     />
   );

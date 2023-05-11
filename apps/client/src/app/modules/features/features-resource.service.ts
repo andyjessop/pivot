@@ -27,5 +27,5 @@ export const featuresResourceService = injectable({
     ),
 });
 
-export type FeaturesResource = ResourceService<Feature[], Error, [string]>;
+export type FeaturesResource = ResourceService<Feature[], [string]>;
 export type FeaturesResourceState = State<Feature[], Error>;

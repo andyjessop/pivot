@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { isDeploymentsRoute } from '@pivot/client/deployments';
+import { DeploymentsResourceState, isDeploymentsRoute } from '@pivot/client/deployments';
 import { projectId } from '@pivot/client/project';
 import { humanReadableDate } from '@pivot/util/time';
 import { stripProtocol } from '@pivot/util/url';
@@ -8,8 +8,6 @@ import { stripProtocol } from '@pivot/util/url';
 import { selectEnvironmentsResourceData } from '../environments';
 import { selectReleasesResourceData } from '../releases';
 import { selectRouteName, selectRouteParams } from '../router';
-
-import { DeploymentsResourceState } from './deployments-resource.service';
 
 export const selectIsDeploymentsRoute = createSelector(selectRouteName, isDeploymentsRoute);
 

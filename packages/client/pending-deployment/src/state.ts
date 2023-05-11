@@ -1,5 +1,7 @@
 import { State } from './types';
 
 export const initialState: State = {
-  data: null,
+  deployment: null,
+  features: [],
+  variables: [],
 };

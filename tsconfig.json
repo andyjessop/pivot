@@ -18,6 +18,8 @@
       "@pivot/client/cache": ["packages/client/cache/src/index.ts"],
       "@pivot/client/components": ["packages/client/components/src/index.ts"],
       "@pivot/client/deployments": ["packages/client/deployments/src/index.ts"],
+      "@pivot/client/deployment-features": ["packages/client/deployment-features/src/index.ts"],
+      "@pivot/client/deployment-variables": ["packages/client/deployment-variables/src/index.ts"],
       "@pivot/client/env": ["packages/client/env/src/index.ts"],
       "@pivot/client/environments": [
         "packages/client/environments/src/index.ts"
@@ -34,9 +36,6 @@
       ],
       "@pivot/client/project": ["packages/client/project/src/index.ts"],
       "@pivot/client/releases": ["packages/client/releases/src/index.ts"],
-      "@pivot/client/shared-interfaces": [
-        "packages/client/shared-interfaces/src/index.ts"
-      ],
       "@pivot/client/variables": ["packages/client/variables/src/index.ts"],
       "@pivot/design/css": ["packages/design/css/src/index.ts"],
       "@pivot/design/custom-elements": [
@@ -71,6 +70,7 @@
       "@pivot/template": ["packages/template/src/index.ts"],
       "@pivot/util/classname": ["packages/util/classname/src/index.ts"],
       "@pivot/util/function": ["packages/util/function/src/index.ts"],
+      "@pivot/util/model": ["packages/util/model/src/index.ts"],
       "@pivot/util/object": ["packages/util/object/src/index.ts"],
       "@pivot/util/promise": ["packages/util/promise/src/index.ts"],
       "@pivot/util/string": ["packages/util/string/src/index.ts"],
