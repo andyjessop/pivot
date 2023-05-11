@@ -6,13 +6,13 @@ import { Draft } from '@pivot/util/model';
 
 import { DisplayVariable, DisplayVariableType } from '../types';
 
-export function buildDisplayVariables(
+export function displayVariables(
   deployment: Draft<Deployment>,
   deploymentVariables: Draft<DeploymentVariable>[] = [],
   variables: Variable[] = [],
   environments: Environment[] = [],
 ): DisplayVariable[] {
-  if (!deploymentVariables || !variables) {
+  if (!deployment || !deploymentVariables || !variables || !environments) {
     return [];
   }
 

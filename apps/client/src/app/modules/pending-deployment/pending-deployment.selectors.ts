@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { buildDisplayVariables, State } from '@pivot/client/pending-deployment';
+import { displayVariables, State } from '@pivot/client/pending-deployment';
 
 import { selectEnvironmentsResourceData } from '../environments';
 import { selectVariablesResourceData } from '../variables';
@@ -33,6 +33,6 @@ export const selectDisplayVariables = createSelector(
       return [];
     }
 
-    return buildDisplayVariables(deployment, deploymentVariables, variables, environments);
+    return displayVariables(deployment, deploymentVariables, variables, environments);
   },
 );
