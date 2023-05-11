@@ -48,19 +48,22 @@ describe('displayVariables', () => {
     },
   ] as Environment[];
 
-  it('returns an empty array if any of the arguments is falsy', () => {
+  it('returns an empty array if any of the arguments are falsy', () => {
     // @ts-expect-error Testing invalid arguments
     expect(displayVariables(null)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
     expect(displayVariables(undefined)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
     expect(displayVariables(deployment, null)).toEqual([]);
+    // @ts-expect-error Testing invalid arguments
     expect(displayVariables(deployment, undefined)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
     expect(displayVariables(deployment, deploymentVariables, null)).toEqual([]);
+    // @ts-expect-error Testing invalid arguments
     expect(displayVariables(deployment, deploymentVariables, undefined)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
     expect(displayVariables(deployment, deploymentVariables, variables, null)).toEqual([]);
+    // @ts-expect-error Testing invalid arguments
     expect(displayVariables(deployment, deploymentVariables, variables, undefined)).toEqual([]);
   });
 

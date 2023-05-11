@@ -8,9 +8,9 @@ import { DisplayVariable, DisplayVariableType } from '../types';
 
 export function displayVariables(
   deployment: Draft<Deployment>,
-  deploymentVariables: Draft<DeploymentVariable>[] = [],
-  variables: Variable[] = [],
-  environments: Environment[] = [],
+  deploymentVariables: Draft<DeploymentVariable>[],
+  variables: Variable[],
+  environments: Environment[],
 ): DisplayVariable[] {
   if (!deployment || !deploymentVariables || !variables || !environments) {
     return [];
