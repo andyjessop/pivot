@@ -11,10 +11,15 @@
     vertical-align: middle;
   }
 
+  & th {
+    font-weight: var(--header-font-weight);
+    color: var(--header-color);
+  }
+
   & thead th {
     padding: calc(var(--cell-padding-vertical) * 2) var(--cell-padding-horizontal);
     border-bottom: 1px solid var(--color-lighten-05);
-  }
+  }  
 
   & tbody tr:first-child td {
     padding-top: calc(var(--cell-padding-vertical) * 2);
@@ -22,11 +27,6 @@
 
   & tbody tr:last-child td {
     padding-bottom: calc(var(--cell-padding-vertical) * 2);
-  }
-
-  & th {
-    font-weight: var(--header-font-weight);
-    color: var(--header-color);
   }
 
   &.small {

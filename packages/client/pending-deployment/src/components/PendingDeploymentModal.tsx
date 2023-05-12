@@ -1,7 +1,7 @@
 import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
 import { Release } from '@pivot/client/releases';
-import { button, form, icon, modal, spaced, typography } from '@pivot/design/css';
+import { animate, button, form, icon, modal, spaced, typography } from '@pivot/design/css';
 import { useEscapeKey } from '@pivot/hooks';
 import { cx } from '@pivot/util/classname';
 import { Draft } from '@pivot/util/model';
@@ -36,9 +36,11 @@ export function PendingDeploymentModal({
   const env = environments.find((env) => env.uuid === environment_id);
 
   return (
-    <div className={modal.base}>
+    <div className={cx(modal.base)}>
       <div className={modal.overlay} onClick={clear}></div>
-      <dialog aria-modal="true" className={cx(modal.container)}>
+      <dialog
+        aria-modal="true"
+        className={cx(modal.container, animate.element, animate['fade-in-up-tiny'], animate.fast)}>
         <header className={modal.header}>
           <h2 className={typography.heading}>Create New Deployment</h2>
           <button aria-label="close" className="delete" onClick={clear}></button>
