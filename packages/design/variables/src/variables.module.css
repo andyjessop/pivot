@@ -25,6 +25,7 @@
   --color-dark-dark: hsl(0deg, 0%, 10%);
   --color-dark-contrast: var(--color-white);
   --color-white: hsl(0deg, 0%, 100%);
+  --color-darken-05: rgba(0, 0, 0, 5%);
   --color-darken-10: rgba(0, 0, 0, 10%);
   --color-darken-20: rgba(0, 0, 0, 20%);
   --color-darken-30: rgba(0, 0, 0, 30%);
@@ -34,6 +35,7 @@
   --color-lighten-03: rgba(255, 255, 255, 3%);
   --color-lighten-05: rgba(255, 255, 255, 5%);
   --color-lighten-07: rgba(255, 255, 255, 7%);
+  --color-lighten-10: rgba(255, 255, 255, 10%);
   --color-lighten-15: rgba(255, 255, 255, 15%);
   --color-lighten-20: rgba(255, 255, 255, 20%);
   --color-lighten-30: rgba(255, 255, 255, 30%);
@@ -48,6 +50,7 @@
   --color-gray-60: hsl(221deg, 14%, 40%);
   --color-gray-70: hsl(221deg, 14%, 30%);
   --color-gray-80: hsl(221deg, 14%, 20%);
+  --color-gray-83: hsl(221deg, 14%, 17%);
   --color-gray-85: hsl(221deg, 14%, 15%);
   --color-gray-90: hsl(221deg, 14%, 10%);
   --color-gray-95: hsl(221deg, 14%, 5%);
@@ -86,17 +89,17 @@
   --avatar-size-0: 2rem;
   --avatar-size-1: 2.5rem;
   --avatar-size-2: 3rem;
-  --raised-1: 0 2px 15px 0 var(--color-darken-30);
-  --raised-2: 0 5px 30px 0 var(--color-darken-30);
-  --raised-3: 0 6px 40px 0 var(--color-darken-30);
-  --raised-4: 0 8 50px 0 var(--color-darken-30);
-  --raised-5: 0 10px 60px 0 var(--color-darken-30);
+  --raised-1: 0 2px 15px 0 var(--color-darken-20);
+  --raised-2: 0 5px 30px 0 var(--color-darken-20);
+  --raised-3: 0 6px 40px 0 var(--color-darken-20);
+  --raised-4: 0 8 50px 0 var(--color-darken-20);
+  --raised-5: 0 10px 60px 0 var(--color-darken-20);
 
   /* App */
   --button-background-color: var(--color-lighten-05);
   --button-background-color-hover: var(--color-lighten-07);
   --button-border-width: 1px;
-  --button-border-color: var(--color-lighten-15);
+  --button-border-color: var(--color-lighten-05);
   --button-border-radius: var(--border-radius-4);
   --button-box-shadow: 1px 1px 0 var(--color-darken-10);
   --button-box-shadow-inset: inset 0 1px 0 var(--color-lighten-03);
@@ -104,7 +107,7 @@
   --button-font-size: var(--font-size-2);
   --button-font-weight: var(--font-weight-quarterbold);
   --button-padding: var(--spacing-1) var(--spacing-15);
-  --card-background-color: var(--color-gray-85);
+  --card-background-color: var(--color-gray-80);
   --card-box-shadow: var(--raised-1);
   --card-border-radius: var(--border-radius-1);
   --card-padding-horizontal: var(--spacing-2);
@@ -116,7 +119,7 @@
   --card-padding-vertical-medium: var(--spacing-3);
   --card-padding-vertical-large: var(--spacing-4);
   --card-border-width: var(--border-width);
-  --card-border-color: var(--color-lighten-15);
+  --card-border-color: var(--color-lighten-05);
   --card-padding: var(--border-radius-1);
   --color-body: var(--color-gray-05);
   --color-body-dull: var(--color-lighten-60);
@@ -132,6 +135,13 @@
   --heading-color: var(--color-gray-40);
   --heading-font-size-relative: 80%;
   --heading-font-weight: var(--font-weight-semibold);
+  --input-background-color: var(--color-gray-83);
+  --input-background-color-disabled: var(--color-gray-70);
+  --input-border-radius: var(--border-radius-1);
+  --input-box-shadow: 1px 1px var(--color-lighten-10);
+  --input-box-shadow-focus: 1px 1px 2px inset var(--color-darken-70);
+  --input-box-shadow-inset: 1px 1px 2px inset var(--color-darken-30);
+  --input-color: var(--color-gray-10);
   --left-nav-width: 200px;
   --main-nav-item-color: var(--nav-color-dull);
   --main-nav-item-hover-color: var(--nav-color-active);
@@ -165,7 +175,7 @@
   --nav-color-active: var(--color-gray-10);
   --page-horizontal-padding: var(--spacing-5);
   --subheader-background: var(--color-darken-20);
-  --subheader-border-color: var(--color-gray-70);
+  --subheader-border-color: var(--color-lighten-05);
   --subheader-box-shadow: var(--raised-1);
   --subheader-color: var(--nav-color-dull);
   --subheader-height: 3rem;

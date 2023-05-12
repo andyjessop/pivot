@@ -53,7 +53,9 @@ export type Slice<
   };
   addListener: (listener: (state: S) => void) => () => void;
   api: {
-    [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
+    [K in keyof T]: T[K] extends undefined
+      ? () => boolean
+      : (...params: DropFirst<Parameters<T[K]>>) => boolean;
   } & {
     getState: () => S;
   };
@@ -155,7 +157,9 @@ export function slice<
     {
       getState: select,
     } as {
-      [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
+      [K in keyof T]: T[K] extends undefined
+        ? () => boolean
+        : (...params: DropFirst<Parameters<T[K]>>) => boolean;
     } & {
       getState: () => S;
     },

@@ -1,7 +1,7 @@
 import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
 import { Release } from '@pivot/client/releases';
-import { button, form, icon, modal, spaced, typography } from '@pivot/design/css';
+import { animate, button, form, icon, modal, spaced, typography } from '@pivot/design/css';
 import { useEscapeKey } from '@pivot/hooks';
 import { cx } from '@pivot/util/classname';
 import { Draft } from '@pivot/util/model';
@@ -14,6 +14,8 @@ interface Props {
   deployment: Draft<Deployment>;
   environments: Environment[];
   releases: Release[];
+  setEnvironment: (uuid: string) => void;
+  setUrl: (url: string) => void;
 }
 
 export function PendingDeploymentModal({
@@ -23,28 +25,22 @@ export function PendingDeploymentModal({
   environments,
   // Features,
   releases,
+  setEnvironment,
+  setUrl,
   Variables,
 }: Props) {
   useEscapeKey(clear);
 
   const { environment_id, release_id } = deployment;
 
-  const selectEnvironment = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // eslint-disable-next-line no-console
-    console.log('selectEnvironment', e.target.value);
-  };
-
-  const updateUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // eslint-disable-next-line no-console
-    console.log('updateUrl', e.target.value);
-  };
-
   const env = environments.find((env) => env.uuid === environment_id);
 
   return (
-    <div className={modal.base}>
+    <div className={cx(modal.base)}>
       <div className={modal.overlay} onClick={clear}></div>
-      <dialog aria-modal="true" className={cx(modal.container)}>
+      <dialog
+        aria-modal="true"
+        className={cx(modal.container, animate.element, animate['fade-in-up-tiny'], animate.fast)}>
         <header className={modal.header}>
           <h2 className={typography.heading}>Create New Deployment</h2>
           <button aria-label="close" className="delete" onClick={clear}></button>
@@ -73,7 +69,7 @@ export function PendingDeploymentModal({
                 <select
                   defaultValue={environment_id}
                   id={environment_id}
-                  onChange={selectEnvironment}>
+                  onChange={(e) => setEnvironment(e.target.value)}>
                   {environments.map((env) => (
                     <option key={env.uuid} value={env.uuid}>
                       {env.name}
@@ -90,7 +86,7 @@ export function PendingDeploymentModal({
                 <div className="control">
                   <input
                     className="input"
-                    onChange={updateUrl}
+                    onChange={(e) => setUrl(e.target.value)}
                     type="text"
                     value={deployment.url || ''}
                   />

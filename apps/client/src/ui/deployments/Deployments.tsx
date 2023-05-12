@@ -1,4 +1,4 @@
-import { button, card, icon, table, tag, typography } from '@pivot/design/css';
+import { animate, button, card, icon, table, tag, typography } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -31,7 +31,7 @@ export default function Deployments() {
   };
 
   return (
-    <div className={cx(card.container)}>
+    <div className={cx(card.container, card.zero, animate.element, animate['fade-in-up-small'])}>
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
@@ -72,9 +72,9 @@ export default function Deployments() {
                     </span>
                   </a>
                 </td>
-                <td>{created_at}</td>
+                <td className={typography.subtitle}>{created_at}</td>
                 <td>
-                  <button className={button.base} onClick={() => clone(uuid)}>
+                  <button className={cx(button.base)} onClick={() => clone(uuid)}>
                     <span className={cx(button.icon, button.before)}>
                       <i className={icon.copy}></i>
                     </span>

@@ -1,6 +1,7 @@
 import { DeploymentFeaturesHttp } from '@pivot/client/deployment-features';
 import { DeploymentVariablesHttp } from '@pivot/client/deployment-variables';
 import { Deployment, DeploymentsResourceService } from '@pivot/client/deployments';
+import { EnvironmentsResource } from '@pivot/client/environments';
 import { makeDraft } from '@pivot/util/model';
 
 import { Actions } from './types';
@@ -10,10 +11,13 @@ export function service(
   deploymentsResource: DeploymentsResourceService,
   deploymentFeaturesHttp: DeploymentFeaturesHttp,
   deploymentVariablesHttp: DeploymentVariablesHttp,
+  environmentsResource: EnvironmentsResource,
 ) {
   return {
     cloneDeployment,
     deploy,
+    setEnvironment,
+    setUrl,
     ...pendingDeploymentState,
   };
 
@@ -58,5 +62,22 @@ export function service(
     }
 
     pendingDeploymentState.clearDrafts();
+  }
+
+  function setEnvironment(uuid: string) {
+    pendingDeploymentState.updateDeployment({ environment_id: uuid });
+
+    // When updating the environment, we need to make sure that the URL is valid for
+    // that environment. An environment can specify a URL, and in that case we need
+    // to ensure that it is not set on the deployment.
+    const environment = environmentsResource.getData()?.find((e) => e.uuid === uuid);
+
+    if (environment?.url) {
+      pendingDeploymentState.updateDeployment({ url: undefined });
+    }
+  }
+
+  function setUrl(url: string) {
+    pendingDeploymentState.updateDeployment({ url });
   }
 }

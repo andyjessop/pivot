@@ -26,11 +26,11 @@ a:hover {
 .input,
 .select select,
 .textarea {
-  background-color: #333;
+  background-color: var(--input-background-color);
   border-color: transparent;
-  border-radius: 4px;
-  color: #cfcfcf;
-  box-shadow: 1px 1px 2px inset #000000a8, 1px 1px #83838366;
+  border-radius: var(--input-border-radius);
+  color: var(--input-color);
+  box-shadow: var(--input-box-shadow-inset), var(--input-box-shadow);
 }
 
 .input:active,
@@ -46,9 +46,9 @@ a:hover {
 .textarea:active,
 .textarea:focus {
   border-color: var(--color-success);
-  border-radius: 4px;
-  color: #cfcfcf;
-  box-shadow: 1px 1px 2px inset #000000a8;
+  border-radius: var(--input-border-radius);
+  color: var(--input-color);
+  box-shadow: var(--input-box-shadow-focus);
 }
 
 input[disabled],
@@ -59,7 +59,7 @@ fieldset[disabled] .input,
 fieldset[disabled] .select select,
 fieldset[disabled] .textarea {
   border-color: transparent !important;
-  background-color: #222 !important;
+  background-color: var(--input-background-color-disabled) !important;
 }
 
 /* stylelint-disable */

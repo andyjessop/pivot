@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { horizontalLeftContent as layout, spaced } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
@@ -36,7 +38,9 @@ export default function Project({ Outlet }: Props) {
       </div>
       <div className={cx(layout.content, styles.container)}>
         <div className={styles.info}></div>
-        <div className={styles.content}>{Outlet}</div>
+        <div className={styles.content}>
+          <Suspense>{Outlet}</Suspense>
+        </div>
       </div>
       <PendingDeployment />
     </>

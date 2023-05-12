@@ -1,0 +1,42 @@
+.element {
+  --animate-duration: 0.5s;
+
+  animation-duration: var(--animate-duration);
+  animation-fill-mode: both;
+
+  &.fade-in-up-small {
+    animation-name: fade-in-up-small;
+  }
+
+  &.fade-in-up-tiny {
+    animation-name: fade-in-up-tiny;
+  }
+
+  &.fast {
+    --animate-duration: 0.2s;
+  }
+}
+
+@keyframes fade-in-up-small {
+  0% {
+    opacity: 0.5;
+    transform: translate3d(0,10%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+@keyframes fade-in-up-tiny {
+  0% {
+    opacity: 0.5;
+    transform: translate3d(0,3%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}

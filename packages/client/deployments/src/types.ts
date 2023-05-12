@@ -1,3 +1,5 @@
+import { Draft } from '@pivot/util/model';
+
 export interface Deployment {
   created_at: string;
   environment_id: string;
@@ -18,6 +20,19 @@ export const isDeployment = (deployment: any): deployment is Deployment => {
     typeof deployment.release_id === 'string' &&
     typeof deployment.url === 'string' &&
     typeof deployment.uuid === 'string' &&
+    Array.isArray(deployment.variables)
+  );
+};
+
+export const isDraftDeployment = (deployment: any): deployment is Draft<Deployment> => {
+  return (
+    typeof deployment === 'object' &&
+    deployment !== null &&
+    typeof deployment.environment_id === 'string' &&
+    Array.isArray(deployment.features) &&
+    typeof deployment.project_id === 'string' &&
+    typeof deployment.release_id === 'string' &&
+    typeof deployment.url === 'string' &&
     Array.isArray(deployment.variables)
   );
 };
