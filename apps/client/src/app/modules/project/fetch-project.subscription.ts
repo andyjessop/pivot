@@ -1,7 +1,8 @@
 import { DeploymentsResourceService } from '@pivot/client/deployments';
+import { EnvironmentsResource } from '@pivot/client/environments';
 
 import { deploymentsResourceService } from '../deployments';
-import { EnvironmentsResource, environmentsResourceService } from '../environments';
+import { environmentsResourceService } from '../environments';
 import { FeaturesResource, featuresResourceService } from '../features';
 import { ReleasesResource, releasesResourceService } from '../releases';
 import { VariablesResource, variablesResourceService } from '../variables';

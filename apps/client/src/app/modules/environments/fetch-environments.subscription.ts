@@ -1,6 +1,8 @@
+import { EnvironmentsResource } from '@pivot/client/environments';
+
 import { selectEnvironmentsProjectId } from '../environments/environments.selectors';
 
-import { EnvironmentsResource, environmentsResourceService } from './environments-resource.service';
+import { environmentsResourceService } from './environments-resource.service';
 
 export const fetchEnvironments = {
   dependencies: [environmentsResourceService],

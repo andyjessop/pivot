@@ -1,0 +1,22 @@
+.element {
+  --animate-duration: 0.5s;
+
+  animation-duration: var(--animate-duration);
+  animation-fill-mode: both;
+
+  &.fade-in-up-small {
+    animation-name: fade-in-up-small;
+  }
+}
+
+@keyframes fade-in-up-small {
+  0% {
+    opacity: 0;
+    transform: translate3d(0,10%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}

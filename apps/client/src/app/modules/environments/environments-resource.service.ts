@@ -1,7 +1,5 @@
-import { Environment } from '@pivot/client/environments';
 import { injectable } from '@pivot/lib/injectable';
-import { resourceService, State } from '@pivot/lib/resource';
-import { Service as ResourceService } from '@pivot/lib/resource';
+import { resourceService } from '@pivot/lib/resource';
 
 import { httpService } from '../http';
 
@@ -26,6 +24,3 @@ export const environmentsResourceService = injectable({
       ),
     ),
 });
-
-export type EnvironmentsResource = ResourceService<Environment, [string]>;
-export type EnvironmentsResourceState = State<Environment[], Error>;

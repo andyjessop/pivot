@@ -46,6 +46,10 @@ export type Service<
   create: (...params: CreateParams) => Promise<Data>;
   delete: (...params: DeleteParams) => Promise<Data>;
   getData: () => Data | null;
+  getError: () => any;
+  getLoading: () => boolean;
+  getState: () => State<Data, any>;
+  getUpdating: () => boolean;
   read: (...params: ReadParams) => Promise<Data | undefined>;
   update: (...params: UpdateParams) => Promise<Data>;
 };

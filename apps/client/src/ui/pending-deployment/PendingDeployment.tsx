@@ -16,7 +16,7 @@ export function PendingDeployment() {
     return null;
   }
 
-  const { clearDrafts, setVariable } = service;
+  const { clearDrafts, setEnvironment, setVariable, setUrl } = service;
 
   // const FeaturesComponent = (
   //   <Features features={features} updateFeature={updateFeature} />
@@ -40,6 +40,8 @@ export function PendingDeployment() {
       deployment={deployment}
       environments={environments}
       releases={releases}
+      setEnvironment={setEnvironment}
+      setUrl={setUrl}
       // Features={FeaturesComponent}
     />
   );

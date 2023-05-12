@@ -1,12 +1,10 @@
 import { createSelector } from 'reselect';
 
-import { isEnvironmentsRoute } from '@pivot/client/environments';
+import { EnvironmentsResourceState, isEnvironmentsRoute } from '@pivot/client/environments';
 import { projectId } from '@pivot/client/project';
 import { stripProtocol } from '@pivot/util/url';
 
 import { selectRouteName, selectRouteParams } from '../router';
-
-import { EnvironmentsResourceState } from './environments-resource.service';
 
 export const selectIsEnvironmentsRoute = createSelector(selectRouteName, isEnvironmentsRoute);
 

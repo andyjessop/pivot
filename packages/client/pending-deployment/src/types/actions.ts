@@ -11,4 +11,5 @@ export interface Actions {
   setDeployment(deployment: Draft<Deployment> | null): void;
   setFeature(feature_id: string, feature: Partial<Draft<DeploymentFeature>>): void;
   setVariable(variable_id: string, variable: Partial<Draft<DeploymentVariable>>): void;
+  updateDeployment(deployment: Partial<Draft<Deployment>>): void;
 }

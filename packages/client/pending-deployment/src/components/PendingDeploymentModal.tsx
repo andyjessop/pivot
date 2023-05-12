@@ -14,6 +14,8 @@ interface Props {
   deployment: Draft<Deployment>;
   environments: Environment[];
   releases: Release[];
+  setEnvironment: (uuid: string) => void;
+  setUrl: (url: string) => void;
 }
 
 export function PendingDeploymentModal({
@@ -23,21 +25,13 @@ export function PendingDeploymentModal({
   environments,
   // Features,
   releases,
+  setEnvironment,
+  setUrl,
   Variables,
 }: Props) {
   useEscapeKey(clear);
 
   const { environment_id, release_id } = deployment;
-
-  const selectEnvironment = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // eslint-disable-next-line no-console
-    console.log('selectEnvironment', e.target.value);
-  };
-
-  const updateUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // eslint-disable-next-line no-console
-    console.log('updateUrl', e.target.value);
-  };
 
   const env = environments.find((env) => env.uuid === environment_id);
 
@@ -73,7 +67,7 @@ export function PendingDeploymentModal({
                 <select
                   defaultValue={environment_id}
                   id={environment_id}
-                  onChange={selectEnvironment}>
+                  onChange={(e) => setEnvironment(e.target.value)}>
                   {environments.map((env) => (
                     <option key={env.uuid} value={env.uuid}>
                       {env.name}
@@ -90,7 +84,7 @@ export function PendingDeploymentModal({
                 <div className="control">
                   <input
                     className="input"
-                    onChange={updateUrl}
+                    onChange={(e) => setUrl(e.target.value)}
                     type="text"
                     value={deployment.url || ''}
                   />

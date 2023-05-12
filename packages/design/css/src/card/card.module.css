@@ -1,4 +1,5 @@
 .container {
+  --animate-duration: 0.2s;
   --container-background-color: var(--card-background-color);
   --container-padding-horizontal: var(--card-padding-horizontal);
   --container-padding-vertical: var(--card-padding-vertical);
@@ -12,6 +13,11 @@
   border: var(--container-border-width) solid var(--container-border-color);
   border-radius: var(--container-border-radius);
   box-shadow: var(--card-box-shadow);
+}
+
+.container.zero {
+  --container-padding-horizontal: 0;
+  --container-padding-vertical: 0;
 }
 
 .container.small {

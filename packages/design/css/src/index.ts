@@ -1,4 +1,5 @@
 export * from './alignment';
+export * from './animate';
 export * from './button';
 export * from './card';
 export * from './form';
