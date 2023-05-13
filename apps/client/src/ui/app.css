@@ -87,3 +87,7 @@ fieldset[disabled] .textarea {
 .delete:hover {
   background-color: #4c4c4c;
 }
+
+dialog {
+  color: var(--color-content);
+}

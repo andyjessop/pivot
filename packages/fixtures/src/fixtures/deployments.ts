@@ -16,7 +16,15 @@ export const deployments = [
     release_id: 'd445b390-8719-43f9-abd1-876b83d3243c',
     url: 'https://aj-new-feature.runestone.io',
     uuid: 'a989f772-3b47-4081-8428-aeb0e852ab2f',
-    variables: [],
+    variables: [
+      {
+        created_at: '2023-05-13T08:57:12.774024+00:00',
+        deployment_id: 'a989f772-3b47-4081-8428-aeb0e852ab2f',
+        uuid: 'e389e9a1-f89a-4a65-988f-9c7ea6b12a97',
+        value: 'https://new-prod.api',
+        variable_id: '4e698d9f-3715-4dcc-b9a8-cd1c47b9ed3a',
+      },
+    ],
   },
   {
     created_at: '2023-02-05T18:33:45.58612+00:00',

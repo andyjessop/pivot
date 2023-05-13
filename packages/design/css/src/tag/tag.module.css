@@ -2,7 +2,7 @@
   --tag-background-color: var(--color-gray-40);
   --tag-color: var(--color-gray-10);
   --tag-border-radius: var(--border-radius-4);
-  --tag-font-size: var(--font-size-2);
+  --tag-font-size: var(--font-size-1);
   --tag-font-weight: var(--font-weight-quarterbold);
   --tag-height: var(--spacing-3);
   --tag-horizontal-padding: var(--spacing-15);
@@ -19,6 +19,7 @@
   line-height: 1.5;
   padding: 0 var(--tag-horizontal-padding);
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
 .primary {

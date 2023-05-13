@@ -6,5 +6,7 @@ import { Draft } from '@pivot/util/model';
 export interface State {
   deployment: Draft<Deployment> | null;
   features: Draft<DeploymentFeature>[];
+  featuresStatus: 'idle' | 'loading' | 'success' | 'error';
   variables: Draft<DeploymentVariable>[];
+  variablesStatus: 'idle' | 'loading' | 'success' | 'error';
 }

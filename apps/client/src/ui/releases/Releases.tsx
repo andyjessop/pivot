@@ -24,9 +24,9 @@ export default function Releases() {
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
-            <th className={typography.heading}>Commit</th>
-            <th className={typography.heading}>Created At</th>
-            <th className={typography.heading}>Actions</th>
+            <th className={cx(typography.heading, typography.h5)}>Commit</th>
+            <th className={cx(typography.heading, typography.h5)}>Created At</th>
+            <th className={cx(typography.heading, typography.h5)}>Actions</th>
           </tr>
         </thead>
         <tbody>

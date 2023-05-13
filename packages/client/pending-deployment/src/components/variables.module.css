@@ -1,13 +1,6 @@
 .variable {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
   padding: 1rem 0;
   margin-bottom: 1rem;
-}
-
-.inner {
-  width: 100%;
 }
 
 .key {

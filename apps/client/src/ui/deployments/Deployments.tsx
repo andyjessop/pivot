@@ -35,11 +35,11 @@ export default function Deployments() {
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
-            <th className={typography.heading}>Release</th>
-            <th className={typography.heading}>Environment</th>
-            <th className={typography.heading}>URL</th>
-            <th className={typography.heading}>Deployed At</th>
-            <th className={typography.heading}>Actions</th>
+            <th className={cx(typography.heading, typography.h5)}>Release</th>
+            <th className={cx(typography.heading, typography.h5)}>Environment</th>
+            <th className={cx(typography.heading, typography.h5)}>URL</th>
+            <th className={cx(typography.heading, typography.h5)}>Deployed At</th>
+            <th className={cx(typography.heading, typography.h5)}>Actions</th>
           </tr>
         </thead>
         <tbody>

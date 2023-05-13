@@ -3,11 +3,11 @@ import { Draft } from '@pivot/util/model';
 
 import { State } from '../types';
 
-export function setVariable(
+export function updateVariable(
   state: State,
   variable_id: string,
   deploymentVariable: Partial<Draft<DeploymentVariable>>,
-) {
+): State {
   const variables = [...(state.variables ?? [])];
 
   const ndx = variables.findIndex((variable) => variable.variable_id === variable_id);
