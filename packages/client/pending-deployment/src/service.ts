@@ -28,22 +28,16 @@ export function service(
     const strippedDeployment = makeDraft(deployment);
 
     pendingDeploymentState.setDeployment(strippedDeployment);
+    pendingDeploymentState.fetchFeatures();
+    pendingDeploymentState.fetchVariables();
 
     const [features, variables] = await Promise.all([
       deploymentFeaturesHttp.get(deployment.uuid),
       deploymentVariablesHttp.get(deployment.uuid),
     ]);
 
-    const strippedFeatures = features.map((feature) => makeDraft(feature));
-    const strippedVariables = variables.map((variable) => makeDraft(variable));
-
-    for (const feature of strippedFeatures) {
-      pendingDeploymentState.setFeature(feature.feature_id, feature);
-    }
-
-    for (const variable of strippedVariables) {
-      pendingDeploymentState.setVariable(variable.variable_id, variable);
-    }
+    pendingDeploymentState.fetchFeaturesSuccess(features);
+    pendingDeploymentState.fetchVariablesSuccess(variables);
   }
 
   function deploy() {

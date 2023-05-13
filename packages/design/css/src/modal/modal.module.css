@@ -28,7 +28,7 @@
 }
 
 .container {
-  --container-background-color: var(--modal-background-color);
+  --container-background: var(--modal-background);
   --container-padding: var(--modal-padding);
   --container-border-width: var(--modal-border-width);
   --container-border-color: var(--modal-border-color);
@@ -38,7 +38,7 @@
   --container-margin: 0;
   --container-box-shadow: var(--modal-box-shadow);
 
-  background-color: var(--container-background-color);
+  background: var(--container-background);
   border: var(--container-border-width) solid var(--container-border-color);
   border-radius: var(--container-border-radius);
   box-shadow: var(--container-box-shadow);

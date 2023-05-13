@@ -3,6 +3,7 @@
 
   animation-duration: var(--animate-duration);
   animation-fill-mode: both;
+  will-change: transform;
 
   &.fade-in-up-small {
     animation-name: fade-in-up-small;

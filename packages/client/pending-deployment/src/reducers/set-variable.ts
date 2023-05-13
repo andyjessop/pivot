@@ -13,7 +13,10 @@ export function setVariable(
   const ndx = variables.findIndex((variable) => variable.variable_id === variable_id);
 
   if (ndx === -1) {
-    return state;
+    return {
+      ...state,
+      variables: [...variables, deploymentVariable],
+    };
   }
 
   return {

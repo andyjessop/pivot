@@ -1,3 +1,26 @@
 .center {
   text-align: center;
 }
+
+.stretch {
+  width: 100%;
+  flex: 1;
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pad1 {
+  padding: var(--spacing-1);
+}
+
+.pad2 {
+  padding: var(--spacing-2);
+}
+
+.pad3 {
+  padding: var(--spacing-3);
+}

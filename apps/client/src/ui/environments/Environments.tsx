@@ -24,8 +24,8 @@ export default function Environments() {
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
-            <th className={typography.heading}>Name</th>
-            <th className={typography.heading}>URL</th>
+            <th className={cx(typography.heading, typography.h5)}>Name</th>
+            <th className={cx(typography.heading, typography.h5)}>URL</th>
           </tr>
         </thead>
         <tbody>

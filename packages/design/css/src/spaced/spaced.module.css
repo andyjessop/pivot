@@ -8,12 +8,8 @@
   align-items: center;
   gap: var(--spaced-gap-default);
 
-  &.stretched {
+  &.block {
     width: 100%;
-
-    :last-child {
-      flex: 1;
-    }
   }
 }
 
