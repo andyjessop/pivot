@@ -7,4 +7,4 @@ export * from './fetch-variables-success';
 export * from './set-deployment';
 export * from './set-feature';
 export * from './update-deployment';
-export * from './set-variable';
+export * from './update-variable';

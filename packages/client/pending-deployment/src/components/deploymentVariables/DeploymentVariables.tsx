@@ -9,18 +9,18 @@ import styles from './deployment-variables.module.css';
 interface Props {
   deploymentVariables: Draft<DeploymentVariableWithName>[];
   isFetchingVariables?: boolean;
-  setVariable: (uuid: string, variable: Partial<Draft<DeploymentVariable>>) => void;
+  updateVariable: (uuid: string, variable: Partial<Draft<DeploymentVariable>>) => void;
 }
 
 export function DeploymentVariables({
   isFetchingVariables,
   deploymentVariables = [],
-  setVariable,
+  updateVariable,
 }: Props) {
   const onTextChange = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    setVariable(name, { value });
+    updateVariable(name, { value });
   };
 
   if (isFetchingVariables) {
