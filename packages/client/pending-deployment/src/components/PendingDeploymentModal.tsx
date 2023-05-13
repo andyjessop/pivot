@@ -38,7 +38,7 @@ export function PendingDeploymentModal({
   const env = environments.find((env) => env.uuid === environment_id);
 
   const addVariable = () => {
-    console.log('addVariable');
+    console.log('addVariable'); // eslint-disable-line no-console
   };
 
   return (
