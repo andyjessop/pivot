@@ -1,5 +1,5 @@
 import { DisplayVariable } from '@pivot/client/pending-deployment';
-import { button, form, icon, spaced, util } from '@pivot/design/css';
+import { button, form, icon, iconStyles, spaced, util } from '@pivot/design/css';
 import { Tag } from '@pivot/design/react/tag';
 import { cx } from '@pivot/util/classname';
 
@@ -41,7 +41,7 @@ export function Variables({ clearOverride, overrideVariable, variables }: Props)
             <button
               className={cx(button.base, button.icon)}
               onClick={() => clearOverride(variable_id)}>
-              <span className={icon.base}>
+              <span className={iconStyles.base}>
                 <i className={icon.undo}></i>
               </span>
             </button>

@@ -1,4 +1,4 @@
-import { default as iconStyles } from './icon.module.css';
+export { default as iconStyles } from './icon.module.css';
 
 export const icon = {
   angleRight: 'las la-angle-right',
@@ -26,5 +26,4 @@ export const icon = {
   undo: 'las la-undo-alt',
   user: 'las la-user',
   variables: 'las la-tags',
-  ...iconStyles,
 };
