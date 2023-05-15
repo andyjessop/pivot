@@ -29,24 +29,14 @@ describe('displayVariables', () => {
     },
   ] as Variable[];
 
-  const environments = [
-    {
-      uuid: 'env-1',
-      variables: [
-        {
-          variable_id: 'var-1',
-        },
-      ],
-    },
-    {
-      uuid: 'env-2',
-      variables: [
-        {
-          variable_id: 'var-2',
-        },
-      ],
-    },
-  ] as Environment[];
+  const environment = {
+    uuid: 'env-1',
+    variables: [
+      {
+        variable_id: 'var-1',
+      },
+    ],
+  } as Environment;
 
   it('returns an empty array if any of the arguments are falsy', () => {
     // @ts-expect-error Testing invalid arguments
@@ -67,12 +57,6 @@ describe('displayVariables', () => {
     expect(displayVariables(deployment, deploymentVariables, variables, undefined)).toEqual([]);
   });
 
-  it('throws an error if the environment with the given id is not found', () => {
-    expect(() => displayVariables(deployment, deploymentVariables, variables, [])).toThrowError(
-      /Environment with id env-1 not found/,
-    );
-  });
-
   it('throws an error if a variable with the given id is not found', () => {
     const invalidVariables = [
       {
@@ -80,27 +64,28 @@ describe('displayVariables', () => {
         uuid: 'var-3',
       },
     ];
+
     expect(() =>
       // @ts-expect-error Testing invalid arguments
-      displayVariables(deployment, deploymentVariables, invalidVariables, environments),
+      displayVariables(deployment, deploymentVariables, invalidVariables, environment),
     ).toThrowError(/Variable with id var-1 not found/);
   });
 
   it('returns an array of display variables', () => {
     const expected = [
       {
+        environment: {
+          color: undefined,
+          name: undefined,
+          uuid: 'env-1',
+        },
         name: 'Variable 1',
-        uuid: 'var-1',
-        variableType: 'deployment',
-        variable_id: 'var-1',
-      },
-      {
-        name: 'Variable 1',
-        variableType: 'environment',
+        overridden: false,
+        value: undefined,
         variable_id: 'var-1',
       },
     ];
-    expect(displayVariables(deployment, deploymentVariables, variables, environments)).toEqual(
+    expect(displayVariables(deployment, deploymentVariables, variables, environment)).toEqual(
       expected,
     );
   });
