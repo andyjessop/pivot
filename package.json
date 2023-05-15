@@ -56,7 +56,7 @@
     "typescript": "^5.0.4",
     "typescript-plugin-css-modules": "^5.0.1",
     "vite": "^4.3.3",
-    "vitest": "^0.29.7"
+    "vitest": "^0.31.0"
   },
   "engines": {
     "node": "18.13.0"
