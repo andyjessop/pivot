@@ -1,5 +1,6 @@
 export interface Environment {
   clone_of: string | null;
+  color: string;
   created_at: string;
   features: EnvironmentFeature[];
   name: string;

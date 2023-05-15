@@ -40,6 +40,23 @@
     margin-left: 0.5em;
   }
 
+  &.small {
+    --base-font-size: var(--button-font-size-small);
+    --base-padding: var(--button-padding-small);
+  }
+
+  &.large {
+    --base-font-size: var(--button-font-size-large);
+    --base-padding: var(--button-padding-large);
+  }
+
+  &.icon {
+    border-radius: 9999px;
+    height: 100%;
+    aspect-ratio: 1;
+    padding: 0;
+  }
+
   &.primary {
     --base-background-color: var(--color-primary);
 

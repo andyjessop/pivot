@@ -1,0 +1,20 @@
+.input {
+  position: relative;
+}
+
+span.overridden {
+  position: absolute;
+  top: -22px;
+  left: 5px;
+  color: var(--color-warning);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-1);
+}
+
+input.overridden, input:focus.overridden {
+  border-color: var(--color-warning);
+}
+
+input:hover.overridden {
+  border-color: var(--color-warning-light);
+}

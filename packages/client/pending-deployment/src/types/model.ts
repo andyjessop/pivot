@@ -1,15 +1,11 @@
 import { Deployment } from '@pivot/client/deployments';
 import { Draft } from '@pivot/util/model';
 
-export enum DisplayVariableType {
-  Deployment = 'deployment',
-  Environment = 'environment',
-}
-
 export type DisplayVariable = {
+  environment: { color: string; name: string; uuid: string };
   name: string;
+  overridden: boolean;
   value: string;
-  variableType: DisplayVariableType;
   variable_id: string;
 };
 

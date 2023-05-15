@@ -22,6 +22,14 @@
   text-transform: uppercase;
 }
 
+.input {
+  --tag-border-radius: var(--border-radius-2);
+}
+
+.base {
+  --tag-background-color: var(--color-gray-40);
+}
+
 .primary {
   --tag-background-color: var(--color-primary);
 }

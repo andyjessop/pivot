@@ -1,0 +1,8 @@
+.base {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  height: var(--icon-height);
+  width: var(--icon-width);
+  font-size: var(--icon-font-size);
+}

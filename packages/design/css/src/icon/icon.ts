@@ -1,3 +1,5 @@
+import { default as iconStyles } from './icon.module.css';
+
 export const icon = {
   angleRight: 'las la-angle-right',
   bell: 'las la-bell',
@@ -21,6 +23,8 @@ export const icon = {
   stream: 'las la-stream',
   tasks: 'las la-tasks',
   timesCircle: 'las la-times-circle',
+  undo: 'las la-undo-alt',
   user: 'las la-user',
   variables: 'las la-tags',
+  ...iconStyles,
 };

@@ -12,6 +12,12 @@ export type DeploymentVariableWithName = DeploymentVariable & {
   name: string;
 };
 
+export type DraftDeploymentVariable = Omit<Draft<DeploymentVariable>, 'deployment_id'>;
+export type DraftDeploymentVariableWithName = Omit<
+  Draft<DeploymentVariableWithName>,
+  'deployment_id'
+>;
+
 export const isDeploymentVariable = (obj: any): obj is DeploymentVariable => {
   return (
     typeof obj === 'object' &&

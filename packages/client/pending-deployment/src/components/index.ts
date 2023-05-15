@@ -1,4 +1,4 @@
 export * from './deploymentVariables/DeploymentVariables';
 export * from './Features';
 export * from './PendingDeploymentModal';
-export * from './Variables';
+export * from './variables/Variables';

@@ -4,10 +4,10 @@ import { Deployment, DeploymentsResourceService } from '@pivot/client/deployment
 import { EnvironmentsResource } from '@pivot/client/environments';
 import { makeDraft } from '@pivot/util/model';
 
-import { Actions } from './types';
+import { Api } from './types';
 
 export function service(
-  pendingDeploymentState: Actions,
+  pendingDeploymentState: Api,
   deploymentsResource: DeploymentsResourceService,
   deploymentFeaturesHttp: DeploymentFeaturesHttp,
   deploymentVariablesHttp: DeploymentVariablesHttp,
@@ -19,6 +19,7 @@ export function service(
     setEnvironment,
     setUrl,
     ...pendingDeploymentState,
+    overrideVariable,
   };
 
   /**
@@ -56,6 +57,27 @@ export function service(
     }
 
     pendingDeploymentState.clearDrafts();
+  }
+
+  function overrideVariable(variable_id: string, value: string) {
+    // if the new value is the same as the original value, we can just remove the variable
+    const deployment = pendingDeploymentState.getState().deployment;
+
+    if (!deployment) {
+      throw new Error('Cannot override variable without a deployment.');
+    }
+
+    const currentEnv = environmentsResource
+      .getData()
+      ?.find((e) => e.uuid === deployment?.environment_id);
+
+    const currentEnvVariable = currentEnv?.variables.find((v) => v.variable_id === variable_id);
+
+    if (currentEnvVariable?.value === value) {
+      return pendingDeploymentState.clearOverride(variable_id);
+    }
+
+    return pendingDeploymentState.overrideVariable(variable_id, value);
   }
 
   function setEnvironment(uuid: string) {
