@@ -1,4 +1,7 @@
-import { DeploymentVariable, DeploymentVariableWithName } from '@pivot/client/deployment-variables';
+import {
+  DeploymentVariable,
+  DraftDeploymentVariableWithName,
+} from '@pivot/client/deployment-variables';
 import { form, spaced, util } from '@pivot/design/css';
 import { Loader } from '@pivot/design/react/loader';
 import { cx } from '@pivot/util/classname';
@@ -7,7 +10,7 @@ import { Draft } from '@pivot/util/model';
 import styles from './deployment-variables.module.css';
 
 interface Props {
-  deploymentVariables: Draft<DeploymentVariableWithName>[];
+  deploymentVariables: DraftDeploymentVariableWithName[];
   isFetchingVariables?: boolean;
   updateVariable: (uuid: string, variable: Partial<Draft<DeploymentVariable>>) => void;
 }
@@ -47,13 +50,16 @@ export function DeploymentVariables({
       {deploymentVariables.map(({ name, value, variable_id }) => (
         <div className={form.element} key={name}>
           <div className={cx('field is-grouped')}>
-            <div className={cx('control is-expanded', form.label, form['label-inline'])}>
-              <span className="icon is-left">
-                <i className="las la-tags"></i>
-              </span>
+            <div
+              className={cx(
+                'control is-expanded',
+                form['label-inline'],
+                spaced.container,
+                util.stretch,
+              )}>
               {name}
             </div>
-            <div className="control has-icons-left is-expanded">
+            <div className={cx('control has-icons-left is-expanded', util.stretch)}>
               <input
                 className="input"
                 onChange={onTextChange(variable_id)}

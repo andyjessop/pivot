@@ -13,6 +13,8 @@ export type DeploymentFeatureWithName = DeploymentFeature & {
   name: string;
 };
 
+export type DraftDeploymentFeature = Omit<Draft<DeploymentFeature>, 'deployment_id'>;
+
 export const isDeploymentFeature = (obj: any): obj is DeploymentFeature => {
   return (
     typeof obj === 'object' &&

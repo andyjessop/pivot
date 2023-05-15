@@ -2,12 +2,12 @@ import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
 import { Release } from '@pivot/client/releases';
 import { button, form, icon, modal, spaced, typography, util } from '@pivot/design/css';
+import { UrlInput } from '@pivot/design/react/url-input';
 import { useEscapeKey } from '@pivot/hooks';
 import { cx } from '@pivot/util/classname';
 import { Draft } from '@pivot/util/model';
 
 interface Props {
-  DeploymentVariables: JSX.Element;
   Variables?: JSX.Element;
   clear: () => void;
   deploy: () => void;
@@ -23,7 +23,6 @@ export function PendingDeploymentModal({
   clear,
   deploy,
   deployment,
-  DeploymentVariables,
   environments,
   // Features,
   releases,
@@ -36,10 +35,6 @@ export function PendingDeploymentModal({
   const { environment_id, release_id } = deployment;
 
   const env = environments.find((env) => env.uuid === environment_id);
-
-  const addVariable = () => {
-    console.log('addVariable'); // eslint-disable-line no-console
-  };
 
   return (
     <div className={cx(modal.base)}>
@@ -92,13 +87,7 @@ export function PendingDeploymentModal({
                   URL
                 </label>
                 <div className="control">
-                  <input
-                    className="input"
-                    id="url"
-                    onChange={(e) => setUrl(e.target.value)}
-                    type="url"
-                    value={deployment.url || ''}
-                  />
+                  <UrlInput onChange={setUrl} url={deployment.url || ''} />
                 </div>
               </div>
             ) : null}
@@ -112,21 +101,9 @@ export function PendingDeploymentModal({
             </div>
           ) : null} */}
           <div className={form.fieldset}>
-            <h4 className={cx(typography.heading, typography.h4, form.label)}>Variables</h4>
-            <div className={cx(form.heading, spaced.container, spaced.block)}>
-              <h5 className={cx(typography.heading, typography.h5, util.stretch)}>
-                Deployment Variables
-              </h5>
-              <button className={cx(button.base)} onClick={addVariable}>
-                <span className={cx(button.icon, button.before)}>
-                  <i className={icon.plusCircle}></i>
-                </span>
-                <span>Add Deployment Variable</span>
-              </button>
-            </div>
-            {DeploymentVariables}
-
-            <h5 className={cx(typography.heading, typography.h5)}>Environment Variables</h5>
+            <h4 className={cx(typography.heading, typography.h4, form.heading, util.stretch)}>
+              Environment Variables
+            </h4>
             {Variables}
           </div>
         </section>

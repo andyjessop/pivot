@@ -1,13 +1,13 @@
-import { DeploymentVariable, DeploymentVariableWithName } from '@pivot/client/deployment-variables';
+import {
+  DraftDeploymentVariable,
+  DraftDeploymentVariableWithName,
+} from '@pivot/client/deployment-variables';
 import { Variable } from '@pivot/client/variables';
-import { Draft } from '@pivot/util/model';
-
-import { DisplayVariableType } from '../types';
 
 export function deploymentVariablesWithNames(
-  deploymentVariables: Draft<DeploymentVariable>[],
+  deploymentVariables: DraftDeploymentVariable[],
   variables: Variable[],
-): Draft<DeploymentVariableWithName>[] {
+): DraftDeploymentVariableWithName[] {
   if (!deploymentVariables || !variables) {
     return [];
   }
@@ -30,7 +30,6 @@ export function deploymentVariablesWithNames(
     return {
       ...variable,
       name: variableData.name,
-      variableType: DisplayVariableType.Deployment,
     };
   });
 }

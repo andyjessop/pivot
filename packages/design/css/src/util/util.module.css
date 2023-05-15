@@ -13,6 +13,11 @@
   align-items: center;
 }
 
+.align-vertically {
+  display: flex;
+  align-items: center;
+}
+
 .pad1 {
   padding: var(--spacing-1);
 }

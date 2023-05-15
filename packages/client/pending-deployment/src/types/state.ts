@@ -1,12 +1,12 @@
-import { DeploymentFeature } from '@pivot/client/deployment-features';
-import { DeploymentVariable } from '@pivot/client/deployment-variables';
+import { DraftDeploymentFeature } from '@pivot/client/deployment-features';
+import { DraftDeploymentVariable } from '@pivot/client/deployment-variables';
 import { Deployment } from '@pivot/client/deployments';
 import { Draft } from '@pivot/util/model';
 
 export interface State {
   deployment: Draft<Deployment> | null;
-  features: Draft<DeploymentFeature>[];
+  features: DraftDeploymentFeature[];
   featuresStatus: 'idle' | 'loading' | 'success' | 'error';
-  variables: Draft<DeploymentVariable>[];
+  variables: DraftDeploymentVariable[];
   variablesStatus: 'idle' | 'loading' | 'success' | 'error';
 }

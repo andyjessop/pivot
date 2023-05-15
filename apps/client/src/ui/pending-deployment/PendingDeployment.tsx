@@ -1,29 +1,28 @@
-import { DeploymentVariables, PendingDeploymentModal } from '@pivot/client/pending-deployment';
+import { PendingDeploymentModal, Variables } from '@pivot/client/pending-deployment';
+import { Loader } from '@pivot/design/react/loader';
 
 import { useSelector, useService } from '~app';
 import { selectEnvironmentsResourceData } from '~app/modules/environments';
 import {
-  selectDeploymentVariablesWithNames,
+  selectDisplayVariables,
   selectIsFetchingVariables,
   selectPendingDeployment,
 } from '~app/modules/pending-deployment';
 import { selectReleasesResourceData } from '~app/modules/releases';
-import { selectVariablesResourceData } from '~app/modules/variables';
 
 export function PendingDeployment() {
   const service = useService('pendingDeployment');
   const environments = useSelector(selectEnvironmentsResourceData);
   const deployment = useSelector(selectPendingDeployment);
-  const deploymentVariables = useSelector(selectDeploymentVariablesWithNames);
-  const isFetchingVariables = useSelector(selectIsFetchingVariables);
   const releases = useSelector(selectReleasesResourceData);
-  const variables = useSelector(selectVariablesResourceData);
+  const variables = useSelector(selectDisplayVariables);
+  const isFetchingVariables = useSelector(selectIsFetchingVariables);
 
   if (!environments || !deployment || !releases || !service || !variables) {
     return null;
   }
 
-  const { clearDrafts, setEnvironment, setUrl, updateVariable } = service;
+  const { clearDrafts, clearOverride, overrideVariable, setEnvironment, setUrl } = service;
 
   // const FeaturesComponent = (
   //   <Features features={features} updateFeature={updateFeature} />
@@ -37,20 +36,19 @@ export function PendingDeployment() {
     service.deploy();
   };
 
-  // const VariablesComponent = <Variables setVariable={setVariable} variables={variables} />;
-
-  const DeploymentVariablesComponent = (
-    <DeploymentVariables
-      deploymentVariables={deploymentVariables ?? []}
-      isFetchingVariables={isFetchingVariables}
-      updateVariable={updateVariable}
+  const VariablesComponent = isFetchingVariables ? (
+    <Loader size="medium" />
+  ) : (
+    <Variables
+      clearOverride={clearOverride}
+      overrideVariable={overrideVariable}
+      variables={variables}
     />
   );
 
   return (
     <PendingDeploymentModal
-      DeploymentVariables={DeploymentVariablesComponent}
-      // Variables={VariablesComponent}
+      Variables={VariablesComponent}
       clear={clearDrafts}
       deploy={deploy}
       deployment={deployment}

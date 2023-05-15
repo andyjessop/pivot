@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+}
+
+.prefix {
+  position: absolute;
+  left: 0.625rem;
+  top: 0.5rem;
+  border-radius: 3px;
+  text-transform: none;
+  background: var(--color-gray-75);
+  box-shadow: var(--button-box-shadow), var(--button-box-shadow-inset);
+  padding: 0.5rem;
+}
+
+.content {
+  padding-left: 4.5rem;
+}

@@ -56,6 +56,12 @@ export const selectDisplayVariables = createSelector(
       return [];
     }
 
-    return displayVariables(deployment, deploymentVariables, variables, environments);
+    const env = environments.find((e) => e.uuid === deployment.environment_id);
+
+    if (!env) {
+      throw new Error(`Environment with id ${deployment.environment_id} not found`);
+    }
+
+    return displayVariables(deployment, deploymentVariables, variables, env);
   },
 );

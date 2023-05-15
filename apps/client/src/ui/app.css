@@ -51,6 +51,14 @@ a:hover {
   box-shadow: var(--input-box-shadow-focus);
 }
 
+input[disabled] .icon,
+.textarea[disabled] .icon,
+.select select[disabled] .icon,
+fieldset[disabled] .input .icon,
+.select fieldset[disabled] select .icon {
+  color: var(--input-color-disabled) !important;
+}
+
 input[disabled],
 .select fieldset[disabled] select,
 .select select[disabled],
@@ -60,6 +68,7 @@ fieldset[disabled] .select select,
 fieldset[disabled] .textarea {
   border-color: transparent !important;
   background-color: var(--input-background-color-disabled) !important;
+  color: var(--input-color-disabled) !important; 
 }
 
 /* stylelint-disable */
