@@ -19,3 +19,15 @@
   );
   color: var(--content-color);
 }
+
+.logo {
+  height: 35px;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+  }
+}

@@ -2,16 +2,16 @@ import { Suspense } from 'react';
 
 import { Breadcrumb } from '@pivot/client/breadcrumb';
 import { Navbar, UserNav } from '@pivot/client/components';
-import { horizontalLeftContent as layout } from '@pivot/design/css';
-import { Loader } from '@pivot/design/react/loader';
+import { animate, horizontalLeftContent as layout } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
 import { selectAuth } from '~app/modules/auth';
 import { selectBreadcrumbParts } from '~app/modules/breadcrumb';
 
-import styles from './root.module.css';
+import logo from '../../assets/logo.png';
 
+import styles from './root.module.css';
 interface Props {
   Outlet: JSX.Element;
 }
@@ -23,6 +23,7 @@ export default function Root({ Outlet }: Props) {
 
   const breadcrumbParts = useSelector(selectBreadcrumbParts);
   const authState = useSelector(selectAuth);
+  const shouldShowNavs = !authState.isChecking;
 
   if (!router || !auth || !head) {
     return null;
@@ -36,25 +37,34 @@ export default function Root({ Outlet }: Props) {
   /**
    * Main navigation component.
    */
-  const LeftNav = (
-    <>
-      {breadcrumbParts.length ? (
-        <Breadcrumb Link={router.Link} parts={breadcrumbParts} />
-      ) : (
-        <Loader />
-      )}
-    </>
+  const LeftNav = shouldShowNavs ? (
+    <span className={cx(animate.element, animate['fade-in'])}>
+      <Breadcrumb Link={router.Link} parts={breadcrumbParts} />
+    </span>
+  ) : null;
+
+  const Logo = (
+    <img
+      className={cx(styles.logo, animate.element, animate['flip-in-x'])}
+      height="35"
+      src={logo}
+      width="35"
+    />
   );
 
   /**
    * User login component.
    */
-  const RightNav = <UserNav actions={auth} data={authState} />;
+  const RightNav = shouldShowNavs ? (
+    <span className={cx(animate.element, animate['fade-in'])}>
+      <UserNav actions={auth} data={authState} />
+    </span>
+  ) : null;
 
   return (
     <div className={cx(layout.container, styles.content)}>
       <div className={cx(layout.top, styles.header)}>
-        <Navbar LeftNav={LeftNav} RightNav={RightNav} />
+        <Navbar LeftNav={LeftNav} Logo={Logo} RightNav={RightNav} />
       </div>
       <Suspense fallback={PageFallback}>{Outlet}</Suspense>
     </div>

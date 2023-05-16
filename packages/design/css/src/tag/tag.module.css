@@ -1,7 +1,7 @@
 .container {
   --tag-background-color: var(--color-gray-40);
   --tag-color: var(--color-gray-10);
-  --tag-border-radius: var(--border-radius-4);
+  --tag-border-radius: var(--border-radius-1);
   --tag-font-size: var(--font-size-1);
   --tag-font-weight: var(--font-weight-quarterbold);
   --tag-height: var(--spacing-3);

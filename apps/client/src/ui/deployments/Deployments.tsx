@@ -1,4 +1,5 @@
-import { animate, button, card, icon, table, tag, typography } from '@pivot/design/css';
+import { animate, button, card, icon, table, typography } from '@pivot/design/css';
+import { Tag } from '@pivot/design/react/tag';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
@@ -31,7 +32,7 @@ export default function Deployments() {
   };
 
   return (
-    <div className={cx(card.container, card.zero, animate.element, animate['fade-in-up-small'])}>
+    <div className={cx(card.container, card.zero, animate.element, animate['fade-in'])}>
       <table className={cx(table.container, table.small)}>
         <thead>
           <tr>
@@ -56,14 +57,7 @@ export default function Deployments() {
                   </Link>
                 </td>
                 <td>
-                  <Link
-                    className={cx(tag.container, tag.success)}
-                    to={{
-                      name: 'environments',
-                      params: { id: projectId },
-                    }}>
-                    {environment?.name}
-                  </Link>
+                  <Tag color={environment?.color}>{environment?.name}</Tag>
                 </td>
                 <td>
                   <a href={url} rel="noreferrer" target="_blank">

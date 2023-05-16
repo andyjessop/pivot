@@ -9,6 +9,12 @@ export type DisplayVariable = {
   variable_id: string;
 };
 
+export type NewVariable = {
+  id: string;
+  name: string;
+  value: string;
+};
+
 export function isPendingDeployment(deployment: any): deployment is Draft<Deployment> {
   return (
     typeof deployment === 'object' &&

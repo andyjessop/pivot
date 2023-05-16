@@ -10,7 +10,7 @@ export function userHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
   async function getTeams(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
     if (isBrowser) {
-      await sleep(500);
+      await sleep(250);
     }
 
     const teams = findTeamsByUserId(USER_ID);

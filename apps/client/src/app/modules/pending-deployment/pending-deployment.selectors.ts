@@ -27,6 +27,11 @@ export const selectPendingVariables = createSelector(
   (state) => state?.variables,
 );
 
+export const selectNewVariables = createSelector(
+  selectPendingDeploymentState,
+  (state) => state?.newVariables,
+);
+
 export const selectIsFetchingFeatures = createSelector(
   selectPendingDeploymentState,
   (state) => state?.featuresStatus === 'loading',
@@ -37,31 +42,54 @@ export const selectIsFetchingVariables = createSelector(
   (state) => state?.variablesStatus === 'loading',
 );
 
-export const selectDeploymentVariablesWithNames = createSelector(
+export const selectDeploymentEnvironment = createSelector(
+  selectPendingDeployment,
+  selectEnvironmentsResourceData,
+  (deployment, environments) => {
+    if (!deployment || !environments) {
+      return undefined;
+    }
+
+    return environments.find((e) => e.uuid === deployment.environment_id);
+  },
+);
+
+const selectDeploymentVariables = createSelector(
   selectPendingVariables,
+  selectDeploymentEnvironment,
+  (deploymentVariables, environment) => {
+    if (!deploymentVariables || !environment) {
+      return [];
+    }
+
+    return deploymentVariables.filter(
+      (v) => !environment.variables.some((env) => env.variable_id === v.variable_id),
+    );
+  },
+);
+
+export const selectDeploymentVariablesWithNames = createSelector(
+  selectDeploymentVariables,
   selectVariablesResourceData,
-  (deploymentVariables, variables) =>
-    deploymentVariables &&
-    variables &&
-    deploymentVariablesWithNames(deploymentVariables, variables),
+  (deploymentVariables, variables) => {
+    if (!deploymentVariables || !variables) {
+      return [];
+    }
+
+    return deploymentVariablesWithNames(deploymentVariables, variables);
+  },
 );
 
 export const selectDisplayVariables = createSelector(
   selectPendingDeployment,
   selectPendingVariables,
   selectVariablesResourceData,
-  selectEnvironmentsResourceData,
-  (deployment, deploymentVariables, variables, environments) => {
-    if (!deployment || !deploymentVariables || !variables || !environments) {
+  selectDeploymentEnvironment,
+  (deployment, deploymentVariables, variables, environment) => {
+    if (!deployment || !deploymentVariables || !variables || !environment) {
       return [];
     }
 
-    const env = environments.find((e) => e.uuid === deployment.environment_id);
-
-    if (!env) {
-      throw new Error(`Environment with id ${deployment.environment_id} not found`);
-    }
-
-    return displayVariables(deployment, deploymentVariables, variables, env);
+    return displayVariables(deployment, deploymentVariables, variables, environment);
   },
 );

@@ -1,30 +1,39 @@
 import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
 import { Release } from '@pivot/client/releases';
-import { button, form, icon, modal, spaced, typography, util } from '@pivot/design/css';
+import { animate, button, form, icon, modal, spaced, typography, util } from '@pivot/design/css';
+import { Loader } from '@pivot/design/react/loader';
 import { UrlInput } from '@pivot/design/react/url-input';
 import { useEscapeKey } from '@pivot/hooks';
 import { cx } from '@pivot/util/classname';
 import { Draft } from '@pivot/util/model';
 
 interface Props {
+  DeploymentVariables?: JSX.Element;
+  NewVariables?: JSX.Element;
   Variables?: JSX.Element;
+  addNewVariable: () => void;
   clear: () => void;
   deploy: () => void;
   // Features?: JSX.Element;
   deployment: Draft<Deployment>;
   environments: Environment[];
+  isFetchingVariables: boolean;
   releases: Release[];
   setEnvironment: (uuid: string) => void;
   setUrl: (url: string) => void;
 }
 
 export function PendingDeploymentModal({
+  addNewVariable,
   clear,
   deploy,
   deployment,
+  DeploymentVariables,
   environments,
+  isFetchingVariables,
   // Features,
+  NewVariables,
   releases,
   setEnvironment,
   setUrl,
@@ -39,7 +48,9 @@ export function PendingDeploymentModal({
   return (
     <div className={cx(modal.base)}>
       <div className={modal.overlay} onClick={clear}></div>
-      <dialog aria-modal="true" className={cx(modal.container)}>
+      <dialog
+        aria-modal="true"
+        className={cx(modal.container, animate.element, animate['fade-in-up-tiny'], animate.fast)}>
         <header className={modal.header}>
           <h2 className={cx(typography.heading, typography.h2)}>Create New Deployment</h2>
           <button aria-label="close" className="delete" onClick={clear}></button>
@@ -101,10 +112,29 @@ export function PendingDeploymentModal({
             </div>
           ) : null} */}
           <div className={form.fieldset}>
-            <h4 className={cx(typography.heading, typography.h4, form.heading, util.stretch)}>
-              Environment Variables
-            </h4>
-            {Variables}
+            <div className={cx(spaced.container, spaced.block, form.heading)}>
+              <h4 className={cx(typography.heading, typography.h4)}>Environment Variables</h4>
+              <button
+                className={cx(button.base, button.small, button.success)}
+                onClick={addNewVariable}>
+                <span className={cx(button.icon, button.before)}>
+                  <i className={icon.plus}></i>
+                </span>
+                <span>New Variable</span>
+              </button>
+            </div>
+
+            {isFetchingVariables ? (
+              <div className={util.center}>
+                <Loader size="large" />
+              </div>
+            ) : (
+              <div className={cx(animate.element, animate['fade-in'])}>
+                {NewVariables}
+                {DeploymentVariables}
+                {Variables}
+              </div>
+            )}
           </div>
         </section>
 

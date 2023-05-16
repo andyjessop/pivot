@@ -24,7 +24,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
   function getComponent(component: string) {
     return async function get(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
       if (isBrowser) {
-        await sleep(500);
+        await sleep(250);
       }
 
       const uuid = getProjectId(req);
@@ -62,7 +62,7 @@ export function projectHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
   async function getProject(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
     if (isBrowser) {
-      await sleep(500);
+      await sleep(250);
     }
 
     const uuid = getUuid(req);

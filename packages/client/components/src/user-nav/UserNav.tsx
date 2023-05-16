@@ -2,6 +2,7 @@ import { FormEvent } from 'react';
 
 import { Service, State } from '@pivot/client/auth';
 import { button, spaced } from '@pivot/design/css';
+import { cx } from '@pivot/util/classname';
 
 import styles from './user-nav.module.css';
 
@@ -24,7 +25,7 @@ export function UserNav({ actions, data }: UserNavProps) {
 
   if (user) {
     return (
-      <div className={spaced.container}>
+      <div className={cx(spaced.container)}>
         <span className={styles.text}>{isLoggingOut ? 'Logging out...' : user.email}</span>
         <button className={button.base} onClick={logout}>
           Logout

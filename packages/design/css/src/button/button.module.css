@@ -11,6 +11,7 @@
   --base-box-shadow-inset: var(--button-box-shadow-inset);
 
   background-color: var(--base-background-color);
+  border-style: solid;
   border-color: var(--base-border-color);
   border-width: var(--base-border-width);
   border-radius: var(--base-border-radius);
@@ -26,6 +27,13 @@
 
   &:hover {
     --base-background-color: var(--button-background-color-hover);
+  }
+
+  &:active {
+    --base-border-color: var(--button-border-color-active);
+    --base-box-shadow: none;
+
+    border-style: solid;
   }
 
   .icon {
@@ -95,6 +103,16 @@
     &:hover {
       --base-background-color: var(--color-info-light);
     }
+  }
+
+  &[disabled] {
+    --base-background-color: var(--button-background-color-disabled);
+    --base-border-color: var(--button-border-color-disabled);
+    --base-color: var(--button-color-disabled);
+    --base-box-shadow: none;
+    --base-box-shadow-inset: none;
+
+    cursor: not-allowed;
   }
 }
 
