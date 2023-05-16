@@ -42,7 +42,6 @@ export function service(
   }
 
   function deploy() {
-    debugger;
     const { deployment, features = [], variables = [] } = pendingDeploymentState.getState();
 
     if (deployment) {
