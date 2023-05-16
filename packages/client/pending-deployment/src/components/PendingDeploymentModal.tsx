@@ -1,7 +1,17 @@
 import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
 import { Release } from '@pivot/client/releases';
-import { animate, button, form, icon, modal, spaced, typography, util } from '@pivot/design/css';
+import {
+  animate,
+  button,
+  form,
+  icon,
+  iconStyles,
+  modal,
+  spaced,
+  typography,
+  util,
+} from '@pivot/design/css';
 import { Loader } from '@pivot/design/react/loader';
 import { UrlInput } from '@pivot/design/react/url-input';
 import { useEscapeKey } from '@pivot/hooks';
@@ -53,7 +63,14 @@ export function PendingDeploymentModal({
         className={cx(modal.container, animate.element, animate['fade-in-up-tiny'], animate.fast)}>
         <header className={modal.header}>
           <h2 className={cx(typography.heading, typography.h2)}>Create New Deployment</h2>
-          <button aria-label="close" className="delete" onClick={clear}></button>
+          <button
+            aria-label="close"
+            className={cx(button.base, button.icon, button.small)}
+            onClick={clear}>
+            <span className={iconStyles.base}>
+              <i className={icon.close}></i>
+            </span>
+          </button>
         </header>
         <section className={modal.body}>
           <div className={cx(spaced.container, spaced.block, form.fieldset)}>

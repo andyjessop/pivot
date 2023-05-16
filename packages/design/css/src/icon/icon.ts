@@ -5,6 +5,7 @@ export const icon = {
   bell: 'las la-bell',
   checkCircle: 'las la-check-circle',
   clone: 'las la-clone',
+  close: 'las la-times',
   copy: 'las la-copy',
   deployments: 'las la-cloud-upload-alt',
   environments: 'las la-layer-group',

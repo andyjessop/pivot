@@ -5,7 +5,7 @@
 .prefix {
   position: absolute;
   left: 0.625rem;
-  top: 0.5rem;
+  top: 0.55rem;
   border-radius: 3px;
   text-transform: none;
   background: var(--color-gray-75);

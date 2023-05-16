@@ -20,6 +20,7 @@
   cursor: pointer;
   font-size: var(--base-font-size);
   font-weight: var(--base-font-weight);
+  height: fit-content;
   justify-content: center;
   padding: var(--base-padding);
   text-align: center;
@@ -60,7 +61,6 @@
 
   &.icon {
     border-radius: 9999px;
-    height: 100%;
     aspect-ratio: 1;
     padding: 0;
   }
