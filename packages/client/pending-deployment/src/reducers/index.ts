@@ -1,3 +1,4 @@
+export * from './add-new-variable';
 export * from './clear-drafts';
 export * from './clear-override';
 export * from './fetch-features';
@@ -5,7 +6,11 @@ export * from './fetch-features-success';
 export * from './fetch-variables';
 export * from './fetch-variables-success';
 export * from './override-variable';
+export * from './remove-variable';
+export * from './remove-new-variable';
 export * from './set-deployment';
 export * from './set-feature';
 export * from './update-deployment';
+export * from './update-new-variable-name';
+export * from './update-new-variable-value';
 export * from './update-variable';

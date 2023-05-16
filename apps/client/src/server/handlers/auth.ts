@@ -38,7 +38,7 @@ export function authHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
       if (grantType === 'password') {
         if (isBrowser) {
-          await sleep(500);
+          await sleep(250);
         }
 
         return handleLogin(req, res, ctx);
@@ -46,7 +46,7 @@ export function authHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
       if (grantType === 'refresh_token') {
         if (isBrowser) {
-          await sleep(500);
+          await sleep(250);
         }
 
         return handleRefreshToken(req, res, ctx);
@@ -55,7 +55,7 @@ export function authHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
     rest.get(`${apiUrl}/auth/v1/user`, async (req, res, ctx) => {
       if (isBrowser) {
-        await sleep(500);
+        await sleep(250);
       }
 
       return handleUser(req, res, ctx);
@@ -63,7 +63,7 @@ export function authHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
     rest.post(`${apiUrl}/auth/v1/logout`, async (req, res, ctx) => {
       if (isBrowser) {
-        await sleep(500);
+        await sleep(250);
       }
 
       return handleLogout(req, res, ctx);

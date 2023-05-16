@@ -1,12 +1,27 @@
+.logo {
+  display: flex;
+  align-items: center;
+}
+
 .container {
   width: 100%;
   display: flex;
   align-items: center;
   background: transparent;
-  z-index: auto;
 }
 
-.logo {
+.box {
+  flex: 1;
   display: flex;
-  align-items: center;
+  justify-content: center;
+}
+
+.box:first-child {
+  margin-right: auto;
+  justify-content: flex-start;
+}
+
+.box:last-child {
+  margin-left: auto;
+  justify-content: flex-end;
 }

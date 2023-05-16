@@ -1,4 +1,4 @@
-import { spaced } from '@pivot/design/css';
+import { animate, spaced } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { Link } from '~app/modules/router/router.types';
@@ -11,9 +11,17 @@ export function SubNav({ items, Link }: { Link: Link; items: SubheaderItems }) {
     <>
       {items.map((item) => (
         <Link
-          className={cx(spaced.container, spaced.small, styles.link, {
-            [styles.active]: item.isActive,
-          })}
+          className={cx(
+            spaced.container,
+            spaced.small,
+            styles.link,
+            animate.element,
+            animate['fade-in'],
+            animate.slow,
+            {
+              [styles.active]: item.isActive,
+            },
+          )}
           key={item.text}
           to={{ name: item.routeName, params: item.routeParams }}>
           <span className={cx(item.icon, styles.icon)}></span>

@@ -5,9 +5,13 @@ import { isPendingDeployment } from '@pivot/client/pending-deployment';
 import { findDeploymentsByProjectId, findProjectById } from '@pivot/fixtures';
 import { sleep } from '@pivot/util/time';
 
-const deploymentsMap = new Map<string, Deployment[]>();
-
-export function deploymentHandlers(apiUrl: string, { isBrowser = false } = {}) {
+export function deploymentHandlers(
+  apiUrl: string,
+  {
+    cache: { deployments: deploymentsMap },
+    isBrowser = false,
+  }: { cache: { deployments: Map<string, Deployment[]> }; isBrowser?: boolean },
+) {
   return [
     rest.get(`${apiUrl}/rest/v1/deployment`, getDeployments),
     rest.post(`${apiUrl}/rest/v1/deployment`, postDeployment),
@@ -15,7 +19,7 @@ export function deploymentHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
   async function getDeployments(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
     if (isBrowser) {
-      await sleep(500);
+      await sleep(250);
     }
 
     const uuid = getProjectId(req);
@@ -45,7 +49,7 @@ export function deploymentHandlers(apiUrl: string, { isBrowser = false } = {}) {
 
   async function postDeployment(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
     if (isBrowser) {
-      await sleep(500);
+      await sleep(250);
     }
 
     const body = await req.json();

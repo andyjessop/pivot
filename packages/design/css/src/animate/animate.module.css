@@ -5,6 +5,10 @@
   animation-fill-mode: both;
   will-change: transform;
 
+  &.fade-in {
+    animation-name: fade-in;
+  }
+
   &.fade-in-up-small {
     animation-name: fade-in-up-small;
   }
@@ -13,8 +17,29 @@
     animation-name: fade-in-up-tiny;
   }
 
+  &.slow {
+    --animate-duration: 1s;
+  }
+  
   &.fast {
     --animate-duration: 0.2s;
+  }
+
+  &.flip-in-x {
+    backface-visibility: visible !important;
+    animation-name: flip-in-x;
+
+    --animate-duration: 1s;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 
@@ -32,12 +57,38 @@
 
 @keyframes fade-in-up-tiny {
   0% {
-    opacity: 0.5;
-    transform: translate3d(0,3%,0);
+    opacity: 0;
+    transform: translate3d(0,2%,0);
   }
 
   100% {
     opacity: 1;
     transform: translateZ(0);
+  }
+}
+
+@keyframes flip-in-x {
+  0% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  100% {
+    transform: perspective(400px);
   }
 }

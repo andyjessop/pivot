@@ -28,7 +28,6 @@ export function Variables({ clearOverride, overrideVariable, variables }: Props)
               <Tag color={environment.color}>{environment.name}</Tag>
             </div>
             <div className={cx('control is-expanded', util.stretch, styles.input)}>
-              {overridden ? <span className={styles.overridden}>Overridden</span> : null}
               <input
                 className={cx('input', {
                   [styles.overridden]: overridden,
@@ -40,6 +39,7 @@ export function Variables({ clearOverride, overrideVariable, variables }: Props)
             </div>
             <button
               className={cx(button.base, button.icon)}
+              disabled={!overridden}
               onClick={() => clearOverride(variable_id)}>
               <span className={iconStyles.base}>
                 <i className={icon.undo}></i>

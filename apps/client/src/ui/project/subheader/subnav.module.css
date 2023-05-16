@@ -3,7 +3,7 @@ a.link {
   --icon-color: var(--nav-icon-color);
 
   color: var(--text-color);
-  font-weight: var(--font-weight-quarterbold);
+  font-weight: var(--font-weight-normal);
 
   .icon {
     font-size: 120%;

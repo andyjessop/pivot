@@ -18,7 +18,7 @@ export function deploymentFeatureHandlers(apiUrl: string, { isBrowser = false } 
     ctx: RestContext,
   ) {
     if (isBrowser) {
-      await sleep(500);
+      await sleep(250);
     }
 
     const uuid = getDeploymentId(req);
@@ -49,7 +49,7 @@ export function deploymentFeatureHandlers(apiUrl: string, { isBrowser = false } 
     ctx: RestContext,
   ) {
     if (isBrowser) {
-      await sleep(500);
+      await sleep(250);
     }
 
     const body = await req.json();

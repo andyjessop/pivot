@@ -39,7 +39,7 @@ export const environments = [
   },
   {
     clone_of: null,
-    color: '#ff9a66',
+    color: '#409caf',
     created_at: '2023-02-05T18:20:10.728899+00:00',
     features: [
       {
