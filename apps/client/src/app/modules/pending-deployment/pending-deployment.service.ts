@@ -2,33 +2,41 @@ import { injectable } from '@pivot/lib/injectable';
 
 import { deploymentFeaturesHttpService } from '../deployment-features';
 import { deploymentVariablesHttpService } from '../deployment-variables';
-import { deploymentsResourceService } from '../deployments';
+import { deploymentsHttpService } from '../deployments';
 import { environmentsResourceService } from '../environments';
+import { toasterService } from '../toaster';
+import { variableOverridesHttpService } from '../variable-overrides';
 
 import { pendingDeploymentSlice } from './pending-deployment.slice';
 
 export const pendingDeploymentService = injectable({
   dependencies: [
     pendingDeploymentSlice,
-    deploymentsResourceService,
-    deploymentFeaturesHttpService,
+    deploymentsHttpService,
     deploymentVariablesHttpService,
+    deploymentFeaturesHttpService,
+    variableOverridesHttpService,
     environmentsResourceService,
+    toasterService,
   ],
   importFn: (
     slice,
-    deploymentsResource,
-    deploymentFeaturesHttp,
+    deploymentsHttp,
     deploymentVariablesHttp,
+    deploymentFeaturesHttp,
+    variableOverridesHttp,
     environments,
+    toaster,
   ) =>
     import('@pivot/client/pending-deployment').then((m) =>
       m.service(
         slice.api,
-        deploymentsResource,
-        deploymentFeaturesHttp,
+        deploymentsHttp,
         deploymentVariablesHttp,
+        deploymentFeaturesHttp,
+        variableOverridesHttp,
         environments,
+        toaster,
       ),
     ),
 });

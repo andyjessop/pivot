@@ -14,6 +14,7 @@ const DEPLOYMENT_FEATURES_PATH = resolve(FIXTURE_PATH, 'deployment-features.ts')
 const DEPLOYMENT_VARIABLES_PATH = resolve(FIXTURE_PATH, 'deployment-variables.ts');
 const FEATURES_PATH = resolve(FIXTURE_PATH, 'features.ts');
 const VARIABLES_PATH = resolve(FIXTURE_PATH, 'variables.ts');
+const VARIABLE_OVERRIDES_PATH = resolve(FIXTURE_PATH, 'variable-overrides.ts');
 const PROJECTS_PATH = resolve(FIXTURE_PATH, 'projects.ts');
 const RELEASES_PATH = resolve(FIXTURE_PATH, 'releases.ts');
 const TEAMS_PATH = resolve(FIXTURE_PATH, 'teams.ts');
@@ -42,6 +43,7 @@ export async function main() {
   const features = await fetchFeatures(pivot.uuid);
   const releases = await fetchReleases(pivot.uuid);
   const variables = await fetchVariables(pivot.uuid);
+  const variableOverrides = await fetchVariableOverrides(pivot.uuid);
   const teams = await fetchTeams();
 
   write(ENVIRONMENTS_PATH, `export const environments = ${JSON.stringify(environments)}`);
@@ -57,6 +59,10 @@ export async function main() {
   write(FEATURES_PATH, `export const features = ${JSON.stringify(features)}`);
   write(RELEASES_PATH, `export const releases = ${JSON.stringify(releases)}`);
   write(VARIABLES_PATH, `export const variables = ${JSON.stringify(variables)}`);
+  write(
+    VARIABLE_OVERRIDES_PATH,
+    `export const variableOverrides = ${JSON.stringify(variableOverrides)}`,
+  );
   write(PROJECTS_PATH, `export const projects = ${JSON.stringify(projects)}`);
   write(TEAMS_PATH, `export const teams = ${JSON.stringify(teams)}`);
   write(USERS_PATH, `export const users = ${JSON.stringify([{ id: USER_ID }])}`);
@@ -149,6 +155,18 @@ export async function main() {
 
   async function fetchVariables(projectId: string) {
     return getProjectComponent(projectId, 'variable?select=*');
+  }
+
+  async function fetchVariableOverrides(projectId: string) {
+    const deployments = await fetchDeployments(projectId);
+
+    const arrayOfArrays = await Promise.all(
+      deployments.flatMap(async (deployment: any) => {
+        return get(`variable_override?deployment_id=eq.${deployment.uuid}&select=*`);
+      }),
+    );
+
+    return arrayOfArrays.flat();
   }
 
   async function getProjectComponent(projectId: string, relativePath: string) {

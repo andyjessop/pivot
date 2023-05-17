@@ -19,7 +19,6 @@ import { cx } from '@pivot/util/classname';
 import { Draft } from '@pivot/util/model';
 
 interface Props {
-  DeploymentVariables?: JSX.Element;
   NewVariables?: JSX.Element;
   Variables?: JSX.Element;
   addNewVariable: () => void;
@@ -39,7 +38,6 @@ export function PendingDeploymentModal({
   clear,
   deploy,
   deployment,
-  DeploymentVariables,
   environments,
   isFetchingVariables,
   // Features,
@@ -81,7 +79,7 @@ export function PendingDeploymentModal({
                 Release
               </label>
               <div className="select">
-                <select autoFocus={true} defaultValue={release_id} id={release_id}>
+                <select defaultValue={release_id} id={release_id}>
                   {releases.map((release) => (
                     <option key={release.uuid} value={release.uuid}>
                       {release.hash}
@@ -143,12 +141,11 @@ export function PendingDeploymentModal({
 
             {isFetchingVariables ? (
               <div className={util.center}>
-                <Loader size="large" />
+                <Loader delay={500} size="large" />
               </div>
             ) : (
               <div className={cx(animate.element, animate['fade-in'])}>
                 {NewVariables}
-                {DeploymentVariables}
                 {Variables}
               </div>
             )}

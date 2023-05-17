@@ -8,6 +8,7 @@ import { projectResourceSlice } from './modules/project';
 import { selectIsProjectRoute } from './modules/project/project.selectors';
 import { releasesResourceSlice } from './modules/releases';
 import { routerSlice } from './modules/router';
+import { toasterSlice } from './modules/toaster';
 import { variablesResourceSlice } from './modules/variables';
 
 /**
@@ -51,6 +52,10 @@ export const slices = {
   router: {
     active: () => true,
     injectable: routerSlice,
+  },
+  toaster: {
+    active: () => true,
+    injectable: toasterSlice,
   },
   variablesResource: {
     active: selectIsProjectRoute,

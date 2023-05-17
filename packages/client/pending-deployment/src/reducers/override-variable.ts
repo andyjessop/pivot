@@ -1,4 +1,4 @@
-import { DraftDeploymentVariable } from '@pivot/client/deployment-variables';
+import { DraftVariableOverride } from '@pivot/client/variable-overrides';
 
 import { State } from '../types';
 
@@ -12,32 +12,32 @@ export function overrideVariable(state: State, variable_id: string, value: strin
     throw new Error('Cannot override variable without a deployment');
   }
 
-  const existingVariableIndex = state.variables.findIndex(
+  const existingVariableIndex = state.variableOverrides.findIndex(
     (variable) => variable.variable_id === variable_id,
   );
 
   if (existingVariableIndex !== -1) {
-    const updatedVariable: DraftDeploymentVariable = {
-      ...state.variables[existingVariableIndex],
+    const updatedVariable: DraftVariableOverride = {
+      ...state.variableOverrides[existingVariableIndex],
       value,
     };
 
-    const updatedVariables = [...state.variables];
-    updatedVariables[existingVariableIndex] = updatedVariable;
+    const updatedVariableOverrides = [...state.variableOverrides];
+    updatedVariableOverrides[existingVariableIndex] = updatedVariable;
 
     return {
       ...state,
-      variables: updatedVariables,
+      variableOverrides: updatedVariableOverrides,
     };
   }
 
-  const newVariable: DraftDeploymentVariable = {
+  const newVariable: DraftVariableOverride = {
     value,
     variable_id,
   };
 
   return {
     ...state,
-    variables: [...state.variables, newVariable],
+    variableOverrides: [...state.variableOverrides, newVariable],
   };
 }

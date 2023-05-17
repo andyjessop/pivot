@@ -1,4 +1,5 @@
 import { DeploymentVariable } from '@pivot/client/deployment-variables';
+import { VariableOverride } from '@pivot/client/variable-overrides';
 
 import { deploymentFeatures } from './fixtures/deployment-features';
 import { deploymentVariables } from './fixtures/deployment-variables';
@@ -8,6 +9,7 @@ import { features } from './fixtures/features';
 import { projects } from './fixtures/projects';
 import { releases } from './fixtures/releases';
 import { teams } from './fixtures/teams';
+import { variableOverrides } from './fixtures/variable-overrides';
 import { variables } from './fixtures/variables';
 
 export function findEnvironmentsByProjectId(projectId: string) {
@@ -28,6 +30,9 @@ export function findDeploymentVariablesByDeploymentId(deploymentId: string) {
   )!;
 }
 
+export function findVariableOverridesByDeploymentId(deploymentId: string) {
+  return (variableOverrides as VariableOverride[]).filter((d) => d.deployment_id === deploymentId)!;
+}
 export function findFeaturesByProjectId(projectId: string) {
   return features.filter((f) => f.project_id === projectId)!;
 }

@@ -1,10 +1,10 @@
-import { DeploymentVariable } from '@pivot/client/deployment-variables';
 import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
+import { VariableOverride } from '@pivot/client/variable-overrides';
 import { Variable } from '@pivot/client/variables';
 import { Draft } from '@pivot/util/model';
 
-import { displayVariables } from './display-variables';
+import { environmentVariables } from './environment-variables';
 
 describe('displayVariables', () => {
   const deployment = {
@@ -16,7 +16,7 @@ describe('displayVariables', () => {
       uuid: 'var-1',
       variable_id: 'var-1',
     },
-  ] as DeploymentVariable[];
+  ] as VariableOverride[];
 
   const variables = [
     {
@@ -40,21 +40,21 @@ describe('displayVariables', () => {
 
   it('returns an empty array if any of the arguments are falsy', () => {
     // @ts-expect-error Testing invalid arguments
-    expect(displayVariables(null)).toEqual([]);
+    expect(environmentVariables(null)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
-    expect(displayVariables(undefined)).toEqual([]);
+    expect(environmentVariables(undefined)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
-    expect(displayVariables(deployment, null)).toEqual([]);
+    expect(environmentVariables(deployment, null)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
-    expect(displayVariables(deployment, undefined)).toEqual([]);
+    expect(environmentVariables(deployment, undefined)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
-    expect(displayVariables(deployment, deploymentVariables, null)).toEqual([]);
+    expect(environmentVariables(deployment, deploymentVariables, null)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
-    expect(displayVariables(deployment, deploymentVariables, undefined)).toEqual([]);
+    expect(environmentVariables(deployment, deploymentVariables, undefined)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
-    expect(displayVariables(deployment, deploymentVariables, variables, null)).toEqual([]);
+    expect(environmentVariables(deployment, deploymentVariables, variables, null)).toEqual([]);
     // @ts-expect-error Testing invalid arguments
-    expect(displayVariables(deployment, deploymentVariables, variables, undefined)).toEqual([]);
+    expect(environmentVariables(deployment, deploymentVariables, variables, undefined)).toEqual([]);
   });
 
   it('throws an error if a variable with the given id is not found', () => {
@@ -67,7 +67,7 @@ describe('displayVariables', () => {
 
     expect(() =>
       // @ts-expect-error Testing invalid arguments
-      displayVariables(deployment, deploymentVariables, invalidVariables, environment),
+      environmentVariables(deployment, deploymentVariables, invalidVariables, environment),
     ).toThrowError(/Variable with id var-1 not found/);
   });
 
@@ -85,7 +85,7 @@ describe('displayVariables', () => {
         variable_id: 'var-1',
       },
     ];
-    expect(displayVariables(deployment, deploymentVariables, variables, environment)).toEqual(
+    expect(environmentVariables(deployment, deploymentVariables, variables, environment)).toEqual(
       expected,
     );
   });

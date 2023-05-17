@@ -1,18 +1,18 @@
-import { DraftDeploymentVariable } from '@pivot/client/deployment-variables';
 import { Deployment } from '@pivot/client/deployments';
 import { Environment } from '@pivot/client/environments';
+import { DraftVariableOverride } from '@pivot/client/variable-overrides';
 import { Variable } from '@pivot/client/variables';
 import { Draft } from '@pivot/util/model';
 
 import { DisplayVariable } from '../types';
 
-export function displayVariables(
+export function environmentVariables(
   deployment: Draft<Deployment>,
-  deploymentVariables: DraftDeploymentVariable[],
+  variableOverrides: DraftVariableOverride[],
   variables: Variable[],
   environment: Environment,
 ): DisplayVariable[] {
-  if (!deployment || !deploymentVariables || !variables || !environment) {
+  if (!deployment || !variableOverrides || !variables || !environment) {
     return [];
   }
 
@@ -31,8 +31,8 @@ export function displayVariables(
       );
     }
 
-    const overriddenValue = deploymentVariables.find(
-      (deploymentVariable) => deploymentVariable.variable_id === variable.variable_id,
+    const overriddenValue = variableOverrides.find(
+      (variableOverrides) => variableOverrides.variable_id === variable.variable_id,
     )?.value;
 
     return {

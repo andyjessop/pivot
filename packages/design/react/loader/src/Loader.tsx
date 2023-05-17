@@ -1,11 +1,12 @@
-import { icon, spin } from '@pivot/design/css';
+import { animate, icon, spin } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 interface Props {
+  delay?: number;
   size?: 'small' | 'medium' | 'large';
 }
 
-export function Loader({ size }: Props) {
+export function Loader({ delay = 0, size }: Props) {
   let fontSize = '100%';
 
   switch (size) {
@@ -24,9 +25,12 @@ export function Loader({ size }: Props) {
 
   return (
     <div
-      className={cx(spin.container, icon.spinner)}
+      className={cx(animate.element, animate['fade-in'])}
       style={{
+        ['--animate-delay' as any]: `${delay}ms`,
         fontSize,
-      }}></div>
+      }}>
+      <div className={cx(spin.container, icon.spinner)}></div>
+    </div>
   );
 }

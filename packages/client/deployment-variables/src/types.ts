@@ -3,9 +3,9 @@ import { Draft } from '@pivot/util/model';
 export interface DeploymentVariable {
   created_at: string;
   deployment_id: string;
+  name: string;
   uuid: string;
   value: string;
-  variable_id: string;
 }
 
 export type DeploymentVariableWithName = DeploymentVariable & {

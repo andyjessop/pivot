@@ -1,2 +1,1 @@
-export * from './deployment-variables-with-names';
-export * from './display-variables';
+export * from './environment-variables';
