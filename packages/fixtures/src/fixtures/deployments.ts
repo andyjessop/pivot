@@ -93,4 +93,14 @@ export const deployments = [
     uuid: '330acec4-ea70-4745-a9c6-bd84277b3c5d',
     variables: [],
   },
+  {
+    created_at: '2023-05-17T14:32:54.359343+00:00',
+    environment_id: '35902513-4df9-4625-a191-833532a190ce',
+    features: [],
+    project_id: 'f4c727f9-6331-439e-b34d-8e056a2aa282',
+    release_id: 'd445b390-8719-43f9-abd1-876b83d3243c',
+    url: 'https://aj-new-feature-10.runestone.io',
+    uuid: '89da6ed1-f93e-455a-9d1f-9a9e566e8337',
+    variables: [],
+  },
 ];
