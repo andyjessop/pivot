@@ -1,7 +1,9 @@
 .element {
   --animate-duration: 0.5s;
-
+  --animate-delay: 0s;
+  
   animation-duration: var(--animate-duration);
+  animation-delay: var(--animate-delay);
   animation-fill-mode: both;
   will-change: transform;
 

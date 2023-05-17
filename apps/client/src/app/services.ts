@@ -10,6 +10,7 @@ import { pendingDeploymentService } from './modules/pending-deployment';
 import { projectResourceService } from './modules/project';
 import { releasesResourceService } from './modules/releases';
 import { routerService } from './modules/router';
+import { toasterService } from './modules/toaster';
 import { variablesResourceService } from './modules/variables';
 
 /**
@@ -33,5 +34,6 @@ export const services = {
   projectResource: projectResourceService,
   releasesResource: releasesResourceService,
   router: routerService,
+  toaster: toasterService,
   variablesResource: variablesResourceService,
 };

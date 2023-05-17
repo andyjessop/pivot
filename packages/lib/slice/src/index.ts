@@ -19,11 +19,14 @@ export type ExtractActions<T, S = any> = T extends Record<
     }
   : any;
 
-export type ExtractApi<T, S = any> = T extends Record<keyof T, (state: S, ...params: any[]) => S>
+export type ExtractApi<T, S = any> = T extends Record<
+  keyof T,
+  (state: infer R, ...params: any[]) => S
+>
   ? {
       [P in keyof T]: (...params: DropFirst<Parameters<T[P]>>) => boolean;
     } & {
-      getState: () => S;
+      getState: () => R;
     }
   : any;
 

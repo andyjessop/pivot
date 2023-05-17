@@ -1,17 +1,21 @@
 import { DeploymentFeaturesHttp } from '@pivot/client/deployment-features';
 import { DeploymentVariablesHttp } from '@pivot/client/deployment-variables';
-import { Deployment, DeploymentsResourceService } from '@pivot/client/deployments';
+import { Deployment, DeploymentsHttp } from '@pivot/client/deployments';
 import { EnvironmentsResource } from '@pivot/client/environments';
+import { Toaster } from '@pivot/client/toaster';
+import { VariableOverridesHttp } from '@pivot/client/variable-overrides';
 import { makeDraft } from '@pivot/util/model';
 
 import { Api } from './types';
 
 export function service(
   pendingDeploymentState: Api,
-  deploymentsResource: DeploymentsResourceService,
-  deploymentFeaturesHttp: DeploymentFeaturesHttp,
+  deploymentsHttp: DeploymentsHttp,
   deploymentVariablesHttp: DeploymentVariablesHttp,
+  deploymentFeaturesHttp: DeploymentFeaturesHttp,
+  variableOverridesHttp: VariableOverridesHttp,
   environmentsResource: EnvironmentsResource,
+  toaster: Toaster,
 ) {
   return {
     cloneDeployment,
@@ -30,31 +34,55 @@ export function service(
 
     pendingDeploymentState.setDeployment(strippedDeployment);
     pendingDeploymentState.fetchFeatures();
-    pendingDeploymentState.fetchVariables();
+    pendingDeploymentState.fetchVariableOverrides();
 
-    const [features, variables] = await Promise.all([
+    const [features, deploymentVariables, variableOverrides] = await Promise.all([
       deploymentFeaturesHttp.get(deployment.uuid),
       deploymentVariablesHttp.get(deployment.uuid),
+      variableOverridesHttp.get(deployment.uuid),
     ]);
 
     pendingDeploymentState.fetchFeaturesSuccess(features);
-    pendingDeploymentState.fetchVariablesSuccess(variables);
+    pendingDeploymentState.fetchVariableOverridesSuccess(variableOverrides);
+    pendingDeploymentState.setNewVariables(deploymentVariables);
   }
 
-  function deploy() {
-    const { deployment, features = [], variables = [] } = pendingDeploymentState.getState();
+  async function deploy() {
+    const { deployment, features = [], variableOverrides = [] } = pendingDeploymentState.getState();
 
-    if (deployment) {
-      deploymentsResource.create(deployment);
+    if (!deployment) {
+      throw new Error('Cannot deploy without a deployment.');
     }
 
-    for (const feature of features) {
-      deploymentFeaturesHttp.post(feature);
+    toaster.addNotification({ content: deployment.url, title: 'Deploying...', type: 'info' });
+
+    const created = await deploymentsHttp.post(deployment);
+
+    if (features.length) {
+      toaster.addNotification({
+        content: deployment.url,
+        title: 'Adding features...',
+        type: 'info',
+      });
+
+      for (const feature of features) {
+        deploymentFeaturesHttp.post({ deployment_id: created.uuid, ...feature });
+      }
     }
 
-    for (const variable of variables) {
-      deploymentVariablesHttp.post(variable);
+    if (variableOverrides.length) {
+      toaster.addNotification({
+        content: deployment.url,
+        title: 'Adding variable overrides...',
+        type: 'info',
+      });
+
+      for (const variable of variableOverrides) {
+        variableOverridesHttp.post({ deployment_id: created.uuid, ...variable });
+      }
     }
+
+    toaster.addNotification({ content: deployment.url, title: 'Deployed!', type: 'info' });
 
     pendingDeploymentState.clearDrafts();
   }

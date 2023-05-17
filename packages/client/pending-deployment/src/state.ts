@@ -2,9 +2,10 @@ import { State } from './types';
 
 export const initialState: State = {
   deployment: null,
+  deploymentVariablesStatus: 'idle',
   features: [],
   featuresStatus: 'idle',
   newVariables: [],
-  variables: [],
-  variablesStatus: 'idle',
+  variableOverrides: [],
+  variableOverridesStatus: 'idle',
 };

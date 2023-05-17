@@ -1,16 +1,14 @@
 import {
-  DeploymentVariables,
+  EnvironmentVariables,
   NewVariables,
   PendingDeploymentModal,
-  Variables,
 } from '@pivot/client/pending-deployment';
 
 import { useSelector, useService } from '~app';
 import { selectEnvironmentsResourceData } from '~app/modules/environments';
 import {
-  selectDeploymentVariablesWithNames,
-  selectDisplayVariables,
-  selectIsFetchingVariables,
+  selectEnvironmentVariables,
+  selectIsFetchingVariableOverrides,
   selectNewVariables,
   selectPendingDeployment,
 } from '~app/modules/pending-deployment';
@@ -21,20 +19,18 @@ export function PendingDeployment() {
 
   const environments = useSelector(selectEnvironmentsResourceData);
   const deployment = useSelector(selectPendingDeployment);
-  const deploymentVariables = useSelector(selectDeploymentVariablesWithNames);
   const newVariables = useSelector(selectNewVariables);
   const releases = useSelector(selectReleasesResourceData);
-  const variables = useSelector(selectDisplayVariables);
-  const isFetchingVariables = useSelector(selectIsFetchingVariables);
+  const environmentVariables = useSelector(selectEnvironmentVariables);
+  const isFetchingVariableOverrides = useSelector(selectIsFetchingVariableOverrides);
 
   if (
     !environments ||
     !deployment ||
-    !deploymentVariables ||
     !newVariables ||
     !releases ||
     !service ||
-    !variables
+    !environmentVariables
   ) {
     return null;
   }
@@ -44,13 +40,11 @@ export function PendingDeployment() {
     clearDrafts,
     clearOverride,
     overrideVariable,
-    removeVariable,
     removeNewVariable,
     setEnvironment,
     setUrl,
     updateNewVariableName,
     updateNewVariableValue,
-    updateVariable,
   } = service;
 
   // const FeaturesComponent = (
@@ -74,25 +68,16 @@ export function PendingDeployment() {
     />
   );
 
-  const DeploymentVariablesComponent = (
-    <DeploymentVariables
-      deploymentVariables={deploymentVariables}
-      removeVariable={removeVariable}
-      updateVariable={updateVariable}
-    />
-  );
-
   const VariablesComponent = (
-    <Variables
+    <EnvironmentVariables
       clearOverride={clearOverride}
       overrideVariable={overrideVariable}
-      variables={variables}
+      variables={environmentVariables}
     />
   );
 
   return (
     <PendingDeploymentModal
-      DeploymentVariables={DeploymentVariablesComponent}
       NewVariables={NewVariablesComponent}
       Variables={VariablesComponent}
       addNewVariable={addNewVariable}
@@ -100,7 +85,7 @@ export function PendingDeployment() {
       deploy={deploy}
       deployment={deployment}
       environments={environments}
-      isFetchingVariables={isFetchingVariables}
+      isFetchingVariables={isFetchingVariableOverrides}
       releases={releases}
       setEnvironment={setEnvironment}
       setUrl={setUrl}

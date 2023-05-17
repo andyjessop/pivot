@@ -1,10 +1,6 @@
 import { createSelector } from 'reselect';
 
-import {
-  deploymentVariablesWithNames,
-  displayVariables,
-  State,
-} from '@pivot/client/pending-deployment';
+import { environmentVariables, State } from '@pivot/client/pending-deployment';
 
 import { selectEnvironmentsResourceData } from '../environments';
 import { selectVariablesResourceData } from '../variables';
@@ -22,9 +18,9 @@ export const selectPendingFeatures = createSelector(
   (state) => state?.features,
 );
 
-export const selectPendingVariables = createSelector(
+export const selectVariableOverrides = createSelector(
   selectPendingDeploymentState,
-  (state) => state?.variables,
+  (state) => state?.variableOverrides,
 );
 
 export const selectNewVariables = createSelector(
@@ -37,9 +33,9 @@ export const selectIsFetchingFeatures = createSelector(
   (state) => state?.featuresStatus === 'loading',
 );
 
-export const selectIsFetchingVariables = createSelector(
+export const selectIsFetchingVariableOverrides = createSelector(
   selectPendingDeploymentState,
-  (state) => state?.variablesStatus === 'loading',
+  (state) => state?.variableOverridesStatus === 'loading',
 );
 
 export const selectDeploymentEnvironment = createSelector(
@@ -54,42 +50,16 @@ export const selectDeploymentEnvironment = createSelector(
   },
 );
 
-const selectDeploymentVariables = createSelector(
-  selectPendingVariables,
-  selectDeploymentEnvironment,
-  (deploymentVariables, environment) => {
-    if (!deploymentVariables || !environment) {
-      return [];
-    }
-
-    return deploymentVariables.filter(
-      (v) => !environment.variables.some((env) => env.variable_id === v.variable_id),
-    );
-  },
-);
-
-export const selectDeploymentVariablesWithNames = createSelector(
-  selectDeploymentVariables,
-  selectVariablesResourceData,
-  (deploymentVariables, variables) => {
-    if (!deploymentVariables || !variables) {
-      return [];
-    }
-
-    return deploymentVariablesWithNames(deploymentVariables, variables);
-  },
-);
-
-export const selectDisplayVariables = createSelector(
+export const selectEnvironmentVariables = createSelector(
   selectPendingDeployment,
-  selectPendingVariables,
+  selectVariableOverrides,
   selectVariablesResourceData,
   selectDeploymentEnvironment,
-  (deployment, deploymentVariables, variables, environment) => {
-    if (!deployment || !deploymentVariables || !variables || !environment) {
+  (deployment, variableOverrides, variables, environment) => {
+    if (!deployment || !variableOverrides || !variables || !environment) {
       return [];
     }
 
-    return displayVariables(deployment, deploymentVariables, variables, environment);
+    return environmentVariables(deployment, variableOverrides, variables, environment);
   },
 );

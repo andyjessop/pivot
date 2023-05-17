@@ -6,6 +6,7 @@ import { deploymentFeatureHandlers } from './handlers/deployment-feature';
 import { deploymentVariableHandlers } from './handlers/deployment-variable';
 import { projectHandlers } from './handlers/project';
 import { userHandlers } from './handlers/user';
+import { variableOverridesHandlers } from './handlers/variable-overrides';
 
 const deployments = new Map<string, Deployment[]>();
 
@@ -16,6 +17,7 @@ export function createHandlers(apiUrl: string, { isBrowser = false } = {}) {
     ...deploymentHandlers(apiUrl, { cache: { deployments }, isBrowser }),
     ...deploymentFeatureHandlers(apiUrl, { isBrowser }),
     ...deploymentVariableHandlers(apiUrl, { isBrowser }),
+    ...variableOverridesHandlers(apiUrl, { isBrowser }),
     ...userHandlers(apiUrl, { isBrowser }),
   ];
 }

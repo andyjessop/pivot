@@ -17,12 +17,12 @@ export function NewVariables({
 }: Props) {
   return (
     <>
-      {newVariables.map(({ id, name, value }) => (
+      {newVariables.map(({ id, name, value }, ndx) => (
         <div className={cx(form.element)} key={id}>
           <div className={cx('field is-grouped', util['align-vertically'])}>
             <div className={cx('control is-expanded')}>
               <input
-                autoFocus
+                autoFocus={ndx === 0}
                 className={cx('input')}
                 onChange={(e) => updateNewVariableName(id, e.target.value)}
                 type="text"

@@ -11,7 +11,7 @@ interface Props {
   variables: DisplayVariable[];
 }
 
-export function Variables({ clearOverride, overrideVariable, variables }: Props) {
+export function EnvironmentVariables({ clearOverride, overrideVariable, variables }: Props) {
   return (
     <>
       {variables.map(({ environment, name, overridden, value, variable_id }) => (

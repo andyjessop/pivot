@@ -19,7 +19,7 @@ export const icon = {
   plusCircle: 'las la-plus-circle',
   projects: 'las la-cubes',
   releases: 'las la-code-branch',
-  remove: 'las la-minus-circle',
+  remove: 'las la-minus',
   shippingFast: 'las la-shipping-fast',
   spinner: 'las la-circle-notch',
   stream: 'las la-stream',
