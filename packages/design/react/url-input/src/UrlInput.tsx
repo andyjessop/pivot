@@ -6,21 +6,21 @@ import styles from './url-input.module.css';
 
 interface Props {
   className?: string;
-  onChange: (value: string) => void;
+  onBlur: (value: string) => void;
   url: string;
 }
 
-export function UrlInput({ className = '', onChange, url }: Props) {
+export function UrlInput({ className = '', onBlur, url }: Props) {
   const [protocol, rest] = splitUrl(url);
 
   return (
     <div className={styles.container}>
       <input
         className={cx('input', styles.content, className)}
+        defaultValue={rest}
         id="url"
-        onChange={(e) => onChange(`${protocol}${e.target.value}`)}
+        onBlur={(e) => onBlur(`${protocol}${e.target.value}`)}
         type="url"
-        value={rest}
       />
       <span className={cx(tag.container, tag.input, styles.prefix)}>{protocol}</span>
     </div>

@@ -32,9 +32,9 @@ export function EnvironmentVariables({ clearOverride, overrideVariable, variable
                 className={cx('input', {
                   [styles.overridden]: overridden,
                 })}
-                onChange={(e) => overrideVariable(variable_id, e.target.value)}
+                defaultValue={value}
+                onBlur={(e) => overrideVariable(variable_id, e.target.value)}
                 type="text"
-                value={value}
               />
             </div>
             <button

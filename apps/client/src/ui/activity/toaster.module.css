@@ -1,0 +1,11 @@
+.container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: var(--toaster-width);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  padding: var(--toaster-padding);
+  gap: var(--toaster-gap);
+}

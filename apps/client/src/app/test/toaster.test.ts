@@ -1,7 +1,7 @@
-import { Notification } from '@pivot/client/toaster';
+import { AlertType } from '@pivot/client/toaster';
 import { headless } from '@pivot/lib/headless';
 
-import { selectNotifications } from '~app/modules/toaster';
+import { selectAlerts } from '~app/modules/activity';
 import { services } from '~app/services';
 import { slices } from '~app/slices';
 import { subscriptions } from '~app/subscriptions';
@@ -26,14 +26,11 @@ describe('integration', () => {
         content: 'content',
         title: 'title',
         type: 'info',
-      } as Notification;
+      } as AlertType;
 
-      toaster.addNotification(notification);
+      toaster.toast(notification);
 
-      const loadedState = await app.waitFor(
-        selectNotifications,
-        (notifications) => notifications?.length !== 0,
-      );
+      const loadedState = await app.waitFor(selectAlerts, (alerts) => alerts?.length !== 0);
 
       expect(loadedState).toEqual([notification]);
     });

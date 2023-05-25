@@ -13,6 +13,7 @@
     "moduleResolution": "Node",
     "noEmit": true,
     "paths": {
+      "@pivot/client/activity": ["packages/client/activity/src/index.ts"],
       "@pivot/client/auth": ["packages/client/auth/src/index.ts"],
       "@pivot/client/breadcrumb": ["packages/client/breadcrumb/src/index.ts"],
       "@pivot/client/cache": ["packages/client/cache/src/index.ts"],
@@ -28,6 +29,7 @@
         "packages/client/feature-flags/src/index.ts"
       ],
       "@pivot/client/features": ["packages/client/features/src/index.ts"],
+      "@pivot/client/footer": ["packages/client/footer/src/index.ts"],
       "@pivot/client/head": ["packages/client/head/src/index.ts"],
       "@pivot/client/http": ["packages/client/http/src/index.ts"],
       "@pivot/client/nav": ["packages/client/nav/src/index.ts"],
@@ -36,7 +38,7 @@
       ],
       "@pivot/client/project": ["packages/client/project/src/index.ts"],
       "@pivot/client/releases": ["packages/client/releases/src/index.ts"],
-      "@pivot/client/toaster": ["packages/client/toaster/src/index.ts"],
+      "@pivot/client/toaster": ["packages/client/activity/src/index.ts"],
       "@pivot/client/variables": ["packages/client/variables/src/index.ts"],
       "@pivot/client/variable-overrides": ["packages/client/variable-overrides/src/index.ts"],
       "@pivot/design/css": ["packages/design/css/src/index.ts"],
@@ -78,6 +80,7 @@
       "@pivot/util/model": ["packages/util/model/src/index.ts"],
       "@pivot/util/object": ["packages/util/object/src/index.ts"],
       "@pivot/util/promise": ["packages/util/promise/src/index.ts"],
+      "@pivot/util/state-machine": ["packages/util/state-machine/src/index.ts"],
       "@pivot/util/string": ["packages/util/string/src/index.ts"],
       "@pivot/util/time": ["packages/util/time/src/index.ts"],
       "@pivot/util/url": ["packages/util/url/src/index.ts"],

@@ -22,19 +22,19 @@ export function NewVariables({
           <div className={cx('field is-grouped', util['align-vertically'])}>
             <div className={cx('control is-expanded')}>
               <input
-                autoFocus={ndx === 0}
+                autoFocus={ndx === 0 && !name}
                 className={cx('input')}
-                onChange={(e) => updateNewVariableName(id, e.target.value)}
+                defaultValue={name}
+                onBlur={(e) => updateNewVariableName(id, e.target.value)}
                 type="text"
-                value={name}
               />
             </div>
             <div className={cx('control is-expanded')}>
               <input
                 className={cx('input')}
-                onChange={(e) => updateNewVariableValue(id, e.target.value)}
+                defaultValue={value}
+                onBlur={(e) => updateNewVariableValue(id, e.target.value)}
                 type="text"
-                value={value}
               />
             </div>
             <button className={cx(button.base, button.icon)} onClick={() => removeNewVariable(id)}>

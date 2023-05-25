@@ -23,7 +23,6 @@ describe('integration', () => {
     });
 
     it('should visit project page', async () => {
-      // The fetch-project subscription calls `resource.read` when on a project route
       visit(`/projects/${project.uuid}`);
 
       const state = await app.getSlice('router');
