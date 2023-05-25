@@ -7,7 +7,7 @@ import { DraftEntry, Entry } from './types';
 const machineConfig = {
   addingEntry: {
     addEntryFinish: (stack: string[], data: State) =>
-      data.activeCount === 0 ? 'showingActive' : 'showingAll',
+      data.activeCount === 1 ? 'showingActive' : 'showingAll',
   },
   closed: {
     addEntryStart: 'addingEntry',
@@ -20,7 +20,7 @@ const machineConfig = {
       return 'addingEntry';
     },
     markInactiveFinish: (stack: string[], data: State) =>
-      data.activeCount === 0 ? 'showingActive' : 'showingAll',
+      data.activeCount === 1 ? 'showingActive' : 'closed',
   },
   showingActive: {
     addEntryStart: 'addingEntry',
@@ -48,30 +48,30 @@ export const reducers = {
 
 const machine = createMachine(machineConfig);
 
-export function addEntryStart(state: State, entry: DraftEntry): State {
+function addEntryStart(state: State, entry: DraftEntry): State {
   const nextState = transition(state, 'addEntryStart');
   const id = generateRandomId();
 
   return {
     ...nextState,
-    activeCount: state.activeCount + 1,
-    entries: [...state.entries, { ...entry, id }],
+    activeCount: nextState.activeCount + 1,
+    entries: [...nextState.entries, { ...entry, id }],
   };
 }
 
-export function addEntryFinish(state: State) {
+function addEntryFinish(state: State) {
   return transition(state, 'addEntryFinish');
 }
 
-export function close(state: State) {
+function close(state: State) {
   return transition(state, 'close');
 }
 
-export function markInactiveFinish(state: State) {
+function markInactiveFinish(state: State) {
   return transition(state, 'markInactiveFinish');
 }
 
-export function markInactiveStart(state: State) {
+function markInactiveStart(state: State) {
   const nextState = transition(state, 'markInactiveStart');
 
   return {
@@ -80,7 +80,7 @@ export function markInactiveStart(state: State) {
   };
 }
 
-export function open(state: State): State {
+function open(state: State): State {
   return transition(state, 'open');
 }
 

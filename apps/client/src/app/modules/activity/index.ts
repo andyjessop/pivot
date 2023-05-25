@@ -1,17 +1,16 @@
 import { createSelector } from 'reselect';
 
-import { State } from '@pivot/client/activity';
+import { initialState, reducers, service, State } from '@pivot/client/activity';
 import { injectable } from '@pivot/lib/injectable';
 import { slice } from '@pivot/lib/slice';
 
 export const activitySlice = injectable({
-  importFn: () =>
-    import('@pivot/client/activity').then((m) => slice('activity', m.initialState, m.reducers)),
+  importFn: () => Promise.resolve(slice('activity', initialState, reducers)),
 });
 
 export const activityService = injectable({
   dependencies: [activitySlice],
-  importFn: (slice) => import('@pivot/client/activity').then((m) => m.service(slice.api)),
+  importFn: (slice) => Promise.resolve(service(slice.api)),
 });
 
 export const selectActivity = (state: { activity?: State }) => state.activity;

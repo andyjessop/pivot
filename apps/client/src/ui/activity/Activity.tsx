@@ -1,6 +1,6 @@
 import { Entry } from '@pivot/client/activity';
 
-import styles from './toaster.module.css';
+import styles from './activity.module.css';
 
 interface Props {
   entries: Entry[];

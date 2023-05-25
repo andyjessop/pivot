@@ -30,11 +30,11 @@ export function createMachine<C extends Config<any, any, D>, D>(config: C): Mach
       data: D,
     ): string | undefined {
       let nextState: (keyof C & string) | undefined;
-      const stateActions = config.states[currentState];
+      const stateActions = config[currentState];
       const actionResult = stateActions && stateActions[action as keyof typeof stateActions];
 
       if (!actionResult) {
-        throw new Error(`Invalid action: ${action}`);
+        return currentState;
       }
 
       if (typeof actionResult === 'function') {

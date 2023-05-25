@@ -13,23 +13,17 @@ export function service(model: Model) {
   };
 
   async function addEntry(entry: DraftEntry) {
-    if (!model.addEntryStart(entry)) {
-      return;
-    }
+    model.addEntryStart(entry);
 
     // Allow time for animation.
     await sleep(500);
 
-    if (!model.addEntryFinish()) {
-      return;
-    }
+    model.addEntryFinish();
 
     // All time for user to read.
     await sleep(5000);
 
-    if (!model.markInactiveStart()) {
-      return;
-    }
+    model.markInactiveStart();
 
     // Allow time for animation.
     await sleep(500);

@@ -38,7 +38,6 @@
       ],
       "@pivot/client/project": ["packages/client/project/src/index.ts"],
       "@pivot/client/releases": ["packages/client/releases/src/index.ts"],
-      "@pivot/client/toaster": ["packages/client/activity/src/index.ts"],
       "@pivot/client/variables": ["packages/client/variables/src/index.ts"],
       "@pivot/client/variable-overrides": ["packages/client/variable-overrides/src/index.ts"],
       "@pivot/design/css": ["packages/design/css/src/index.ts"],
