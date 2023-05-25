@@ -8,8 +8,6 @@ export function service<T extends RouterConfig>(
 ) {
   const config = { notFound: { path: '/404' }, ...initial };
 
-  debugger;
-
   addEventListener('popstate', onPopstate);
 
   navigate(getRouteFromUrl(config, window.location.href));
