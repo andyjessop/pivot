@@ -12,10 +12,10 @@ export function RenderRoute(routeKey: string, routes: Routes): ReactElement | nu
     return null;
   }
 
-  return routeChain.reduceRight((children, currentKey) => {
+  return routeChain.reduceRight((outlet, currentKey) => {
     const Component = routes[currentKey].component;
 
-    return <Component>{children}</Component>;
+    return <Component Outlet={outlet} />;
   }, null as ReactElement | null);
 }
 

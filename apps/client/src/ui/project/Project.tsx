@@ -13,10 +13,10 @@ import { selectSubheaderItems } from './subheader/subheader.selectors';
 import { SubNav } from './subheader/SubNav';
 
 interface Props {
-  children: JSX.Element;
+  Outlet: JSX.Element;
 }
 
-export default function Project({ children }: Props) {
+export default function Project({ Outlet }: Props) {
   const router = useService('router');
   const subheaderItems = useSelector(selectSubheaderItems);
 
@@ -39,7 +39,7 @@ export default function Project({ children }: Props) {
       <div className={cx(layout.content, styles.container)}>
         <div className={styles.info}></div>
         <div className={styles.content}>
-          <Suspense>{children}</Suspense>
+          <Suspense>{Outlet}</Suspense>
         </div>
       </div>
       <PendingDeployment />
