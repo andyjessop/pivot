@@ -92,9 +92,9 @@ export function headless<
 
   function middleware(store: MiddlewareAPI) {
     return (next: Dispatch) => async (action: Action) => {
-      await updateRegistrations(store.getState());
       next(action);
 
+      await updateRegistrations(store.getState());
       await runSubscriptions();
     };
   }

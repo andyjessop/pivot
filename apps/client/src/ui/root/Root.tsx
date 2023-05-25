@@ -16,10 +16,10 @@ import { Activity } from '../activity/Activity';
 
 import styles from './root.module.css';
 interface Props {
-  Outlet: JSX.Element;
+  children: JSX.Element;
 }
 
-export default function Root({ Outlet }: Props) {
+export default function Root({ children }: Props) {
   const activity = useService('activity');
   const router = useService('router');
   const auth = useService('auth');
@@ -75,7 +75,7 @@ export default function Root({ Outlet }: Props) {
       <div className={cx(layout.top, styles.header)}>
         <Navbar LeftNav={LeftNav} Logo={Logo} RightNav={RightNav} />
       </div>
-      <Suspense fallback={PageFallback}>{Outlet}</Suspense>
+      <Suspense fallback={PageFallback}>{children}</Suspense>
       {FooterComponent}
       <Activity entries={activityEntries} />
     </div>
