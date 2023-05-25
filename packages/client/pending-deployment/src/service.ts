@@ -1,12 +1,12 @@
+import { Activity } from '@pivot/client/activity';
 import { DeploymentFeaturesHttp } from '@pivot/client/deployment-features';
 import { DeploymentVariablesHttp } from '@pivot/client/deployment-variables';
 import { Deployment, DeploymentsHttp } from '@pivot/client/deployments';
 import { EnvironmentsResource } from '@pivot/client/environments';
-import { Toaster } from '@pivot/client/toaster';
 import { VariableOverridesHttp } from '@pivot/client/variable-overrides';
 import { makeDraft } from '@pivot/util/model';
 
-import { Api } from './types';
+import { Api } from './slice';
 
 export function service(
   pendingDeploymentState: Api,
@@ -15,7 +15,7 @@ export function service(
   deploymentFeaturesHttp: DeploymentFeaturesHttp,
   variableOverridesHttp: VariableOverridesHttp,
   environmentsResource: EnvironmentsResource,
-  toaster: Toaster,
+  activity: Activity,
 ) {
   return {
     cloneDeployment,
@@ -54,16 +54,18 @@ export function service(
       throw new Error('Cannot deploy without a deployment.');
     }
 
-    toaster.addNotification({ content: deployment.url, title: 'Deploying...', type: 'info' });
+    pendingDeploymentState.clearDrafts();
+
+    activity.addEntry({ content: deployment.url, title: 'Deploying...', type: 'info' });
 
     const created = await deploymentsHttp.post(deployment);
 
     if (features.length) {
-      toaster.addNotification({
-        content: deployment.url,
-        title: 'Adding features...',
-        type: 'info',
-      });
+      // toaster.toast({
+      //   content: deployment.url,
+      //   title: 'Adding features...',
+      //   type: 'info',
+      // });
 
       for (const feature of features) {
         deploymentFeaturesHttp.post({ deployment_id: created.uuid, ...feature });
@@ -71,20 +73,18 @@ export function service(
     }
 
     if (variableOverrides.length) {
-      toaster.addNotification({
-        content: deployment.url,
-        title: 'Adding variable overrides...',
-        type: 'info',
-      });
+      // toaster.toast({
+      //   content: deployment.url,
+      //   title: 'Adding variable overrides...',
+      //   type: 'info',
+      // });
 
       for (const variable of variableOverrides) {
         variableOverridesHttp.post({ deployment_id: created.uuid, ...variable });
       }
     }
 
-    toaster.addNotification({ content: deployment.url, title: 'Deployed!', type: 'info' });
-
-    pendingDeploymentState.clearDrafts();
+    // toaster.toast({ content: deployment.url, title: 'Deployed!', type: 'info' });
   }
 
   function overrideVariable(variable_id: string, value: string) {

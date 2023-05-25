@@ -2,30 +2,35 @@ import { Suspense } from 'react';
 
 import { Breadcrumb } from '@pivot/client/breadcrumb';
 import { Navbar, UserNav } from '@pivot/client/components';
+import { Footer } from '@pivot/client/footer';
 import { animate, horizontalLeftContent as layout } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
+import { selectEntries } from '~app/modules/activity';
 import { selectAuth } from '~app/modules/auth';
 import { selectBreadcrumbParts } from '~app/modules/breadcrumb';
 
 import logo from '../../assets/logo.png';
+import { Activity } from '../activity/Activity';
 
 import styles from './root.module.css';
 interface Props {
-  Outlet: JSX.Element;
+  children: JSX.Element;
 }
 
-export default function Root({ Outlet }: Props) {
+export default function Root({ children }: Props) {
+  const activity = useService('activity');
   const router = useService('router');
   const auth = useService('auth');
   const head = useService('head');
 
+  const activityEntries = useSelector(selectEntries);
   const breadcrumbParts = useSelector(selectBreadcrumbParts);
   const authState = useSelector(selectAuth);
   const shouldShowNavs = !authState.isChecking;
 
-  if (!router || !auth || !head) {
+  if (!router || !auth || !head || !activity) {
     return null;
   }
 
@@ -52,6 +57,10 @@ export default function Root({ Outlet }: Props) {
     />
   );
 
+  const Notifications = <div>Notifications</div>;
+
+  const FooterComponent = <Footer Notifications={Notifications} className={layout.footer} />;
+
   /**
    * User login component.
    */
@@ -66,7 +75,9 @@ export default function Root({ Outlet }: Props) {
       <div className={cx(layout.top, styles.header)}>
         <Navbar LeftNav={LeftNav} Logo={Logo} RightNav={RightNav} />
       </div>
-      <Suspense fallback={PageFallback}>{Outlet}</Suspense>
+      <Suspense fallback={PageFallback}>{children}</Suspense>
+      {FooterComponent}
+      <Activity entries={activityEntries} />
     </div>
   );
 }

@@ -113,7 +113,7 @@ export function PendingDeploymentModal({
                   URL
                 </label>
                 <div className="control">
-                  <UrlInput onChange={setUrl} url={deployment.url || ''} />
+                  <UrlInput onBlur={setUrl} url={deployment.url || ''} />
                 </div>
               </div>
             ) : null}

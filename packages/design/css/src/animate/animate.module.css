@@ -11,12 +11,24 @@
     animation-name: fade-in;
   }
 
+  &.fade-in-right {
+    animation-name: fade-in-right;
+  }
+
+  &.fade-out-right {
+    animation-name: fade-out-right;
+  }
+
   &.fade-in-up-small {
     animation-name: fade-in-up-small;
   }
 
   &.fade-in-up-tiny {
     animation-name: fade-in-up-tiny;
+  }
+
+  &.squeeze-vertically {
+    animation-name: squeeze-vertically;
   }
 
   &.slow {
@@ -42,6 +54,31 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes fade-in-right {
+  0% {
+    opacity: 0;
+    transform: translate3d(20%,0%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+@keyframes fade-out-right {
+  0% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateZ(0);
+    transform: translate3d(20%,0%,0);
   }
 }
 
@@ -92,5 +129,15 @@
 
   100% {
     transform: perspective(400px);
+  }
+}
+
+@keyframes squeeze-vertically {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
   }
 }

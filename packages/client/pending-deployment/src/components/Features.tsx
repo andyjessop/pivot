@@ -53,7 +53,7 @@ export function Features({ features, updateFeature }: Props) {
                   disabled={!enabled}
                   max="1"
                   min="0"
-                  onChange={onSliderChange(uuid)}
+                  onBlur={onSliderChange(uuid)}
                   step="0.05"
                   type="range"
                   value={value}

@@ -30,3 +30,14 @@
   grid-area: content;
   padding: var(--spacing-2) var(--page-horizontal-padding);
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--footer-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--page-horizontal-padding);
+}

@@ -69,10 +69,9 @@ export default function Deployments() {
                 <td className={typography.subtitle}>{created_at}</td>
                 <td>
                   <button className={cx(button.base)} onClick={() => clone(uuid)}>
-                    <span className={cx(button.icon, button.before)}>
+                    <span className={cx(button.icon)}>
                       <i className={icon.copy}></i>
                     </span>
-                    <span>Duplicate</span>
                   </button>
                 </td>
               </tr>
