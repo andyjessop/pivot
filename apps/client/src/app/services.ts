@@ -1,4 +1,3 @@
-import { activityService } from './modules/activity';
 import { authService } from './modules/auth';
 import { breadcrumbService } from './modules/breadcrumb';
 import { cacheService } from './modules/cache';
@@ -11,6 +10,7 @@ import { pendingDeploymentService } from './modules/pending-deployment';
 import { projectResourceService } from './modules/project';
 import { releasesResourceService } from './modules/releases';
 import { routerService } from './modules/router';
+import { toasterService } from './modules/toaster';
 import { variablesResourceService } from './modules/variables';
 
 /**
@@ -22,7 +22,6 @@ import { variablesResourceService } from './modules/variables';
  * that can modify (and read from) the state of the application.
  */
 export const services = {
-  activity: activityService,
   auth: authService,
   breadcrumb: breadcrumbService,
   cache: cacheService,
@@ -35,5 +34,6 @@ export const services = {
   projectResource: projectResourceService,
   releasesResource: releasesResourceService,
   router: routerService,
+  toaster: toasterService,
   variablesResource: variablesResourceService,
 };

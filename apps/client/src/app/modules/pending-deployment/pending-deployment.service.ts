@@ -1,10 +1,10 @@
 import { injectable } from '@pivot/lib/injectable';
 
-import { activityService } from '../activity';
 import { deploymentFeaturesHttpService } from '../deployment-features';
 import { deploymentVariablesHttpService } from '../deployment-variables';
 import { deploymentsHttpService } from '../deployments';
 import { environmentsResourceService } from '../environments';
+import { toasterService } from '../toaster';
 import { variableOverridesHttpService } from '../variable-overrides';
 
 import { pendingDeploymentSlice } from './pending-deployment.slice';
@@ -17,7 +17,7 @@ export const pendingDeploymentService = injectable({
     deploymentFeaturesHttpService,
     variableOverridesHttpService,
     environmentsResourceService,
-    activityService,
+    toasterService,
   ],
   importFn: (
     slice,
@@ -26,7 +26,7 @@ export const pendingDeploymentService = injectable({
     deploymentFeaturesHttp,
     variableOverridesHttp,
     environments,
-    activity,
+    toaster,
   ) =>
     import('@pivot/client/pending-deployment').then((m) =>
       m.service(
@@ -36,7 +36,7 @@ export const pendingDeploymentService = injectable({
         deploymentFeaturesHttp,
         variableOverridesHttp,
         environments,
-        activity,
+        toaster,
       ),
     ),
 });

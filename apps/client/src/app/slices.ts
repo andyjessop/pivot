@@ -1,4 +1,3 @@
-import { activitySlice } from './modules/activity';
 import { authSlice } from './modules/auth';
 import { breadcrumbSlice } from './modules/breadcrumb';
 import { deploymentsResourceSlice } from './modules/deployments';
@@ -9,6 +8,7 @@ import { projectResourceSlice } from './modules/project';
 import { selectIsProjectRoute } from './modules/project/project.selectors';
 import { releasesResourceSlice } from './modules/releases';
 import { routerSlice } from './modules/router';
+import { toasterSlice } from './modules/toaster';
 import { variablesResourceSlice } from './modules/variables';
 
 /**
@@ -17,10 +17,6 @@ import { variablesResourceSlice } from './modules/variables';
  * is a function that returns a boolean indicating whether the slice should be active.
  */
 export const slices = {
-  activity: {
-    active: () => true,
-    injectable: activitySlice,
-  },
   auth: {
     active: () => true,
     injectable: authSlice,
@@ -56,6 +52,10 @@ export const slices = {
   router: {
     active: () => true,
     injectable: routerSlice,
+  },
+  toaster: {
+    active: () => true,
+    injectable: toasterSlice,
   },
   variablesResource: {
     active: selectIsProjectRoute,

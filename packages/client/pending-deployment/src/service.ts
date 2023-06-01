@@ -1,4 +1,5 @@
-import { Activity } from '@pivot/client/activity';
+import { ToasterService } from 'packages/client/toaster/src';
+
 import { DeploymentFeaturesHttp } from '@pivot/client/deployment-features';
 import { DeploymentVariablesHttp } from '@pivot/client/deployment-variables';
 import { Deployment, DeploymentsHttp } from '@pivot/client/deployments';
@@ -15,7 +16,7 @@ export function service(
   deploymentFeaturesHttp: DeploymentFeaturesHttp,
   variableOverridesHttp: VariableOverridesHttp,
   environmentsResource: EnvironmentsResource,
-  activity: Activity,
+  toaster: ToasterService,
 ) {
   return {
     cloneDeployment,
@@ -56,16 +57,20 @@ export function service(
 
     pendingDeploymentState.clearDrafts();
 
-    activity.addEntry({ content: deployment.url, title: 'Deploying...', type: 'info' });
+    toaster.addEntry({
+      content: `${deployment.url}`,
+      title: 'Deploying',
+      type: 'info',
+    });
 
     const created = await deploymentsHttp.post(deployment);
 
     if (features.length) {
-      // toaster.toast({
-      //   content: deployment.url,
-      //   title: 'Adding features...',
-      //   type: 'info',
-      // });
+      toaster.addEntry({
+        content: deployment.url,
+        title: 'Adding features...',
+        type: 'info',
+      });
 
       for (const feature of features) {
         deploymentFeaturesHttp.post({ deployment_id: created.uuid, ...feature });
@@ -73,18 +78,22 @@ export function service(
     }
 
     if (variableOverrides.length) {
-      // toaster.toast({
-      //   content: deployment.url,
-      //   title: 'Adding variable overrides...',
-      //   type: 'info',
-      // });
+      toaster.addEntry({
+        content: deployment.url,
+        title: 'Adding variable overrides...',
+        type: 'info',
+      });
 
       for (const variable of variableOverrides) {
         variableOverridesHttp.post({ deployment_id: created.uuid, ...variable });
       }
     }
 
-    // toaster.toast({ content: deployment.url, title: 'Deployed!', type: 'info' });
+    toaster.addEntry({
+      content: `${deployment.url}`,
+      title: 'Deploy Success',
+      type: 'success',
+    });
   }
 
   function overrideVariable(variable_id: string, value: string) {

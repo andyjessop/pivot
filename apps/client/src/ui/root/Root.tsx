@@ -3,16 +3,16 @@ import { Suspense } from 'react';
 import { Breadcrumb } from '@pivot/client/breadcrumb';
 import { Navbar, UserNav } from '@pivot/client/components';
 import { Footer } from '@pivot/client/footer';
+import { Toaster } from '@pivot/client/toaster';
 import { animate, horizontalLeftContent as layout } from '@pivot/design/css';
 import { cx } from '@pivot/util/classname';
 
 import { useSelector, useService } from '~app';
-import { selectEntries } from '~app/modules/activity';
 import { selectAuth } from '~app/modules/auth';
 import { selectBreadcrumbParts } from '~app/modules/breadcrumb';
+import { selectEntries } from '~app/modules/toaster';
 
 import logo from '../../assets/logo.png';
-import { Activity } from '../activity/Activity';
 
 import styles from './root.module.css';
 interface Props {
@@ -20,17 +20,17 @@ interface Props {
 }
 
 export default function Root({ children }: Props) {
-  const activity = useService('activity');
+  const toaster = useService('toaster');
   const router = useService('router');
   const auth = useService('auth');
   const head = useService('head');
 
-  const activityEntries = useSelector(selectEntries);
+  const toasterEntries = useSelector(selectEntries);
   const breadcrumbParts = useSelector(selectBreadcrumbParts);
   const authState = useSelector(selectAuth);
   const shouldShowNavs = !authState.isChecking;
 
-  if (!router || !auth || !head || !activity) {
+  if (!router || !auth || !head || !toaster) {
     return null;
   }
 
@@ -57,9 +57,7 @@ export default function Root({ children }: Props) {
     />
   );
 
-  const Notifications = <div>Notifications</div>;
-
-  const FooterComponent = <Footer Notifications={Notifications} className={layout.footer} />;
+  const FooterComponent = <Footer className={layout.footer} />;
 
   /**
    * User login component.
@@ -77,7 +75,9 @@ export default function Root({ children }: Props) {
       </div>
       <Suspense fallback={PageFallback}>{children}</Suspense>
       {FooterComponent}
-      <Activity entries={activityEntries} />
+      <div className={styles.toaster}>
+        <Toaster entries={toasterEntries} remove={toaster.removeEntry} />
+      </div>
     </div>
   );
 }

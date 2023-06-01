@@ -11,6 +11,10 @@
     animation-name: fade-in;
   }
 
+  &.fade-out {
+    animation-name: fade-out;
+  }
+
   &.fade-in-right {
     animation-name: fade-in-right;
   }
@@ -54,6 +58,16 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 
