@@ -31,3 +31,12 @@
     left: 50%;
   }
 }
+
+.toaster {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width: var(--toaster-width);
+  right: 0;
+  padding: 0 var(--toaster-padding) var(--toaster-padding) 0;
+}

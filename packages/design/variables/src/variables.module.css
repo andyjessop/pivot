@@ -151,7 +151,7 @@
   --form-label-margin-bottom: var(--spacing-1);
   --form-label-color: var(--color-gray-40);
   --form-spacing: var(--spacing-5);
-  --footer-height: 50px;
+  --footer-height: 40px;
   --footer-background: var(--card-background-color-base);
   --footer-border-color: var(--card-border-color);
   --footer-box-shadow: var(--raised-1);
@@ -221,6 +221,7 @@
   --subheader-box-shadow: var(--raised-2);
   --subheader-color: var(--nav-color-dull);
   --subheader-height: 3rem;
+  --toaster-content-color: var(var(--color-lighten-30));
   --toaster-gap: var(--spacing-1);
   --toaster-padding: var(--spacing-2);
   --toaster-width: 300px;

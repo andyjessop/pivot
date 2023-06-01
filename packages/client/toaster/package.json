@@ -1,5 +1,5 @@
 {
-  "name": "@pivot/client-activity",
+  "name": "@pivot/client-toaster",
   "main": "./src/index.ts",
   "scripts": {
     "stylelint": "stylelint \"src/**/*.css\" --allow-empty-input",
