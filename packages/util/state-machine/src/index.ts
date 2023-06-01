@@ -38,7 +38,6 @@ export function createMachine<C extends Config<any, any, D>, D>(config: C): Mach
       }
 
       if (typeof actionResult === 'function') {
-        console.log(data);
         nextState = actionResult(stack, data);
       } else {
         nextState = actionResult;
