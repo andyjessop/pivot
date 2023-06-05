@@ -75,6 +75,7 @@
       "@pivot/lib/use-service": ["packages/lib/use-service/src/index.ts"],
       "@pivot/template": ["packages/template/src/index.ts"],
       "@pivot/util/classname": ["packages/util/classname/src/index.ts"],
+      "@pivot/util/event-emitter": ["packages/util/event-emitter/src/index.ts"],
       "@pivot/util/function": ["packages/util/function/src/index.ts"],
       "@pivot/util/model": ["packages/util/model/src/index.ts"],
       "@pivot/util/object": ["packages/util/object/src/index.ts"],

@@ -1,11 +1,19 @@
+import { eventEmitter } from '@pivot/util/event-emitter';
+
 import { Action, Config, machine, State } from './machine';
 
 interface Options<T> {
   initial?: State<T>;
 }
 
+type Events<T> = {
+  enter: { action: Action<T>; next: State<T>; previous: State<T> };
+  exit: { action: Action<T>; previous: State<T> };
+};
+
 export function createMachine<T extends Config>(config: T, { initial }: Options<T> = {}) {
   const m = machine(config);
+  const emitter = eventEmitter<Events<T>>();
 
   let state = initial || (config.initial as State<T>);
 
@@ -17,6 +25,7 @@ export function createMachine<T extends Config>(config: T, { initial }: Options<
 
   return {
     currentState: () => state,
+    ...emitter,
     transition,
   };
 
@@ -31,12 +40,20 @@ export function createMachine<T extends Config>(config: T, { initial }: Options<
   }
 
   function transition(action: Action<T>) {
-    const nextState = m.transition(state, action);
+    const next = m.transition(state, action);
 
-    if (!nextState) {
+    if (!next) {
       return null;
     }
 
-    return transitionToInitial(nextState);
+    const previous = state;
+
+    emitter.emit('exit', { action, previous: state });
+
+    const final = transitionToInitial(next);
+
+    emitter.emit('enter', { action, next: final, previous });
+
+    return final;
   }
 }
