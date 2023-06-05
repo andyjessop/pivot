@@ -98,4 +98,38 @@ describe('createMachine', () => {
 
     expect(nextState).toEqual('STATE_6');
   });
+
+  it('should listen to enter event', () => {
+    const createdMachine = createMachine(config, { initial: 'STATE_9' });
+
+    createdMachine.on('enter', ({ action, next, previous }) => {
+      expect(action).toEqual('ACTION_4');
+      expect(next).toEqual('STATE_6');
+      expect(previous).toEqual('STATE_9');
+    });
+
+    createdMachine.transition('ACTION_4');
+  });
+
+  it('should listen to exit event', () => {
+    const createdMachine = createMachine(config, { initial: 'STATE_9' });
+
+    createdMachine.on('exit', ({ action, previous }) => {
+      expect(action).toEqual('ACTION_4');
+      expect(previous).toEqual('STATE_9');
+    });
+
+    createdMachine.transition('ACTION_4');
+  });
+
+  it('should listen to exit event', () => {
+    const createdMachine = createMachine(config, { initial: 'STATE_9' });
+
+    createdMachine.on('exit', ({ action, previous }) => {
+      expect(action).toEqual('ACTION_4');
+      expect(previous).toEqual('STATE_9');
+    });
+
+    createdMachine.transition('ACTION_4');
+  });
 });
