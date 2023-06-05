@@ -1,21 +1,21 @@
-interface State {
-  actions: Record<string, string>;
-  initial?: string;
-  parent?: string;
+import { Config, State } from './machine';
+
+interface FlatState<T> {
+  actions?: Record<string, State<T>>;
+  initial?: State<T>;
+  parent?: State<T>;
 }
 
-interface StateMap {
-  [key: string]: State;
-}
+type StateMap<T> = Record<State<T>, FlatState<T>>;
 
-export function flattenConfig(config: Record<string, any>): StateMap {
-  const stateMap: StateMap = {};
+export function flattenConfig<T extends Config>(config: T): StateMap<T> {
+  const stateMap = {} as Record<State<T>, FlatState<T>>;
 
-  function traverseStates(states: Record<string, any>, parent?: string) {
-    for (const [key, value] of Object.entries(states)) {
-      const state: State = {
-        actions: value.actions,
-        initial: value.initial,
+  function traverseStates(states: Record<string, Config>, parent?: State<T>) {
+    for (const [key, value] of Object.entries(states) as [State<T>, T][]) {
+      const state: FlatState<T> = {
+        actions: value.actions as Record<string, State<T>>,
+        initial: value.initial as State<T>,
       };
 
       if (parent) {
@@ -34,15 +34,17 @@ export function flattenConfig(config: Record<string, any>): StateMap {
     }
   }
 
-  traverseStates(config.states);
+  if (config.states) {
+    traverseStates(config.states);
+  }
 
   return stateMap;
 }
 
-export function getParentPath(stateMap: StateMap, stateName: string): string[] {
-  const path: string[] = [stateName];
+export function getParentPath<T>(stateMap: StateMap<T>, stateName: State<T>): State<T>[] {
+  const path: State<T>[] = [stateName];
 
-  let state = stateMap[stateName] as State | undefined;
+  let state = stateMap[stateName] as FlatState<T> | undefined;
 
   while (state) {
     if (state.parent) {

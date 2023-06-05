@@ -1,62 +1,42 @@
-import { ActionUnion, Config, machine, StateUnion } from './machine';
+import { Action, Config, machine, State } from './machine';
 
 interface Options<T> {
-  initialState?: StateUnion<T>;
+  initial?: State<T>;
 }
 
-export function createMachine<T extends Config>(config: T, { initialState }: Options<T> = {}) {
+export function createMachine<T extends Config>(config: T, { initial }: Options<T> = {}) {
   const m = machine(config);
 
-  let state = initialState || (config.initial as StateUnion<T>);
+  let state = initial || (config.initial as State<T>);
+
+  transitionToInitial(state);
 
   if (!state) {
     throw new Error('Initial state is not defined');
   }
 
   return {
+    currentState: () => state,
     transition,
   };
 
-  function transition(action: ActionUnion<T>) {
+  function transitionToInitial(s: State<T>) {
+    state = s;
+
+    while (m.states[state]?.initial) {
+      state = m.states[state].initial as State<T>;
+    }
+
+    return state;
+  }
+
+  function transition(action: Action<T>) {
     const nextState = m.transition(state, action);
 
     if (!nextState) {
       return null;
     }
 
-    state = nextState;
+    return transitionToInitial(nextState);
   }
 }
-
-const m = machine({
-  initial: 'STATE_1',
-  states: {
-    STATE_1: {
-      actions: { ACTION_5: 'STATE_2' },
-      initial: 'STATE_3',
-      states: {
-        STATE_3: {
-          actions: { ACTION_1: 'STATE_4', ACTION_2: 'STATE_2' },
-        },
-        STATE_4: {
-          actions: { ACTION_3: 'STATE_3' },
-        },
-      },
-    },
-
-    STATE_2: {
-      actions: { ACTION_4: 'STATE_1', ACTION_5: 'STATE_3' },
-      initial: 'STATE_5',
-      states: {
-        STATE_5: {
-          actions: { ACTION_6: 'STATE_6' },
-        },
-        STATE_6: {
-          actions: { ACTION_6: 'STATE_5' },
-        },
-      },
-    },
-  },
-});
-
-const nextState = m.transition('STATE_1', 'ACTION_5');
