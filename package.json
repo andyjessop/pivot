@@ -27,7 +27,7 @@
     "@nx/devkit": "16.3.1",
     "@nx/eslint-plugin": "16.3.1",
     "@nx/js": "16.3.1",
-    "@nx/workspace": "16.3.1",
+    "@nx/workspace": "16.3.2",
     "@testing-library/react": "^14.0.0",
     "@types/eslint": "^8.40.0",
     "@types/jest": "^29.5.2",
