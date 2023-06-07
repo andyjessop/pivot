@@ -24,10 +24,10 @@
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
-    "@nx/devkit": "16.3.1",
-    "@nx/eslint-plugin": "16.3.1",
-    "@nx/js": "16.3.1",
-    "@nx/workspace": "16.3.1",
+    "@nx/devkit": "16.3.2",
+    "@nx/eslint-plugin": "16.3.2",
+    "@nx/js": "16.3.2",
+    "@nx/workspace": "16.3.2",
     "@testing-library/react": "^14.0.0",
     "@types/eslint": "^8.40.0",
     "@types/jest": "^29.5.2",
@@ -47,7 +47,7 @@
     "eslint-plugin-typescript-sort-keys": "^2.3.0",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
-    "nx": "16.3.1",
+    "nx": "16.3.2",
     "nx-cloud": "16.0.5",
     "postcss-nesting": "^11.2.1",
     "prettier": "^2.8.8",
