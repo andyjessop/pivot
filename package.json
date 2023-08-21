@@ -51,7 +51,7 @@
     "nx-cloud": "16.0.5",
     "postcss-nesting": "^11.2.1",
     "prettier": "^2.8.8",
-    "stylelint": "^15.6.0",
+    "stylelint": "^15.10.3",
     "stylelint-config-standard": "^33.0.0",
     "typescript": "^5.0.4",
     "typescript-plugin-css-modules": "^5.0.1",
